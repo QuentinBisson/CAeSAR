@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <header class="header">
+                    
+            <section class="left">
+            <h1><a href="{{asset('admin/')}}">Administration</a></h1>
+            </section>
+                    
+            <section class="right">
+                <a class="link-button-deconnexion" href="{{asset('logout')}}">Deconnexion</a>
+            </section>
+        </header>
+        <section class="content">
+            {% block body %}{% endblock %}
+        </section>
+        {% block javascripts %}
+        <script language="JavaScript" type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
+        <script language="JavaScript" type="text/javascript" src="{{ asset('js/jquery-ui-1.10.0.custom.min.js') }}" ></script>
+        {% endblock %}
+    </body>
+</html>

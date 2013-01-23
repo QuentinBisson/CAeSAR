@@ -1,0 +1,23 @@
+caesar_web_mining:
+    resource: "@CaesarWebMiningBundle/Resources/config/routing.yml"
+    prefix:   /
+
+caesar_location:
+    resource: "@CaesarLocationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+caesar_tag:
+    resource: "@CaesarTagBundle/Resources/config/routing.yml"
+    prefix:   /
+
+caesar_resource:
+    resource: "@CaesarResourceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+caesar_admin:
+    resource: "@CaesarAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+caesar_client:
+    resource: "@CaesarUserBundle/Resources/config/routing.yml"
+    prefix:   /

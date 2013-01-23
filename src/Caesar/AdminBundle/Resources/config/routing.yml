@@ -1,0 +1,21 @@
+caesar_admin_homepage:
+    pattern:  /
+    defaults: { _controller: CaesarAdminBundle:Admin:index }
+
+caesar_resource_homepage:
+    pattern:  /resource/{page}
+    defaults: { _controller: CaesarAdminBundle:Resource:list, page:1}
+    requirements:
+        page:  \d+
+        
+caesar_resource_add:
+    pattern:  /resource/add
+    defaults: { _controller: CaesarAdminBundle:Resource:add }
+    
+caesar_resource_update:
+    pattern:  /resource/update/{id}
+    defaults: { _controller: CaesarAdminBundle:Resource:update }
+    
+caesar_resource_delete:
+    pattern:  /resource/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:Resource:delete }

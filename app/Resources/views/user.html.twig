@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <header>
+            <section>
+                <a href="{{asset('home')}}">Accueil</a>
+                <input type="text" placeholder="Mots-clés"/>
+            </section>
+
+            <section>
+                <a href="{{asset('register')}}">Inscription</a>
+                <p>
+                    <a href="{{asset('profile')}}">
+                        Bonjour
+                    </a>
+                </p>
+
+                <nav>
+                    <ul>
+                        <li>
+                            Mon profil
+                        </li>
+                        <li>
+                            Mes emprunts
+                        </li>
+                    </ul>
+                </nav>
+                <a href="{{asset('register')}}">Connexion</a>
+            </section>
+        </header>
+        <section>
+            <header>
+                {% block bodyTitle %}{% endblock %}
+                </header>
+
+                <section>
+                {% block body %}{% endblock %}
+                    </section>
+                </section>
+        {% block javascripts %}{% endblock %}
+            </body>
+        </html>

@@ -1,0 +1,70 @@
+aside.sidebar{
+    float: left;
+    width: 250px;
+    background-color: lightgray;
+}
+
+aside.sidebar nav {
+    box-shadow: 2px 2px 2px 2px #999;
+    margin: 20px 20px 10px 10px;
+    background-color: white;
+}
+
+aside.sidebar nav ul, aside.sidebar nav ul ul {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+aside.sidebar .ui-accordion-header {
+    background: white url("../images/fleche-droite.png") 95% 50% no-repeat;
+}
+
+aside.sidebar a.ui-accordion-header:hover, 
+aside.sidebar a.ui-accordion-header-active:hover {
+    color: white;
+    background: #4099FF url("../images/fleche-blanche-droite.png") 95% 50% no-repeat;
+}
+
+aside.sidebar nav ul li, aside.sidebar nav ul li ul li {
+    list-style: none;
+}
+
+aside.sidebar nav ul li a {
+    color: black; 
+    background-color: white;
+}
+aside.sidebar nav ul li a, aside.sidebar nav ul li ul li a {
+    display: block;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 30px;
+}
+
+aside.sidebar nav ul li ul li a {
+    padding-left: 30px;
+    color: black; 
+}
+
+aside.sidebar nav li a:hover {
+    color: white;
+    background-color: #4099FF;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 20px; 
+}
+
+li.active{
+    background-color: #4099FF;
+}
+
+@media screen and (max-width:980px) and (min-width:480px) {
+
+}
+
+@media screen and (max-width:480px) {
+
+}

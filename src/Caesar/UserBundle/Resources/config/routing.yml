@@ -1,0 +1,19 @@
+caesar_client_homepage:
+    pattern:  /
+    defaults: { _controller: CaesarUserBundle:User:index }
+
+caesar_client_login:
+    pattern:  /login
+    defaults: { _controller: CaesarUserBundle:User:login }
+    
+caesar_client_register:
+    pattern:  /register
+    defaults: { _controller: CaesarUserBundle:User:register }
+    
+caesar_client_profile:
+    pattern:  /profile
+    defaults: { _controller: CaesarUserBundle:User:profile }
+    
+caesar_client_resetting:
+    pattern:  /resetting
+    defaults: { _controller: CaesarUserBundle:User:resetting }

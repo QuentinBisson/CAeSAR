@@ -1,0 +1,61 @@
+{% extends "::admin.html.twig" %}
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/layout.css') }}" />
+{% endblock %}
+{% block body %}
+
+{% block menu %}
+<aside class="sidebar">
+    <nav>
+        <ul id="accordion">
+            <li><a href="{{path('caesar_admin_homepage')}}">Ressources</a>
+                <ul>
+                <li><a href="{{path('caesar_resource_add')}}">Ajouter</a></li>
+                </ul>
+            </li>
+            <li><a href="{{path('caesar_admin_homepage')}}">Utilisateurs</a>
+                <ul>
+                   {#<li><a href="{{path('admin/user/add')}}">Ajouter</a></li>#}
+                </ul>
+            </li>
+            <li><a href="{{path('caesar_admin_homepage')}}">Emplacements</a>
+                <ul>
+                    {#<li><a href="{{path('admin/location/add')}}">Ajouter</a></li>#}
+                </ul>
+            </li>
+            <li><a href="{{path('caesar_admin_homepage')}}">Emprunts</a>
+                <ul>
+                    {#<li><a href="{{path('admin/loan/add')}}">Ajouter</a></li>#}
+                </ul>
+            </li>
+            <li><a href="{{path('caesar_admin_homepage')}}">Etiquettes</a>
+                <ul>
+                    {#<li><a href="{{path('admin/tag/add')}}">Ajouter</a></li>#}
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+{% endblock %}
+
+{% block content %}
+<h2>{% block contentTitle %}{% endblock %}</h2>
+{% block contentBody %}{% endblock %}
+{% endblock %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+{{parent()}}
+<script type="text/javascript">
+  $(document).ready(function() {
+                $( "#accordion" ).accordion({
+                    heightStyle: "content",
+                    autoHeight: false,
+                    navigation: true
+                });
+            });
+</script>
+{% endblock %}
