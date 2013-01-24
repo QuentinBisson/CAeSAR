@@ -13,6 +13,3 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
-    max_users_on_admin_listepage: 20
-    max_resources_on_admin_listepage: 20
-    max_resources_on_search_page: 20
