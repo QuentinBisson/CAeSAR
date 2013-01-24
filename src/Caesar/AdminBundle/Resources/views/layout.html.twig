@@ -65,7 +65,7 @@ function getActiveIndex() {
     var lis = ul.getElementsByTagName('li');
     if (lis.length > 1) {
         var li = lis[1];
-        if (li.dataset.header == undefined) {
+        if (li.dataset.header === undefined) {
             return false;
         }
         var i = parseInt(li.dataset.header);
@@ -73,13 +73,23 @@ function getActiveIndex() {
     }
     return false;
 }
+var ul = document.getElementById('breadcrumb');
+var lis = ul.getElementsByTagName('li');
+if (lis.length == 1) {
+    var spans = lis[0].getElementsByTagName("span");
+    for (var i = 0; i < spans.length; i++) {
+        if ('divider' === spans[i].className) {
+            spans[i].style.display = 'none';
+        }
+    }
+}
 
 $('.accordion a').each(function(){
-      var href= $(this).attr('href');
-      var url = document.location.toString();
-      if(url.match(href+"$")==href) {
+    var href= $(this).attr('href');
+    var url = document.location.toString();
+    if(url.match(href+"$") == href) {
         $(this).addClass('active');
-      }
+    }
 });
 
 </script>
