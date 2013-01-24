@@ -1,6 +1,11 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
-{% block contentTitle %}Lister les ressources{% endblock %}
+{% block breadCrumb%}
+    {{parent()}}
+<li data-header="1" class="active"><span>Utilisateurs</span></li>
+{% endblock %}
+
+{% block contentTitle %}Lister les utilisateurs{% endblock %}
 
 {% block contentBody %}
 {% endblock %}

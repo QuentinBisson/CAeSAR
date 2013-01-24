@@ -1,6 +1,8 @@
 aside.sidebar{
+    height: 95%;
     float: left;
     width: 250px;
+    clear: both;
     background-color: lightgray;
 }
 
@@ -10,7 +12,23 @@ aside.sidebar nav {
     background-color: white;
 }
 
-aside.sidebar nav ul, aside.sidebar nav ul ul {
+aside.sidebar nav > ul > li > a {
+   font-size: 18px;
+}
+
+/*
+
+BORDERS
+
+aside.sidebar nav > ul {
+    border: solid 1px black;
+}
+
+aside.sidebar nav > ul > li > a, aside.sidebar nav > ul > li > ul {
+    border-bottom: solid 1px black;
+}*/
+
+aside.sidebar nav ul {
     padding: 0;
     margin: 0;
     background-color: white;
@@ -20,10 +38,13 @@ aside.sidebar .ui-accordion-header {
     background: white url("../images/fleche-droite.png") 95% 50% no-repeat;
 }
 
+aside.sidebar nav ul li ul li a.active:hover {
+    background: #002FA7;
+}
 aside.sidebar a.ui-accordion-header:hover, 
 aside.sidebar a.ui-accordion-header-active:hover {
     color: white;
-    background: #4099FF url("../images/fleche-blanche-droite.png") 95% 50% no-repeat;
+    background: #002FA7 url("../images/fleche-blanche-droite.png") 95% 50% no-repeat;
 }
 
 aside.sidebar nav ul li, aside.sidebar nav ul li ul li {
@@ -44,12 +65,7 @@ aside.sidebar nav ul li a, aside.sidebar nav ul li ul li a {
 
 aside.sidebar nav ul li ul li a {
     padding-left: 30px;
-    color: black; 
-}
-
-aside.sidebar nav li a:hover {
-    color: white;
-    background-color: #4099FF;
+    color: black;
 }
 
 h2 {
@@ -57,8 +73,97 @@ h2 {
     padding-top: 20px; 
 }
 
-li.active{
-    background-color: #4099FF;
+/*TO CHECK*/
+aside.sidebar a.ui-accordion-header-active {
+    background: #053A6C url("../images/fleche-blanche-droite.png") 95% 50% no-repeat;
+}
+
+aside.sidebar nav ul > li > ul > li > a.active, aside.sidebar a.ui-accordion-header-active {
+    color: white;
+    background-color: #053A6C;
+}
+
+aside.sidebar nav li a:hover {
+    color: white;
+    background-color: #002FA7;
+}
+.breadcrumb { 
+    float: left;
+    display: block; 
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+}  
+.breadcrumb li {
+    display: inline; 
+    float: left;
+}  
+/*.breadcrumb li.first {
+    padding-left: 8px;
+}
+
+.breadcrumb li a,  
+.breadcrumb li a:link,  
+.breadcrumb li a:visited, 
+.breadcrumb li.active span{  
+    color: #666;  
+    display: block;  
+    float: left;  
+    font-size: 14px;  
+    margin-left: -13px;  
+    padding: 0px 25px 0px 20px;  
+    position: relative;  
+    text-decoration: none;  
+}  
+.breadcrumb li a, .breadcrumb li.active span {  
+    background-image: url('../images/bg-crumbs.png');  
+    background-repeat: no-repeat;  
+    background-position: 100% 10px;  
+    position: relative;
+    border: 1px solid darkgray;
+}  
+
+.breadcrumb li a:hover {  
+    color: #333;  
+    background-position: 100% -38px;  
+    cursor: pointer;  
+}  
+
+.breadcrumb li a:active, .breadcrumb li.active span {  
+    color: white;  
+    background-position: 100% -86px;  
+}  */
+
+.breadcrumb {
+  padding: 0px 14px;
+  margin: 0 0 18px;
+  background-color: #fbfbfb;
+  background-image: -moz-linear-gradient(top, #ffffff, #f5f5f5);
+  background-image: -ms-linear-gradient(top, #ffffff, #f5f5f5);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f5f5f5));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f5f5f5);
+  background-image: -o-linear-gradient(top, #ffffff, #f5f5f5);
+  background-image: linear-gradient(top, #ffffff, #f5f5f5);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
+  border: 1px solid #ddd;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+  -moz-box-shadow: inset 0 1px 0 #ffffff;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+.breadcrumb li {
+  display: inline-block;
+  text-shadow: 0 1px 0 #ffffff;
+}
+.breadcrumb .divider {
+  padding: 0 5px;
+  color: #999999;
+}
+.breadcrumb .active a {
+  color: #333333;
 }
 
 @media screen and (max-width:980px) and (min-width:480px) {

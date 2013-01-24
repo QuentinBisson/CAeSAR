@@ -1,5 +1,10 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
+{% block breadCrumb%}
+    {{parent()}}
+    <li data-header="0" class="active"><span>Ressources</span></li>
+{% endblock %}
+
 {% block contentTitle %}Lister les ressources{% endblock %}
 
 {% block contentBody %}

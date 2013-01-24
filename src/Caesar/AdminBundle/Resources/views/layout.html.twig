@@ -3,59 +3,84 @@
     {{parent()}}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/layout.css') }}" />
 {% endblock %}
-{% block body %}
 
 {% block menu %}
 <aside class="sidebar">
     <nav>
-        <ul id="accordion">
-            <li><a href="{{path('caesar_admin_homepage')}}">Ressources</a>
+        <ul class="accordion">
+            <li><a href="{{path('caesar_resource_homepage')}}">Ressources</a>
                 <ul>
-                <li><a href="{{path('caesar_resource_add')}}">Ajouter</a></li>
+                    <li><a href="{{path('caesar_resource_add')}}">Ajouter une ressource</a></li>
+                    <li><a href="{{path('caesar_resource_homepage')}}">Voir les ressources</a></li>
+                    <li><a href="{{path('caesar_resource_skeleton')}}">Modifier le squelette</a></li>
                 </ul>
             </li>
-            <li><a href="{{path('caesar_admin_homepage')}}">Utilisateurs</a>
+            <li><a href="{{path('caesar_admin_user_homepage')}}">Utilisateurs</a>
                 <ul>
-                   {#<li><a href="{{path('admin/user/add')}}">Ajouter</a></li>#}
+                   <li><a href="{{path('caesar_admin_user_add')}}">Ajouter un utilisateur</a></li>
+                    <li><a href="{{path('caesar_admin_user_homepage')}}">Voir les ressources</a></li>
                 </ul>
             </li>
-            <li><a href="{{path('caesar_admin_homepage')}}">Emplacements</a>
-                <ul>
-                    {#<li><a href="{{path('admin/location/add')}}">Ajouter</a></li>#}
-                </ul>
-            </li>
-            <li><a href="{{path('caesar_admin_homepage')}}">Emprunts</a>
-                <ul>
+                <li><a href="{{path('caesar_admin_location_homepage')}}">Emplacements</a>
+                    <ul>
+                        <li><a href="{{path('caesar_admin_location_add')}}">Ajouter un emplacement</a></li>
+                        <li><a href="{{path('caesar_admin_location_homepage')}}">Voir les emplacements</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="{{asset('#loan')}}">Emprunts</a>
+                        <ul>
                     {#<li><a href="{{path('admin/loan/add')}}">Ajouter</a></li>#}
-                </ul>
-            </li>
-            <li><a href="{{path('caesar_admin_homepage')}}">Etiquettes</a>
-                <ul>
+                            </ul>
+                        </li>
+                        <li><a href="{{asset('#tag')}}">Etiquettes</a>
+                            <ul>
                     {#<li><a href="{{path('admin/tag/add')}}">Ajouter</a></li>#}
-                </ul>
-            </li>
-        </ul>
-    </nav>
-</aside>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
 {% endblock %}
 
 {% block content %}
-<h2>{% block contentTitle %}{% endblock %}</h2>
-{% block contentBody %}{% endblock %}
+    <h2>{% block contentTitle %}{% endblock %}</h2>
+    {% block contentBody %}{% endblock %}
 {% endblock %}
-
-{% endblock %}
-
 
 {% block javascripts %}
 {{parent()}}
 <script type="text/javascript">
-  $(document).ready(function() {
-                $( "#accordion" ).accordion({
-                    heightStyle: "content",
-                    autoHeight: false,
-                    navigation: true
-                });
-            });
+$(document).ready(function() {
+    $( ".accordion" ).accordion({
+        heightStyle: "content",
+        autoHeight: false,
+        navigation: true,
+        collapsible: true,
+        active: getActiveIndex()
+    });
+});
+
+function getActiveIndex() {
+    var ul = document.getElementById('breadcrumb');
+    var lis = ul.getElementsByTagName('li');
+    if (lis.length > 1) {
+        var li = lis[1];
+        if (li.dataset.header == undefined) {
+            return false;
+        }
+        var i = parseInt(li.dataset.header);
+        return i;
+    }
+    return false;
+}
+
+$('.accordion a').each(function(){
+      var href= $(this).attr('href');
+      var url = document.location.toString();
+      if(url.match(href+"$")==href) {
+        $(this).addClass('active');
+      }
+});
+
 </script>
 {% endblock %}

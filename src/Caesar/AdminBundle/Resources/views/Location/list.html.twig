@@ -1,6 +1,11 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
-{% block contentTitle %}Lister les ressources{% endblock %}
+{% block breadCrumb%}
+    {{parent()}}
+    <li data-header="2" class="active"><span>Emplacements</span></li>
+{% endblock %}
+
+{% block contentTitle %}Lister les emplacements{% endblock %}
 
 {% block contentBody %}
 {% endblock %}

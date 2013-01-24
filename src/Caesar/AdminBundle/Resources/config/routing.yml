@@ -7,6 +7,10 @@ caesar_resource_homepage:
     defaults: { _controller: CaesarAdminBundle:Resource:list, page:1}
     requirements:
         page:  \d+
+
+caesar_admin_logout:
+    pattern:  /logout
+    defaults: { _controller: CaesarUserBundle:User:logout }
         
 caesar_resource_add:
     pattern:  /resource/add
@@ -19,3 +23,45 @@ caesar_resource_update:
 caesar_resource_delete:
     pattern:  /resource/delete/{id}
     defaults: { _controller: CaesarAdminBundle:Resource:delete }
+    
+caesar_resource_skeleton:
+    pattern:  /resource/skeleton
+    defaults: { _controller: CaesarAdminBundle:Resource:skeleton }
+
+
+caesar_admin_user_homepage:
+    pattern:  /user/{page}
+    defaults: { _controller: CaesarAdminBundle:User:list, page:1}
+    requirements:
+        page:  \d+
+        
+caesar_admin_user_add:
+    pattern:  /user/add
+    defaults: { _controller: CaesarAdminBundle:User:add }
+    
+caesar_admin_user_update:
+    pattern:  /user/update/{id}
+    defaults: { _controller: CaesarAdminBundle:User:update }
+    
+caesar_admin_user_delete:
+    pattern:  /user/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:User:delete }
+
+caesar_admin_location_homepage:
+    pattern:  /location/{page}
+    defaults: { _controller: CaesarAdminBundle:Location:list, page:1}
+    requirements:
+        page:  \d+
+        
+caesar_admin_location_add:
+    pattern:  /location/add
+    defaults: { _controller: CaesarAdminBundle:Location:add }
+    
+caesar_admin_location_update:
+    pattern:  /location/update/{id}
+    defaults: { _controller: CaesarAdminBundle:Location:update }
+    
+caesar_admin_location_delete:
+    pattern:  /location/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:Location:delete }
+    

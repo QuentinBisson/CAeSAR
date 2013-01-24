@@ -1,7 +1,15 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
+{% block breadCrumb%}
+    {{parent()}}
+    <li data-header="2">
+        <a href="{{path('caesar_admin_location_homepage')}}">Emplacements</a>
+        <span class="divider">></span>
+    </li>
+    <li class="active"><span>Suppression</span></li>
+{% endblock %}
 
 {% block contentTitle %}
-Suppression d'une ressource
+Suppression d'un emplacement
 {% endblock %}
 
 {% block contentBody %}

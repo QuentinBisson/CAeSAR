@@ -12,19 +12,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class UserController extends Controller {
 
     public function listAction() {
-        return $this->render('CaesarAdminBundle:Location:list.html.twig');
+        return $this->render('CaesarAdminBundle:User:list.html.twig');
     }
 
     public function addAction() {
-        return $this->render('CaesarAdminBundle:Location:add.html.twig');
+        return $this->render('CaesarAdminBundle:User:add.html.twig');
     }
 
     public function updateAction() {
-        return $this->render('CaesarAdminBundle:Location:update.html.twig');
+        return $this->render('CaesarAdminBundle:User:update.html.twig');
     }
 
     public function deleteAction() {
-        return $this->render('CaesarAdminBundle:Location:delete.html.twig');
+        return $this->render('CaesarAdminBundle:User:delete.html.twig');
     }
 
 }

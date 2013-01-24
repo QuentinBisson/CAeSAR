@@ -1,6 +1,16 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
+
+{% block breadCrumb%}
+    {{parent()}}
+    <li data-header="0">
+        <a href="{{path('caesar_resource_homepage')}}">Ressources</a>
+        <span class="divider">></span>
+    </li>
+    <li class="active"><span>Squelette</span></li>
+{% endblock %}
+
 {% block contentTitle %}
-Ajouter une ressource
+Modifier le squelette
 {% endblock %}
 
 {% block contentBody %}
