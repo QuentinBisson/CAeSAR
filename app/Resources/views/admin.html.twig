@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/icons.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -12,19 +13,28 @@
         <header class="header">
                     
             <section class="left">
-            <h1><a href="{{asset('admin/')}}">Administration</a></h1>
+            <ul id="breadcrumb" class="breadcrumb">
+                {% block breadCrumb%}
+                    <li><a href="{{path('caesar_admin_homepage')}}">
+                            <i class="icon-home"></i>
+                        </a>
+                        <span class="divider">></span>
+                    </li>
+                {% endblock %}
+            </ul>
             </section>
                     
             <section class="right">
-                <a class="link-button-deconnexion" href="{{asset('logout')}}">Deconnexion</a>
+                <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">Deconnexion</a>
             </section>
         </header>
-        <section class="content">
-            {% block body %}{% endblock %}
-        </section>
+        
+        {% block menu %}{% endblock %}
+            
+        <section>{% block content %}{% endblock %}</section>
         {% block javascripts %}
-        <script language="JavaScript" type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
-        <script language="JavaScript" type="text/javascript" src="{{ asset('js/jquery-ui-1.10.0.custom.min.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-ui-1.10.0.custom.min.js') }}" ></script>
         {% endblock %}
     </body>
 </html>

@@ -20,7 +20,7 @@ class UserRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
 
-    public function identificate($login) {
+    public function identify($login) {
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.login = :login')
                 ->setParameter('login', $login);

@@ -1,0 +1,34 @@
+{% extends "CaesarAdminBundle::layout.html.twig" %}
+
+{% block breadCrumb%}
+    {{parent()}}
+<li data-header="1" class="active"><span>Utilisateurs</span></li>
+{% endblock %}
+
+{% block contentTitle %}Lister les utilisateurs{% endblock %}
+
+{% block contentBody %}
+<table>
+    <tr>
+        <th>{{ knp_pagination_sortable(pagination, 'Code BU', 'u.codeBu') }}</th>
+        <th{% if pagination.isSorted('u.login') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Login', 'u.login') }}</th>
+        <th{% if pagination.isSorted('u.nom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nom', 'u.nom') }}</th>
+        <th{% if pagination.isSorted('u.prenom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Prenom', 'u.prenom') }}</th>
+        <th{% if pagination.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Adresse mail de contact', 'u.email') }}</th>
+    </tr>
+
+    {# table body #}
+    {% for user in pagination %}
+    <tr {% if loop.index is odd %} class="color"{% endif %}>
+        <td>{{ user.codeBu }}</td>
+        <td>{{ user.login }}</td>
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

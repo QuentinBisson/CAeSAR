@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class LocationController extends Controller {
 
-    public function listAction() {
-        return $this->render('CaesarAdminBundle:Location:list.html.twig');
+    public function indexAction() {
+        return $this->render('CaesarAdminBundle:Location:index.html.twig');
     }
 
     public function addAction() {

@@ -11,8 +11,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class UserController extends Controller {
 
-    public function listAction() {
-        return $this->render('CaesarAdminBundle:User:list.html.twig');
+    public function indexAction($page = 1) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+ 
+        //Création de la requête : Exemple
+        $dql = "SELECT u FROM CaesarUserBundle:User u";
+        $query = $em->createQuery($dql);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+                $query, $page/* page number */, 20/* limit per page */
+        );
+
+        return $this->render("CaesarAdminBundle:User:index.html.twig",
+                array('pagination' => $pagination)
+        );
     }
 
     public function addAction() {

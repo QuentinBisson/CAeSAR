@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Caesar\TagBundle\CaesarTagBundle(),
             new Caesar\LocationBundle\CaesarLocationBundle(),
             new Caesar\WebMiningBundle\CaesarWebMiningBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

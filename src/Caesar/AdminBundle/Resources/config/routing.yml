@@ -4,7 +4,7 @@ caesar_admin_homepage:
 
 caesar_resource_homepage:
     pattern:  /resource/{page}
-    defaults: { _controller: CaesarAdminBundle:Resource:list, page:1}
+    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1}
     requirements:
         page:  \d+
 
@@ -31,7 +31,7 @@ caesar_resource_skeleton:
 
 caesar_admin_user_homepage:
     pattern:  /user/{page}
-    defaults: { _controller: CaesarAdminBundle:User:list, page:1}
+    defaults: { _controller: CaesarAdminBundle:User:index, page:1}
     requirements:
         page:  \d+
         
@@ -49,7 +49,7 @@ caesar_admin_user_delete:
 
 caesar_admin_location_homepage:
     pattern:  /location/{page}
-    defaults: { _controller: CaesarAdminBundle:Location:list, page:1}
+    defaults: { _controller: CaesarAdminBundle:Location:index, page:1}
     requirements:
         page:  \d+
         

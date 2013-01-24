@@ -58,3 +58,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+knp_paginator:
+    template:
+          pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+          sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template

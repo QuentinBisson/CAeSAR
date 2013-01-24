@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class ResourceController extends Controller {
 
-    public function listAction() {
-        return $this->render('CaesarAdminBundle:Resource:list.html.twig');
+    public function indexAction() {
+        return $this->render('CaesarAdminBundle:Resource:index.html.twig');
     }
 
     public function addAction() {

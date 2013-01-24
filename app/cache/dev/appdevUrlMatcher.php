@@ -131,7 +131,12 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             // caesar_resource_homepage
             if (0 === strpos($pathinfo, '/admin/resource') && preg_match('#^/admin/resource(?:/(?P<page>\\d+))?$#s', $pathinfo, $matches)) {
-                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\ResourceController::listAction',  'page' => '1',)), array('_route' => 'caesar_resource_homepage'));
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\ResourceController::indexAction',  'page' => '1',)), array('_route' => 'caesar_resource_homepage'));
+            }
+
+            // caesar_admin_logout
+            if ($pathinfo === '/admin/logout') {
+                return array (  '_controller' => 'Caesar\\UserBundle\\Controller\\UserController::logoutAction',  '_route' => 'caesar_admin_logout',);
             }
 
             // caesar_resource_add
@@ -147,6 +152,51 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // caesar_resource_delete
             if (0 === strpos($pathinfo, '/admin/resource/delete') && preg_match('#^/admin/resource/delete/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
                 return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\ResourceController::deleteAction',)), array('_route' => 'caesar_resource_delete'));
+            }
+
+            // caesar_resource_skeleton
+            if ($pathinfo === '/admin/resource/skeleton') {
+                return array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\ResourceController::skeletonAction',  '_route' => 'caesar_resource_skeleton',);
+            }
+
+            // caesar_admin_user_homepage
+            if (0 === strpos($pathinfo, '/admin/user') && preg_match('#^/admin/user(?:/(?P<page>\\d+))?$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\UserController::indexAction',  'page' => '1',)), array('_route' => 'caesar_admin_user_homepage'));
+            }
+
+            // caesar_admin_user_add
+            if ($pathinfo === '/admin/user/add') {
+                return array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\UserController::addAction',  '_route' => 'caesar_admin_user_add',);
+            }
+
+            // caesar_admin_user_update
+            if (0 === strpos($pathinfo, '/admin/user/update') && preg_match('#^/admin/user/update/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\UserController::updateAction',)), array('_route' => 'caesar_admin_user_update'));
+            }
+
+            // caesar_admin_user_delete
+            if (0 === strpos($pathinfo, '/admin/user/delete') && preg_match('#^/admin/user/delete/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\UserController::deleteAction',)), array('_route' => 'caesar_admin_user_delete'));
+            }
+
+            // caesar_admin_location_homepage
+            if (0 === strpos($pathinfo, '/admin/location') && preg_match('#^/admin/location(?:/(?P<page>\\d+))?$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\LocationController::indexAction',  'page' => '1',)), array('_route' => 'caesar_admin_location_homepage'));
+            }
+
+            // caesar_admin_location_add
+            if ($pathinfo === '/admin/location/add') {
+                return array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\LocationController::addAction',  '_route' => 'caesar_admin_location_add',);
+            }
+
+            // caesar_admin_location_update
+            if (0 === strpos($pathinfo, '/admin/location/update') && preg_match('#^/admin/location/update/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\LocationController::updateAction',)), array('_route' => 'caesar_admin_location_update'));
+            }
+
+            // caesar_admin_location_delete
+            if (0 === strpos($pathinfo, '/admin/location/delete') && preg_match('#^/admin/location/delete/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Caesar\\AdminBundle\\Controller\\LocationController::deleteAction',)), array('_route' => 'caesar_admin_location_delete'));
             }
 
         }

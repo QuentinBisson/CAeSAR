@@ -17,46 +17,53 @@ class User {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
+    /**
+     * @var int $codeBu
+     * 
+     * @ORM\Column(name="codeBu", type="integer",length=10)
+     */
+    private $codeBu;
+    
     /**
      * @var string $login
      * 
-     * @ORM\Column(name="login", type="string", length="100")
+     * @ORM\Column(name="login", type="string", length=100)
      */
     private $login;
 
     /**
      * @var string $motDePasse
      * 
-     * @ORM\Column(name="motDePasse", type="string", length="100")
+     * @ORM\Column(name="motDePasse", type="string", length=100)
      */
     private $motDePasse;
 
     /**
      * @var string $email
      * 
-     * @ORM\Column(name="email", type="string", length="100")
+     * @ORM\Column(name="email", type="string", length=100)
      */
     private $email;
 
     /**
      * @var string $nom
      * 
-     * @ORM\Column(name="name", type="string", length="60")
+     * @ORM\Column(name="name", type="string", length=60)
      */
     private $nom;
 
     /**
      * @var string $prenom
      * 
-     * @ORM\Column(name="prenom", type="string", length="50")
+     * @ORM\Column(name="prenom", type="string", length=50)
      */
     private $prenom;
 
     /**
      * @var string $role
      * 
-     * @ORM\Column(name="role", type="string", length="50")
+     * @ORM\Column(name="role", type="string", length=50)
      */
     private $role;
 
@@ -118,6 +125,27 @@ class User {
         return $this;
     }
 
-}
 
-?>
+    /**
+     * Set codeBu
+     *
+     * @param integer $codeBu
+     * @return User
+     */
+    public function setCodeBu($codeBu)
+    {
+        $this->codeBu = $codeBu;
+    
+        return $this;
+    }
+
+    /**
+     * Get codeBu
+     *
+     * @return integer 
+     */
+    public function getCodeBu()
+    {
+        return $this->codeBu;
+    }
+}
