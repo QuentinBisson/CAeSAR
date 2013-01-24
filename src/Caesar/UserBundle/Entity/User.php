@@ -5,20 +5,117 @@ namespace Caesar\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user")
  */
 class User {
 
     /**
+     * @var integer $id
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
-    public function __construct() {
-        parent::__construct();
+    /**
+     * @var string $login
+     * 
+     * @ORM\Column(name="login", type="string", length="100")
+     */
+    private $login;
+
+    /**
+     * @var string $motDePasse
+     * 
+     * @ORM\Column(name="motDePasse", type="string", length="100")
+     */
+    private $motDePasse;
+
+    /**
+     * @var string $email
+     * 
+     * @ORM\Column(name="email", type="string", length="100")
+     */
+    private $email;
+
+    /**
+     * @var string $nom
+     * 
+     * @ORM\Column(name="name", type="string", length="60")
+     */
+    private $nom;
+
+    /**
+     * @var string $prenom
+     * 
+     * @ORM\Column(name="prenom", type="string", length="50")
+     */
+    private $prenom;
+
+    /**
+     * @var string $role
+     * 
+     * @ORM\Column(name="role", type="string", length="50")
+     */
+    private $role;
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getLogin() {
+        return $this->login;
+    }
+
+    public function setLogin($login) {
+        $this->login = $login;
+        return $this;
+    }
+
+    public function getMotDePasse() {
+        return $this->motDePasse;
+    }
+
+    public function setMotDePasse($motDePasse) {
+        $this->motDePasse = $motDePasse;
+        return $this;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function setNom($nom) {
+        $this->nom = $nom;
+        return $this;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    public function setPrenom($prenom) {
+        $this->prenom = $prenom;
+        return $this;
+    }
+
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+        return $this;
     }
 
 }
