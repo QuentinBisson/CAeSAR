@@ -14,10 +14,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
+        $builder->add("codeBU", "number")
                 ->add("login")
                 ->add("motDePasse", "password")
-                ->add("email")
+                ->add("email", "email")
                 ->add("nom")
                 ->add("prenom");
     }

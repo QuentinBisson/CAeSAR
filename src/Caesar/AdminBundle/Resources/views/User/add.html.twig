@@ -2,16 +2,22 @@
 
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="1">
-        <a href="{{path('caesar_admin_user_homepage')}}">Utilisateurs</a>
-        <span class="divider">></span>
-    </li>
-    <li class="active"><span>Ajout</span></li>
+<li data-header="1">
+    <a href="{{path('caesar_admin_user_homepage')}}">Utilisateurs</a>
+    <span class="divider">></span>
+</li>
+<li class="active"><span>Ajout</span></li>
 {% endblock %}
-    
+
 {% block contentTitle %}
 Ajouter un utilisateur
 {% endblock %}
 
 {% block contentBody %}
+<form action="{{ path('caesar_admin_user_add') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+
+    <input type="submit" />
+</form>
 {% endblock %}
