@@ -12,17 +12,17 @@
     <thead>
         <tr>
             <th class = "userBu">{{ knp_pagination_sortable(pagination, 'Code BU', 'u.codeBu') }}</th>
-            <th{% if pagination.isSorted('u.login') %} class="sorted userLogin" {% else %} class="userLogin" {% endif %}>{{ knp_pagination_sortable(pagination, 'Login', 'u.login') }}</th>
-            <th{% if pagination.isSorted('u.nom') %} class="sorted userName"{% else %} class="userName" {% endif %}>{{ knp_pagination_sortable(pagination, 'Nom', 'u.nom') }}</th>
-            <th{% if pagination.isSorted('u.prenom') %} class="sorted userFirstName"{% else %} class="userFirstName" {% endif %}>{{ knp_pagination_sortable(pagination, 'Prenom', 'u.prenom') }}</th>
-            <th{% if pagination.isSorted('u.email') %} class="sorted userEmail"{% else %} class="userEmail" {% endif %}>{{ knp_pagination_sortable(pagination, 'Adresse mail de contact', 'u.email') }}</th>
+            <th{% if pagination.isSorted('u.login') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Login', 'u.login') }}</th>
+            <th{% if pagination.isSorted('u.nom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nom', 'u.nom') }}</th>
+            <th{% if pagination.isSorted('u.prenom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Prenom', 'u.prenom') }}</th>
+            <th{% if pagination.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Adresse mail de contact', 'u.email') }}</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         {% for user in pagination %}
-            <tr {% if loop.index is odd %} class="color"{% endif %}>
+            <tr>
                 <td>{{ user.codeBu }}</td>
                 <td>{{ user.login }}</td>
                 <td>{{ user.nom }}</td>
@@ -35,7 +35,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{path('caesar_admin_user_udelete', {'id': user.id})}}">
+                    <a href="{{path('caesar_admin_user_delete', {'id': user.id})}}">
                          <i class="icon-remove"></i>
                     </a>
                 </td>
