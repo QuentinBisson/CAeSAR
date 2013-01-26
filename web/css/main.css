@@ -20,6 +20,13 @@ body {
 
 h1, h2 {
     margin: 0;
+    line-height: 40px;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+}
+
+h1 {
+    font-size: 38.5px;
 }
 
 .header section.left {
