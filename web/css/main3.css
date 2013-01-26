@@ -1,3 +1,11 @@
+/* 
+    Document   : main3
+    Created on : 26 janv. 2013, 22:25:06
+    Author     : bissoqu1
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
 html {
     height: 100%;
 }
@@ -9,6 +17,7 @@ body {
     height: 100%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12pt;
+    background: url('../images/background.png');
 }
 
 .header {
@@ -99,6 +108,7 @@ h1 {
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: white;
 }
 
 .content{
@@ -229,6 +239,11 @@ th.sorted a.asc span:after {
 
 }
 
+.header-content, .main-content {
+    width: 70%;
+    margin: auto;
+}
+
 @media screen and (max-width:980px) and (min-width:480px) {
 
 }
@@ -236,3 +251,5 @@ th.sorted a.asc span:after {
 @media screen and (max-width:480px) {
 
 }
+
+
