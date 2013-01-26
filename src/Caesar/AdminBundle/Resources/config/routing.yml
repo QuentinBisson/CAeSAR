@@ -3,8 +3,8 @@ caesar_admin_homepage:
     defaults: { _controller: CaesarAdminBundle:Admin:index }
 
 caesar_resource_homepage:
-    pattern:  /resource/{page}
-    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1}
+    pattern:  /resource/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'r.id', direction:'asc'}
     requirements:
         page:  \d+
 
@@ -30,8 +30,8 @@ caesar_resource_skeleton:
 
 
 caesar_admin_user_homepage:
-    pattern:  /user/{page}
-    defaults: { _controller: CaesarAdminBundle:User:index, page:1}
+    pattern:  /user/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:User:index, page:1, sort:'u.codeBu', direction:'asc'}
     requirements:
         page:  \d+
         

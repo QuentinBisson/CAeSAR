@@ -3,14 +3,14 @@
 {% block breadCrumb%}
     {{parent()}}
     <li data-header="1">
-        <a href="{{path('caesar_admin_user_homepage')}}">Utilisateurs</a>
+        <a href="{{path('caesar_admin_user_homepage')}}">{{'admin.breadcrumb.users.list'|trans({})}}</a>
         <span class="divider">></span>
     </li>
-    <li class="active"><span>Suppression</span></li>
+    <li class="active"><span>{{'admin.breadcrumb.users.delete'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}
-Suppression d'un utilisateur
+{{'admin.title.users.delete'|trans({})}}
 {% endblock %}
 
 {% block contentBody %}

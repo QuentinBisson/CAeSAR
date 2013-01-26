@@ -1,0 +1,81 @@
+admin:
+    title:
+        main:
+          CAeSAR - Administration
+        home:
+          Bienvenue sur l'interface d'administration
+        locations:
+            add: Ajouter un nouvel emplacement
+            update: Modifier un emplacement
+            delete: Supprimer un emplacement
+            list: Lister les emplacements
+        users:
+            add: Ajouter un nouvel utilisateur
+            update: Modifier un utilisateur
+            delete: Supprimer un utilisateur
+            list: Lister les utilisateurs
+        resources:
+            add: Ajouter une nouvelle ressource
+            update: Modifier une ressource
+            delete: Supprimer une ressource
+            list: Lister les ressources
+            skeleton: Modifier le squelette d'une ressource
+    menu:
+        title:
+            locations:
+                header: Emplacements
+                add: Ajouter un emplacement
+                list: Lister les emplacements
+            users:
+                header: Utilisateurs
+                add: Ajouter un utilisateur
+                list: Lister les utilisateurs
+            resources:
+                header: Ressources
+                add: Ajouter une ressource
+                list: Lister les ressources
+                skeleton: Modifier le squelette
+            tags:
+                header: Étiquettes
+            borrowings:
+                header: Emprunts
+    button:
+        logout: Déconnexion
+    breadcrumb:
+        locations:
+            add: Ajouter
+            update: Modifier
+            delete: Supprimer
+            list: Emplacements
+        users:
+            add: Ajouter
+            update: Modifier
+            delete: Supprimer
+            list: Utilisateurs
+        resources:
+            add: Ajouter
+            update: Modifier
+            delete: Supprimer
+            list: Ressources
+            skeleton: Squelette
+        tags:
+            add:
+            update:
+            delete:
+            list: Etiquette
+        borrowings:
+            add:
+            update:
+            delete:
+            list: Emprunts
+            
+table:
+    title:
+        users:
+          codeBu: Code B.U.
+          login: Login
+          nom: Nom
+          prenom: Prénom
+          email: Courriel
+        locations:
+        resources:

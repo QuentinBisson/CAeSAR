@@ -21,3 +21,4 @@ caesar_admin:
 caesar_client:
     resource: "@CaesarUserBundle/Resources/config/routing.yml"
     prefix:   /
+        

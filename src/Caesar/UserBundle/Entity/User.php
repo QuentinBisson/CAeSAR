@@ -18,14 +18,14 @@ class User {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var int $codeBu
      * 
      * @ORM\Column(name="codeBu", type="integer",length=10)
      */
     private $codeBu;
-    
+
     /**
      * @var string $login
      * 
@@ -39,6 +39,13 @@ class User {
      * @ORM\Column(name="motDePasse", type="string", length=100)
      */
     private $motDePasse;
+
+    /**
+     * @var string $confirmMotDePasse
+     * 
+     * Il ne sera pas ajouté en base de données
+     */
+    protected $confirmMotDePasse;
 
     /**
      * @var string $email
@@ -126,17 +133,15 @@ class User {
         return $this;
     }
 
-
     /**
      * Set codeBu
      *
      * @param integer $codeBu
      * @return User
      */
-    public function setCodeBu($codeBu)
-    {
+    public function setCodeBu($codeBu) {
         $this->codeBu = $codeBu;
-    
+
         return $this;
     }
 
@@ -145,8 +150,16 @@ class User {
      *
      * @return integer 
      */
-    public function getCodeBu()
-    {
+    public function getCodeBu() {
         return $this->codeBu;
     }
+
+    public function getConfirmMotDePasse() {
+        return $this->confirmMotDePasse;
+    }
+
+    public function setConfirmMotDePasse($confirmMotDePasse) {
+        $this->confirmMotDePasse = $confirmMotDePasse;
+    }
+
 }

@@ -1,0 +1,81 @@
+admin:
+    title:
+        main:
+          CAeSAR - Administration
+        home:
+          Welcome on the administration interface
+        locations:
+            add: Add a new location
+            update: Edit a location
+            delete: Delete a location
+            list: List locations
+        users:
+            add: Add a new user
+            update: Edit a user
+            delete: Delete a user
+            list: List users
+        resources:
+            add: Add a new resource
+            update: Edit a resource
+            delete: Delete a resource
+            list: List resources
+            skeleton: Edit the resources skeleton
+    menu:
+        title:
+            locations:
+                header: Locations
+                add: Add a location
+                list: List locations
+            users:
+                header: Users
+                add: Add a user
+                list: List users
+            resources:
+                header: Resources
+                add: Add a resource
+                list: List resources
+                skeleton: Edit skeleton
+            tags:
+                header: Tags
+            borrowings:
+                header: Borrowings
+    button:
+        logout: Log out
+    breadcrumb:
+        locations:
+            add: Add
+            update: Edit
+            delete: Delete
+            list: Locations
+        users:
+            add: Add
+            update: Edit
+            delete: Delete
+            list: Users
+        resources:
+            add: Add
+            update: Edit
+            delete: Delete
+            list: Resources
+            skeleton: Skeleton
+        tags:
+            add:
+            update:
+            delete:
+            list: Tags
+        borrowings:
+            add:
+            update:
+            delete:
+            list: Borrowings
+            
+table:
+    title:
+        users:
+          codeBu: U.L. Code
+          login: Login
+          nom: Last name
+          prenom: First name
+          email: Email address
+        locations:
+        resources:

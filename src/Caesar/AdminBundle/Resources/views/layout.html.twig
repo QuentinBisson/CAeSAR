@@ -8,43 +8,43 @@
 <aside class="sidebar">
     <nav>
         <ul class="accordion">
-            <li><a href="{{path('caesar_resource_homepage')}}">Ressources</a>
+            <li><a href="{{path('caesar_resource_homepage')}}">{{'admin.menu.title.resources.header'|trans({})}}</a>
                 <ul>
-                    <li><a href="{{path('caesar_resource_add')}}">Ajouter une ressource</a></li>
-                    <li><a href="{{path('caesar_resource_homepage')}}">Voir les ressources</a></li>
-                    <li><a href="{{path('caesar_resource_skeleton')}}">Modifier le squelette</a></li>
+                    <li><a href="{{path('caesar_resource_add')}}">{{'admin.menu.title.resources.add'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_resource_homepage')}}">{{'admin.menu.title.resources.list'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_resource_skeleton')}}">{{'admin.menu.title.resources.skeleton'|trans({})}}</a></li>
                 </ul>
             </li>
-            <li><a href="{{path('caesar_admin_user_homepage')}}">Utilisateurs</a>
+            <li><a href="{{path('caesar_admin_user_homepage')}}">{{'admin.menu.title.users.header'|trans({})}}</a>
                 <ul>
-                   <li><a href="{{path('caesar_admin_user_add')}}">Ajouter un utilisateur</a></li>
-                    <li><a href="{{path('caesar_admin_user_homepage')}}">Voir les utilisateurs</a></li>
+                    <li><a href="{{path('caesar_admin_user_add')}}">{{'admin.menu.title.users.add'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_user_homepage')}}">{{'admin.menu.title.users.list'|trans({})}}</a></li>
                 </ul>
             </li>
-                <li><a href="{{path('caesar_admin_location_homepage')}}">Emplacements</a>
-                    <ul>
-                        <li><a href="{{path('caesar_admin_location_add')}}">Ajouter un emplacement</a></li>
-                        <li><a href="{{path('caesar_admin_location_homepage')}}">Voir les emplacements</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="{{asset('#loan')}}">Emprunts</a>
-                        <ul>
-                    {#<li><a href="{{path('admin/loan/add')}}">Ajouter</a></li>#}
-                            </ul>
-                        </li>
-                        <li><a href="{{asset('#tag')}}">Etiquettes</a>
-                            <ul>
-                    {#<li><a href="{{path('admin/tag/add')}}">Ajouter</a></li>#}
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </aside>
+            <li><a href="{{path('caesar_admin_location_homepage')}}">{{'admin.menu.title.locations.header'|trans({})}}</a>
+                <ul>
+                    <li><a href="{{path('caesar_admin_location_add')}}">{{'admin.menu.title.locations.add'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_location_homepage')}}">{{'admin.menu.title.locations.list'|trans({})}}</a></li>
+                </ul>
+            </li>
+            <li><a href="{{asset('#borrowing')}}">{{'admin.menu.title.borrowings.header'|trans({})}}</a>
+                <ul>
+
+                </ul>
+            </li>
+            <li><a href="{{asset('#tag')}}">{{'admin.menu.title.tags.header'|trans({})}}</a>
+                <ul>
+
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
 {% endblock %}
 
 {% block content %}
-    <h2>{% block contentTitle %}{% endblock %}</h2>
-    {% block contentBody %}{% endblock %}
+<h1>{% block contentTitle %}{% endblock %}</h1>
+<div class="contentBody">{% block contentBody %}{% endblock %}</div>        
 {% endblock %}
 
 {% block javascripts %}
@@ -92,5 +92,5 @@ $('.accordion a').each(function(){
     }
 });
 
-</script>
+    </script>
 {% endblock %}

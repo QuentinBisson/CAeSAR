@@ -14,66 +14,79 @@ use Caesar\UserBundle\Form\UserType;
  */
 class UserController extends Controller {
 
-    public function indexAction($page = 1) {
+    public function indexAction($page = 1, $sort = 'u.codeBu', $direction = 'asc') {
         $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQueryBuilder()
+                        ->add('select', 'u')
+                        ->add('from', 'Caesar\UserBundle\Entity\User u')
+                        ->add('where', 'u.role = \'USER\'')
+                        ->addOrderBy($sort, $direction)->getQuery();
 
-
-        //Création de la requête : Exemple
-        $dql = "SELECT u FROM CaesarUserBundle:User u WHERE u.role NOT LIKE 'ADMINISTRATEUR'";
-        $query = $em->createQuery($dql);
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-                $query, $page/* page number */, 10/* limit per page */
+                $query, $page, 10, array('sort' => $sort, 'direction' => $direction)
         );
 
-        return $this->render("CaesarAdminBundle:User:index.html.twig", array('pagination' => $pagination)
-        );
+        return $this->render("CaesarAdminBundle:User:index.html.twig", array(
+                    'pagination' => $pagination, 'page' => $page,
+                    'sort' => $sort, 'direction' => $direction,
+                    'options' => array('translationDomain'=> 'messages')));
     }
 
     public function addAction(Request $request) {
         $user = new User();
-        
+
         $form = $this->createForm(new UserType(), $user);
-        
+
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
                 // effectuez quelques actions, comme sauvegarder la tâche dans
                 // la base de données
-                
                 //return $this->redirect($this->generateUrl('task_success'));
             }
         }
 
         return $this->render('CaesarAdminBundle:User:add.html.twig', array(
-            'form' => $form->createView(),
-        ));
+                    'form' => $form->createView(),
+                ));
     }
 
     public function updateAction(Request $request, $id) {
-        
-        
-        //getUser
-        $user = new User();
-        
+
+        $user = $this->getDoctrine()
+                ->getRepository('CaesarUserBundle:User')
+                ->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+        }
+
         $form = $this->createForm(new UserType(), $user);
-        
+
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
-                // effectuez quelques actions, comme sauvegarder la tâche dans
-                // la base de données
                 
-                //return $this->redirect($this->generateUrl('task_success'));
             }
         }
-        
-        return $this->render('CaesarAdminBundle:User:update.html.twig');
+
+        return $this->render('CaesarAdminBundle:User:update.html.twig', array(
+                    'form' => $form->createView(),
+                ));
     }
 
-    public function deleteAction() {
+    public function deleteAction($id) {
+        $user = $this->getDoctrine()
+                ->getRepository('CaesarUserBundle:User')
+                ->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+        }
+
         return $this->render('CaesarAdminBundle:User:delete.html.twig');
     }
 

@@ -14,12 +14,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add("codeBU", "number")
-                ->add("login")
-                ->add("motDePasse", "password")
-                ->add("email", "email")
-                ->add("nom")
-                ->add("prenom");
+        $builder->add("codeBU", "number", array('label' => 'form.user.type.label.codeBu'))
+                ->add("login", 'text', array('label' => 'form.user.type.label.login'))
+                ->add("motDePasse", "password", array('label' => 'form.user.type.label.password'))
+                ->add("confirmMotDePasse", "password", array('label' => 'form.user.type.label.password.confirm'))
+                ->add("email", "email", array('label' => 'form.user.type.label.email'))
+                ->add("nom", 'text', array('label' => 'form.user.type.label.name'))
+                ->add("prenom", 'text', array('label' => 'form.user.type.label.firstname'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
