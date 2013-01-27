@@ -2,47 +2,37 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}CAeSAR{% endblock %}</title>
+        {% block stylesheets %}
+        	<link rel="stylesheet" type="text/css" href="{{ asset('css/main_client.css') }}" />
+        	<link rel="stylesheet" type="text/css" href="{{ asset('css/icons.css') }}" />
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <header>
-            <section>
-                <a href="{{asset('home')}}">Accueil</a>
-                <input type="text" placeholder="Mots-clés"/>
-            </section>
+        <div class="navbar">
+            <div class="left">
+                <a class="nav-el" href="{{asset('caesar_client_homepage')}}"><i class="icon-home icon-white"></i></a>
+                <input type="text" class="input-search" placeholder="Rechercher ...">
+            </div>
 
-            <section>
-                <a href="{{asset('register')}}">Inscription</a>
-                <p>
-                    <a href="{{asset('profile')}}">
-                        Bonjour
-                    </a>
-                </p>
-
-                <nav>
-                    <ul>
-                        <li>
-                            Mon profil
-                        </li>
-                        <li>
-                            Mes emprunts
-                        </li>
-                    </ul>
-                </nav>
-                <a href="{{asset('register')}}">Connexion</a>
-            </section>
-        </header>
+            <div class="right">	
+				<p class="nav-el">{{ 'user.welcomeMessage'|trans({}, 'CaesarUserBundle') }} <a href="{{ path('caesar_client_profile')}}">Foo</a></p>
+                
+		 		{#<a href="{{ path('caesar_client_register')}}">{{ 'user.inscription'|trans({}, 'CaesarUserBundle') }}</a>
+                <a href="{{ path('caesar_client_login') }}">{{ 'user.connexion'|trans({}, 'CaesarUserBundle') }}</a>#}
+            </div>
+        </div>
+        
         <section>
             <header>
                 {% block bodyTitle %}{% endblock %}
-                </header>
+			</header>
 
-                <section>
-                {% block body %}{% endblock %}
-                    </section>
-                </section>
-        {% block javascripts %}{% endblock %}
-            </body>
-        </html>
+			<section>
+				{% block body %}{% endblock %}
+			</section>
+		</section>
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>
