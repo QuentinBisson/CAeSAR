@@ -1,0 +1,4 @@
+client:
+    navbar:
+        search_form:
+            placeholder: Search ...

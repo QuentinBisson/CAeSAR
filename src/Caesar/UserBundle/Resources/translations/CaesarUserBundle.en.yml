@@ -1,0 +1,9 @@
+user:
+    welcomeMessage: Welcome
+    
+form:
+    main_form:
+        borrow: Borrow
+        return: Return
+        consult: Consult
+        placeholder: Enter a UB code, ISBN, identifier ...

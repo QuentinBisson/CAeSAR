@@ -1,0 +1,9 @@
+user:
+    welcomeMessage: Bonjour
+    
+form:
+    main_form:
+        borrow: Emprunter
+        return: Rendre
+        consult: Consulter
+        placeholder: Entrez un code BU, ISBN, identifiant ...

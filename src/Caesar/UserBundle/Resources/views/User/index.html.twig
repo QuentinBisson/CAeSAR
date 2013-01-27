@@ -7,11 +7,11 @@
 {% block body %}
 <section id="main-form">
 	<form action="#" method="post" autocomplete="off">
-		<input type="text" name="main_form_text" placeholder="Entrez un code BU, ISBN, identifiant ...">
+		<input type="text" name="main_form_text" placeholder="{{ 'form.main_form.placeholder'|trans({}, 'CaesarUserBundle') }}">
 		<div class="main-form-actions">
-			<input type="submit" name="emprunter" value="Emprunter">
-			<input type="submit" name="rendre" value="Rendre" disabled="disabled">
-			<input type="submit" name="identifier" value="Identifier" disabled="disabled">
+			<input type="submit" name="emprunter" value="{{ 'form.main_form.borrow'|trans({}, 'CaesarUserBundle') }}">
+			<input type="submit" name="rendre" value="{{ 'form.main_form.return'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+			<input type="submit" name="consulter" value="{{ 'form.main_form.consult'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
 		</div>
 	</form>
 </section>
