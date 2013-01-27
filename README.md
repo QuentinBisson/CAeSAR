@@ -34,3 +34,15 @@ Exécutez les commandes :
 	php app/console doctrine:database:create
 	
 	php app/console doctrine:schema:create --force
+
+6) Mise à jour des routes
+-------------------------
+Lorsque vous modifier une route, lancez les commandes suivantes :
+    php app/console translation:extract fr --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
+    php app/console translation:extract en --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
+
+Ainsi les routes seront préfixés par la locale en cours.
+Exemple : 
+    - L'url http://localhost/CAeSAR/web/admin/resource/ ne fonctionne pas
+    - L'url http://localhost/CAeSAR/web/en/admin/resource/add est valide
+

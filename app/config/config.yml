@@ -14,7 +14,6 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
     trust_proxy_headers: false # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
     trusted_proxies: ~
     session:         ~
@@ -70,3 +69,8 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: :Pagination:sortable.html.twig # sort link template
+        
+jms_i18n_routing:
+    default_locale: %locale%
+    locales: [en, fr]
+    strategy: prefix

@@ -20,6 +20,9 @@ admin:
             delete: Supprimer une ressource
             list: Lister les ressources
             skeleton: Modifier le squelette d'une ressource
+    lang: 
+        french: Français
+        english: Anglais
     menu:
         title:
             locations:

@@ -46,8 +46,9 @@
 {% endblock %}
 
 {% block content %}
-<h1>{% block contentTitle %}{% endblock %}</h1>
-<div class="contentBody">{% block contentBody %}{% endblock %}</div>        
+<header><h1>{% block contentTitle %}{% endblock %}</h1></header>
+
+<section class="contentBody">{% block contentBody %}{% endblock %}</section>        
 {% endblock %}
 
 {% block javascripts %}

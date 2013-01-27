@@ -25,6 +25,8 @@ class AppKernel extends Kernel {
             new Caesar\LocationBundle\CaesarLocationBundle(),
             new Caesar\WebMiningBundle\CaesarWebMiningBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -20,6 +20,9 @@ admin:
             delete: Delete a resource
             list: List resources
             skeleton: Edit the resources skeleton
+    lang: 
+        french: French
+        english: English            
     menu:
         title:
             locations:
