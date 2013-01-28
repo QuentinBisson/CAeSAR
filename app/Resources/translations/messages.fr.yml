@@ -2,3 +2,29 @@ client:
     navbar:
         search_form:
             placeholder: Rechercher ...
+form:
+    user:
+        type:
+            label:
+                codeBu: Code B.U.
+                login: Login
+                password:
+                    normal: Mot de passe
+                    confirm: Confirmer le mot de passe
+                email: Courriel
+                name: Nom
+                firstname: Prénom
+                
+table:
+    foot:
+        count:
+            text: %value% lignes ont été trouvées
+    title:
+        users:
+          codeBu: Code B.U.
+          login: Login
+          nom: Nom
+          prenom: Prénom
+          email: Courriel
+        locations:
+        resources:

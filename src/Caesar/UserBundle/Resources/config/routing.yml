@@ -1,6 +1,6 @@
 caesar_client_homepage:
     pattern:  /
-    defaults: { _controller: CaesarUserBundle:User:index }
+    defaults: { _controller: CaesarUserBundle:User:index}
 
 caesar_client_login:
     pattern:  /login

@@ -3,6 +3,7 @@ aside.sidebar{
     float: left;
     width: 250px;
     clear: both;
+    background: url('../../../images/background.jpg');
 }
 
 aside.sidebar nav {   
@@ -25,6 +26,7 @@ aside.sidebar nav > ul > li:last-child > a {
 
 aside.sidebar nav ul li a {
     border: 1px solid #e5e5e5;
+    box-shadow: 2px 2px 2px 2px #999;
 }
 
 aside.sidebar nav ul li ul li a {
@@ -103,41 +105,6 @@ aside.sidebar nav li a:hover {
     display: inline; 
     float: left;
 }  
-/*.breadcrumb li.first {
-    padding-left: 8px;
-}
-
-.breadcrumb li a,  
-.breadcrumb li a:link,  
-.breadcrumb li a:visited, 
-.breadcrumb li.active span{  
-    color: #666;  
-    display: block;  
-    float: left;  
-    font-size: 14px;  
-    margin-left: -13px;  
-    padding: 0px 25px 0px 20px;  
-    position: relative;  
-    text-decoration: none;  
-}  
-.breadcrumb li a, .breadcrumb li.active span {  
-    background-image: url('../images/bg-crumbs.png');  
-    background-repeat: no-repeat;  
-    background-position: 100% 10px;  
-    position: relative;
-    border: 1px solid darkgray;
-}  
-
-.breadcrumb li a:hover {  
-    color: #333;  
-    background-position: 100% -38px;  
-    cursor: pointer;  
-}  
-
-.breadcrumb li a:active, .breadcrumb li.active span {  
-    color: white;  
-    background-position: 100% -86px;  
-}  */
 
 .breadcrumb {
     padding: 0px 14px;
@@ -183,6 +150,10 @@ aside.sidebar nav li a:hover {
     color: #333333;
 }
 
+article {
+    margin-left: 250px;
+}
+
 .contentBody {
-    margin-left:300px;
+
 }

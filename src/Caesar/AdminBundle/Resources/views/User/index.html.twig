@@ -1,8 +1,13 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+{% endblock %}
+
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="1" class="active"><span>{{'admin.breadcrumb.users.list'|trans({})}}</span></li>
+<li data-header="1" class="active"><span>{{'admin.breadcrumb.users.list'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}{{'admin.title.users.list'|trans({})}}{% endblock %}
@@ -11,48 +16,50 @@
 <table class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
-            <th{% if pagination.isSorted('u.codeBu') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'table.title.users.codeBu', 'u.codeBu', options) }}</th>
-            <th{% if pagination.isSorted('u.login') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'table.title.users.login', 'u.login', options) }}</th>
-            <th{% if pagination.isSorted('u.nom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'table.title.users.nom', 'u.nom', options) }}</th>
-            <th{% if pagination.isSorted('u.prenom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'table.title.users.prenom', 'u.prenom', options) }}</th>
-            <th{% if pagination.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'table.title.users.email', 'u.email', options) }}</th>
+            <th{% if 'u.codeBu' == sort %} class="sorted"{% endif %}>{{ 'table.title.users.codeBu'|trans({}) }}
+                <a href="{{path('caesar_admin_user_homepage', {'page': page, 'sort' :'codeBu', 'direction' : (direction == 'asc' and sort == 'codeBu') ? 'desc' : 'asc'})}}">sort</a>
+            </th>
+            <th{% if 'u.login' == sort %} class="sorted"{% endif %}>{{'table.title.users.login'|trans({}) }}</th>
+            <th{% if 'u.nom' == sort %} class="sorted"{% endif %}>{{'table.title.users.nom'|trans({}) }}</th>
+            <th{% if 'u.prenom' == sort %} class="sorted"{% endif %}>{{'table.title.users.prenom'|trans({}) }}</th>
+            <th{% if 'u.email' == sort %} class="sorted"{% endif %}>{{'table.title.users.email'|trans({}) }}</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
-     <tfoot>
+    <tfoot>
         <tr>
             <th colspan="7">
-                Afficher le nombre d'éléments trouvés
-            </th>
-        </tr>
-    </tfoot>
-    <tbody>
-        {% for user in pagination %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ user.codeBu }}</td>
-                <td>{{ user.login }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                    <a href="{{path('caesar_admin_user_update', {'id': user.id})}}">
-                        <i class="icon-edit"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="{{path('caesar_admin_user_delete', {'id': user.id})}}">
-                        <i class="icon-remove"></i>
-                    </a>
-                </td>
+                {{ 'table.foot.count.text'|trans({'%value%': count}) }}
+                </th>
             </tr>
-        {% endfor %}
+        </tfoot>
         <tbody>
-    </table>
+        {% for user in users %}
+                <tr>
+                    <td>{{ user.codeBu }}</td>
+                    <td>{{ user.login }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">
+                            <i class="icon-edit"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}">
+                            <i class="icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+        {% endfor %}
+            <tbody>
+        </table>
 
 {# display navigation #}
-    <div class="navigation">
-    {{ knp_pagination_render(pagination) }}
+        <div class="navigation">
+
         </div>
 {% endblock %}
 

@@ -72,13 +72,3 @@ admin:
             delete:
             list: Borrowings
             
-table:
-    title:
-        users:
-          codeBu: U.L. Code
-          login: Login
-          nom: Last name
-          prenom: First name
-          email: Email address
-        locations:
-        resources:

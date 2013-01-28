@@ -72,13 +72,3 @@ admin:
             delete:
             list: Emprunts
             
-table:
-    title:
-        users:
-          codeBu: Code B.U.
-          login: Login
-          nom: Nom
-          prenom: Prénom
-          email: Courriel
-        locations:
-        resources:

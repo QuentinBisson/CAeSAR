@@ -3,7 +3,7 @@
 namespace Caesar\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Caesar\UserBundle\Entity\User;
 use Caesar\UserBundle\Form\UserType;
 
@@ -14,30 +14,30 @@ use Caesar\UserBundle\Form\UserType;
  */
 class UserController extends Controller {
 
-    public function indexAction($page = 1, $sort = 'u.codeBu', $direction = 'asc') {
+    public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
         $em = $this->getDoctrine()->getEntityManager();
         $query = $em->createQueryBuilder()
-                        ->add('select', 'u')
-                        ->add('from', 'Caesar\UserBundle\Entity\User u')
-                        ->add('where', 'u.role = \'USER\'')
-                        ->addOrderBy($sort, $direction)->getQuery();
+                ->add('select', 'u')
+                ->add('from', 'Caesar\UserBundle\Entity\User u')
+                ->add('where', 'u.role = \'USER\'')
+                ->addOrderBy('u.' . $sort, $direction)->getQuery()
+                ->setFirstResult(($page - 1) * 15)
+                ->setMaxResults(($page * 15) - 1);
+        $users = $query->getResult();
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-                $query, $page, 10, array('sort' => $sort, 'direction' => $direction)
-        );
+        $query = $em->createQuery('SELECT COUNT(u.id) FROM Caesar\UserBundle\Entity\User u where u.role = \'USER\'');
+        $count = $query->getSingleScalarResult();
 
         return $this->render("CaesarAdminBundle:User:index.html.twig", array(
-                    'pagination' => $pagination, 'page' => $page,
-                    'sort' => $sort, 'direction' => $direction,
-                    'options' => array('translationDomain'=> 'messages')));
+                    'users' => $users, 'page' => $page,
+                    'sort' => $sort, 'direction' => $direction, 'count' => $count));
     }
 
-    public function addAction(Request $request) {
+    public function addAction() {
         $user = new User();
 
         $form = $this->createForm(new UserType(), $user);
-
+        $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
@@ -53,8 +53,7 @@ class UserController extends Controller {
                 ));
     }
 
-    public function updateAction(Request $request, $id) {
-
+    public function updateAction($id) {
         $user = $this->getDoctrine()
                 ->getRepository('CaesarUserBundle:User')
                 ->find($id);
@@ -62,9 +61,8 @@ class UserController extends Controller {
         if (!$user) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
-
         $form = $this->createForm(new UserType(), $user);
-
+        $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
@@ -74,8 +72,9 @@ class UserController extends Controller {
         }
 
         return $this->render('CaesarAdminBundle:User:update.html.twig', array(
-                    'form' => $form->createView(),
+                    'form' => $form->createView(), 'user' => $id
                 ));
+        return new Response("ok");
     }
 
     public function deleteAction($id) {
