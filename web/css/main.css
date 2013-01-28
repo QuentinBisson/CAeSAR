@@ -20,12 +20,16 @@ body {
     background-repeat: repeat-x;
 }
 
-.header section.left {
+.left {
     float: left;
 }
 
-.header section.right {
+.right {
     float: right;
+}
+
+a {
+    outline:0;
 }
 
 .link-button-deconnexion {
@@ -182,6 +186,18 @@ h1, h2 {
 h1 {
     font-size: 38.5px;
     color: #282828;
+}
+
+.sort-link {
+    display: block;
+}
+.sort-link img {
+    width: 10px;
+}
+
+p.sort-label {
+    float: left;
+    padding-top: 6px;
 }
 
 @media screen and (max-width:980px) and (min-width:480px) {

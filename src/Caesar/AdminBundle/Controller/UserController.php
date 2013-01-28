@@ -25,9 +25,17 @@ class UserController extends Controller {
                 ->setMaxResults(($page * 15) - 1);
         $users = $query->getResult();
 
-        $query = $em->createQuery('SELECT COUNT(u.id) FROM Caesar\UserBundle\Entity\User u where u.role = \'USER\'');
-        $count = $query->getSingleScalarResult();
-
+        $countQuery = $em->createQuery('SELECT COUNT(u.id) FROM Caesar\UserBundle\Entity\User u where u.role = \'USER\'');
+        $count = $countQuery->getSingleScalarResult();
+        
+        $request = $this->get('request');
+        
+        if ($request->isXmlHttpRequest()) {
+            return $this->render("CaesarAdminBundle:User:list.html.twig", array(
+                    'users' => $users, 'page' => $page,
+                    'sort' => $sort, 'direction' => $direction, 'count' => $count));
+        }
+        
         return $this->render("CaesarAdminBundle:User:index.html.twig", array(
                     'users' => $users, 'page' => $page,
                     'sort' => $sort, 'direction' => $direction, 'count' => $count));

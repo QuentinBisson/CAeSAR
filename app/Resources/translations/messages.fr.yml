@@ -22,9 +22,16 @@ table:
     title:
         users:
           codeBu: Code B.U.
-          login: Login
+          login: Nom d'utilisateur
           nom: Nom
           prenom: Prénom
           email: Courriel
         locations:
         resources:
+    sort:
+        down: Trier vers le bas
+        up: Trier vers le haut
+
+ajax:
+    wait:
+        message: Veuillez patientez ...

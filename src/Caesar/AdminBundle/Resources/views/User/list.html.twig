@@ -1,0 +1,19 @@
+ {% for user in users %}
+<tr>
+    <td>{{ user.codeBu }}</td>
+    <td>{{ user.login }}</td>
+    <td>{{ user.nom }}</td>
+    <td>{{ user.prenom }}</td>
+    <td>{{ user.email }}</td>
+    <td>
+        <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">
+            <i class="icon-edit"></i>
+        </a>
+    </td>
+    <td>
+        <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}">
+            <i class="icon-remove"></i>
+        </a>
+    </td>
+</tr>
+{% endfor %}

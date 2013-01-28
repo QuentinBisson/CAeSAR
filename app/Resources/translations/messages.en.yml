@@ -27,4 +27,11 @@ table:
           prenom: First name
           email: Email address
         locations:
-        resources:                
+        resources:            
+    sort:
+        down: Sort down
+        up: Sort up
+        
+ajax:
+    wait:
+        message: Please wait ...

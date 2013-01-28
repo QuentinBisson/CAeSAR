@@ -16,50 +16,47 @@
 <table class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
-            <th{% if 'u.codeBu' == sort %} class="sorted"{% endif %}>{{ 'table.title.users.codeBu'|trans({}) }}
-                <a href="{{path('caesar_admin_user_homepage', {'page': page, 'sort' :'codeBu', 'direction' : (direction == 'asc' and sort == 'codeBu') ? 'desc' : 'asc'})}}">sort</a>
+            <th{% if 'codeBu' == sort %} class="sorted"{% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.codeBu'|trans({}), 'page': page, 'sort': 'codeBu'}  %}
             </th>
-            <th{% if 'u.login' == sort %} class="sorted"{% endif %}>{{'table.title.users.login'|trans({}) }}</th>
-            <th{% if 'u.nom' == sort %} class="sorted"{% endif %}>{{'table.title.users.nom'|trans({}) }}</th>
-            <th{% if 'u.prenom' == sort %} class="sorted"{% endif %}>{{'table.title.users.prenom'|trans({}) }}</th>
-            <th{% if 'u.email' == sort %} class="sorted"{% endif %}>{{'table.title.users.email'|trans({}) }}</th>
+            <th{% if 'login' == sort %} class="sorted"{% endif %}>
+                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.login'|trans({}), 'page': page, 'sort': 'login'}  %}
+            </th>
+            <th{% if 'nom' == sort %} class="sorted"{% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.nom'|trans({}), 'page': page, 'sort': 'nom'}  %}
+            </th>
+            <th{% if 'prenom' == sort %} class="sorted"{% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.prenom'|trans({}), 'page': page, 'sort': 'prenom'}  %}
+            </th>
+            <th{% if 'email' == sort %} class="sorted"{% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.email'|trans({}), 'page': page, 'sort': 'email'}  %}
+            </th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th colspan="7">
+            <td colspan="7">
                 {{ 'table.foot.count.text'|trans({'%value%': count}) }}
-                </th>
-            </tr>
-        </tfoot>
-        <tbody>
-        {% for user in users %}
-                <tr>
-                    <td>{{ user.codeBu }}</td>
-                    <td>{{ user.login }}</td>
-                    <td>{{ user.nom }}</td>
-                    <td>{{ user.prenom }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">
-                            <i class="icon-edit"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}">
-                            <i class="icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-        {% endfor %}
-            <tbody>
-        </table>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody id="table_list">
+        {% include 'CaesarAdminBundle:User:list.html.twig' with {'users' : users}  %}
+    <tbody>
+</table>
 
 {# display navigation #}
-        <div class="navigation">
+            <div class="navigation">
 
-        </div>
+            </div>
 {% endblock %}
-
+{% block javascripts %}
+{{parent()}}
+            <script type="text/javascript" src="{{ asset('js/jquery.blockUI.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+            <script type="text/javascript">
+                message = "{{'ajax.wait.message'|trans({})}}";
+                </script>
+{% endblock %}
