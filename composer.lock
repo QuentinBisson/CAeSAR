@@ -1,5 +1,5 @@
 {
-    "hash": "0cfdcf598669df1b9ce598c9ef273ef2",
+    "hash": "913411fd572404afb9a7de4258df5f60",
     "packages": [
         {
             "name": "doctrine/common",
@@ -466,71 +466,6 @@
             ]
         },
         {
-            "name": "jms/i18n-routing-bundle",
-            "version": "dev-master",
-            "target-dir": "JMS/I18nRoutingBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle",
-                "reference": "64070a8b8c0da7a1c411463778266caffedc7a12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle/archive/64070a8b8c0da7a1c411463778266caffedc7a12.zip",
-                "reference": "64070a8b8c0da7a1c411463778266caffedc7a12",
-                "shasum": ""
-            },
-            "require": {
-                "jms/translation-bundle": ">=1.0,<2.0-dev",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev"
-            },
-            "require-dev": {
-                "sensio/framework-extra-bundle": "*",
-                "jms/di-extra-bundle": "*",
-                "symfony/css-selector": "*",
-                "symfony/http-kernel": "*",
-                "symfony/validator": "*",
-                "symfony/browser-kit": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/yaml": "*",
-                "symfony/process": "*",
-                "symfony/class-loader": "*",
-                "symfony/twig-bundle": "*"
-            },
-            "time": "2012-11-16 15:29:35",
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\I18nRoutingBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "This bundle allows you to create i18n routes.",
-            "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",
-            "keywords": [
-                "routing",
-                "translation",
-                "multilanguage"
-            ]
-        },
-        {
             "name": "jms/metadata",
             "version": "1.1.1",
             "source": {
@@ -637,85 +572,6 @@
                 "security",
                 "secure",
                 "expression"
-            ]
-        },
-        {
-            "name": "jms/translation-bundle",
-            "version": "dev-master",
-            "target-dir": "JMS/TranslationBundle",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "2d14f79d2298f40e43d6b9ce29cc9549879ee3ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/schmittjoh/JMSTranslationBundle/archive/2d14f79d2298f40e43d6b9ce29cc9549879ee3ae.zip",
-                "reference": "2d14f79d2298f40e43d6b9ce29cc9549879ee3ae",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "0.9.1",
-                "symfony/console": "*",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev"
-            },
-            "conflict": {
-                "twig/twig": "1.10.2"
-            },
-            "require-dev": {
-                "symfony/twig-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/validator": "*",
-                "symfony/security": "*",
-                "symfony/process": "*",
-                "symfony/yaml": "*",
-                "sensio/framework-extra-bundle": "*",
-                "jms/di-extra-bundle": "*"
-            },
-            "suggest": {
-                "twig/twig": "1.*",
-                "sensio/framework-extra-bundle": "2.*",
-                "jms/di-extra-bundle": "1.*"
-            },
-            "time": "2013-01-24 21:54:03",
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\TranslationBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Puts the Symfony2 Translation Component on steroids",
-            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
-            "keywords": [
-                "i18n",
-                "ui",
-                "translation",
-                "multilanguage",
-                "interface",
-                "extraction",
-                "extract",
-                "webinterface"
             ]
         },
         {
@@ -954,45 +810,6 @@
             "keywords": [
                 "log",
                 "logging"
-            ]
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v0.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser",
-                "reference": "v0.9.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
-                "reference": "v0.9.1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "time": "2012-04-23 15:52:11",
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPParser": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "php",
-                "parser"
             ]
         },
         {
@@ -1555,8 +1372,6 @@
     "stability-flags": {
         "twig/extensions": 20,
         "kriswallsmith/assetic": 20,
-        "knplabs/knp-paginator-bundle": 20,
-        "jms/i18n-routing-bundle": 20,
-        "jms/translation-bundle": 20
+        "knplabs/knp-paginator-bundle": 20
     }
 }
