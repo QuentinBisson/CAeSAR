@@ -30,9 +30,8 @@ class UserRepository extends EntityRepository {
     }
 
     public function getUserFromToSortBy($page, $sort, $direction) {
-        $min = ($page - 1) * 10;
-        $max = ($page * 10) - 1;
-        //TODO tester count
+        $min = ($page - 1) * 15;
+        $max = ($page * 15) - 1;
 
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.role = \'USER\'')
