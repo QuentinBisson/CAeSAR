@@ -15,14 +15,14 @@ use Caesar\UserBundle\Form\UserType;
 class UserController extends Controller {
 
     public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
-        $nb_per_page = 15; // Nombre d'éléments affichés par page (pour la pagination)
+        $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $em = $this->getDoctrine()->getManager();
 
         $repository_user = $em->getRepository('CaesarUserBundle:User');
 
         $users = $repository_user->getUserFromToSortBy($page, $sort, $direction);
         $count = $repository_user->count();
-        
+
         /* Pagination */
         $total = $count;
         $pagination = array(
@@ -40,7 +40,6 @@ class UserController extends Controller {
                         'count' => $count,
                         'pagination' => $pagination));
         }
-
 
         return $this->render("CaesarAdminBundle:User:index.html.twig", array(
                     'users' => $users,

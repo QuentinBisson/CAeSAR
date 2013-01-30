@@ -5,7 +5,7 @@
     <a class="sort-link sort-up" href="{{path(app.request.attributes.get('_route'), {'page': page, 'sort' :sort, 'direction' : 'asc'})}}">
         <img src="{{asset('images/sort-asc.png')}}" alt="{{'table.sort.up'|trans({})}}"/>
     </a>
-    <a class="sort-link sort-down" href="{{path('caesar_admin_user_homepage', {'page': page, 'sort' :sort, 'direction' : 'desc'})}}">
+    <a class="sort-link sort-down" href="{{path(app.request.attributes.get('_route'), {'page': page, 'sort' :sort, 'direction' : 'desc'})}}">
         <img src="{{asset('images/sort-desc.png')}}" alt="{{'table.sort.down'|trans({})}}"/>
     </a>
 </span>

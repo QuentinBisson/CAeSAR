@@ -1,8 +1,4 @@
 function click_sort(e) {
-    $.blockUI({
-        message: '<h1 style="color:white">' + message + '</h1>',
-        css: {backgroundColor :'black', color: 'white'}
-        });
     var url = this.href;
     var src = $(this).children("img").attr("src");
     var idx = src.indexOf('.png');
@@ -20,14 +16,13 @@ function click_sort(e) {
         e.preventDefault();
     });     
             
-    window.history.pushState('state', 'page', url);
     $.ajax({
         type: "POST",
         url: url,
         cache: false,
         success: function(data){
             $('#table_list').html(data);
-            $.unblockUI();
+            window.history.pushState('state', 'page', url);
         }
     });
     e.preventDefault();
@@ -35,3 +30,28 @@ function click_sort(e) {
 }
 
 $('.table > thead > tr > th a').click(click_sort);
+
+/* Pagination */
+$(document).ready(function() {
+    $("._pagination").click(function(e) {
+        window.history.pushState('state', 'page',  $(this).attr('href'));
+        $(".navigation a").each(function() {
+            $(this).removeClass('active');
+        });
+        var elem = $(this);
+        $.ajax({
+            type: "POST",
+            url: elem.attr('href'),
+            cache: false,
+            success: function(data){
+                $('#table_list').html(data);
+                elem.addClass('active');
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $('#table_list').html('Une erreur est survenue');
+            }
+        });
+        e.preventDefault();
+        return false; // Empêche la redirection normale
+    });
+});
