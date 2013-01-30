@@ -3,11 +3,16 @@
 namespace Caesar\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNCodeBU", columns={"codeBu"}),
- *  @ORM\UniqueConstraint(name="UNLogin", columns={"login"})})
+ * @ORM\UniqueConstraint(name="UNLogin", columns={"login"})})
+ * 
+ * @UniqueEntity("codeBu")
+ * @UniqueEntity("login")
  */
 class User {
 
@@ -22,14 +27,16 @@ class User {
     /**
      * @var int $codeBu
      * 
-     * @ORM\Column(name="codeBu", type="integer",length=10)
+     * @ORM\Column(name="codeBu", type="integer",length=10, unique=true)
+     * @Assert\NotBlank()
      */
     private $codeBu;
 
     /**
      * @var string $login
      * 
-     * @ORM\Column(name="login", type="string", length=100)
+     * @ORM\Column(name="login", type="string", length=100, unique=true)
+     * @Assert\NotBlank()
      */
     private $login;
 
@@ -37,6 +44,7 @@ class User {
      * @var string $motDePasse
      * 
      * @ORM\Column(name="motDePasse", type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $motDePasse;
 
@@ -51,6 +59,8 @@ class User {
      * @var string $email
      * 
      * @ORM\Column(name="email", type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -58,6 +68,7 @@ class User {
      * @var string $nom
      * 
      * @ORM\Column(name="name", type="string", length=60)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -65,6 +76,7 @@ class User {
      * @var string $prenom
      * 
      * @ORM\Column(name="prenom", type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $prenom;
 
@@ -160,6 +172,13 @@ class User {
 
     public function setConfirmMotDePasse($confirmMotDePasse) {
         $this->confirmMotDePasse = $confirmMotDePasse;
+    }
+
+    /**
+     * @Assert\True(message = "The password and confirmation password do not match")
+     */
+    public function isPasswordEqualToConfirmationPassword() {
+        return ($this->motDePasse === $this->confirmMotDePasse);
     }
 
 }
