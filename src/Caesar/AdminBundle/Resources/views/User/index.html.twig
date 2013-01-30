@@ -84,31 +84,29 @@
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
-            <script type="text/javascript" src="{{ asset('js/jquery.blockUI.js') }}" ></script>
-            <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
-            <script type="text/javascript">
-                message = "{{'ajax.wait.message'|trans({})}}";
-                /* Pagination */
-                $(document).ready(function() {
-                	var processing = false;
-	                $("._pagination").click(function() {
-			            if (processing) return false;
-			            processing = true;
-			            $.ajax({
-			                type: "GET",
-			                url: $(this).attr('href'),
-			                cache: false,
-			                success: function(data){
-			                 	$('#table_list').html(data);
-			                    processing = false;
-			                },
-			                error: function(xhr, ajaxOptions, thrownError) {
-			                	$('#table_list').html('Une erreur est survenue');
-			                    processing = false;
-			                }
-			            });
-			            return false; // Empêche la redirection normale
-			        });
-                });
-            </script>
+    <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+    <script type="text/javascript">
+            /* Pagination */
+            $(document).ready(function() {
+                    var processing = false;
+                    $("._pagination").click(function() {
+                            if (processing) return false;
+                                processing = true;
+                                $.ajax({
+                                    type: "GET",
+                                    url: $(this).attr('href'),
+                                    cache: false,
+                                    success: function(data){
+                                            $('#table_list').html(data);
+                                        processing = false;
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                            $('#table_list').html('Une erreur est survenue');
+                                        processing = false;
+                                    }
+                                });
+                                return false; // Empêche la redirection normale
+                            });
+            });
+        </script>
 {% endblock %}

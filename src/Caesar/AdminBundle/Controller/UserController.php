@@ -15,40 +15,40 @@ use Caesar\UserBundle\Form\UserType;
 class UserController extends Controller {
 
     public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
-    	$nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
+        $nb_per_page = 15; // Nombre d'éléments affichés par page (pour la pagination)
         $em = $this->getDoctrine()->getManager();
-        
-        $repository_uer = $em->getRepository('CaesarUserBundle:User');
 
-        $users = $repository_uer->getUserFromToSortBy($page, $sort, $direction);
-        $count = $repository_uer->count();
+        $repository_user = $em->getRepository('CaesarUserBundle:User');
+
+        $users = $repository_user->getUserFromToSortBy($page, $sort, $direction);
+        $count = $repository_user->count();
         
         /* Pagination */
-        $total = count($repository_uer->findAll());
+        $total = $count;
         $pagination = array(
-        		'cur' => $page,
-        		'max' => floor($total/$nb_per_page),
+            'cur' => $page,
+            'max' => floor($total / $nb_per_page),
         );
 
         $request = $this->get('request');
         if ($request->isXmlHttpRequest()) {
             return $this->render("CaesarAdminBundle:User:list.html.twig", array(
                         'users' => $users,
-            			'page' => $page,
+                        'page' => $page,
                         'sort' => $sort,
-            			'direction' => $direction,
-            		    'count' => $count,
-            			'pagination' => $pagination));
+                        'direction' => $direction,
+                        'count' => $count,
+                        'pagination' => $pagination));
         }
-        
-		
+
+
         return $this->render("CaesarAdminBundle:User:index.html.twig", array(
                     'users' => $users,
-        		 	'page' => $page,
+                    'page' => $page,
                     'sort' => $sort,
-        		 	'direction' => $direction,
-        		 	'count' => $count,
-            		'pagination' => $pagination));
+                    'direction' => $direction,
+                    'count' => $count,
+                    'pagination' => $pagination));
     }
 
     public function addAction() {
