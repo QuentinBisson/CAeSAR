@@ -38,7 +38,9 @@ Exécutez les commandes :
 6) Mise à jour des routes
 -------------------------
 Lorsque vous modifier une route, lancez les commandes suivantes :
+
     php app/console translation:extract fr --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
+
     php app/console translation:extract en --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
 
 Ainsi les routes seront préfixés par la locale en cours.
@@ -46,3 +48,15 @@ Exemple :
     - L'url http://localhost/CAeSAR/web/admin/resource/ ne fonctionne pas
     - L'url http://localhost/CAeSAR/web/en/admin/resource/add est valide
 
+7) Installation de PHPUnit
+-------------------------
+
+Tout est au bout de ce lien :
+
+	http://blog.adenova.fr/2009/07/installer-phpunit-sous-wamp/
+
+Pour lancer les tests, executez la commande 
+
+	php -c app
+
+A la racine du projet.
