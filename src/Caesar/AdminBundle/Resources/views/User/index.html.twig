@@ -91,7 +91,8 @@
                 /* Pagination */
                 $(document).ready(function() {
                 	var processing = false;
-	                $("._pagination").live("click", function(e){
+	                $("._pagination").click(function() {
+		                alert($(this).attr('href'));
 			            if (processing) return false;
 			            processing = true;
 			            $.ajax({
@@ -99,6 +100,7 @@
 			                url: $(this).attr('href'),
 			                cache: false,
 			                success: function(data){
+				                alert(data);
 			                 	$('#table_list').html(data);
 			                    processing = false;
 			                },
