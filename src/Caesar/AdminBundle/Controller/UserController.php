@@ -15,24 +15,40 @@ use Caesar\UserBundle\Form\UserType;
 class UserController extends Controller {
 
     public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
+    	$nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $em = $this->getDoctrine()->getManager();
         
         $repository_uer = $em->getRepository('CaesarUserBundle:User');
 
         $users = $repository_uer->getUserFromToSortBy($page, $sort, $direction);
         $count = $repository_uer->count();
+        
+        /* Pagination */
+        $total = count($repository_uer->findAll());
+        $pagination = array(
+        		'cur' => $page,
+        		'max' => floor($total/$nb_per_page),
+        );
 
         $request = $this->get('request');
-
         if ($request->isXmlHttpRequest()) {
             return $this->render("CaesarAdminBundle:User:list.html.twig", array(
-                        'users' => $users, 'page' => $page,
-                        'sort' => $sort, 'direction' => $direction, 'count' => $count));
+                        'users' => $users,
+            			'page' => $page,
+                        'sort' => $sort,
+            			'direction' => $direction,
+            		    'count' => $count,
+            			'pagination' => $pagination));
         }
-
+        
+		
         return $this->render("CaesarAdminBundle:User:index.html.twig", array(
-                    'users' => $users, 'page' => $page,
-                    'sort' => $sort, 'direction' => $direction, 'count' => $count));
+                    'users' => $users,
+        		 	'page' => $page,
+                    'sort' => $sort,
+        		 	'direction' => $direction,
+        		 	'count' => $count,
+            		'pagination' => $pagination));
     }
 
     public function addAction() {
