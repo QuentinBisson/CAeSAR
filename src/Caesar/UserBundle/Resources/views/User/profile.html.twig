@@ -1,1 +1,23 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
+
+{% block bodyTitle %}
+<h1>{{ 'profile.title'|trans({}, 'CaesarUserBundle') }}</h1>
+{% endblock %}
+
+{% block body %}
+<section class="container">
+	<div>
+		<ul class="label-list">
+			<li>Prénom : Bar</li>
+			<li>Nom : Foo</li>
+			<li>E-mail : foo.bar@mail.fr</li>
+		</ul>
+	</div>
+	<div>
+		<form action="#" method="post">
+			<label>Nouveau mot de passe :</label><input type="password">
+			<input type="submit" value="Changer">
+		</form>
+	</div>
+</section>
+{% endblock %}

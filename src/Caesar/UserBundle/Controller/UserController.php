@@ -5,10 +5,15 @@ namespace Caesar\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserController extends Controller
-{
+{ 
     public function indexAction()
     {
         return $this->render('CaesarUserBundle:User:index.html.twig');
+    }
+    
+    public function searchAction()
+    {
+    	return $this->render('CaesarUserBundle:User:search.html.twig');
     }
     
     public function loginAction()

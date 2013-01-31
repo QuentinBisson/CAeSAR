@@ -2,6 +2,7 @@
 
 html {
     height: 100%;
+    min-width: 640px;
 }
 
 body {
@@ -12,11 +13,25 @@ body {
     background-image: url("../images/background.jpg");
 }
 
+.container {
+	width: 640px;
+	margin: auto;
+}
+
+.label-list {
+	list-style: none;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 25px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	color: #282828;
+	padding: 5px;
+	text-align: left;	
+}
 /**
  * Titre(s)
  **/
 header {
-	width: 300px;
+	width: 640px;
 	margin: auto;
 }
 header h1 {
@@ -31,7 +46,7 @@ header h1 {
  **/
 
 .navbar {
-	line-height: 48px;
+	line-height: 52px;
     height:52px;
     background-color: #505050;
 	background-image: -moz-linear-gradient(top,#606060,#404040);
@@ -51,78 +66,117 @@ header h1 {
 /**
  * Elément d'une navbar
  **/
+ 
 .nav-el {
-	margin-top: 2px;
+	margin-top: 0px;
 	margin-left: 4px;
 	margin-right: 4px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	text-align: center;
+	font-family: "Trebuchet MS", sans-serif;
+	text-decoration: none;
+	font-size: 18px;
 	display: inline-block;
-	-webkit-border-radius: 1px;
-	-moz-border-radius: 1px;
-	border-radius: 1px;
+	background-color: #303030;
+	background-image: -moz-linear-gradient(top,#404040,#202020);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
+	background-image: -webkit-linear-gradient(top,#404040,#202020);
+	background-image: -o-linear-gradient(top,#404040,#202020);
+	background-image: linear-gradient(to bottom,#404040,#202020);
+	background-repeat: repeat-x;
 }
 .nav-el:hover {
 	background-color: #bebebe;
-	-webkit-transition-property: background-color;
+	background-image: -moz-linear-gradient(top,#cecece,#aeaeae);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#cecece),to(#aeaeae));
+	background-image: -webkit-linear-gradient(top,#cecece,#aeaeae);
+	background-image: -o-linear-gradient(top,#cecece,#aeaeae);
+	background-image: linear-gradient(to bottom,#cecece,#aeaeae);
+	-webkit-transition-property: background-image;
 	-webkit-transition-duration: 0.7s;
-	-moz-transition-property: background-color;
+	-moz-transition-property: background-image;
 	-moz-transition-duration: 0.7s;
-	transition-property: background-color;
+	transition-property: background-image;
 	transition-duration: 0.7s;
 }
-p.nav-el {
-	font-family: "Trebuchet MS";
+
+.nav-group .nav-el {
+	margin-left: 0px;
+	margin-right: 0px;
 }
 .nav-el i[class*="icon-"] {
 	margin-top: 4px;
 }
 
-.input-search {
-	width: 400px;
-	height: 35px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+.nav-btn {
+	padding-right: 50px;
+	padding-left: 50px;
+}
+
+#user_panel {
+	position: absolute;
+	right: 0;
+}
+
+#user_panel .btn {
+	display: block;
 	font-family: "Trebuchet MS", sans-serif;
-	vertical-align: middle;
+	font-size: 18px;
+	cursor: pointer;
+	color: #2f3235;
+	padding: 20px;
+	width: 154px;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	color: #f3f3f6;
+	background-color: #505050;
 	
-	background-color: #f6f3f6;
-	border: 1px solid #c5c8cb;
-	-webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	-moz-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	-webkit-transition: border linear .2s,box-shadow linear .2s;
-	-moz-transition: border linear .2s,box-shadow linear .2s;
-	-o-transition: border linear .2s,box-shadow linear .2s;
-	transition: border linear .2s,box-shadow linear .2s;
-	
+	background-image: -moz-linear-gradient(top,#606060,#404040);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#606060),to(#404040));
+	background-image: -webkit-linear-gradient(top,#606060,#404040);
+	background-image: -o-linear-gradient(top,#606060,#404040);
+	background-image: linear-gradient(to bottom,#606060,#404040);
+	background-repeat: repeat-x;
+
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-		
-	padding: 5px;
-	font-size: 15px;
+	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
 }
-input[type="text"].input-search:focus {
-	outline: none;
+
+#user_panel .btn:hover {
+	background-color: #303030;
+	background-image: -moz-linear-gradient(top,#404040,#202020);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
+	background-image: -webkit-linear-gradient(top,#404040,#202020);
+	background-image: -o-linear-gradient(top,#404040,#202020);
+	background-image: linear-gradient(to bottom,#404040,#202020);
+	background-repeat: repeat-x;
 }
+
 /**
  * Formulaire Principal | Champ unique + trois boutons
  **/
  
-#main-form {
-	width: 600px;
+#main-form, #search-form {
+	width: 640px;
 	height: 100px;
 	margin: auto;
-	margin-top: 5%;
+	margin-top: 50px;
 }
 
 /**
  * Champ unique
  **/
-#main-form input[name='main_form_text'] {
-	width: 600px;
+#main-form input[name='main_form_text'],
+#search-form input[name='search_form_text'] {
+	width: 640px;
 	height: 50px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -149,7 +203,8 @@ input[type="text"].input-search:focus {
 	
 }
 
-#main-form input[name='main_form_text']:focus {
+#main-form input[name='main_form_text']:focus,
+#search-form input[name='search_form_text']:focus {
 	background-color: #fdf8fd;
 	outline : none;	
 }
@@ -160,12 +215,17 @@ input[type="text"].input-search:focus {
 #main-form .main-form-actions {
 	margin: auto;
 	margin-top: 10px;
-	
+}
+#search-form .search-form-actions {
+	width: 210px;
+	margin: auto;
+	margin-top: 10px;
 }
 
-#main-form .main-form-actions input[type="submit"] {
+#main-form .main-form-actions input[type="submit"],
+#search-form .search-form-actions input[type="submit"]{
 	font-family: "Trebuchet MS", sans-serif;
-	width: 197px;
+	width: 210px;
 	height: 60px;
 	font-size: 22px;
 	cursor: pointer;
@@ -199,7 +259,8 @@ input[type="text"].input-search:focus {
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
 
 }
-#main-form .main-form-actions input[type="submit"]:active {
+#main-form .main-form-actions input[type="submit"]:active,
+#search-form .search-form-actions input[type="submit"]:active {
 	color: #f3f3f6;
 	background-color: rgb(83, 126, 192);
 	background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));

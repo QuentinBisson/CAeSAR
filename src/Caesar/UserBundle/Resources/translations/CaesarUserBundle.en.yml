@@ -1,9 +1,13 @@
-user:
-    welcomeMessage: Welcome
-    
+search:
+    title: Search    
+profile:
+    title: My profile
 form:
+    search:
+        placeholder: Enter keywords ...
+        search: Search
     main_form:
         borrow: Borrow
         return: Return
         consult: Consult
-        placeholder: Enter a UB code, ISBN, identifier ...
+        placeholder: Enter a UL code, ISBN, identifier ...

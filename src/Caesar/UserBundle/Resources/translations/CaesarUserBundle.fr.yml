@@ -1,7 +1,11 @@
-user:
-    welcomeMessage: Bonjour
-    
+search:
+    title: Recherche
+profile:
+    title: Mes informations
 form:
+    search:
+        placeholder: Entrez des mots-clés ...
+        search: Rechercher
     main_form:
         borrow: Emprunter
         return: Rendre

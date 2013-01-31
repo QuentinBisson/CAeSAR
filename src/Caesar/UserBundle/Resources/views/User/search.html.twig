@@ -1,0 +1,16 @@
+{% extends "CaesarUserBundle::layout.html.twig" %}
+
+{% block bodyTitle %}
+<h1>{{ 'search.title'|trans({}, 'CaesarUserBundle') }}</h1>
+{% endblock %}
+
+{% block body %}
+<section id="search-form">
+	<form action="#" method="post">
+		<input type="text" name="search_form_text" placeholder="{{ 'form.search.placeholder'|trans({}, 'CaesarUserBundle') }}">
+		<div class="search-form-actions">
+			<input type="submit" name="rechercher" value="{{ 'form.search.search'|trans({}, 'CaesarUserBundle') }}">
+		</div>
+	</form>
+</section>
+{% endblock %}
