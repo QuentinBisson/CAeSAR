@@ -45,14 +45,19 @@
 {% block content %}
 <header><h1>{% block contentTitle %}{% endblock %}</h1></header>
 
-<section class="contentBody">
-{% if app.session.hasFlash('notice') %}
-        <div class="flash-notice">
-        {{ app.session.flash('notice') }}
-        </div>
-{% endif %}
-        
-{% block contentBody %}{% endblock %}</section>        
+
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+    <div class="flash-{{ type }}">
+        {{ flashMessage }}
+    </div>
+    {% endfor %}
+{% endfor %}
+
+    <section class="contentBody">        
+{% block contentBody %}
+{% endblock %}
+        </section>        
 {% endblock %}
 
 {% block javascripts %}

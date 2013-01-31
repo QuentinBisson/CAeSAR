@@ -29,6 +29,7 @@ class User {
      * 
      * @ORM\Column(name="codeBu", type="integer",length=10, unique=true)
      * @Assert\NotBlank()
+     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
      */
     private $codeBu;
 

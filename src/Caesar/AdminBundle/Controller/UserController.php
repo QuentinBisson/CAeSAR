@@ -30,24 +30,20 @@ class UserController extends Controller {
             'max' => floor($total / $nb_per_page),
         );
 
+        $array = array(
+            'users' => $users,
+            'page' => $page,
+            'sort' => $sort,
+            'direction' => $direction,
+            'count' => $count,
+            'pagination' => $pagination);
+
         $request = $this->get('request');
         if ($request->isXmlHttpRequest()) {
-            return $this->render("CaesarAdminBundle:User:list.html.twig", array(
-                        'users' => $users,
-                        'page' => $page,
-                        'sort' => $sort,
-                        'direction' => $direction,
-                        'count' => $count,
-                        'pagination' => $pagination));
+            return $this->render("CaesarAdminBundle:User:list.html.twig", $array);
         }
 
-        return $this->render("CaesarAdminBundle:User:index.html.twig", array(
-                    'users' => $users,
-                    'page' => $page,
-                    'sort' => $sort,
-                    'direction' => $direction,
-                    'count' => $count,
-                    'pagination' => $pagination));
+        return $this->render("CaesarAdminBundle:User:index.html.twig", $array);
     }
 
     public function addAction() {
@@ -59,6 +55,11 @@ class UserController extends Controller {
             $form->bind($request);
 
             if ($form->isValid()) {
+                
+                
+                $user->setRole('USER');
+                
+                print_r($user);
                 // effectuez quelques actions, comme sauvegarder la tâche dans
                 // la base de données
                 //return $this->redirect($this->generateUrl('task_success'));
@@ -95,13 +96,28 @@ class UserController extends Controller {
     }
 
     public function deleteAction($id) {
-        $user = $this->getDoctrine()
-                ->getRepository('CaesarUserBundle:User')
-                ->find($id);
+        if (filter_var($id, FILTER_VALIDATE_INT) !== false) {
+            $clean = $id;
+        } else {
+            throw $this->createNotFoundException('L\'identidifiant de l\'utilisateur ' . $id . ' \'est pas valide.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        if (isset($clean)) {
+            $user = $em->getRepository('CaesarUserBundle:User')
+                    ->find($clean);
+        }
 
         if (!$user) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
+        
+        $em->remove($user);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+                'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été supprimé.'
+        );
 
         return $this->render('CaesarAdminBundle:User:delete.html.twig');
     }

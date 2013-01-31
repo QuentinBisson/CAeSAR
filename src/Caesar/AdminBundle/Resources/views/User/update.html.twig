@@ -15,7 +15,20 @@
 {% block contentBody %}
 <form action="{{ path('caesar_admin_user_update', {'id': user}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
-    {{ form_rest(form) }}
-    <input type="submit" />
-</form>
+        <fieldset>
+            <legend>Données personnelles</legend>
+            {{ form_row(form.codeBU) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+        </fieldset>
+        <fieldset>
+            <legend>Données de connexion</legend>
+            {{ form_row(form.login) }}
+            {{ form_row(form.motDePasse) }}
+            {{ form_row(form.confirmMotDePasse) }}
+        </fieldset>
+        {{ form_rest(form) }}
+        <input type="submit" />
+    </form>
 {% endblock %}

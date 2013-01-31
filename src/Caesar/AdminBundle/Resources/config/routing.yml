@@ -7,6 +7,7 @@ caesar_resource_homepage:
     defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
+        direction: asc|desc
 
 caesar_admin_logout:
     pattern:  /logout
@@ -35,26 +36,32 @@ caesar_resource_skeleton:
 caesar_admin_user_update:
     pattern:  /user/update/{id}
     defaults: { _controller: CaesarAdminBundle:User:update}
+    requirements:
+        id:  \d+
         
 caesar_admin_user_delete:
     pattern:  /user/delete/{id}
     defaults: { _controller: CaesarAdminBundle:User:delete }
-       
+    requirements:
+        id:  \d+
+        
 caesar_admin_user_homepage:
     pattern:  /user/{page}/{sort}/{direction}
     defaults: { _controller: CaesarAdminBundle:User:index, page:1, sort:'codeBu', direction:'asc'}
     requirements:
         page:  \d+
-        
+        direction: asc|desc
+         
 caesar_admin_user_add:
     pattern:  /user/add
     defaults: { _controller: CaesarAdminBundle:User:add }
     
 caesar_admin_location_homepage:
-    pattern:  /location/{page}
-    defaults: { _controller: CaesarAdminBundle:Location:index, page:1}
+    pattern:  /location/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Location:index, page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
+        direction: asc|desc
         
 caesar_admin_location_add:
     pattern:  /location/add
@@ -63,8 +70,12 @@ caesar_admin_location_add:
 caesar_admin_location_update:
     pattern:  /location/update/{id}
     defaults: { _controller: CaesarAdminBundle:Location:update }
+    requirements:
+        id:  \d+
     
 caesar_admin_location_delete:
     pattern:  /location/delete/{id}
-    defaults: { _controller: CaesarAdminBundle:Location:delete }
-    
+    defaults: { _controller: CaesarAdminBundle:Location:delete}
+    requirements:
+        id:  \d+
+        

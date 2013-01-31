@@ -10,7 +10,8 @@ form label {
 
 input[type="text"],
 input[type="password"],
-input[type="email"]{
+input[type="email"],
+input[type="number"]{
     height: 35px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
