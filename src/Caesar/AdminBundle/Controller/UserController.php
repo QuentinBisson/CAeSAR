@@ -47,22 +47,18 @@ class UserController extends Controller {
     }
 
     public function addAction() {
+        $em = $this->getDoctrine()->getEntityManager();
         $user = new User();
-
         $form = $this->createForm(new UserType(), $user);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
             if ($form->isValid()) {
-                
-                
+                $user = $form->getData();
                 $user->setRole('USER');
-                
-                print_r($user);
-                // effectuez quelques actions, comme sauvegarder la tâche dans
-                // la base de données
-                //return $this->redirect($this->generateUrl('task_success'));
+                $em->persist($user);
+                $em->flush();
+                return $this->render('CaesarAdminBundle:Admin:index.html.twig');
             }
         }
 
@@ -111,7 +107,7 @@ class UserController extends Controller {
         if (!$user) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
-        
+
         $em->remove($user);
         $em->flush();
 

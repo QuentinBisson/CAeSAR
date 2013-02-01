@@ -70,6 +70,13 @@ class User {
      * 
      * @ORM\Column(name="name", type="string", length=60)
      * @Assert\NotBlank()
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     *
      */
     private $nom;
 
@@ -78,6 +85,12 @@ class User {
      * 
      * @ORM\Column(name="prenom", type="string", length=50)
      * @Assert\NotBlank()
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      */
     private $prenom;
 
