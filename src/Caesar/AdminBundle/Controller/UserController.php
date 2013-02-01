@@ -48,21 +48,22 @@ class UserController extends Controller {
     }
 
     public function addAction() {
+        $em = $this->getDoctrine()->getEntityManager();
         $user = new User();
-
         $form = $this->createForm(new UserType(), $user);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
             if ($form->isValid()) {
+
+                $user = $form->getData();
+                $user->setRole('USER');
                 /* $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                   $encodedPass = $encoder->encodePassword($password, $user->getSalt()); */
-
-                $user->setRole('USER');
-                // effectuez quelques actions, comme sauvegarder la tâche dans
-                // la base de données
-                //return $this->redirect($this->generateUrl('task_success'));
+                $em->persist($user);
+                $em->flush();
+                // ajouter message flash
+                return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
         }
 
@@ -94,7 +95,7 @@ class UserController extends Controller {
             $form->bind($request);
 
             if ($form->isValid()) {
-                
+
                 //Update
             }
         }
