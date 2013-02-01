@@ -14,7 +14,8 @@ use Caesar\UserBundle\Form\UserType;
  */
 class UserController extends Controller {
 
-    public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
+    public function indexAction($page = 1, $sort = 'codeBu', $direction = 'asc') {
+
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $em = $this->getDoctrine()->getManager();
 
@@ -55,11 +56,10 @@ class UserController extends Controller {
             $form->bind($request);
 
             if ($form->isValid()) {
-                
-                
+                /* $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                  $encodedPass = $encoder->encodePassword($password, $user->getSalt()); */
+
                 $user->setRole('USER');
-                
-                print_r($user);
                 // effectuez quelques actions, comme sauvegarder la tâche dans
                 // la base de données
                 //return $this->redirect($this->generateUrl('task_success'));
@@ -72,34 +72,10 @@ class UserController extends Controller {
     }
 
     public function updateAction($id) {
-        $user = $this->getDoctrine()
-                ->getRepository('CaesarUserBundle:User')
-                ->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
-        }
-        $form = $this->createForm(new UserType(), $user);
-        $request = $this->get('request');
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
-
-            if ($form->isValid()) {
-                
-            }
-        }
-
-        return $this->render('CaesarAdminBundle:User:update.html.twig', array(
-                    'form' => $form->createView(), 'user' => $id
-                ));
-        return new Response("ok");
-    }
-
-    public function deleteAction($id) {
-        if (filter_var($id, FILTER_VALIDATE_INT) !== false) {
+        if (filter_input($id, FILTER_VALIDATE_INT) !== false) {
             $clean = $id;
         } else {
-            throw $this->createNotFoundException('L\'identidifiant de l\'utilisateur ' . $id . ' \'est pas valide.');
+            throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -111,7 +87,41 @@ class UserController extends Controller {
         if (!$user) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
-        
+
+        $form = $this->createForm(new UserType(), $user);
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                
+                //Update
+            }
+        }
+
+        return $this->render('CaesarAdminBundle:User:update.html.twig', array(
+                    'form' => $form->createView(), 'user' => $id
+                ));
+        return new Response("ok");
+    }
+
+    public function deleteAction($id) {
+        if (filter_input($id, FILTER_VALIDATE_INT) !== false) {
+            $clean = $id;
+        } else {
+            throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        if (isset($clean)) {
+            $user = $em->getRepository('CaesarUserBundle:User')
+                    ->find($clean);
+        }
+
+        if (!$user) {
+            throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+        }
+
         $em->remove($user);
         $em->flush();
 
