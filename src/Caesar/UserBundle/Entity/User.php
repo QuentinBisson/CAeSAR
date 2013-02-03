@@ -5,6 +5,7 @@ namespace Caesar\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
@@ -14,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("codeBu")
  * @UniqueEntity("login")
  */
-class User {
+class User implements UserInterface {
 
     /**
      * @var integer $id
@@ -100,6 +101,11 @@ class User {
      * @ORM\Column(name="role", type="string", length=50)
      */
     private $role;
+
+    function __construct() {
+        $this->motDePasse = null;
+        $this->confirmMotDePasse = $this->motDePasse;
+    }
 
     public function getId() {
         return $this->id;
@@ -193,6 +199,30 @@ class User {
      */
     public function isPasswordEqualToConfirmationPassword() {
         return ($this->motDePasse === $this->confirmMotDePasse);
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getPassword() {
+        return $this->motDePasse;
+    }
+
+    public function getRoles() {
+        return array($this->role);
+    }
+
+    public function getSalt() {
+        return '';
+    }
+
+    public function getUsername() {
+        return $this->login;
+    }
+
+    public function isEqualTo(UserInterface $user) {
+        return $this->id === $user->getId();
     }
 
 }

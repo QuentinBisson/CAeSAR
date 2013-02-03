@@ -58,11 +58,13 @@ class UserController extends Controller {
 
                 $user = $form->getData();
                 $user->setRole('USER');
-                /* $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                  $encodedPass = $encoder->encodePassword($password, $user->getSalt()); */
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), null));
                 $em->persist($user);
                 $em->flush();
-                // ajouter message flash
+                $this->get('session')->getFlashBag()->add(
+                        'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été ajouté.'
+                );
                 return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
         }
@@ -89,14 +91,22 @@ class UserController extends Controller {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
 
+        $user->setConfirmMotDePasse($user->getMotDePasse());
+
         $form = $this->createForm(new UserType(), $user);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
-
-                //Update
+                $user = $form->getData();
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), null));
+                $em->flush();
+                $this->get('session')->getFlashBag()->add(
+                        'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été modifié.'
+                );
+                return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
         }
 
