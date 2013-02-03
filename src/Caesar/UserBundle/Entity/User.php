@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity("codeBu")
  * @UniqueEntity("login")
  */
-class User implements UserInterface {
+class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var integer $id
@@ -223,6 +224,24 @@ class User implements UserInterface {
 
     public function isEqualTo(UserInterface $user) {
         return $this->id === $user->getId();
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize() {
+        return serialize(array(
+                    $this->id,
+                ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized) {
+        list (
+                $this->id,
+                ) = unserialize($serialized);
     }
 
 }

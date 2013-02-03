@@ -59,7 +59,7 @@ class UserController extends Controller {
                 $user = $form->getData();
                 $user->setRole('USER');
                 $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), null));
+                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), $user->getSalt()));
                 $em->persist($user);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add(
@@ -101,7 +101,7 @@ class UserController extends Controller {
             if ($form->isValid()) {
                 $user = $form->getData();
                 $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), null));
+                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), $user->getSalt()));
                 $em->flush();
                 $this->get('session')->getFlashBag()->add(
                         'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été modifié.'

@@ -14,8 +14,8 @@ security:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
-        users:
-            entity: { class: CaesarUserBundle:User }
+        main:
+            entity: { class: Caesar\UserBundle\Entity\User, property: login }
 
     firewalls:
         #secured_area:
@@ -24,6 +24,19 @@ security:
         #    form_login:
         #        login_path:  /login
         #        check_path:  /login_check
+        login:
+            pattern:  ^/demo/secured/login$
+            security: false
+
+        secured_area:
+            pattern:    ^/demo/secured/
+            form_login:
+                check_path: /demo/secured/login_check
+                login_path: /demo/secured/login
+            logout:
+                path:   /demo/secured/logout
+                target: /demo/
+
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
