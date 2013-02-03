@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author David
  */
-class UserType extends AbstractType {
+class UserUpdateType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add("codeBU", 'integer', array('label' => 'form.user.type.label.codeBu'))
@@ -19,8 +19,8 @@ class UserType extends AbstractType {
                 ->add("firstname", 'text', array('label' => 'form.user.type.label.firstname', 'trim' => true))
                 ->add("email", "email", array('label' => 'form.user.type.label.email', 'trim' => true))
                 ->add("username", 'text', array('label' => 'form.user.type.label.login', 'trim' => true))
-                ->add("plainPassword", "password", array('label' => 'form.user.type.label.password.normal'))
-                ->add("confirmPassword", "password", array('label' => 'form.user.type.label.password.confirm'));
+                ->add("plainPassword", "password", array('label' => 'form.user.type.label.password.normal', 'required' => false))
+                ->add("confirmPassword", "password", array('label' => 'form.user.type.label.password.confirm', 'required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -29,7 +29,7 @@ class UserType extends AbstractType {
     }
 
     public function getName() {
-        return "caesar_userBundle_userType";
+        return "caesar_userBundle_userUpdateType";
     }
 
 }

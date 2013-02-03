@@ -4,14 +4,14 @@
             <th{% if 'codeBu' == sort %} class="sorted codeBu"{% else %} class = "codeBu" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.codeBu'|trans({}), 'page': page, 'sort': 'codeBu'}  %}
             </th>
-            <th{% if 'login' == sort %} class="sorted login"{% else %} class = "login" {% endif %}>
-                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.login'|trans({}), 'page': page, 'sort': 'login'}  %}
+            <th{% if 'username' == sort %} class="sorted login"{% else %} class = "login" {% endif %}>
+                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.login'|trans({}), 'page': page, 'sort': 'username'}  %}
             </th>
-            <th{% if 'nom' == sort %} class="sorted nom"{% else %} class = "nom" {% endif %}>
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.nom'|trans({}), 'page': page, 'sort': 'nom'}  %}
+            <th{% if 'name' == sort %} class="sorted nom"{% else %} class = "nom" {% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.nom'|trans({}), 'page': page, 'sort': 'name'}  %}
             </th>
-            <th{% if 'prenom' == sort %} class="sorted prenom"{% else %} class = "prenom" {% endif %}>
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.prenom'|trans({}), 'page': page, 'sort': 'prenom'}  %}
+            <th{% if 'firstname' == sort %} class="sorted prenom"{% else %} class = "prenom" {% endif %}>
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.prenom'|trans({}), 'page': page, 'sort': 'firstname'}  %}
             </th>
             <th{% if 'email' == sort %} class="sorted email" {% else %} class = "email" {% endif %}>
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.email'|trans({}), 'page': page, 'sort': 'email'}  %}
@@ -31,9 +31,9 @@
          {% for user in users %}
             <tr>
                 <td>{{ user.codeBu }}</td>
-                <td>{{ user.login }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.firstname }}</td>
                 <td>{{ user.email }}</td>
                 <td>
                     <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">

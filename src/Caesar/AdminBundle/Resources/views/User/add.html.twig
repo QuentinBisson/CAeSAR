@@ -19,15 +19,15 @@
         <fieldset>
             <legend>Données personnelles</legend>
             {{ form_row(form.codeBU) }}
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.firstname) }}
             {{ form_row(form.email) }}
         </fieldset>
         <fieldset>
             <legend>Données de connexion</legend>
-            {{ form_row(form.login) }}
-            {{ form_row(form.motDePasse) }}
-            {{ form_row(form.confirmMotDePasse) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.confirmPassword) }}
         </fieldset>
         {{ form_rest(form) }}
         <input type="submit" />

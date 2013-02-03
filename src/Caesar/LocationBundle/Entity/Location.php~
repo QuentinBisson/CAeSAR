@@ -21,6 +21,7 @@ class Location {
      */
     private $id;
 
+
     /**
      * @var string $nom
      * 
@@ -36,56 +37,5 @@ class Location {
      * @Assert\NotBlank()
      */
     private $description;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return Location
-     */
-    public function setNom($nom) {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom() {
-        return $this->nom;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Location
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription() {
-        return $this->description;
-    }
 
 }

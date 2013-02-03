@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Caesar\UserBundle\Entity\User;
 use Caesar\UserBundle\Form\UserType;
+use Caesar\UserBundle\Form\UserUpdateType;
 
 /**
  * Description of UserController
@@ -55,17 +56,26 @@ class UserController extends Controller {
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-
-                $user = $form->getData();
-                $user->setRole('USER');
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), $user->getSalt()));
-                $em->persist($user);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add(
-                        'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été ajouté.'
-                );
-                return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
+                $password = $user->getPassword();
+                if (!empty($password)) {
+                    $user = $form->getData();
+                    $user->setRole('USER');
+                    $plainPassword = $user->getPlainPassword();
+                    if (!empty($plainPassword)) {
+                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                        $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+                    }
+                    $em->persist($user);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add(
+                            'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été ajouté.'
+                    );
+                    return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
+                } else {
+                    $this->get('session')->getFlashBag()->add(
+                            'erreur', 'Le mot de passe ne peut pas être vide.'
+                    );
+                }
             }
         }
 
@@ -91,20 +101,23 @@ class UserController extends Controller {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
 
-        $user->setConfirmMotDePasse($user->getMotDePasse());
+        $user->setConfirmPassword($user->getPlainPassword());
 
-        $form = $this->createForm(new UserType(), $user);
+        $form = $this->createForm(new UserUpdateType(), $user);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
                 $user = $form->getData();
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $user->setMotDePasse($encoder->encodePassword($user->getMotDePasse(), $user->getSalt()));
+                $plainPassword = $user->getPlainPassword();
+                if (!empty($plainPassword)) {
+                    $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                    $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+                }
                 $em->flush();
                 $this->get('session')->getFlashBag()->add(
-                        'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été modifié.'
+                        'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'
                 );
                 return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
@@ -137,7 +150,7 @@ class UserController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
-                'notice', 'L\'utilisateur ' . $user->getNom() . ' ' . $user->getPrenom() . ' a été supprimé.'
+                'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été supprimé.'
         );
 
         return $this->render('CaesarAdminBundle:User:delete.html.twig');

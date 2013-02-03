@@ -15,7 +15,7 @@ security:
 
     providers:
         main:
-            entity: { class: Caesar\UserBundle\Entity\User, property: login }
+            entity: { class: Caesar\UserBundle\Entity\User, property: username }
 
     firewalls:
         #secured_area:

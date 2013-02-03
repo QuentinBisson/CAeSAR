@@ -16,29 +16,29 @@ use Doctrine\ORM\NoResultException;
  */
 class UserRepository extends EntityRepository implements UserProviderInterface {
 
-    public function authentificate($login, $password) {
+    public function authentificate($username, $password) {
         $qb = $this->createQueryBuilder('u');
-        $qb->where('u.login = :login or u.codeBu = :login2')
-                ->setParameters(array('login' => $login, 'login2' => $login))
-                ->andWhere('u.motDePasse = :password')
+        $qb->where('u.username = :username or u.codeBu = :codeBu')
+                ->setParameters(array('username' => $username, 'codeBu' => $username))
+                ->andWhere('u.password = :password')
                 ->setParameter('password', $password);
         return $qb->getQuery()->getResult();
     }
 
-    public function identify($login) {
+    public function identify($username) {
         $qb = $this->createQueryBuilder('u');
-        $qb->where('u.login = :login')
-                ->setParameter('login', $login)
-                ->orWhere('u.codeBU = :login')
-                ->setParameter('login', $login);
+        $qb->where('u.username = :username')
+                ->setParameter('username', $username)
+                ->orWhere('u.codeBU = :codeBu')
+                ->setParameter('cdeBu', $username);
         return $qb->getQuery()->getResult();
     }
 
     public function loadUserByUsername($username) {
         $q = $this
                 ->createQueryBuilder('u')
-                ->where('u.login = :login OR u.codeBu = :codeBu')
-                ->setParameter('login', $username)
+                ->where('u.username = :username OR u.codeBu = :codeBu')
+                ->setParameter('username', $username)
                 ->setParameter('codeBu', $username)
                 ->getQuery()
         ;

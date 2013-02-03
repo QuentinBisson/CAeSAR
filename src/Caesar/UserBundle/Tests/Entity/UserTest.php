@@ -5,10 +5,10 @@ use Caesar\UserBundle\Entity\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-	public function testLogin() {
+	public function testUsername() {
 		$user = new User();
-		$user->setLogin("john");
-		$data = $user->getLogin();
+		$user->setUsername("john");
+		$data = $user->getUsername();
 				
 		$this->assertEquals("john", $data);
 	}
