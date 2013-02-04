@@ -200,6 +200,22 @@ p.sort-label {
     padding-top: 6px;
 }
 
+.notice, .error {
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.notice {
+    background-color: green;
+}
+
+.error {
+    background-color: green;
+}
+
 @media screen and (max-width:980px) and (min-width:480px) {
 
 }

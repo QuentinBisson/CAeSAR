@@ -5,6 +5,7 @@ namespace Caesar\LocationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\LocationBundle\Entity\LocationRepository")
@@ -22,12 +23,12 @@ class Location {
     private $id;
 
     /**
-     * @var string $nom
+     * @var string $name
      * 
-     * @ORM\Column(name="nom", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      * @Assert\NotBlank()
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string $description
@@ -36,6 +37,19 @@ class Location {
      * @Assert\NotBlank()
      */
     private $description;
+
+    /**
+     *
+     * @var arrayCollection $resources
+     * @ORM\OneToMany(targetEntity="Resource", mappedBy="location")
+     *
+     */
+    private $resources;
+
+    function __construct() {
+        parent::__construct();
+        $this->resources = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -47,24 +61,24 @@ class Location {
     }
 
     /**
-     * Set nom
+     * Set name
      *
-     * @param string $nom
+     * @param string $name
      * @return Location
      */
-    public function setNom($nom) {
-        $this->nom = $nom;
+    public function setName($name) {
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get name
      *
      * @return string 
      */
-    public function getNom() {
-        return $this->nom;
+    public function getName() {
+        return $this->name;
     }
 
     /**
