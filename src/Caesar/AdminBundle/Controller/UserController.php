@@ -53,29 +53,23 @@ class UserController extends Controller {
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
         $request = $this->get('request');
+
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                $password = $user->getPassword();
-                if (!empty($password)) {
-                    $user = $form->getData();
-                    $user->setRole('USER');
-                    $plainPassword = $user->getPlainPassword();
-                    if (!empty($plainPassword)) {
-                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                        $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
-                    }
-                    $em->persist($user);
-                    $em->flush();
-                    $this->get('session')->getFlashBag()->add(
-                            'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été ajouté.'
-                    );
-                    return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
-                } else {
-                    $this->get('session')->getFlashBag()->add(
-                            'erreur', 'Le mot de passe ne peut pas être vide.'
-                    );
+                $user = $form->getData();
+                $user->setRole('USER');
+                $plainPassword = $user->getPlainPassword();
+                if (!empty($plainPassword)) {
+                    $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                    $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
                 }
+                $em->persist($user);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add(
+                        'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été ajouté.'
+                );
+                return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
         }
 
@@ -107,19 +101,25 @@ class UserController extends Controller {
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
             if ($form->isValid()) {
                 $user = $form->getData();
-                $plainPassword = $user->getPlainPassword();
-                if (!empty($plainPassword)) {
-                    $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                    $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+                $password = $user->getPassword();
+                if (!empty($password)) {
+                    $plainPassword = $user->getPlainPassword();
+                    if (!empty($plainPassword)) {
+                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                        $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+                    }
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add(
+                            'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'
+                    );
+                    $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
+                } else {
+                    $this->get('session')->getFlashBag()->add(
+                            'erreur', 'Le mot de passe ne peut pas être vide.'
+                    );
                 }
-                $em->flush();
-                $this->get('session')->getFlashBag()->add(
-                        'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'
-                );
-                return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
             }
         }
 
