@@ -41,13 +41,12 @@ class Location {
     /**
      *
      * @var arrayCollection $resources
-     * @ORM\OneToMany(targetEntity="Resource", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="Caesar\ResourceBundle\Entity\Resource", mappedBy="location")
      *
      */
     private $resources;
 
     function __construct() {
-        parent::__construct();
         $this->resources = new ArrayCollection();
     }
 

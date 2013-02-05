@@ -1,0 +1,73 @@
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th{% if 'name' == sort %} class="sorted location-name"{% else %} class = "location-name" {% endif %} >
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.locations.name'|trans({}), 'page': page, 'sort': 'name'}  %}
+            </th>
+            <th{% if 'description' == sort %} class="sorted location-description"{% else %} class = "location-description" {% endif %}>
+                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.locations.description'|trans({}), 'page': page, 'sort': 'description'}  %}
+            </th>
+            <th class="edit"></th>
+            <th class="delete"></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                {{ 'table.foot.count.text'|trans({'%value%': count}) }}
+            </td>
+        </tr>
+    </tfoot>
+    <tbody id="table_list">
+         {% for location in locations %}
+            <tr>
+                <td>{{ location.name }}</td>
+                <td>{{ location.description }}</td>
+                <td>
+                    <a href="{{path('caesar_admin_location_update', {'id':location.id})}}">
+                        <i class="icon-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{path('caesar_admin_location_delete', {'id':location.id})}}">
+                        <i class="icon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+    <tbody>
+</table>
+
+{# display navigation #}
+
+<div class="navigation">
+    <ul>{# Affichage des boutons "Précédent" et "Première page" (si page > 1) #}
+        {% if pagination.cur > 1 %}
+            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':1, 'sort' :sort, 'direction' : direction}) }}" title="{{ "pagination.first"|trans({}, 'CaesarAdminBundle') }}"><<</a></li>
+            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur-1, 'sort' :sort, 'direction' : direction}) }}" title="{{ "pagination.prev"|trans({}, 'CaesarAdminBundle') }}"><</a></li>
+        {% endif %}
+
+        {# Affichage des boutons vers les 3 pages précédent la page courante (ou 2, ou 1, ou 0) #}
+        {% for i in 3 .. 1 %}
+                {% if pagination.cur - i > 0 %}
+                <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur - i, 'sort' :sort, 'direction' : direction}) }}">{{ pagination.cur - i }}</a></li>
+                {% endif %}
+        {% endfor %}
+
+        {# Affichage de la page courante #}
+        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur, 'sort' :sort, 'direction' : direction}) }}">{{ pagination.cur }}</a></li> 
+
+        {# Affichage des 3 (ou 2, ou 1, ou 0) pages suivant la page courante #}
+        {% for i in 1 .. 3 %}
+                {% if pagination.cur + i <= pagination.max %}
+                <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur + i, 'sort' :sort, 'direction' : direction}) }}">{{ pagination.cur + i }}</a></li>
+                {% endif %}
+        {% endfor %}
+
+                    {# Affichage des boutons "Suivant" et "Dernière page" (si page différente du max de page ) #}
+        {% if pagination.cur <= pagination.max %}
+            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur + 1, 'sort' :sort, 'direction' : direction}) }}" title="{{ "pagination.next"|trans({}, 'CaesarAdminBundle') }}">></a></li>
+            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.max, 'sort' :sort, 'direction' : direction}) }}" title="{{ "pagination.last"|trans({}, 'CaesarAdminBundle') }}">>></a></li>
+        {% endif %}
+    </ul>
+</div>

@@ -2,15 +2,25 @@
 
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="2">
-        <a href="{{path('caesar_admin_location_homepage')}}">{{'admin.breadcrumb.locations.list'|trans({})}}</a>
-        <span class="divider">></span>
-    </li>
-    <li class="active"><span>{{'admin.breadcrumb.locations.add'|trans({})}}</span></li>
+<li data-header="2">
+    <a href="{{path('caesar_admin_location_homepage')}}">{{'admin.breadcrumb.locations.list'|trans({})}}</a>
+    <span class="divider">></span>
+</li>
+<li class="active"><span>{{'admin.breadcrumb.locations.add'|trans({})}}</span></li>
 {% endblock %}
 {% block contentTitle %}
 {{'admin.title.locations.add'|trans({})}}
 {% endblock %}
 
 {% block contentBody %}
+<form action="{{ path('caesar_admin_location_add') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend>{{'admin.fieldset.locations.legend'|trans({})}}</legend>
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+        </fieldset>
+        {{ form_rest(form) }}
+        <input type="submit" />
+    </form>
 {% endblock %}

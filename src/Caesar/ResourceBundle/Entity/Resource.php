@@ -1,6 +1,6 @@
 <?php
 
-namespace Caesar\LocationBundle\Entity;
+namespace Caesar\ResourceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,10 +22,11 @@ class Resource {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Location", inversedBy="resources")
-     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Caesar\LocationBundle\Entity\Location", inversedBy="resources")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
      * */
-
+    private $location;
+    
     /**
      * Get id
      *

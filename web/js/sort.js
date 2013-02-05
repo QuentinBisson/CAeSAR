@@ -75,7 +75,6 @@ $(document).ready(function() {
     if (bool === false) {
         var elem = $('.table > thead th:first-child a.sort-up');
         var src = elem.children("img").attr("src");
-        alert(src);
         var idx = src.indexOf('.png');
         src = src.slice(0, idx) + "-active" + src.slice(idx);
         elem.children("img").attr("src", src);

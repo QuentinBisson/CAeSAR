@@ -115,15 +115,3 @@ border: 1px solid #ddd;
 th a.sortable, th.sorted {
     vertical-align: middle;
 }
-
-th a.sortable span {
-
-}
-
-th.sorted a.desc span:after {
-
-}
-
-th.sorted a.asc span:after {
-
-}
