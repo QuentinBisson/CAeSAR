@@ -26,7 +26,7 @@ table:
           nom: Last name
           prenom: First name
           email: Email address
-        locations:
+        shelfs:
         resources:            
     sort:
         down: Sort down

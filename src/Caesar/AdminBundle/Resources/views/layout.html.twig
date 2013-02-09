@@ -21,10 +21,10 @@
                     <li><a href="{{path('caesar_admin_user_homepage')}}">{{'admin.menu.title.users.list'|trans({})}}</a></li>
                 </ul>
             </li>
-            <li><a href="{{path('caesar_admin_location_homepage')}}">{{'admin.menu.title.locations.header'|trans({})}}</a>
+            <li><a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.menu.title.shelves.header'|trans({})}}</a>
                 <ul>
-                    <li><a href="{{path('caesar_admin_location_add')}}">{{'admin.menu.title.locations.add'|trans({})}}</a></li>
-                    <li><a href="{{path('caesar_admin_location_homepage')}}">{{'admin.menu.title.locations.list'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_shelf_add')}}">{{'admin.menu.title.shelves.add'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.menu.title.shelves.list'|trans({})}}</a></li>
                 </ul>
             </li>
             <li><a href="{{asset('#borrowing')}}">{{'admin.menu.title.borrowings.header'|trans({})}}</a>
@@ -53,11 +53,9 @@
     </div>
     {% endfor %}
 {% endfor %}
-
-    <section class="contentBody">        
+      
 {% block contentBody %}
-{% endblock %}
-        </section>        
+{% endblock %}     
 {% endblock %}
 
 {% block javascripts %}

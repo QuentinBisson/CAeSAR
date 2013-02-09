@@ -3,8 +3,8 @@ caesar_admin_homepage:
     defaults: { _controller: CaesarAdminBundle:Admin:index}
 
 caesar_resource_homepage:
-    pattern:  /resource/{page}/{sort}/{direction}
-    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'id', direction:'asc'}
+    pattern:  /resource/{page}/{sort}/{direction}/{keywords}
+    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'id', direction:'asc', keywords:''}
     requirements:
         page:  \d+
         direction: asc|desc
@@ -56,26 +56,26 @@ caesar_admin_user_add:
     pattern:  /user/add
     defaults: { _controller: CaesarAdminBundle:User:add }
     
-caesar_admin_location_homepage:
-    pattern:  /location/{page}/{sort}/{direction}
-    defaults: { _controller: CaesarAdminBundle:Location:index, page:1, sort:'id', direction:'asc'}
+caesar_admin_shelf_homepage:
+    pattern:  /shelf/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Shelf:index, page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc
         
-caesar_admin_location_add:
-    pattern:  /location/add
-    defaults: { _controller: CaesarAdminBundle:Location:add }
+caesar_admin_shelf_add:
+    pattern:  /shelf/add
+    defaults: { _controller: CaesarAdminBundle:Shelf:add }
     
-caesar_admin_location_update:
-    pattern:  /location/update/{id}
-    defaults: { _controller: CaesarAdminBundle:Location:update }
+caesar_admin_shelf_update:
+    pattern:  /shelf/update/{id}
+    defaults: { _controller: CaesarAdminBundle:Shelf:update }
     requirements:
         id:  \d+
     
-caesar_admin_location_delete:
-    pattern:  /location/delete/{id}
-    defaults: { _controller: CaesarAdminBundle:Location:delete}
+caesar_admin_shelf_delete:
+    pattern:  /shelf/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:Shelf:delete}
     requirements:
         id:  \d+
         

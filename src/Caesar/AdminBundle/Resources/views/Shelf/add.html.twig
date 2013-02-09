@@ -3,20 +3,20 @@
 {% block breadCrumb%}
     {{parent()}}
 <li data-header="2">
-    <a href="{{path('caesar_admin_location_homepage')}}">{{'admin.breadcrumb.locations.list'|trans({})}}</a>
+    <a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.breadcrumb.shelves.list'|trans({})}}</a>
     <span class="divider">></span>
 </li>
-<li class="active"><span>{{'admin.breadcrumb.locations.add'|trans({})}}</span></li>
+<li class="active"><span>{{'admin.breadcrumb.shelves.add'|trans({})}}</span></li>
 {% endblock %}
 {% block contentTitle %}
-{{'admin.title.locations.add'|trans({})}}
+{{'admin.title.shelves.add'|trans({})}}
 {% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_location_add') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('caesar_admin_shelf_add') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <fieldset>
-            <legend>{{'admin.fieldset.locations.legend'|trans({})}}</legend>
+            <legend>{{'admin.fieldset.shelves.legend'|trans({})}}</legend>
             {{ form_row(form.name) }}
             {{ form_row(form.description) }}
         </fieldset>

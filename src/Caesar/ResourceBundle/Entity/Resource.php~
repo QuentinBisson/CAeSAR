@@ -36,27 +36,4 @@ class Resource {
         return $this->id;
     }
 
-
-    /**
-     * Set shelf
-     *
-     * @param \Caesar\ShelfBundle\Entity\Shelf $shelf
-     * @return Resource
-     */
-    public function setShelf(\Caesar\ShelfBundle\Entity\Shelf $shelf = null)
-    {
-        $this->shelf = $shelf;
-    
-        return $this;
-    }
-
-    /**
-     * Get shelf
-     *
-     * @return \Caesar\ShelfBundle\Entity\Shelf 
-     */
-    public function getShelf()
-    {
-        return $this->shelf;
-    }
 }

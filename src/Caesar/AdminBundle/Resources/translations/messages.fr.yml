@@ -4,7 +4,7 @@ admin:
           CAeSAR - Administration
         home:
           Bienvenue sur l'interface d'administration
-        locations:
+        shelves:
             add: Ajouter un nouvel emplacement
             update: Modifier un emplacement
             delete: Supprimer un emplacement
@@ -25,7 +25,7 @@ admin:
         english: Anglais
     menu:
         title:
-            locations:
+            shelves:
                 header: Emplacements
                 add: Ajouter un emplacement
                 list: Lister les emplacements
@@ -45,7 +45,7 @@ admin:
     button:
         logout: Déconnexion
     breadcrumb:
-        locations:
+        shelves:
             add: Ajouter
             update: Modifier
             delete: Supprimer

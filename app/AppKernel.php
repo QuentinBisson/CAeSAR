@@ -22,7 +22,7 @@ class AppKernel extends Kernel {
             new Caesar\UserBundle\CaesarUserBundle(),
             new Caesar\ResourceBundle\CaesarResourceBundle(),
             new Caesar\TagBundle\CaesarTagBundle(),
-            new Caesar\LocationBundle\CaesarLocationBundle(),
+            new Caesar\ShelfBundle\CaesarShelfBundle(),
             new Caesar\WebMiningBundle\CaesarWebMiningBundle()
         );
 

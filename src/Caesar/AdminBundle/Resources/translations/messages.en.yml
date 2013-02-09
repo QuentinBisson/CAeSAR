@@ -4,11 +4,11 @@ admin:
           CAeSAR - Administration
         home:
           Welcome on the administration interface
-        locations:
-            add: Add a new location
-            update: Edit a location
-            delete: Delete a location
-            list: List locations
+        shelves:
+            add: Add a new shelf
+            update: Edit a shelf
+            delete: Delete a shelf
+            list: List shelves
         users:
             add: Add a new user
             update: Edit a user
@@ -25,10 +25,10 @@ admin:
         english: English            
     menu:
         title:
-            locations:
-                header: Locations
-                add: Add a location
-                list: List locations
+            shelves:
+                header: Shelves
+                add: Add a shelf
+                list: List shelves
             users:
                 header: Users
                 add: Add a user
@@ -45,11 +45,11 @@ admin:
     button:
         logout: Log out
     breadcrumb:
-        locations:
+        shelves:
             add: Add
             update: Edit
             delete: Delete
-            list: Locations
+            list: Shelves
         users:
             add: Add
             update: Edit

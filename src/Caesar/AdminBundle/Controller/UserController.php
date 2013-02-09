@@ -126,7 +126,6 @@ class UserController extends Controller {
         return $this->render('CaesarAdminBundle:User:update.html.twig', array(
                     'form' => $form->createView(), 'user' => $id
                 ));
-        return new Response("ok");
     }
 
     public function deleteAction($id) {

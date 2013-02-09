@@ -26,7 +26,7 @@ table:
           nom: Nom
           prenom: Prénom
           email: Courriel
-        locations:
+        shelfs:
         resources:
     sort:
         down: Trier vers le bas

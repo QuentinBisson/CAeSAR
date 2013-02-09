@@ -2,10 +2,10 @@
     <thead>
         <tr>
             <th{% if 'name' == sort %} class="sorted location-name"{% else %} class = "location-name" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.locations.name'|trans({}), 'page': page, 'sort': 'name'}  %}
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.shelves.name'|trans({}), 'page': page, 'sort': 'name'}  %}
             </th>
             <th{% if 'description' == sort %} class="sorted location-description"{% else %} class = "location-description" {% endif %}>
-                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.locations.description'|trans({}), 'page': page, 'sort': 'description'}  %}
+                    {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.shelves.description'|trans({}), 'page': page, 'sort': 'description'}  %}
             </th>
             <th class="edit"></th>
             <th class="delete"></th>
@@ -19,17 +19,17 @@
         </tr>
     </tfoot>
     <tbody id="table_list">
-         {% for location in locations %}
+         {% for shelf in shelves %}
             <tr>
-                <td>{{ location.name }}</td>
-                <td>{{ location.description }}</td>
+                <td>{{ shelf.name }}</td>
+                <td>{{ shelf.description }}</td>
                 <td>
-                    <a href="{{path('caesar_admin_location_update', {'id':location.id})}}">
+                    <a href="{{path('caesar_admin_shelf_update', {'id':shelf.id})}}">
                         <i class="icon-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="{{path('caesar_admin_location_delete', {'id':location.id})}}">
+                    <a href="{{path('caesar_admin_shelf_delete', {'id':shelf.id})}}">
                         <i class="icon-remove"></i>
                     </a>
                 </td>

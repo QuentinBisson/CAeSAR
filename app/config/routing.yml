@@ -1,8 +1,8 @@
 caesar_web_mining:
     resource: "@CaesarWebMiningBundle/Resources/config/routing.yml"
 
-caesar_location:
-    resource: "@CaesarLocationBundle/Resources/config/routing.yml"
+caesar_shelf:
+    resource: "@CaesarShelfBundle/Resources/config/routing.yml"
 
 caesar_tag:
     resource: "@CaesarTagBundle/Resources/config/routing.yml"

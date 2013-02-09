@@ -1,6 +1,6 @@
 <?php
 
-namespace Caesar\LocationBundle\Entity;
+namespace Caesar\ShelfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -8,11 +8,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="Caesar\LocationBundle\Entity\LocationRepository")
- * @ORM\Table(name="location")
+ * @ORM\Entity(repositoryClass="Caesar\ShelfBundle\Entity\ShelfRepository")
+ * @ORM\Table(name="shelf")
  * @UniqueEntity("name")
  */
-class Location {
+class Shelf {
 
     /**
      * @var integer $id
@@ -41,7 +41,7 @@ class Location {
     /**
      *
      * @var arrayCollection $resources
-     * @ORM\OneToMany(targetEntity="Caesar\ResourceBundle\Entity\Resource", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="Caesar\ResourceBundle\Entity\Resource", mappedBy="shelf")
      *
      */
     private $resources;
@@ -63,7 +63,7 @@ class Location {
      * Set name
      *
      * @param string $name
-     * @return Location
+     * @return Shelf
      */
     public function setName($name) {
         $this->name = $name;
@@ -84,7 +84,7 @@ class Location {
      * Set description
      *
      * @param string $description
-     * @return Location
+     * @return Shelf
      */
     public function setDescription($description) {
         $this->description = $description;
@@ -101,4 +101,37 @@ class Location {
         return $this->description;
     }
 
+
+    /**
+     * Add resources
+     *
+     * @param \Caesar\ResourceBundle\Entity\Resource $resources
+     * @return Shelf
+     */
+    public function addResource(\Caesar\ResourceBundle\Entity\Resource $resources)
+    {
+        $this->resources[] = $resources;
+    
+        return $this;
+    }
+
+    /**
+     * Remove resources
+     *
+     * @param \Caesar\ResourceBundle\Entity\Resource $resources
+     */
+    public function removeResource(\Caesar\ResourceBundle\Entity\Resource $resources)
+    {
+        $this->resources->removeElement($resources);
+    }
+
+    /**
+     * Get resources
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResources()
+    {
+        return $this->resources;
+    }
 }
