@@ -1,1 +1,7 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
+{% block fos_user_content %}
+    <form action="{{ path('caesar_client_register') }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" value="Enregistrer">
+    </form>
+{% endblock fos_user_content %}

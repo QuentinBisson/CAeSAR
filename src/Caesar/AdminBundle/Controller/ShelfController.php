@@ -121,7 +121,7 @@ class ShelfController extends Controller {
             throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         if (isset($clean)) {
             $shelf = $em->getRepository('CaesarShelfBundle:Shelf')
                     ->find($clean);
@@ -139,7 +139,7 @@ class ShelfController extends Controller {
             $em->remove($shelf);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get('session')->setFlash(
                     'notice', 'L\'emplacement ' . $shelf->getName() . ' ' . $shelf->getFirstname() . ' a été supprimé.'
             );
 

@@ -3,6 +3,9 @@
 namespace Caesar\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Caesar\UserBundle\Entity\User;
+use Caesar\UserBundle\Form\UserType;
+use Caesar\UserBundle\Form\UserHandler;
 
 class UserController extends Controller
 { 
@@ -23,7 +26,14 @@ class UserController extends Controller
     
     public function registerAction()
     {
-        return $this->render('CaesarUserBundle:User:register.html.twig');
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
+        $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager());
+        if ($formHandler->process()) {
+            $this->get('session')->setFlash('success', 'Inscription réussie');
+            return $this->redirect($this->generateUrl('caesar_client_homepage'));
+        }
+        return $this->render('CaesarUserBundle:User:register.html.twig', array('form' => $form->createView()));
     }
     
     public function profileAction()
