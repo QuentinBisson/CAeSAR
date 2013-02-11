@@ -140,7 +140,7 @@ class ShelfController extends Controller {
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                    'notice', 'L\'emplacement ' . $shelf->getName() . ' ' . $shelf->getFirstname() . ' a été supprimé.'
+                    'notice', 'L\'emplacement ' . $shelf->getName() . ' a été supprimé.'
             );
 
             return $this->render('CaesarAdminBundle:Shelf:delete.html.twig');

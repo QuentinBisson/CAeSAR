@@ -15,7 +15,7 @@
 {% block contentBody %}
 <form action="{{ path('caesar_admin_shelf_update', {'id': shelf}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
-        <fieldset>
+        <fieldset class="shelf">
             <legend>{{'admin.fieldset.shelves.legend'|trans({})}}</legend>
             {{ form_row(form.name) }}
             {{ form_row(form.description) }}

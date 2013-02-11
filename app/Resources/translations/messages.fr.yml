@@ -14,6 +14,12 @@ form:
                 email: Courriel
                 name: Nom
                 firstname: Prénom
+    shelf:
+        type:
+            label:
+                name: Nom de l'emplacement
+                description: Description
+                search: Rechercher
                 
 table:
     foot:
@@ -26,7 +32,9 @@ table:
           nom: Nom
           prenom: Prénom
           email: Courriel
-        shelfs:
+        shelves:
+           name: Nom
+           description: Description
         resources:
     sort:
         down: Trier vers le bas

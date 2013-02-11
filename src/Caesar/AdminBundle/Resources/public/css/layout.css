@@ -249,3 +249,8 @@ div.navigation li.active a {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c');
   /* IE6–IE9 */
 }
+
+.shelf textarea {
+    width: 40%;
+    height: 150px;
+}
