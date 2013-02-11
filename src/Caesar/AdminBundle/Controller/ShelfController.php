@@ -127,20 +127,20 @@ class ShelfController extends Controller {
                     ->find($clean);
         }
 
-        if (!$shelf) {
+        if ($shelf == null) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
 
-        $books = $shelf->getResources();
-
-        if ($books->count() > 0) {
-            return $this->render('CaesarAdminBundle:Shelf:delete.html.twig', array('books', $books));
+        //$books = $shelf->getResources();
+        $books = $em->getRepository('CaesarShelfBundle:Shelf')->findAllResourcesById($clean);
+        if (count($books) > 0) {
+            return $this->render('CaesarAdminBundle:Shelf:delete.html.twig', array('books' => $books));
         } else {
             $em->remove($shelf);
             $em->flush();
 
             $this->get('session')->setFlash(
-                    'notice', 'L\'emplacement ' . $shelf->getName() . ' ' . $shelf->getFirstname() . ' a été supprimé.'
+                    'notice', 'L\'emplacement ' . $shelf->getName() . ' a été supprimé.'
             );
 
             return $this->render('CaesarAdminBundle:Shelf:delete.html.twig');
