@@ -18,16 +18,17 @@ class ShelfRepository extends EntityRepository {
         $qb->orderBy('s.' . $sort, $direction)
                 ->setFirstResult($min)
                 ->setMaxResults($nb_per_page);
+
         if (!empty($keywords)) {
             $iteration = 0;
             foreach ($keywords as $string) {
                 if ($iteration > 0) {
-                    $qb->andWhere('s.name like \'%:name' . $iteration . '%\' OR s.description like \'%:description' . $iteration . '%\'');
+                    $qb->andWhere("(UPPER(s.name) like UPPER(:name" . $iteration . ")) OR (UPPER(s.description) like UPPER(:desc" . $iteration . "))");
                 } else {
-                    $qb->where('s.name like \'%:name' . $iteration . '%\' OR s.description like \'%:description' . $iteration . '%\'');
+                    $qb->where("(UPPER(s.name) like UPPER(:name" . $iteration . ")) OR (UPPER(s.description) like UPPER(:desc" . $iteration . "))");
                 }
-                $qb->setParameter('name' . $iteration, $string);
-                $qb->setParameter('description' . $iteration, $string);
+                $qb->setParameter('name' . $iteration, '%' . $string . '%');
+                $qb->setParameter('desc' . $iteration, '%' . $string . '%');
                 ++$iteration;
             }
         }

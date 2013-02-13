@@ -14,16 +14,28 @@ use Caesar\ShelfBundle\Form\ShelfSearchType;
  */
 class ShelfController extends Controller {
 
-    public function indexAction($page = 1, $sort = 'name', $direction = 'asc', $keywords = '') {
+    public function indexAction($page = 1, $sort = 'name', $direction = 'asc') {
 
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
+        $searchForm = $this->createForm(new ShelfSearchType());
+        $keywords = null;
         $em = $this->getDoctrine()->getManager();
 
         $repository_shelf = $em->getRepository('CaesarShelfBundle:Shelf');
 
-        if (!empty($keywords)) {
-            $keywords = explode(' ', $keywords);
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $searchForm->bind($request);
+            if ($searchForm->isValid()) {
+                $data = $searchForm->getData();
+                $keywords = $data['keywords'];
+                
+            }
         }
+        if (!empty($keywords)) {
+            $keywords = explode(" ", $keywords);
+        }
+        
         $shelves = $repository_shelf->getShelfFromToSortBy($page, $sort, $direction, $keywords);
         $count = $repository_shelf->count();
 
@@ -41,13 +53,11 @@ class ShelfController extends Controller {
             'direction' => $direction,
             'count' => $count,
             'pagination' => $pagination);
-
-        $request = $this->get('request');
+        
         if ($request->isXmlHttpRequest()) {
             return $this->render("CaesarAdminBundle:Shelf:list.html.twig", $array);
         }
 
-        $searchForm = $this->createForm(new ShelfSearchType());
         $array['searchForm'] = $searchForm->createView();
 
         return $this->render("CaesarAdminBundle:Shelf:index.html.twig", $array);
