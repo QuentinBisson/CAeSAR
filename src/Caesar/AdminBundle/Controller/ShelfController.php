@@ -142,7 +142,7 @@ class ShelfController extends Controller {
         }
 
         $books = $shelf->getResources();
-        print_r($books);
+
         if ($books->count() > 0) {
             return $this->render('CaesarAdminBundle:Shelf:delete.html.twig', array('books', $books));
         } else {
