@@ -3,8 +3,8 @@ caesar_admin_homepage:
     defaults: { _controller: CaesarAdminBundle:Admin:index}
 
 caesar_resource_homepage:
-    pattern:  /resource/{page}/{sort}/{direction}/{keywords}
-    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'id', direction:'asc', keywords:''}
+    pattern:  /resource/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc

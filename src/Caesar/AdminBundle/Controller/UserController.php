@@ -110,6 +110,7 @@ class UserController extends Controller {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                         $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
                     }
+                    //TODO verifirer unicité codebu et login
                     $em->flush();
                     $this->get('session')->getFlashBag()->add(
                             'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'

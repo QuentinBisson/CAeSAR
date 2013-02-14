@@ -42,6 +42,9 @@ admin:
                 header: Étiquettes
             borrowings:
                 header: Emprunts
+    fieldset:
+        shelves:
+            legend: Informations sur l'emplacement
     button:
         logout: Déconnexion
     breadcrumb:

@@ -4,7 +4,6 @@ namespace Caesar\ShelfBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Description of ShelfType
@@ -14,12 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ShelfSearchType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add("searchShelf", 'search', array('label' => 'form.shelf.type.label.search', 'trim' => true));
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(
-                array('data_class' => "Caesar\ShelfBundle\Entity\Shelf"));
+        $builder->add("keywords", 'search', array('label' => 'form.shelf.type.label.search', 'trim' => true, 'required' => false));
     }
 
     public function getName() {

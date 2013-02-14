@@ -2,7 +2,6 @@ client:
     navbar:
         search_form:
             placeholder: Search ...
-form:
     user:
         type:
             label:
@@ -14,6 +13,12 @@ form:
                 email: Email address
                 name: Last name
                 firstname: First name
+    shelf:
+        type:
+            label:
+                name: Shelf name
+                description: Description
+                search: Search
 
 table:
     foot:
@@ -26,7 +31,9 @@ table:
           nom: Last name
           prenom: First name
           email: Email address
-        shelfs:
+        shelves:
+           name: Name
+           description: Description
         resources:            
     sort:
         down: Sort down

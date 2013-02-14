@@ -42,6 +42,9 @@ admin:
                 header: Tags
             borrowings:
                 header: Borrowings
+    fieldset:
+        shelves:
+            legend: Informations about the shelf
     button:
         logout: Log out
     breadcrumb:
