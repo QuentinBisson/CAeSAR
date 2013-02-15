@@ -29,13 +29,12 @@ class ShelfController extends Controller {
             if ($searchForm->isValid()) {
                 $data = $searchForm->getData();
                 $keywords = $data['keywords'];
-                
             }
         }
         if (!empty($keywords)) {
             $keywords = explode(" ", $keywords);
         }
-        
+
         $shelves = $repository_shelf->getShelfFromToSortBy($page, $sort, $direction, $keywords);
         $count = $repository_shelf->count();
 
@@ -53,7 +52,7 @@ class ShelfController extends Controller {
             'direction' => $direction,
             'count' => $count,
             'pagination' => $pagination);
-        
+
         if ($request->isXmlHttpRequest()) {
             return $this->render("CaesarAdminBundle:Shelf:list.html.twig", $array);
         }
