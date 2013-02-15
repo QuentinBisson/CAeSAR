@@ -1,4 +1,9 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
 {% block breadCrumb%}
     {{parent()}}
     <li data-header="2">
@@ -13,4 +18,21 @@
 {% endblock %}
 
 {% block contentBody %}
+    {% if books is defined %}
+    <div class="alert alert-warning">
+        Vous devez d'abord supprimer les ressources suivantes avant de supprimer l'étagère
+    </div>
+    <br />
+    <section class="contentBody">        
+        <table class="table table-hover table-bordered table-striped">
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td><td>{{ book.shelf.name }}</td>
+                <td><a href="{{ path('caesar_resource_delete', {'id':book.id}) }}">Supprimer la ressource</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </section>
+        
+    {% endif %}
 {% endblock %}

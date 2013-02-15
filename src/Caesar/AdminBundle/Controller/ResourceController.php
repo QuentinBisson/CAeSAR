@@ -128,7 +128,7 @@ class ResourceController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
-                'notice', 'La ressource ' . $resource->getName() . ' ' . $resource->getFirstname() . ' a été supprimée.'
+                'notice', 'La ressource ' . $resource->getId() . ' a été supprimée.'
         );
 
         return $this->render('CaesarAdminBundle:Resource:delete.html.twig');
