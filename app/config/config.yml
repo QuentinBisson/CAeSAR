@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: "@Caesar/UserBundle/Resources/config/services.yml" }
+    - { resource: "@CaesarUserBundle/Resources/config/services.yml" }
     
 framework:
     #esi:             ~
