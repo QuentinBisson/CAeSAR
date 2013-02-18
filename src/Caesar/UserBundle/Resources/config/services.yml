@@ -1,7 +1,6 @@
 parameters:
-#    caesar_client.example.class: Caesar\ClientBundle\Example
+    caesar_user_provider.class: Caesar\UserBundle\Security\UserProvider
 
 services:
-#    caesar_client.example:
-#        class: %caesar_client.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    caesar_user_provider:
+        class: "%caesar_user_provider.class%"

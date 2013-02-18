@@ -2,10 +2,6 @@
 
 namespace Caesar\UserBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
@@ -14,9 +10,8 @@ use Doctrine\ORM\NoResultException;
  *
  * @author David
  */
-class UserRepository extends EntityRepository implements UserProviderInterface {
-
-    public function authentificate($username, $password) {
+class UserRepository extends EntityRepository {
+public function authentificate($username, $password) {
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.username = :username or u.codeBu = :codeBu')
                 ->setParameters(array('username' => $username, 'codeBu' => $username))
@@ -64,7 +59,6 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
     public function supportsClass($class) {
         return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
     }
-
     public function getUserFromToSortBy($page, $sort, $direction) {
         $nb_per_page = 10;
         $min = ($page - 1) * $nb_per_page;
