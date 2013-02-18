@@ -26,30 +26,34 @@
                 {{ form_row(form.code) }}
                 {{ form_row(form.description) }}
                 {{ form_row(form.quantity) }}
-                {{ form_row(form.shelf) }}                 
-                {{ form_row(form.local) }}
-                {{ form_row(form.url) }}     
-            </div>
-             <div class="left half-width">
-                <div>
-                    <button> Rechercher les informations</button>
+                {{ form_row(form.shelf) }}    
+                {{ form_row(form.local, { 'attr': {'id': 'local-file'} }) }}
+                {{ form_row(form.url) }}   
                 </div>
-                <div class="left">
-                    <img id="resource-img" src="" alt="Image de la ressource"/>
+                <div class="left half-width">
+                    <div>
+                        <input type="button" value="Rechercher les informations"/>
+                    </div>
+                    <div class="left max-width">
+                        <img id="resource-img" src="" alt="Please, choose an image file"/>
+                    </div>
                 </div>
-            </div>
-            <div class="clear"></div>
-             <div> 
-                <div class="long-description">
+                <div class="clear"></div>
+                <div> 
+                    <div class="long-description">
                     {{ form_label(form.longDescription) }}
                     {{ form_errors(form.longDescription) }}
                     {{ form_widget(form.longDescription) }}
-                </div>
-                <button>Réinitialiser le squelette</button>
-                <input type="submit" value="Enregistrer la ressource"/>
-            </div>
-      </div>  
-        
+                        </div>
+                        <input type="button" value="Réinitialiser le squelette"/>
+                        <input type="submit" value="Modifier la ressource"/>
+                    </div>
+                </div>  
+        {{ form_row(form.path) }}
         {{ form_rest(form) }}
             </form>
 {% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+{% endblock %}	

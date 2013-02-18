@@ -22,12 +22,12 @@ class ShelfRepository extends EntityRepository {
             $iteration = 0;
             foreach ($keywords as $string) {
                 if ($iteration > 0) {
-                    $qb->andWhere('s.name like \'%:name' . $iteration . '%\' OR s.description like \'%:description' . $iteration . '%\'');
+                    $qb->andWhere("s.name like :name" . $iteration . " OR s.description like :description" . $iteration);
                 } else {
-                    $qb->where('s.name like \'%:name' . $iteration . '%\' OR s.description like \'%:description' . $iteration . '%\'');
+                    $qb->where("s.name like :name" . $iteration . " OR s.description like :description" . $iteration);
                 }
-                $qb->setParameter('name' . $iteration, $string);
-                $qb->setParameter('description' . $iteration, $string);
+                $qb->setParameter('name' . $iteration, '%' . $string . '%');
+                $qb->setParameter('description' . $iteration, '%' . $string . '%');
                 ++$iteration;
             }
         }

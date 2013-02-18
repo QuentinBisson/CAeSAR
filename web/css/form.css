@@ -46,7 +46,7 @@ select{
     margin-bottom:10px;
 }
 
-input[type="submit"], button {
+input[type="submit"], input[type="button"] {
     padding: 10px 10px;
     border: 1px solid #c5c8cb;
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
@@ -62,7 +62,7 @@ input[type="submit"], button {
 }
 
 
-input[type="submit"]:hover, button:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
@@ -71,16 +71,10 @@ input[type="submit"]:hover, button:hover {
     background: linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
     text-decoration: none;
 }
-input[type="submit"]:active, button:active {
+input[type="submit"]:active, input[type="button"]:active {
     border-radius: 4px;
     border: solid 1px #203E5F;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-}
-
-.fileUpload label, .fileUpload input[type="button"] {
-    float: left;
-
 }

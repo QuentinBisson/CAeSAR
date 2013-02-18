@@ -34,8 +34,7 @@ class ResourceController extends Controller {
             $keywords = explode(" ", $keywords);
         }
 
-        //add keywords
-        $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction);
+        $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction, $keywords);
         $count = $repository_resource->count();
 
         /* Pagination */
@@ -53,7 +52,6 @@ class ResourceController extends Controller {
             'count' => $count,
             'pagination' => $pagination);
 
-        $request = $this->get('request');
         if ($request->isXmlHttpRequest()) {
             return $this->render("CaesarAdminBundle:Resource:list.html.twig", $array);
         }
@@ -125,7 +123,7 @@ class ResourceController extends Controller {
     }
 
     public function deleteAction($id) {
-        if (filter_input($id, FILTER_VALIDATE_INT) !== false) {
+        if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
             $clean = $id;
         } else {
             throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');

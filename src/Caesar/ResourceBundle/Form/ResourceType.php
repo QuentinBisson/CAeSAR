@@ -20,6 +20,7 @@ class ResourceType extends AbstractType {
                 ->add("quantity", 'integer', array('label' => 'form.resource.type.quantity'))
                 ->add("local", "file", array('label' => 'form.resource.type.local', 'required' => false))
                 ->add("url", "url", array('label' => 'form.resource.type.url', 'required' => false))
+                ->add("path", "hidden", array('required' => false))
                 ->add('shelf', 'entity', array(
                     'class' => 'CaesarShelfBundle:Shelf',
                     'property' => 'name',
