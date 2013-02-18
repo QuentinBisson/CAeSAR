@@ -8,3 +8,9 @@ services:
     caesar_user_provider:
         class: "%caesar_user_provider.class%"
         arguments: ["@doctrine.orm.entity_manager", "@user_metadata"]
+    caesar.security.authentication.provider:
+        class:  Caesar\UserBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ['', %kernel.cache_dir%/security/nonces]
+    caesar.security.authentication.listener:
+        class: Caesar\UserBundle\Security\Firewall\WsseListener
+        arguments: ["@security.context", "@security.authentication.manager"]

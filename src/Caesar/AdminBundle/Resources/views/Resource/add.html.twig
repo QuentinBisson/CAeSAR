@@ -1,5 +1,10 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
+
 {% block breadCrumb%}
     {{parent()}}
     <li data-header="0">
@@ -14,4 +19,38 @@
 {% endblock %}
 
 {% block contentBody %}
+    <form action="{{ path('caesar_resource_add') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        <div class="left max-width">
+            <div class="left half-width">
+                {{ form_row(form.code) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.quantity) }}
+                {{ form_row(form.shelf) }}    
+            </div>
+            <div class="left half-width">
+                <div>
+                    <button> Rechercher les informations</button>
+                </div>
+                <div id="fileUpload"> 
+                    {{ form_row(form.image) }}
+                </div>
+                <div class="left max-width">
+                    <img id="resource-img" src="" alt="Image de la ressource"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div> 
+                <div class="long-description">
+                    {{ form_label(form.longDescription) }}
+                    {{ form_errors(form.longDescription) }}
+                    {{ form_widget(form.longDescription) }}
+                </div>
+                <button>Réinitialiser le squelette</button>
+                <input type="submit" value="Enregistrer la ressource"/>
+            </div>
+      </div>  
+        
+        {{ form_rest(form) }}
+    </form>
 {% endblock %}

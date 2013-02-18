@@ -53,13 +53,21 @@ class Resource {
      */
     private $longDescription;
 
-     /**
+    /**
      * @var int $quantity
      * 
      * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
     
+     /**
+     * @var string $image
+     * 
+     * @ORM\Column(name="image", type="string",length=255)
+     */
+    private $image;
+
+
     /**
      * Get id
      *
@@ -90,17 +98,15 @@ class Resource {
         return $this->shelf;
     }
 
-
     /**
      * Set code
      *
      * @param integer $code
      * @return Resource
      */
-    public function setCode($code)
-    {
+    public function setCode($code) {
         $this->code = $code;
-    
+
         return $this;
     }
 
@@ -109,8 +115,7 @@ class Resource {
      *
      * @return integer 
      */
-    public function getCode()
-    {
+    public function getCode() {
         return $this->code;
     }
 
@@ -120,10 +125,9 @@ class Resource {
      * @param string $description
      * @return Resource
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -132,8 +136,7 @@ class Resource {
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -143,10 +146,9 @@ class Resource {
      * @param string $longDescription
      * @return Resource
      */
-    public function setLongDescription($longDescription)
-    {
+    public function setLongDescription($longDescription) {
         $this->longDescription = $longDescription;
-    
+
         return $this;
     }
 
@@ -155,8 +157,7 @@ class Resource {
      *
      * @return string 
      */
-    public function getLongDescription()
-    {
+    public function getLongDescription() {
         return $this->longDescription;
     }
 
@@ -166,10 +167,9 @@ class Resource {
      * @param integer $quantity
      * @return Resource
      */
-    public function setQuantity($quantity)
-    {
+    public function setQuantity($quantity) {
         $this->quantity = $quantity;
-    
+
         return $this;
     }
 
@@ -178,8 +178,7 @@ class Resource {
      *
      * @return integer 
      */
-    public function getQuantity()
-    {
+    public function getQuantity() {
         return $this->quantity;
     }
 
@@ -189,10 +188,9 @@ class Resource {
      * @param \Caesar\TagBundle\Entity\Tag $tag
      * @return Resource
      */
-    public function setTag(\Caesar\TagBundle\Entity\Tag $tag = null)
-    {
+    public function setTag(\Caesar\TagBundle\Entity\Tag $tag = null) {
         $this->tag = $tag;
-    
+
         return $this;
     }
 
@@ -201,8 +199,8 @@ class Resource {
      *
      * @return \Caesar\TagBundle\Entity\Tag 
      */
-    public function getTag()
-    {
+    public function getTag() {
         return $this->tag;
     }
+
 }

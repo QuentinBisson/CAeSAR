@@ -59,6 +59,14 @@ class Resource {
      * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
+    
+     /**
+     * @var string $image
+     * 
+     * @ORM\Column(name="image", type="string",length=255)
+     */
+    private $image;
+
 
     /**
      * Get id
@@ -195,4 +203,27 @@ class Resource {
         return $this->tag;
     }
 
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Resource
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

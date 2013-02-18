@@ -12,14 +12,13 @@ class WsseFactory implements SecurityFactoryInterface
 {
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
-        $providerId = 'security.authentication.provider.wsse.'.$id;
+        $providerId = 'security.authentication.provider.'.$id;
         $container
-            ->setDefinition($providerId, new DefinitionDecorator('wsse.security.authentication.provider'))
-            ->replaceArgument(0, new Reference($userProvider))
-        ;
+            ->setDefinition($providerId, new DefinitionDecorator('caesar.security.authentication.provider'))
+            ->replaceArgument(0, new Reference($userProvider));
 
-        $listenerId = 'security.authentication.listener.wsse.'.$id;
-        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('wsse.security.authentication.listener'));
+        $listenerId = 'security.authentication.listener.'.$id;
+        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('caesar.security.authentication.listener'));
 
         return array($providerId, $listenerId, $defaultEntryPoint);
     }
@@ -31,7 +30,7 @@ class WsseFactory implements SecurityFactoryInterface
 
     public function getKey()
     {
-        return 'wsse';
+        return 'http_basic';
     }
 
     public function addConfiguration(NodeDefinition $node)

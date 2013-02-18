@@ -23,7 +23,7 @@ class WsseProvider implements AuthenticationProviderInterface
     public function authenticate(TokenInterface $token)
     {
         $user = $this->userProvider->loadUserByUsername($token->getUsername());
-
+        die($user);
         if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
             $authenticatedToken = new WsseUserToken($user->getRoles());
             $authenticatedToken->setUser($user);
@@ -36,6 +36,7 @@ class WsseProvider implements AuthenticationProviderInterface
 
     protected function validateDigest($digest, $nonce, $created, $secret)
     {
+        die();
         // Expire timestamp after 5 minutes
         if (time() - strtotime($created) > 300) {
             return false;

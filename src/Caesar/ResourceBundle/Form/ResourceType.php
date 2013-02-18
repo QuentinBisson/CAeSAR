@@ -14,7 +14,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ResourceType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add("code", 'integer', array('label' => 'form.resource.type.label.code'));
+        $builder->add("code", 'integer', array('label' => 'form.resource.type.label.code'))
+                ->add("description", "text", array('label' => 'form.resource.type.label.description'))
+                ->add("longDescription", "textarea", array('label' => 'form.resource.type.label.long.description'))
+                ->add("quantity", 'integer', array('label' => 'form.resource.type.quantity'))
+                ->add("image", "file", array('label' => 'form.resource.type.image'))
+                ->add('shelf', 'entity', array(
+                    'class' => 'CaesarShelfBundle:Shelf',
+                    'property' => 'name',
+                    'label'=> 'form.resource.type.label.shelf'
+                 ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

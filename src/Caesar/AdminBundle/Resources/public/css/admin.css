@@ -25,3 +25,16 @@
 .delete { 
     width:2%;
 }
+
+img#resource-img{
+    float: left;
+    height: 160px;
+    width: 140px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.long-description textarea {
+    width: 70%;
+    height: 100px;
+}

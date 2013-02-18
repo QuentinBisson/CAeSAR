@@ -5,7 +5,7 @@ namespace Caesar\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\ResourceBundle\Form\ResourceType;
-
+use Caesar\ResourceBundle\Form\ResourceSearchType;
 /**
  * Description of ResourceController
  *
@@ -13,13 +13,28 @@ use Caesar\ResourceBundle\Form\ResourceType;
  */
 class ResourceController extends Controller {
 
-    public function indexAction($page = 1, $sort = 'isbn', $direction = 'asc') {
+    public function indexAction($page = 1, $sort = 'code', $direction = 'asc') {
         
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
+        $searchForm = $this->createForm(new ResourceSearchType());
+        $keywords = null;
         $em = $this->getDoctrine()->getManager();
 
         $repository_resource = $em->getRepository('CaesarResourceBundle:Resource');
 
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $searchForm->bind($request);
+            if ($searchForm->isValid()) {
+                $data = $searchForm->getData();
+                $keywords = $data['keywords'];
+            }
+        }
+        if (!empty($keywords)) {
+            $keywords = explode(" ", $keywords);
+        }
+
+        //add keywords
         $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction);
         $count = $repository_resource->count();
 
@@ -43,6 +58,8 @@ class ResourceController extends Controller {
             return $this->render("CaesarAdminBundle:Resource:list.html.twig", $array);
         }
 
+        $array['searchForm'] = $searchForm->createView();
+        
         return $this->render("CaesarAdminBundle:Resource:index.html.twig", $array);
 
     }
@@ -98,7 +115,7 @@ class ResourceController extends Controller {
                 $this->get('session')->getFlashBag()->add(
                         'notice', 'La ressource ' . $resource->getName() . ' a été modifiée.'
                 );
-                $this->redirect($this->generateUrl('caesar_admin_resource_homepage'));
+                $this->redirect($this->generateUrl('caesar_resource_homepage'));
             }
         }
 

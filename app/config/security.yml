@@ -29,6 +29,7 @@ security:
             form_login:
                 login_path:  caesar_client_login
                 check_path:  caesar_client_login_check
+            http_basic: true
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
