@@ -20,28 +20,15 @@ security:
             entity: { class: Caesar\UserBundle\Entity\User, property: username }
 
     firewalls:
-        #secured_area:
-        #    pattern:    ^/
-        #    anonymous: ~
-        #    form_login:
-        #        login_path:  /login
-        #        check_path:  /login_check
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
-
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        caesar:
+            pattern:  ^/
+            anonymous: ~
+            form_login:
+                login_path:  caesar_client_login
+                check_path:  caesar_client_login_check
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

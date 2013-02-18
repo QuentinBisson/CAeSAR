@@ -1,6 +1,10 @@
 parameters:
-    caesar_user_provider.class: Caesar\UserBundle\Security\UserProvider
+    caesar_user_provider.class: Caesar\UserBundle\Entity\UserRepository
 
 services:
+    user_metadata:
+        class: Doctrine\ORM\Mapping\ClassMetaData
+        arguments: ['Caesar\UserBundle\Entity\User']
     caesar_user_provider:
         class: "%caesar_user_provider.class%"
+        arguments: ["@doctrine.orm.entity_manager", "@user_metadata"]
