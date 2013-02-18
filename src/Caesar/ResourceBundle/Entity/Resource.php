@@ -59,14 +59,25 @@ class Resource {
      * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
-    
-     /**
-     * @var string $image
-     * 
-     * @ORM\Column(name="image", type="string",length=255)
-     */
-    private $image;
 
+    /**
+     * @var string $path
+     * 
+     * @ORM\Column(name="path", type="string",length=255)
+     */
+    private $path;
+
+    /**
+     * @var string $local
+     * 
+     */
+    private $local;
+
+    /**
+     * @var string $url
+     * 
+     */
+    private $url;
 
     /**
      * Get id
@@ -203,17 +214,15 @@ class Resource {
         return $this->tag;
     }
 
-
     /**
      * Set image
      *
      * @param string $image
      * @return Resource
      */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    
+    public function setPath($path) {
+        $this->path = $path;
+
         return $this;
     }
 
@@ -222,8 +231,23 @@ class Resource {
      *
      * @return string 
      */
-    public function getImage()
-    {
-        return $this->image;
+    public function getPath() {
+        return $this->path;
+    }
+
+    public function getLocal() {
+        return $this->local;
+    }
+
+    public function setLocal($local) {
+        $this->local = $local;
+    }
+
+    public function getUrl() {
+        return $this->url;
+    }
+
+    public function setUrl($url) {
+        $this->url = $url;
     }
 }

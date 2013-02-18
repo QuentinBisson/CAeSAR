@@ -8,10 +8,19 @@ form label {
     line-height: 35px;
 }
 
+input[type="file"] {
+    height: 35px;
+    font-family: "Trebuchet MS", sans-serif;
+    vertical-align: middle;
+    font-size: 15px;
+    margin-bottom:10px;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
+input[type="url"],
 textarea, 
 select{
     height: 35px;
@@ -38,7 +47,7 @@ select{
 }
 
 input[type="submit"], button {
-    padding: 20px 10px;
+    padding: 10px 10px;
     border: 1px solid #c5c8cb;
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -71,35 +80,7 @@ input[type="submit"]:active, button:active {
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-#fileUpload {
-    position:relative;
-}
- 
-#browserVisible {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-    background:url(button.gif) 100% 0px no-repeat;
-    height:26px;
-    width:240px;
-}
- 
-#fileField {
-    width:155px;
-    height:26px;
-    margin-right:85px;
-    font-size:16px;
-    border:solid 1px #000;
-}
- 
-#browserHidden {
-    position:relative;
-    width:240px;
-    height:26px;
-    text-align: right;
-    -moz-opacity:0 ;
-    filter:alpha(opacity: 0);
-    opacity: 0;
-    z-index: 2;
+.fileUpload label, .fileUpload input[type="button"] {
+    float: left;
+
 }
