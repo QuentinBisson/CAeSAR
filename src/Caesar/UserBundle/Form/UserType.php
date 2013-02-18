@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add("codeBU", 'integer', array('label' => 'form.user.type.label.codeBu'))
+        $builder->add("codeBu", 'integer', array('label' => 'form.user.type.label.codeBu'))
                 ->add("name", 'text', array('label' => 'form.user.type.label.name', 'trim' => true))
                 ->add("firstname", 'text', array('label' => 'form.user.type.label.firstname', 'trim' => true))
                 ->add("email", "email", array('label' => 'form.user.type.label.email', 'trim' => true))

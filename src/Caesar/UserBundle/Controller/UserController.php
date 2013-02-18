@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
-        $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager());
+        $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
         if ($formHandler->process()) {
             $this->get('session')->setFlash('success', 'Inscription réussie');
             return $this->redirect($this->generateUrl('caesar_client_homepage'));

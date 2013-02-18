@@ -13,12 +13,14 @@ class UserHandler
     protected $form;
     protected $request;
     protected $em;
-
-    public function __construct(Form $form, Request $request, EntityManager $em)
+    protected $encoder;
+    
+    public function __construct(Form $form, Request $request, EntityManager $em, $encoder)
     {
         $this->form = $form;
         $this->request = $request;
         $this->em = $em;
+        $this->encoder = $encoder;
     }
 
     public function process()
@@ -35,6 +37,8 @@ class UserHandler
 
     public function onSuccess(User $user)
     {
+        $user->setPassword($this->encoder->encodePassword($user->getPlainPassword(), $user->getSalt()));
+        $user->setRole('USER');
         $this->em->persist($user);
         $this->em->flush();
     }

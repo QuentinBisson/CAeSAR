@@ -1,5 +1,9 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
+{% block bodyTitle %}
+    <h1>{{ 'login.title'|trans({}, 'CaesarUserBundle') }}</h1>
+{% endblock %}
+
 {% block caesar_user_content %}
 {% if error %}
     <div>{{ error.message }}</div>
