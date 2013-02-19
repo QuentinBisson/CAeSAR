@@ -14,161 +14,161 @@ body {
 }
 
 .container {
-	width: 640px;
-	margin: auto;
+    width: 640px;
+    margin: auto;
 }
 
 .label-list {
-	list-style: none;
-	font-family: "Trebuchet MS", sans-serif;
-	font-size: 25px;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-	color: #282828;
-	padding: 5px;
-	text-align: left;	
+    list-style: none;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 25px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    color: #282828;
+    padding: 5px;
+    text-align: left;	
 }
 /**
  * Titre(s)
  **/
 header {
-	width: 640px;
-	margin: auto;
+    width: 640px;
+    margin: auto;
 }
 header h1 {
-	font-size: 40px;
-	font-family: "Trebuchet MS";
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-	color: #282828;
-	text-align: center;
+    font-size: 40px;
+    font-family: "Trebuchet MS";
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    color: #282828;
+    text-align: center;
 }
 /**
  * Navbar
  **/
 
 .navbar {
-	line-height: 52px;
+    line-height: 52px;
     height:52px;
     background-color: #505050;
-	background-image: -moz-linear-gradient(top,#606060,#404040);
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(#606060),to(#404040));
-	background-image: -webkit-linear-gradient(top,#606060,#404040);
-	background-image: -o-linear-gradient(top,#606060,#404040);
-	background-image: linear-gradient(to bottom,#606060,#404040);
-	background-repeat: repeat-x;
+    background-image: -moz-linear-gradient(top,#606060,#404040);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#606060),to(#404040));
+    background-image: -webkit-linear-gradient(top,#606060,#404040);
+    background-image: -o-linear-gradient(top,#606060,#404040);
+    background-image: linear-gradient(to bottom,#606060,#404040);
+    background-repeat: repeat-x;
 }
 .right {
-	float: right;
+    float: right;
 }
 .left {
-	float: left;
+    float: left;
 }
 
 /**
- * Elément d'une navbar
+ * Elï¿½ment d'une navbar
  **/
- 
+
 .nav-el {
-	margin-top: 0px;
-	margin-left: 4px;
-	margin-right: 4px;
-	padding-left: 20px;
-	padding-right: 20px;
-	color: #fff;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-	text-align: center;
-	font-family: "Trebuchet MS", sans-serif;
-	text-decoration: none;
-	font-size: 18px;
-	display: inline-block;
-	background-color: #303030;
-	background-image: -moz-linear-gradient(top,#404040,#202020);
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
-	background-image: -webkit-linear-gradient(top,#404040,#202020);
-	background-image: -o-linear-gradient(top,#404040,#202020);
-	background-image: linear-gradient(to bottom,#404040,#202020);
-	background-repeat: repeat-x;
+    margin-top: 0px;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    text-align: center;
+    font-family: "Trebuchet MS", sans-serif;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
+    background-color: #303030;
+    background-image: -moz-linear-gradient(top,#404040,#202020);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
+    background-image: -webkit-linear-gradient(top,#404040,#202020);
+    background-image: -o-linear-gradient(top,#404040,#202020);
+    background-image: linear-gradient(to bottom,#404040,#202020);
+    background-repeat: repeat-x;
 }
 .nav-el:hover {
-	background-color: #bebebe;
-	background-image: -moz-linear-gradient(top,#cecece,#aeaeae);
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(#cecece),to(#aeaeae));
-	background-image: -webkit-linear-gradient(top,#cecece,#aeaeae);
-	background-image: -o-linear-gradient(top,#cecece,#aeaeae);
-	background-image: linear-gradient(to bottom,#cecece,#aeaeae);
-	-webkit-transition-property: background-image;
-	-webkit-transition-duration: 0.7s;
-	-moz-transition-property: background-image;
-	-moz-transition-duration: 0.7s;
-	transition-property: background-image;
-	transition-duration: 0.7s;
+    background-color: #bebebe;
+    background-image: -moz-linear-gradient(top,#cecece,#aeaeae);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#cecece),to(#aeaeae));
+    background-image: -webkit-linear-gradient(top,#cecece,#aeaeae);
+    background-image: -o-linear-gradient(top,#cecece,#aeaeae);
+    background-image: linear-gradient(to bottom,#cecece,#aeaeae);
+    -webkit-transition-property: background-image;
+    -webkit-transition-duration: 0.7s;
+    -moz-transition-property: background-image;
+    -moz-transition-duration: 0.7s;
+    transition-property: background-image;
+    transition-duration: 0.7s;
 }
 
 .nav-group .nav-el {
-	margin-left: 0px;
-	margin-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 .nav-el i[class*="icon-"] {
-	margin-top: 4px;
+    margin-top: 4px;
 }
 
 .nav-btn {
-	padding-right: 50px;
-	padding-left: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 #user_panel {
-	position: absolute;
-	right: 0;
+    position: absolute;
+    right: 0;
 }
 
 #user_panel .btn {
-	display: block;
-	font-family: "Trebuchet MS", sans-serif;
-	font-size: 18px;
-	cursor: pointer;
-	color: #2f3235;
-	padding: 20px;
-	width: 154px;
-	text-decoration: none;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-	color: #f3f3f6;
-	background-color: #505050;
-	
-	background-image: -moz-linear-gradient(top,#606060,#404040);
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(#606060),to(#404040));
-	background-image: -webkit-linear-gradient(top,#606060,#404040);
-	background-image: -o-linear-gradient(top,#606060,#404040);
-	background-image: linear-gradient(to bottom,#606060,#404040);
-	background-repeat: repeat-x;
+    display: block;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    color: #2f3235;
+    padding: 20px;
+    width: 154px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    color: #f3f3f6;
+    background-color: #505050;
 
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    background-image: -moz-linear-gradient(top,#606060,#404040);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#606060),to(#404040));
+    background-image: -webkit-linear-gradient(top,#606060,#404040);
+    background-image: -o-linear-gradient(top,#606060,#404040);
+    background-image: linear-gradient(to bottom,#606060,#404040);
+    background-repeat: repeat-x;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
 }
 
 #user_panel .btn:hover {
-	background-color: #303030;
-	background-image: -moz-linear-gradient(top,#404040,#202020);
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
-	background-image: -webkit-linear-gradient(top,#404040,#202020);
-	background-image: -o-linear-gradient(top,#404040,#202020);
-	background-image: linear-gradient(to bottom,#404040,#202020);
-	background-repeat: repeat-x;
+    background-color: #303030;
+    background-image: -moz-linear-gradient(top,#404040,#202020);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#404040),to(#202020));
+    background-image: -webkit-linear-gradient(top,#404040,#202020);
+    background-image: -o-linear-gradient(top,#404040,#202020);
+    background-image: linear-gradient(to bottom,#404040,#202020);
+    background-repeat: repeat-x;
 }
 
 /**
  * Formulaire Principal | Champ unique + trois boutons
  **/
- 
+
 #main-form, #search-form {
-	width: 640px;
-	height: 100px;
-	margin: auto;
-	margin-top: 50px;
+    width: 640px;
+    height: 100px;
+    margin: auto;
+    margin-top: 50px;
 }
 
 /**
@@ -176,115 +176,143 @@ header h1 {
  **/
 #main-form input[name='main_form_text'],
 #search-form input[name='search_form_text'] {
-	width: 640px;
-	height: 50px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	font-family: "Trebuchet MS", sans-serif;
-	vertical-align: middle;
-	
-	background-color: #f6f3f6;
-	border: 1px solid #c5c8cb;
-	-webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	-moz-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
-	-webkit-transition: border linear .2s,box-shadow linear .2s;
-	-moz-transition: border linear .2s,box-shadow linear .2s;
-	-o-transition: border linear .2s,box-shadow linear .2s;
-	transition: border linear .2s,box-shadow linear .2s;
-	
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-		
-	padding: 5px;
-	font-size: 20px;
-	
+    width: 640px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", sans-serif;
+    vertical-align: middle;
+
+    background-color: #f6f3f6;
+    border: 1px solid #c5c8cb;
+    -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    -moz-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    -webkit-transition: border linear .2s,box-shadow linear .2s;
+    -moz-transition: border linear .2s,box-shadow linear .2s;
+    -o-transition: border linear .2s,box-shadow linear .2s;
+    transition: border linear .2s,box-shadow linear .2s;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    padding: 5px;
+    font-size: 20px;
+
 }
 
 #main-form input[name='main_form_text']:focus,
 #search-form input[name='search_form_text']:focus {
-	background-color: #fdf8fd;
-	outline : none;	
+    background-color: #fdf8fd;
+    outline : none;	
 }
 
 /**
  * Trois boutons
  **/
 #main-form .main-form-actions {
-	margin: auto;
-	margin-top: 10px;
+    margin: auto;
+    margin-top: 10px;
 }
 #search-form .search-form-actions {
-	width: 210px;
-	margin: auto;
-	margin-top: 10px;
+    width: 210px;
+    margin: auto;
+    margin-top: 10px;
 }
 
 #main-form .main-form-actions input[type="submit"],
 #search-form .search-form-actions input[type="submit"]{
-	font-family: "Trebuchet MS", sans-serif;
-	width: 210px;
-	height: 60px;
-	font-size: 22px;
-	cursor: pointer;
-	color: #2f3235;
+    font-family: "Trebuchet MS", sans-serif;
+    width: 210px;
+    height: 60px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #2f3235;
 
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-	color: #f3f3f6;
-	background-color: rgb(83, 126, 192);
-	
-	background-image: -moz-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(117, 163, 214)),to(rgb(53, 86, 172)));
-	background-image: -webkit-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
-	background-image: -o-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
-	background-image: linear-gradient(to bottom,rgb(117, 163, 214),rgb(53, 86, 172));
-	background-repeat: repeat-x;
-	border-color: #51a351 #51a351 #387038;
-	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462',endColorstr='#ff51a351',GradientType=0);
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    color: #f3f3f6;
+    background-color: rgb(83, 126, 192);
 
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	
-	border: 1px solid rgb(195, 200, 205);
+    background-image: -moz-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(117, 163, 214)),to(rgb(53, 86, 172)));
+    background-image: -webkit-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: -o-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: linear-gradient(to bottom,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-repeat: repeat-x;
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462',endColorstr='#ff51a351',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    border: 1px solid rgb(195, 200, 205);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
 
 }
 #main-form .main-form-actions input[type="submit"]:active,
 #search-form .search-form-actions input[type="submit"]:active {
-	color: #f3f3f6;
-	background-color: rgb(83, 126, 192);
-	background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(53, 86, 172)),to(rgb(117, 163, 214)));
-	background-image: -webkit-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
-	background-image: -o-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
-	background-image: linear-gradient(to bottom,rgb(53, 86, 172),rgb(117, 163, 214));
-	
+    color: #f3f3f6;
+    background-color: rgb(83, 126, 192);
+    background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(53, 86, 172)),to(rgb(117, 163, 214)));
+    background-image: -webkit-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: -o-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: linear-gradient(to bottom,rgb(53, 86, 172),rgb(117, 163, 214));
+
 }
 
 #main-form .main-form-actions input[type="submit"][disabled="disabled"],
 #main-form .main-form-actions input[type="submit"][disabled="disabled"]:active {
-	color: #f3f3f6;
-	border: 1px solid rgb(195, 200, 205);
-	background-color: rgb(195, 200, 205);
-	background-image: -moz-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(190, 193, 201)),to(rgb(211, 211, 211)));
-	background-image: -webkit-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
-	background-image: -o-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
-	background-image: linear-gradient(to bottom,rgb(190, 193, 201),rgb(211, 211, 211));
-	cursor: default;
+    color: #f3f3f6;
+    border: 1px solid rgb(195, 200, 205);
+    background-color: rgb(195, 200, 205);
+    background-image: -moz-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(190, 193, 201)),to(rgb(211, 211, 211)));
+    background-image: -webkit-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: -o-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: linear-gradient(to bottom,rgb(190, 193, 201),rgb(211, 211, 211));
+    cursor: default;
 }
 
+.clear {
+    clear: both;
+}
 
-/**
+.resource-image, .resource-details {
+    width: 45%;
+}
 
+.resource-details {
+    margin-left: 15px;
+}
 
+.resource-image {
+    
+}
+
+.emprunts {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.emprunts summary {
+    padding: 5px 10px;
+    outline: none;
+    width: 250px;
+    background-color: #053A6C;
+    color: white;
+    font-weight: bold;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}

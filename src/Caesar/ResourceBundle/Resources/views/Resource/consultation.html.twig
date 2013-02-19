@@ -6,6 +6,30 @@
 
 {% block body %}
 <section>
-   
+    <div class="left resource-details">
+        <span>Code de la ressource: </span>{{resource.code}}
+        <br />
+        <span>Nom de la ressource: </span>{{resource.description}}
+        <br />
+        <span>Étagère: </span>{{resource.shelf.name}}
+        <br />
+        <span>Détails: </span>{{resource.longDescription}}
+        <br />
+        <span>Nombre de ressources enregistrées: </span>{{resource.quantity}}
+        <br />
+    </div>
+    <div class="right resource-image">
+         <img src="{#{asset('images/resources/' . resource.path)}#} alt="Couverture de la ressource""/>
+    </div>
+    <div class="clear"></div>
+   <details class="emprunts">
+   <summary>Emprunts en cours ()</summary>
+   <table>
+      <tr>
+         <th>Nom</th>
+         <th>Détails</th>
+      </tr>
+   </table>
+</details>
 </section>
 {% endblock %}

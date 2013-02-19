@@ -1,3 +1,5 @@
 caesar_resource_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CaesarResourceBundle:Default:index }
+    pattern:  /consult/{id}
+    defaults: { _controller: CaesarResourceBundle:Resource:consult }
+    requirements:
+        id:  \d+

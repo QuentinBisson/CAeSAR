@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="Caesar\ResourceBundle\Entity\ResourceRepository")
  * @ORM\Table(name="resource")
- * @UniqueEntity("nom")
  */
 class Resource {
 

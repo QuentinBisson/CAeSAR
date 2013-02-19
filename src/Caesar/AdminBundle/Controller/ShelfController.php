@@ -88,7 +88,7 @@ class ShelfController extends Controller {
     }
 
     public function updateAction($id) {
-        if (filter_input($id, FILTER_VALIDATE_INT) !== false) {
+        if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
             $clean = $id;
         } else {
             throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');

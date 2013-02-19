@@ -7,9 +7,6 @@ caesar_shelf:
 caesar_tag:
     resource: "@CaesarTagBundle/Resources/config/routing.yml"
 
-caesar_resource:
-    resource: "@CaesarResourceBundle/Resources/config/routing.yml"
-
 caesar_admin:
     resource: "@CaesarAdminBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/admin
@@ -27,3 +24,10 @@ caesar_client:
 caesar_client_default:
     pattern:  /
     defaults: { _controller: CaesarUserBundle:User:index, _locale: 'fr'}
+    
+caesar_resource:
+    resource: "@CaesarResourceBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements: 
+        _locale: fr|en
+    defaults: {_locale: 'fr'}
