@@ -22,21 +22,27 @@
 <form action="{{ path('caesar_resource_add') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <div class="left max-width">
-            <div class="left half-width">
-                {{ form_row(form.code) }}
-                {{ form_row(form.description) }}
-                {{ form_row(form.quantity) }}
-                {{ form_row(form.shelf) }}    
-                {{ form_row(form.local, { 'attr': {'id': 'local-file'} }) }}
-                {{ form_row(form.url) }}   
-                </div>
-                <div class="left half-width">
-                    <div>
+            
+                <div class="left max-width" style="border-bottom:2px solid #111;">
+                    <div style="display:inline-block;">
+                        {{ form_row(form.code)}}
+                    </div>
+                    <div style="display:inline-block;margin-left:250px;">
                         <input type="button" value="Rechercher les informations"/>
                     </div>
-                    <div class="left max-width">
-                        <img id="resource-img" src="" alt="Please, choose an image file"/>
-                    </div>
+
+                </div>
+                
+                <div class="left half-width" style="min-width: 500px;">
+                
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.quantity) }}
+                    {{ form_row(form.shelf) }}    
+                    {{ form_row(form.local, { 'attr': {'id': 'local-file'} }) }}
+                    {{ form_row(form.url) }}   
+                </div>
+                 <div class="right" style="width: 40%;">
+                    <img id="resource-img" src="" alt="Please, choose an image file"/>
                 </div>
                 <div class="clear"></div>
                 <div> 
@@ -48,7 +54,8 @@
                         <input type="button" value="Réinitialiser le squelette"/>
                         <input type="submit" value="Enregistrer la ressource"/>
                     </div>
-                </div>  
+                </div>
+
         {{ form_row(form.path) }}
         {{ form_rest(form) }}
             </form>
