@@ -28,7 +28,7 @@
         {% for book in books %}
             <tr>
                 <td>{{ book.id }}</td><td>{{ book.shelf.name }}</td>
-                <td><a href="{{ path('caesar_resource_delete', {'id':book.id}) }}">Supprimer la ressource</a></td>
+                <td><a href="{{ path('caesar_admin_resource_delete', {'id':book.id}) }}">Supprimer la ressource</a></td>
             </tr>
         {% endfor %}
         </table>

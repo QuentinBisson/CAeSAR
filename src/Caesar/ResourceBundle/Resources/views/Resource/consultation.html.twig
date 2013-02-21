@@ -6,30 +6,44 @@
 
 {% block body %}
 <section>
-    <div class="left resource-details">
-        <span>Code de la ressource: </span>{{resource.code}}
-        <br />
-        <span>Nom de la ressource: </span>{{resource.description}}
-        <br />
-        <span>Étagère: </span>{{resource.shelf.name}}
-        <br />
-        <span>Détails: </span>{{resource.longDescription}}
-        <br />
-        <span>Nombre de ressources enregistrées: </span>{{resource.quantity}}
-        <br />
+    <div class="left resource-image">
+        <img src="{#{asset('images/resources/' . resource.path)}#} alt="Couverture de la ressource""/>
     </div>
-    <div class="right resource-image">
-         <img src="{#{asset('images/resources/' . resource.path)}#} alt="Couverture de la ressource""/>
+    <div class="left resource-details">
+        <p>
+            <span class="consultation-title">{{resource.description}}</span>
+        </p>
+        <p>
+            <span class="consultation-id">Identifiant:</span><br />
+            <span class="consultation-text">{{resource.code}}</span>
+        </p>
+        <p>
+            <span class="consultation-location">Emplacement de la ressource:</span><br />
+            <span class="consultation-text">{{resource.shelf.name}}</span>
+        </p>
+        <p>
+            <span class="consultation-quantity">Quantité de livres:</span><br />
+            <span class="consultation-text">{{resource.quantity}}</span>
+        </p>
     </div>
     <div class="clear"></div>
-   <details class="emprunts">
-   <summary>Emprunts en cours ()</summary>
-   <table>
-      <tr>
-         <th>Nom</th>
-         <th>Détails</th>
-      </tr>
-   </table>
-</details>
+
+    <div class="consultation-div">
+        <p>
+            <span class="consult-title">Détails du livre:</span><br />
+            <span class="consultation-text-details">{{resource.longDescription}}</span>
+        </p>
+    </div>
+    <div class="consultation-div">
+        <a href="#" class="consult-title">Emprunts en cours ()</a>
+        <div class="consultation-content-block">
+            <table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Détails</th>
+                </tr>
+            </table>
+        </div>
+    </div>
 </section>
 {% endblock %}

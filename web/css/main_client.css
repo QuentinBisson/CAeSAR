@@ -297,22 +297,47 @@ header h1 {
 }
 
 .resource-image {
-    
+    width: 180px;
+    padding: 20px 50px;
 }
 
-.emprunts {
-    margin-top: 15px;
-    margin-left: 15px;
+.consultation-div {
+    margin-left: 20px;
 }
 
-.emprunts summary {
+.consult-title {
     padding: 5px 10px;
     outline: none;
-    width: 250px;
+    width: 1500px;
     background-color: #053A6C;
     color: white;
     font-weight: bold;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+}
+
+a.consult-title {
+    text-decoration: none;
+}
+
+.consultation-title {
+    font-size: 1.5em;
+}
+
+.consultation-title, .consultation-id, .consultation-location, .consultation-quantity {
+    font-weight: bold;
+}
+
+.consultation-text {
+    margin-left: 100px;
+}
+
+.consultation-content-block, .consultation-text-details {
+    margin-top: 15px;
+    margin-left: 15px; 
+}
+.consultation-text-details {
+    display: inline-block;
+    margin-bottom: 30px;
 }

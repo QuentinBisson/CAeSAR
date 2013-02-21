@@ -14,7 +14,7 @@
 {% block contentTitle %}{{'admin.title.resources.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_resource_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+<form action="{{ path('caesar_admin_resource_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_rest(searchForm) }}
         <input type="submit" value="Rechercher"/>

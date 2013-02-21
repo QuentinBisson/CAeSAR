@@ -14,6 +14,13 @@ caesar_admin:
         _locale: fr|en
     defaults: {_locale: 'fr'}
     
+caesar_resource:
+    resource: "@CaesarResourceBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements: 
+        _locale: fr|en
+    defaults: {_locale: 'fr'}    
+    
 caesar_client:
     resource: "@CaesarUserBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
@@ -24,10 +31,3 @@ caesar_client:
 caesar_client_default:
     pattern:  /
     defaults: { _controller: CaesarUserBundle:User:index, _locale: 'fr'}
-    
-caesar_resource:
-    resource: "@CaesarResourceBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}
-    requirements: 
-        _locale: fr|en
-    defaults: {_locale: 'fr'}

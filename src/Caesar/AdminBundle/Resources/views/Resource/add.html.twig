@@ -8,7 +8,7 @@
 {% block breadCrumb%}
     {{parent()}}
 <li data-header="0">
-    <a href="{{path('caesar_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
+    <a href="{{path('caesar_admin_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
     <span class="divider">></span>
 </li>
 <li class="active"><span>{{'admin.breadcrumb.resources.add'|trans({})}}</span></li>
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_resource_add') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('caesar_admin_resource_add') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <div class="left max-width">
             
