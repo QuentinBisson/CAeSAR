@@ -38,7 +38,7 @@
                     {{ form_row(form.description) }}
                     {{ form_row(form.quantity) }}
                     {{ form_row(form.shelf) }}    
-                    {{ form_row(form.local, { 'attr': {'id': 'local-file'} }) }}
+                    {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
                     {{ form_row(form.url) }}   
                 </div>
                  <div class="right" style="width: 40%;">
@@ -63,4 +63,18 @@
     {% block javascripts %}
 {{parent()}}
             <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+            <script type="text/javascript">
+                
+                
+                   function eraseLocal(){
+                       document.getElementById("caesar_resourceBundle_resourceType_local").value="";
+                    }
+                    
+                    function eraseURL(){
+                        document.getElementById("caesar_resourceBundle_resourceType_url").value="";
+                     }
+                     
+                     document.getElementById("caesar_resourceBundle_resourceType_local").addEventListener('click', eraseURL);
+                     document.getElementById("caesar_resourceBundle_resourceType_url").addEventListener('focus', eraseLocal);
+            </script> 
 {% endblock %}	

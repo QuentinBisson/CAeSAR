@@ -68,13 +68,15 @@ class Resource {
 
     /**
      * @var string $local
+     * @Assert\Image(
+     *  mimeTypes = {"image/jpeg","image/png"}
+     * )
      * 
      */
     private $local;
 
     /**
      * @var string $url
-     * 
      */
     private $url;
 
