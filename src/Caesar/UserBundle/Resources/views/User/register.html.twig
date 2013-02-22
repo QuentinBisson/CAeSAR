@@ -1,12 +1,12 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
 {% block bodyTitle %}
-    <h1>{{ 'register.title'|trans({}, 'CaesarUserBundle') }}</h1>
+    <h1>{{ 'user.register.title'|trans({}, 'CaesarUserBundle') }}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
-    <form action="{{ path('caesar_client_register') }}" method="post">
+    <form class="form-client" action="{{ path('caesar_client_register') }}" method="post">
         {{ form_widget(form) }}
-        <input type="submit" value="Enregistrer">
+        <input type="submit" value="{{ 'user.register.label.register'|trans({}, 'CaesarUserBundle') }}">
     </form>
 {% endblock caesar_user_content %}
