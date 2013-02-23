@@ -76,15 +76,16 @@ class ResourceController extends Controller {
                 if ($resource->getLocal() != "") {
                     $fileName = $resource->getLocal()->getClientOriginalName();
                     $extension = explode('.', $fileName);
-                    $newFileName = $resource->getCode() . "." . $extension[count($extension)-1];
+                    $newFileName = $resource->getCode() . "." . $extension[count($extension) - 1];
                     $resource->getLocal()->move("ressources/IMG", $newFileName);
                 } else {
                     $url = $resource->getUrl();
                     $extension = explode('.', $url);
-                    $newFileName = $resource->getCode().".".$extension[count($extension)-1];
-                    $img = 'ressources/IMG/'.$newFileName;
+                    $newFileName = $resource->getCode() . "." . $extension[count($extension) - 1];
+                    $img = 'ressources/IMG/' . $newFileName;
                     file_put_contents($img, file_get_contents($url));
                 }
+                $this->resizeIMG($newFileName);
                 $resource->setPath($newFileName);
                 $em->persist($resource);
                 $em->flush();
@@ -125,7 +126,7 @@ class ResourceController extends Controller {
                 $resource = $form->getData();
                 $em->flush();
                 $this->get('session')->getFlashBag()->add(
-                        'notice', 'La ressource ' . $resource->getName() . ' a été modifiée.'
+                        'notice', 'La ressource ' . $resource->getDescription() . ' a été modifiée.'
                 );
                 $this->redirect($this->generateUrl('caesar_resource_homepage'));
             }
@@ -165,6 +166,29 @@ class ResourceController extends Controller {
 
     public function skeletonAction() {
         return $this->render('CaesarAdminBundle:Resource:skeleton.html.twig');
+    }
+
+    private function resizeIMG($fileName) {
+        $extension = strtolower(substr($fileName, -3));
+        $img_src_resource = null;
+        switch ($extension) {
+            case "jpg":
+                $img_src_resource = imagecreatefromjpeg("ressources/IMG/" . $fileName);
+                break;
+            case "png":
+                $img_src_resource = imagecreatefrompng("ressources/IMG/" . $fileName);
+                break;
+        }
+        if ($img_src_resource != null) {
+            $img_src_width = imagesx($img_src_resource);
+            $img_src_height = imagesy($img_src_resource);
+            $NouvelleLargeur = 140;
+            $Reduction = ( ($NouvelleLargeur * 100) /  $img_src_width);
+            $NouvelleHauteur = ( ($img_src_height * $Reduction) / 100 );
+            $img_dst_resource = imagecreatetruecolor( $NouvelleLargeur, $NouvelleHauteur );
+            imagecopyresampled($img_dst_resource, $img_src_resource,0,0,0,0,$NouvelleLargeur,$NouvelleHauteur, $img_src_width,$img_src_height );
+            imagejpeg( $img_dst_resource, "ressources/IMG/".$fileName);
+        }
     }
 
 }
