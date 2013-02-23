@@ -109,6 +109,27 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      */
     private $role;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Borrowing", mappedBy="user")
+     */
+    private $borrowings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\BorrowingArchive", mappedBy="user")
+     */
+    private $borrowingArchives;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="user")
+     */
+    private $reservations;
+    
+    function __construct() {
+        $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -235,4 +256,103 @@ class User implements UserInterface, EquatableInterface, \Serializable {
                 ) = unserialize($serialized);
     }
 
+
+    /**
+     * Add borrowings
+     *
+     * @param \Caesar\UserBundle\Entity\Borrowing $borrowings
+     * @return User
+     */
+    public function addBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings)
+    {
+        $this->borrowings[] = $borrowings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove borrowings
+     *
+     * @param \Caesar\UserBundle\Entity\Borrowing $borrowings
+     */
+    public function removeBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings)
+    {
+        $this->borrowings->removeElement($borrowings);
+    }
+
+    /**
+     * Get borrowings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBorrowings()
+    {
+        return $this->borrowings;
+    }
+
+    /**
+     * Add borrowingArchives
+     *
+     * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
+     * @return User
+     */
+    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
+    {
+        $this->borrowingArchives[] = $borrowingArchives;
+    
+        return $this;
+    }
+
+    /**
+     * Remove borrowingArchives
+     *
+     * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
+     */
+    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
+    {
+        $this->borrowingArchives->removeElement($borrowingArchives);
+    }
+
+    /**
+     * Get borrowingArchives
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBorrowingArchives()
+    {
+        return $this->borrowingArchives;
+    }
+
+    /**
+     * Add reservations
+     *
+     * @param \Caesar\UserBundle\Entity\Reservation $reservations
+     * @return User
+     */
+    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
+    {
+        $this->reservations[] = $reservations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reservations
+     *
+     * @param \Caesar\UserBundle\Entity\Reservation $reservations
+     */
+    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
+    {
+        $this->reservations->removeElement($reservations);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
 }

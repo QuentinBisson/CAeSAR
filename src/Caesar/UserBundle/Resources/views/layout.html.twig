@@ -1,5 +1,10 @@
 {% extends "::user.html.twig" %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaruser/css/Caesar_user_style.css') }}" />
+{% endblock %}
+
 {% block body %}
 
 {% block caesar_user_content %}{% endblock caesar_user_content %}

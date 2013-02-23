@@ -1,3 +1,13 @@
+user:
+    login:
+        title: "Connexion"
+        label:
+            login: "Connexion"
+            username: "Nom d'utilisateur"
+    register:
+        title: "Inscription"
+        label:
+            register: "Enregistrer"
 search:
     title: Recherche
 profile:

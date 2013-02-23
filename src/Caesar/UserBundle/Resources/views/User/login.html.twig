@@ -1,7 +1,7 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
 {% block bodyTitle %}
-    <h1>{{ 'login.title'|trans({}, 'CaesarUserBundle') }}</h1>
+    <h1>{{ 'user.login.title'|trans({}, 'CaesarUserBundle') }}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
@@ -9,8 +9,8 @@
     <div>{{ error.message }}</div>
 {% endif %}
 
-<form action="{{ path('caesar_client_login_check') }}" method="post">
-    <label for="username">Username:</label>
+<form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post">
+    <label for="username">{{ 'user.login.label.username'|trans({}, 'CaesarUserBundle') }}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
     {#
@@ -18,6 +18,6 @@
         <input type="hidden" name="_target_path" value="/account" />
     #}
 
-    <button type="submit">login</button>
+    <input type="submit" value="{{ 'user.login.label.login'|trans({}, 'CaesarUserBundle') }}" />
 </form>
 {% endblock caesar_user_content %}

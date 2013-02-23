@@ -21,8 +21,8 @@
                     <a class="nav-el nav-btn" href="{{ path('caesar_client_profile')}}"><i class="icon-user icon-white"></i> {{ app.user.firstName }}</a>
                     <a class="nav-el" id="toggle_user_panel" href="#"><i class="icon-chevron-down icon-white"></i></a>
                 {% else %}
-                    <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'user.inscription'|trans({}, 'CaesarUserBundle') }}</a>
-                    <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'user.connexion'|trans({}, 'CaesarUserBundle') }}</a>
+                    <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'client.navbar.inscription'|trans }}</a>
+                    <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'client.navbar.connexion'|trans }}</a>
                 {% endif %}
             </div>
         </div>

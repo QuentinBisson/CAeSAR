@@ -1,5 +1,7 @@
 client:
     navbar:
+        connexion: Login
+        inscription: Register
         search_form:
             placeholder: Search ...
     user:

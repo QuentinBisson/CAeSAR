@@ -34,13 +34,19 @@
         </p>
     </div>
     <div class="consultation-div clear">
-        <a href="#" class="consult-title">Emprunts en cours ()</a>
+        <a href="#" class="consult-title">Emprunts en cours ({{resource.borrowings.count}})</a>
         <div class="consultation-content-block">
             <table>
-                <tr>
-                    <th>Nom</th>
-                    <th>Détails</th>
-                </tr>
+                <thead></thead>
+                <tbody>
+                    {% for borrowing in resource.borrowings %}
+                    <tr>
+                        <td>{{borrowing.user.name}}</td>
+                        <td>{{borrowing.user.firstname}}</td>
+                        <td>{{borrowing.borrowingDate|date('d/m/Y')}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>

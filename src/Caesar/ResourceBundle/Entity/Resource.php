@@ -68,16 +68,39 @@ class Resource {
 
     /**
      * @var string $local
+     * @Assert\Image(
+     *  mimeTypes = {"image/jpeg","image/png"}
+     * )
      * 
      */
     private $local;
 
     /**
      * @var string $url
-     * 
      */
     private $url;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Borrowing", mappedBy="resource")
+     */
+    private $borrowings;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\BorrowingArchive", mappedBy="resource")
+     */
+    private $borrowingArchives;
+    
+      /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="resource")
+     */
+    private $reservations;
+
+    function __construct() {
+        $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reservation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -248,5 +271,104 @@ class Resource {
 
     public function setUrl($url) {
         $this->url = $url;
+    }
+
+    /**
+     * Add borrowings
+     *
+     * @param \Caesar\UserBundle\Borrowing $borrowings
+     * @return Resource
+     */
+    public function addBorrowing(\Caesar\UserBundle\Borrowing $borrowings)
+    {
+        $this->borrowings[] = $borrowings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove borrowings
+     *
+     * @param \Caesar\UserBundle\Borrowing $borrowings
+     */
+    public function removeBorrowing(\Caesar\UserBundle\Borrowing $borrowings)
+    {
+        $this->borrowings->removeElement($borrowings);
+    }
+
+    /**
+     * Get borrowings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBorrowings()
+    {
+        return $this->borrowings;
+    }
+
+    /**
+     * Add borrowingArchives
+     *
+     * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
+     * @return Resource
+     */
+    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
+    {
+        $this->borrowingArchives[] = $borrowingArchives;
+    
+        return $this;
+    }
+
+    /**
+     * Remove borrowingArchives
+     *
+     * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
+     */
+    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
+    {
+        $this->borrowingArchives->removeElement($borrowingArchives);
+    }
+
+    /**
+     * Get borrowingArchives
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBorrowingArchives()
+    {
+        return $this->borrowingArchives;
+    }
+
+    /**
+     * Add reservations
+     *
+     * @param \Caesar\UserBundle\Entity\Reservation $reservations
+     * @return Resource
+     */
+    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
+    {
+        $this->reservations[] = $reservations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reservations
+     *
+     * @param \Caesar\UserBundle\Entity\Reservation $reservations
+     */
+    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
+    {
+        $this->reservations->removeElement($reservations);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
     }
 }
