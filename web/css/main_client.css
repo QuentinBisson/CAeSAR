@@ -288,12 +288,9 @@ header h1 {
     clear: both;
 }
 
-.resource-image, .resource-details {
-    width: 45%;
-}
-
 .resource-details {
     margin-left: 15px;
+    margin-right: 50px;
 }
 
 .resource-image {
@@ -303,12 +300,12 @@ header h1 {
 
 .consultation-div {
     margin-left: 20px;
+    padding-top: 10px;
 }
 
 .consult-title {
     padding: 5px 10px;
     outline: none;
-    width: 1500px;
     background-color: #053A6C;
     color: white;
     font-weight: bold;
@@ -340,4 +337,11 @@ a.consult-title {
 .consultation-text-details {
     display: inline-block;
     margin-bottom: 30px;
+}
+
+
+@media screen and (max-width:960px) {
+    .consultation-div {
+        clear: both;
+    }
 }
