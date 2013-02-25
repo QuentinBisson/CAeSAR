@@ -77,16 +77,17 @@ class ResourceController extends Controller {
                     $fileName = $resource->getLocal()->getClientOriginalName();
                     $extension = explode('.', $fileName);
                     $newFileName = $resource->getCode() . "." . $extension[count($extension) - 1];
-                    $resource->getLocal()->move("ressources/IMG", $newFileName);
+                    $resource->getLocal()->move("resources/img", $newFileName);
                 } else {
                     $url = $resource->getUrl();
                     $extension = explode('.', $url);
                     $newFileName = $resource->getCode() . "." . $extension[count($extension) - 1];
-                    $img = 'ressources/IMG/' . $newFileName;
+                    $img = 'resources/img/' . $newFileName;
                     file_put_contents($img, file_get_contents($url));
                 }
                 $this->resizeIMG($newFileName);
                 $resource->setPath($newFileName);
+
                 $em->persist($resource);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add(
@@ -173,10 +174,10 @@ class ResourceController extends Controller {
         $img_src_resource = null;
         switch ($extension) {
             case "jpg":
-                $img_src_resource = imagecreatefromjpeg("ressources/IMG/" . $fileName);
+                $img_src_resource = imagecreatefromjpeg("resources/img/" . $fileName);
                 break;
             case "png":
-                $img_src_resource = imagecreatefrompng("ressources/IMG/" . $fileName);
+                $img_src_resource = imagecreatefrompng("resources/img/" . $fileName);
                 break;
         }
         if ($img_src_resource != null) {
@@ -187,7 +188,7 @@ class ResourceController extends Controller {
             $NouvelleHauteur = ( ($img_src_height * $Reduction) / 100 );
             $img_dst_resource = imagecreatetruecolor( $NouvelleLargeur, $NouvelleHauteur );
             imagecopyresampled($img_dst_resource, $img_src_resource,0,0,0,0,$NouvelleLargeur,$NouvelleHauteur, $img_src_width,$img_src_height );
-            imagejpeg( $img_dst_resource, "ressources/IMG/".$fileName);
+            imagejpeg( $img_dst_resource, "resources/img/".$fileName);
         }
     }
 

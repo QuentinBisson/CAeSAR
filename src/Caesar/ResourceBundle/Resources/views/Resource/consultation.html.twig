@@ -7,9 +7,9 @@
 {% block body %}
 <section>
     <div class="left resource-image">
-        <img src="{#{asset('images/resources/' . resource.path)}#}" alt="{{'resource.label.cover'|trans({})}}" />
+        <img src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'resource.label.cover'|trans({})}}" />
     </div>
-    <div class="left resource-details">
+    <div class="resource-details">
         <p>
             <span class="consultation-title">{{resource.description}}</span>
         </p>
@@ -27,14 +27,14 @@
         </p>
     </div>
 
-    <div class="consultation-div">
+    <div class="consultation-div clear">
         <p>
             <span class="consult-title">{{'resource.label.details'|trans({})}}:</span><br />
-            <span class="consultation-text-details">{{resource.longDescription}}</span>
+            <span class="consultation-text-details">{{resource.longDescription|nl2br}}</span>
         </p>
     </div>
     <div class="consultation-div clear">
-        <a href="#" class="consult-title">{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</a>
+        <span class="consult-title">{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</span>
         {% if resource.borrowings.count > 0 %}
             <div class="consultation-content-block">
                 <table>

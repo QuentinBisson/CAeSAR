@@ -345,7 +345,4 @@ a.consult-title {
 
 
 @media screen and (max-width:960px) {
-    .consultation-div {
-        clear: both;
-    }
 }

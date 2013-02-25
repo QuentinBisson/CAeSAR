@@ -31,7 +31,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * 
      * @ORM\Column(name="codeBu", type="integer",length=10, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
+     * @Assert\Regex("/^[0-9]*$/")
      */
     private $codeBu;
 

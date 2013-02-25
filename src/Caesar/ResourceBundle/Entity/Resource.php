@@ -40,7 +40,7 @@ class Resource {
      * @ORM\Column(name="code", type="bigint", unique=true)
      * 
      * @Assert\NotBlank()
-     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
+     * @Assert\Regex("/^[0-9]*$/")
      */
     private $code;
 
