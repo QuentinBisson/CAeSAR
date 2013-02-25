@@ -132,18 +132,15 @@ class ShelfController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         if (isset($clean)) {
-            $shelf = $em->getRepository('CaesarShelfBundle:Shelf')
-                    ->find($clean);
+            $shelf = $em->getRepository('CaesarShelfBundle:Shelf')->find($clean);
         }
 
         if (!$shelf) {
             throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
         }
-
-        $books = $shelf->getResources();
-
-        if ($books->count() > 0) {
-            return $this->render('CaesarAdminBundle:Shelf:delete.html.twig', array('books', $books));
+        $books = $em->getRepository('CaesarShelfBundle:Shelf')->findAllResourcesById($shelf->getId());
+        if (count($books) > 0) {
+            return $this->render('CaesarAdminBundle:Shelf:delete.html.twig', array('books' => $books, 'count' => count($books)));
         } else {
             $em->remove($shelf);
             $em->flush();

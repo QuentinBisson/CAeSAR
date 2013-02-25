@@ -2,13 +2,13 @@
     <thead>
         <tr>
             <th{% if 'code' == sort %} class="sorted resource-code"{% else %} class = "resource-code" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.code'|trans({}), 'page': page, 'sort': 'name'}  %}
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.code'|trans({}), 'page': page, 'sort': 'code'}  %}
             </th>
             <th{% if 'description' == sort %} class="sorted resource-description"{% else %} class = "resource-description" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.description'|trans({}), 'page': page, 'sort': 'name'}  %}
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.description'|trans({}), 'page': page, 'sort': 'description'}  %}
             </th>
-            <th{% if 'code' == sort %} class="sorted resource-quantity"{% else %} class = "resource-quantity" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.quantity'|trans({}), 'page': page, 'sort': 'name'}  %}
+            <th{% if 'quantity' == sort %} class="sorted resource-quantity"{% else %} class = "resource-quantity" {% endif %} >
+                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.quantity'|trans({}), 'page': page, 'sort': 'quantity'}  %}
             </th>
             <th class="edit"></th>
             <th class="delete"></th>

@@ -1,0 +1,6 @@
+consultation:
+    text:
+        name: Nom de l'emprunteur
+        firstname: Prénom
+        borrowing:
+            date: Date d'emprunt

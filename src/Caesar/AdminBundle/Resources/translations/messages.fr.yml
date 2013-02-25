@@ -23,6 +23,12 @@ admin:
     lang: 
         french: Français
         english: Anglais
+    label:
+        location:
+            delete:
+                not:
+                    empty: Vous devez déplacer les ressources suivantes dans une autre étagère avant de la supprimer.
+                move: Déplacer la ressource
     menu:
         title:
             shelves:
@@ -47,6 +53,13 @@ admin:
             legend: Informations sur l'emplacement
     button:
         logout: Déconnexion
+        user:
+            add: Ajouter l'utilisateur
+            update: Modifier l'utilisateur
+        shelf:
+            add: Ajouter l'emplacement
+            update: Modifier l'emplacement
+            search: Rechercher
     breadcrumb:
         shelves:
             add: Ajouter

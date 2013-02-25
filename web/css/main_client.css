@@ -298,6 +298,10 @@ header h1 {
     padding: 20px 50px;
 }
 
+.resource-image img {
+    width: 140px;
+}
+
 .consultation-div {
     margin-left: 20px;
     padding-top: 10px;

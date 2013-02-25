@@ -21,6 +21,18 @@ client:
                 name: Shelf name
                 description: Description
                 search: Search
+    resource:
+        type:
+            label:
+                code: Code (ISBN or Tag)
+                description: Title
+                quantity: Quantity
+                shelf: Location
+                local: Local file
+                url: Distant file
+                long:
+                    description: Detailled description
+                search: Search
 
 table:
     foot:
@@ -36,11 +48,24 @@ table:
         shelves:
            name: Name
            description: Description
-        resources:            
+        resources: 
+            code: Code (ISBN or Tag)
+            description: Title
+            shelf:
+                name: Location's name
+            quantity: Registered quantity
     sort:
         down: Sort down
         up: Sort up
-        
 ajax:
     wait:
         message: Please wait ...
+        
+resource:
+    label:
+        identifier: Identifier
+        location: Resource's location
+        quantity: Resource's quantity
+        details: Resource's details
+        borrowings: Current borrowings
+        cover: Resource's cover

@@ -7,48 +7,56 @@
 {% block body %}
 <section>
     <div class="left resource-image">
-        <img src="{#{asset('images/resources/' . resource.path)}#} alt="Couverture de la ressource""/>
+        <img src="{#{asset('images/resources/' . resource.path)}#}" alt="{{'resource.label.cover'|trans({})}}" />
     </div>
     <div class="left resource-details">
         <p>
             <span class="consultation-title">{{resource.description}}</span>
         </p>
         <p>
-            <span class="consultation-id">Identifiant:</span><br />
+            <span class="consultation-id">{{'resource.label.identifier'|trans({})}}:</span><br />
             <span class="consultation-text">{{resource.code}}</span>
         </p>
         <p>
-            <span class="consultation-location">Emplacement de la ressource:</span><br />
+            <span class="consultation-location">{{'resource.label.location'|trans({})}}:</span><br />
             <span class="consultation-text">{{resource.shelf.name}}</span>
         </p>
         <p>
-            <span class="consultation-quantity">Quantité de livres:</span><br />
+            <span class="consultation-quantity">{{'resource.label.quantity'|trans({})}}:</span><br />
             <span class="consultation-text">{{resource.quantity}}</span>
         </p>
     </div>
 
     <div class="consultation-div">
         <p>
-            <span class="consult-title">Détails du livre:</span><br />
+            <span class="consult-title">{{'resource.label.details'|trans({})}}:</span><br />
             <span class="consultation-text-details">{{resource.longDescription}}</span>
         </p>
     </div>
     <div class="consultation-div clear">
-        <a href="#" class="consult-title">Emprunts en cours ({{resource.borrowings.count}})</a>
-        <div class="consultation-content-block">
-            <table>
-                <thead></thead>
-                <tbody>
-                    {% for borrowing in resource.borrowings %}
-                    <tr>
-                        <td>{{borrowing.user.name}}</td>
-                        <td>{{borrowing.user.firstname}}</td>
-                        <td>{{borrowing.borrowingDate|date('d/m/Y')}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <a href="#" class="consult-title">{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</a>
+        {% if resource.borrowings.count > 0 %}
+            <div class="consultation-content-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{'consultation.text.name'|trans({})}}</th>
+                            <th>{{'consultation.text.firstname'|trans({})}}</th>
+                            <th>{{'consultation.text.borrowing.date'|trans({})}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for borrowing in resource.borrowings %}
+                        <tr>
+                            <td>{{borrowing.user.name}}</td>
+                            <td>{{borrowing.user.firstname}}</td>
+                            <td>{{borrowing.borrowingDate|date('d/m/Y')}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

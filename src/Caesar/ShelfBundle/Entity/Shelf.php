@@ -101,17 +101,15 @@ class Shelf {
         return $this->description;
     }
 
-
     /**
      * Add resources
      *
      * @param \Caesar\ResourceBundle\Entity\Resource $resources
      * @return Shelf
      */
-    public function addResource(\Caesar\ResourceBundle\Entity\Resource $resources)
-    {
+    public function addResource(\Caesar\ResourceBundle\Entity\Resource $resources) {
         $this->resources[] = $resources;
-    
+
         return $this;
     }
 
@@ -120,8 +118,7 @@ class Shelf {
      *
      * @param \Caesar\ResourceBundle\Entity\Resource $resources
      */
-    public function removeResource(\Caesar\ResourceBundle\Entity\Resource $resources)
-    {
+    public function removeResource(\Caesar\ResourceBundle\Entity\Resource $resources) {
         $this->resources->removeElement($resources);
     }
 
@@ -130,8 +127,8 @@ class Shelf {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getResources()
-    {
+    public function getResources() {
         return $this->resources;
     }
+
 }

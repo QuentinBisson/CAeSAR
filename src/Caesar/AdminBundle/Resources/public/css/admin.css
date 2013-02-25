@@ -28,7 +28,6 @@
 
 img#resource-img{
     float: left;
-    height: 160px;
     width: 140px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -37,4 +36,20 @@ img#resource-img{
 .long-description textarea {
     width: 70%;
     height: 100px;
+}
+
+.overflow{
+    overflow: auto;
+} 
+
+.mid-height{
+    height: 50%;
+}
+
+.resource-code {
+    width: 20%;
+}
+
+.resource-description {
+    width: 40%;
 }

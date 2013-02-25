@@ -22,6 +22,18 @@ form:
                 name: Nom de l'emplacement
                 description: Description
                 search: Rechercher
+    resource:
+        type:
+            label:
+                code: Code (ISBN ou Étiquette)
+                description: Titre
+                quantity: Quantité
+                shelf: Emplacement
+                local: Fichier local
+                url: Fichier distant
+                long:
+                    description: Description détaillée
+                search: Rechercher
                 
 table:
     foot:
@@ -37,7 +49,12 @@ table:
         shelves:
            name: Nom
            description: Description
-        resources:
+        resources: 
+            code: Code (ISBN ou Étiquette)
+            description: Titre
+            shelf:
+                name: Nom de l'emplacement
+            quantity: Quantité enregistrée
     sort:
         down: Trier vers le bas
         up: Trier vers le haut
@@ -45,3 +62,12 @@ table:
 ajax:
     wait:
         message: Veuillez patientez ...
+        
+resource:
+    label:
+        identifier: Identifiant
+        location: Emplacement de la ressource
+        quantity: Quantité de ressources
+        details: Détails de la ressource
+        borrowings: Emprunts en cours
+        cover: Couverture de la ressource

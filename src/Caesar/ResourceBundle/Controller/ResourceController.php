@@ -26,7 +26,6 @@ class ResourceController extends Controller {
         if (!$resource) {
             throw $this->createNotFoundException('Ressource non trouvée avec id ' . $id);
         }
-        
         return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array('resource' => $resource));
     }
 

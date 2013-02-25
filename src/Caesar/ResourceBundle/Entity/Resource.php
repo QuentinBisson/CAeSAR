@@ -5,6 +5,7 @@ namespace Caesar\ResourceBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\ResourceBundle\Entity\ResourceRepository")
@@ -28,6 +29,7 @@ class Resource {
 
     /**
      * @ORM\OneToOne(targetEntity="Caesar\TagBundle\Entity\Tag", mappedBy="resource")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
      * */
     private $tag;
 
@@ -35,6 +37,9 @@ class Resource {
      * @var int $code
      * 
      * @ORM\Column(name="code", type="bigint", unique=true)
+     * 
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
      */
     private $code;
 
@@ -42,6 +47,7 @@ class Resource {
      * @var int $description
      * 
      * @ORM\Column(name="description", type="string",length=255)
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -49,6 +55,8 @@ class Resource {
      * @var int $longDescription
      * 
      * @ORM\Column(name="longDescription", type="text")
+     * 
+     * @Assert\NotBlank()
      */
     private $longDescription;
 
@@ -56,6 +64,8 @@ class Resource {
      * @var int $quantity
      * 
      * @ORM\Column(name="quantity", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
      */
     private $quantity;
 
@@ -84,23 +94,23 @@ class Resource {
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Borrowing", mappedBy="resource")
      */
     private $borrowings;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\BorrowingArchive", mappedBy="resource")
      */
     private $borrowingArchives;
-    
-      /**
+
+    /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="resource")
      */
     private $reservations;
 
     function __construct() {
-        $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->reservation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->borrowings = new ArrayCollection();
+        $this->borrowingArchives = new ArrayCollection();
+        $this->reservation = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -279,10 +289,9 @@ class Resource {
      * @param \Caesar\UserBundle\Borrowing $borrowings
      * @return Resource
      */
-    public function addBorrowing(\Caesar\UserBundle\Borrowing $borrowings)
-    {
+    public function addBorrowing(\Caesar\UserBundle\Borrowing $borrowings) {
         $this->borrowings[] = $borrowings;
-    
+
         return $this;
     }
 
@@ -291,8 +300,7 @@ class Resource {
      *
      * @param \Caesar\UserBundle\Borrowing $borrowings
      */
-    public function removeBorrowing(\Caesar\UserBundle\Borrowing $borrowings)
-    {
+    public function removeBorrowing(\Caesar\UserBundle\Borrowing $borrowings) {
         $this->borrowings->removeElement($borrowings);
     }
 
@@ -301,8 +309,7 @@ class Resource {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBorrowings()
-    {
+    public function getBorrowings() {
         return $this->borrowings;
     }
 
@@ -312,10 +319,9 @@ class Resource {
      * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
      * @return Resource
      */
-    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
-    {
+    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives) {
         $this->borrowingArchives[] = $borrowingArchives;
-    
+
         return $this;
     }
 
@@ -324,8 +330,7 @@ class Resource {
      *
      * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
      */
-    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
-    {
+    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives) {
         $this->borrowingArchives->removeElement($borrowingArchives);
     }
 
@@ -334,8 +339,7 @@ class Resource {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBorrowingArchives()
-    {
+    public function getBorrowingArchives() {
         return $this->borrowingArchives;
     }
 
@@ -345,10 +349,9 @@ class Resource {
      * @param \Caesar\UserBundle\Entity\Reservation $reservations
      * @return Resource
      */
-    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
-    {
+    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations) {
         $this->reservations[] = $reservations;
-    
+
         return $this;
     }
 
@@ -357,8 +360,7 @@ class Resource {
      *
      * @param \Caesar\UserBundle\Entity\Reservation $reservations
      */
-    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
-    {
+    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations) {
         $this->reservations->removeElement($reservations);
     }
 
@@ -367,8 +369,8 @@ class Resource {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getReservations()
-    {
+    public function getReservations() {
         return $this->reservations;
     }
+
 }

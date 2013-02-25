@@ -1,0 +1,6 @@
+consultation:
+    text:
+        name: Last name
+        firstname: First name
+        borrowing:
+            date: Borrowing date

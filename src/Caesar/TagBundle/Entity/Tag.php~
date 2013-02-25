@@ -22,8 +22,7 @@ class Tag {
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Caesar\ResourceBundle\Entity\Resource", mappedBy="tag")
-     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Caesar\ResourceBundle\Entity\Resource", inversedBy="tag")
      * */
     private $resource;
 

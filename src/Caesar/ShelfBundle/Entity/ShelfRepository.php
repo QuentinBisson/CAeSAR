@@ -40,15 +40,15 @@ class ShelfRepository extends EntityRepository {
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllResourcesById($id)
-    {
+    public function findAllResourcesById($id) {
         return $this->getEntityManager()->createQueryBuilder()->select('r')
-                ->from('\Caesar\ResourceBundle\Entity\Resource', 'r')
-                ->where('r.shelf = :id')
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->getResult();
+                        ->from('\Caesar\ResourceBundle\Entity\Resource', 'r')
+                        ->where('r.shelf = :id')
+                        ->setParameter('id', $id)
+                        ->getQuery()
+                        ->getResult();
     }
+
 }
 
 ?>

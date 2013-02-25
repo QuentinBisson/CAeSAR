@@ -3,7 +3,7 @@ form {
 }
 
 form label {
-    width: 200px;
+    min-width: 200px;
     float: left;
     line-height: 35px;
 }

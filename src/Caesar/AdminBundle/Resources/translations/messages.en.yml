@@ -22,7 +22,13 @@ admin:
             skeleton: Edit the resources skeleton
     lang: 
         french: French
-        english: English            
+        english: English    
+    label:
+        location:
+            delete:
+                not:
+                    empty: You must first move the following resources to a new location before removing this location.
+                move: Move the resource
     menu:
         title:
             shelves:
@@ -47,6 +53,13 @@ admin:
             legend: Informations about the shelf
     button:
         logout: Log out
+        user:
+            add: Add the user
+            update: Update the user
+        shelf:
+            add: Add the location
+            update: Update the location
+            search: Search
     breadcrumb:
         shelves:
             add: Add

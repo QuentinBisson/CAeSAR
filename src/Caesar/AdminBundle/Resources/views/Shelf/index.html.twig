@@ -17,7 +17,7 @@
 <form action="{{ path('caesar_admin_shelf_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_rest(searchForm) }}
-        <input type="submit" value="Rechercher"/>
+        <input type="submit" value="{{'admin.button.shelf.search'|trans({})}}"/>
     </form>
     <section class="contentBody">        
      {% include 'CaesarAdminBundle:Shelf:list.html.twig' with {'shelves' : shelves, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
