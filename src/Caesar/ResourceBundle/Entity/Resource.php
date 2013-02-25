@@ -23,6 +23,7 @@ class Resource {
     /**
      * @ORM\ManyToOne(targetEntity="Caesar\ShelfBundle\Entity\Shelf", inversedBy="resources")
      * @ORM\JoinColumn(name="shelf_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      * */
     private $shelf;
 
@@ -35,6 +36,7 @@ class Resource {
      * @var int $code
      * 
      * @ORM\Column(name="code", type="bigint", unique=true)
+     * @Assert\NotBlank()
      */
     private $code;
 
@@ -42,6 +44,7 @@ class Resource {
      * @var int $description
      * 
      * @ORM\Column(name="description", type="string",length=255)
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -49,6 +52,7 @@ class Resource {
      * @var int $longDescription
      * 
      * @ORM\Column(name="longDescription", type="text")
+     * @Assert\NotBlank()
      */
     private $longDescription;
 
@@ -56,6 +60,7 @@ class Resource {
      * @var int $quantity
      * 
      * @ORM\Column(name="quantity", type="integer")
+     * @Assert\NotBlank()
      */
     private $quantity;
 
@@ -63,6 +68,7 @@ class Resource {
      * @var string $path
      * 
      * @ORM\Column(name="path", type="string",length=255)
+     * @Assert\NotBlank()
      */
     private $path;
 
@@ -77,6 +83,8 @@ class Resource {
 
     /**
      * @var string $url
+     * @Assert\Url()
+     * @Assert\Regex("/^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|png)$/")
      */
     private $url;
 
