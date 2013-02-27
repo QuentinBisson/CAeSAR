@@ -60,3 +60,11 @@ Pour lancer les tests, executez la commande
 	php -c app
 
 A la racine du projet.
+
+8) Module PHP
+-------------------------
+
+Pour l'upload de fichier, un validateur necessite l'activation du module 
+	php_fileInfo
+pour récuperer les types mimes des fichiers
+(dans wamp, c'est une extension php)
