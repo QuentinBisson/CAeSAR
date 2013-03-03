@@ -37,7 +37,7 @@ class BorrowingArchive {
      * @ORM\Column(name="borrowingDate", type="date")
      */
     private $borrowingDate;
-    
+
     /**
      * @var date $returnDate
      * 
@@ -70,17 +70,15 @@ class BorrowingArchive {
         return $this->borrowingDate;
     }
 
-
     /**
      * Set resource
      *
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Resource $resource = null)
-    {
+    public function setResource(\Caesar\ResourceBundle\Resource $resource = null) {
         $this->resource = $resource;
-    
+
         return $this;
     }
 
@@ -89,8 +87,7 @@ class BorrowingArchive {
      *
      * @return \Caesar\ResourceBundle\Resource 
      */
-    public function getResource()
-    {
+    public function getResource() {
         return $this->resource;
     }
 
@@ -100,10 +97,9 @@ class BorrowingArchive {
      * @param \Caesar\UserBundle\Entity\User $user
      * @return Borrowing
      */
-    public function setUser(\Caesar\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Caesar\UserBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
@@ -112,8 +108,7 @@ class BorrowingArchive {
      *
      * @return \Caesar\UserBundle\Entity\User 
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -123,10 +118,9 @@ class BorrowingArchive {
      * @param \DateTime $returnDate
      * @return BorrowingArchive
      */
-    public function setReturnDate($returnDate)
-    {
+    public function setReturnDate($returnDate) {
         $this->returnDate = $returnDate;
-    
+
         return $this;
     }
 
@@ -135,8 +129,8 @@ class BorrowingArchive {
      *
      * @return \DateTime 
      */
-    public function getReturnDate()
-    {
+    public function getReturnDate() {
         return $this->returnDate;
     }
+
 }

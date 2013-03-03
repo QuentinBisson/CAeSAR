@@ -53,3 +53,16 @@ img#resource-img{
 .resource-description {
     width: 40%;
 }
+
+#borrowing-user-label, #borrowing-resource-label {
+    border: 1px solid black;
+    padding: 0 5px;
+    vertical-align: baseline;
+}
+.borrowing-resource, .borrowing-user{
+     margin-top: 5px;
+} 
+
+.borrowing-resource {
+    margin-bottom: 5px;
+}

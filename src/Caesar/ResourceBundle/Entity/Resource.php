@@ -29,18 +29,10 @@ class Resource {
     private $shelf;
 
     /**
-     * @ORM\OneToOne(targetEntity="Caesar\TagBundle\Entity\Tag", mappedBy="resource")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
-     * */
-    private $tag;
-
-    /**
      * @var int $code
      * 
-     * @ORM\Column(name="code", type="bigint", unique=true)
-     * 
+     * @ORM\Column(name="code", type="string",length=20, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Regex("/^[0-9]*$/")
      */
     private $code;
 
@@ -292,7 +284,7 @@ class Resource {
      * @param \Caesar\UserBundle\Borrowing $borrowings
      * @return Resource
      */
-    public function addBorrowing(\Caesar\UserBundle\Borrowing $borrowings) {
+    public function addBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings) {
         $this->borrowings[] = $borrowings;
 
         return $this;
@@ -303,7 +295,7 @@ class Resource {
      *
      * @param \Caesar\UserBundle\Borrowing $borrowings
      */
-    public function removeBorrowing(\Caesar\UserBundle\Borrowing $borrowings) {
+    public function removeBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings) {
         $this->borrowings->removeElement($borrowings);
     }
 

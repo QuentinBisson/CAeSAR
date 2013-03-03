@@ -27,14 +27,15 @@
                     <li><a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.menu.title.shelves.list'|trans({})}}</a></li>
                 </ul>
             </li>
-            <li><a href="{{asset('#borrowing')}}">{{'admin.menu.title.borrowings.header'|trans({})}}</a>
+            <li><a href="{{path('caesar_admin_borrowing_homepage')}}">{{'admin.menu.title.borrowings.header'|trans({})}}</a>
                 <ul>
-
+                    <li><a href="{{path('caesar_admin_borrowing_homepage')}}">{{'admin.menu.title.borrowings.list'|trans({})}}</a></li>
                 </ul>
             </li>
-            <li><a href="{{asset('#tag')}}">{{'admin.menu.title.tags.header'|trans({})}}</a>
+            <li><a href="{{path('caesar_admin_tag_homepage')}}">{{'admin.menu.title.tags.header'|trans({})}}</a>
                 <ul>
-
+                    <li><a href="{{path('caesar_admin_tag_homepage')}}">{{'admin.menu.title.tags.list'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_tag_generate')}}">{{'admin.menu.title.tags.generate'|trans({})}}</a></li>
                 </ul>
             </li>
         </ul>

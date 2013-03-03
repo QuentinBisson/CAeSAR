@@ -220,12 +220,25 @@ p.sort-label {
     color: #555;
 }
 
-.notice {
-    background-color: green;
+.flash-notice {
+    background-color: #00FF66;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px solid rgb(87, 207, 87);
+    border-radius: 5px;
 }
 
-.error {
-    background-color: green;
+.flash-error {
+    background-color: rgb(255, 163, 163);
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px solid rgb(255, 118, 118);
+    border-radius: 5px;
+}
+
+.form-search-button {
+    margin-left: 200px;
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width:980px) and (min-width:480px) {

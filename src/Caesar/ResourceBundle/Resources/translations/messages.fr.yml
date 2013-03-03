@@ -4,3 +4,6 @@ consultation:
         firstname: Prénom
         borrowing:
             date: Date d'emprunt
+form:
+    resource:
+        choose: Choisissez un emplacement

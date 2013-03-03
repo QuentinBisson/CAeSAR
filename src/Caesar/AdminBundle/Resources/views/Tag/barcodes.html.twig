@@ -1,0 +1,7 @@
+{% for tag in tags %}
+    <div class="barcode">
+        <img src="{{asset(path('caesar_admin_tag_barcode') ~ '/' ~ tag.code)}}" alt="{{tag.code}}"/>
+        <br />
+        <span>{{tag.code}}</span>
+    </div>    
+{% endfor %}

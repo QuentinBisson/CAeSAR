@@ -134,8 +134,31 @@ class ResourceController extends Controller {
         }
 
         return $this->render('CaesarAdminBundle:Resource:update.html.twig', array(
-                    'form' => $form->createView(), 'resource' => $id
+                    'form' => $form->createView(), 'resource' => $resource, 'shelf' => $resource->getShelf()
                 ));
+    }
+
+    public function descriptionAction($id = 1) {
+        if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
+            $clean = $id;
+        } else {
+            throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        if (isset($clean)) {
+            $shelf = $em->getRepository('CaesarShelfBundle:Shelf')
+                    ->find($clean);
+        }
+        if (!$shelf) {
+            throw $this->createNotFoundException('Emplacement non trouvé avec id ' . $clean);
+        }
+
+        $request = $this->get('request');
+        if ($request->isXmlHttpRequest()) {
+            return $this->render("CaesarAdminBundle:Resource:shelfDescription.html.twig", array('shelf' => $shelf));
+        }
+        throw $this->createNotFoundException('Requete invalide');
     }
 
     public function deleteAction($id) {
@@ -184,11 +207,11 @@ class ResourceController extends Controller {
             $img_src_width = imagesx($img_src_resource);
             $img_src_height = imagesy($img_src_resource);
             $NouvelleLargeur = 140;
-            $Reduction = ( ($NouvelleLargeur * 100) /  $img_src_width);
+            $Reduction = ( ($NouvelleLargeur * 100) / $img_src_width);
             $NouvelleHauteur = ( ($img_src_height * $Reduction) / 100 );
-            $img_dst_resource = imagecreatetruecolor( $NouvelleLargeur, $NouvelleHauteur );
-            imagecopyresampled($img_dst_resource, $img_src_resource,0,0,0,0,$NouvelleLargeur,$NouvelleHauteur, $img_src_width,$img_src_height );
-            imagejpeg( $img_dst_resource, "resources/img/".$fileName);
+            $img_dst_resource = imagecreatetruecolor($NouvelleLargeur, $NouvelleHauteur);
+            imagecopyresampled($img_dst_resource, $img_src_resource, 0, 0, 0, 0, $NouvelleLargeur, $NouvelleHauteur, $img_src_width, $img_src_height);
+            imagejpeg($img_dst_resource, "resources/img/" . $fileName);
         }
     }
 

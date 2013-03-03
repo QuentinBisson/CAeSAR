@@ -4,3 +4,6 @@ consultation:
         firstname: First name
         borrowing:
             date: Borrowing date
+form:
+    resource:
+        choose: Choose an location

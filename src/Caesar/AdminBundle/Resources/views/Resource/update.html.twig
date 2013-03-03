@@ -7,11 +7,11 @@
 
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="0">
-        <a href="{{path('caesar_admin_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
-        <span class="divider">></span>
-    </li>
-    <li class="active"><span>{{'admin.breadcrumb.resources.update'|trans({})}}</span></li>
+<li data-header="0">
+    <a href="{{path('caesar_admin_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
+    <span class="divider">></span>
+</li>
+<li class="active"><span>{{'admin.breadcrumb.resources.update'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}
@@ -19,41 +19,47 @@
 {% endblock %}
 
 {% block contentBody %}
-    <form action="{{ path('caesar_admin_resource_update', {'id': resource}) }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('caesar_admin_resource_update', {'id': resource.id}) }}" method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
         <div class="left max-width">
             <div class="left half-width">
                 {{ form_row(form.code) }}
                 {{ form_row(form.description) }}
                 {{ form_row(form.quantity) }}
-                {{ form_row(form.shelf) }}    
+                {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
+                    <section class="shelf-description">
+                        {% if shelf is defined %}
+                            {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
+                        {% endif %}
+                    </section>
                 {{ form_row(form.local, { 'attr': {'id': 'local-file'} }) }}
                 {{ form_row(form.url) }}   
-                </div>
-                <div class="left half-width">
-                    <div>
-                        <input type="button" value="Rechercher les informations"/>
                     </div>
-                    <div class="left max-width">
-                        <img id="resource-img" src="" alt="Please, choose an image file"/>
+                    <div class="left half-width">
+                        <div>
+                            <input type="button" value="Rechercher les informations"/>
+                        </div>
+                        <div class="left max-width">
+                            <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="Please, choose an image file"/>
+                        </div>
                     </div>
-                </div>
-                <div class="clear"></div>
-                <div> 
-                    <div class="long-description">
+                    <div class="clear"></div>
+                    <div> 
+                        <div class="long-description">
                     {{ form_label(form.longDescription) }}
                     {{ form_errors(form.longDescription) }}
                     {{ form_widget(form.longDescription) }}
+                            </div>
+                            <input type="button" value="Réinitialiser le squelette"/>
+                            <input type="submit" value="Modifier la ressource"/>
                         </div>
-                        <input type="button" value="Réinitialiser le squelette"/>
-                        <input type="submit" value="Modifier la ressource"/>
-                    </div>
-                </div>  
+                    </div>  
         {{ form_row(form.path) }}
         {{ form_rest(form) }}
-            </form>
+            <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+                </form>
 {% endblock %}
 {% block javascripts %}
     {{parent()}}
-    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+        <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
 {% endblock %}	

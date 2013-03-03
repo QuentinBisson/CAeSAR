@@ -29,8 +29,30 @@ function handleFileSelect(evt) {
 
 document.getElementById('caesar_resourceBundle_resourceType_local').addEventListener('change', handleFileSelect, false);
 
-document.getElementById('caesar_resourceBundle_resourceType_url').addEventListener('keyup', function(){
+document.getElementById('apply-image').addEventListener('click', function(){
+    var a  = document.getElementById('caesar_resourceBundle_resourceType_url');
     var img = document.getElementById('resource-img');
-    img.src = this.value;
-    document.getElementById('caesar_resourceBundle_resourceType_path').value = this.value;
+    img.src = a.value;
+    document.getElementById('caesar_resourceBundle_resourceType_path').value = a.value;
 }, false);
+
+/* Pagination */
+$(document).ready(function() {
+     $("select.shelf-selection").change(function(e){
+         var url = $('.shelf-description-url').attr('value');
+         url += '/' + $(this).find(":selected").attr('value');
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            success: function(data){
+                $('.shelf-description').html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $('.shelf-description').html("");
+            }
+        });
+        e.preventDefault();
+        return false; // Empêche la redirection normale
+     });
+});

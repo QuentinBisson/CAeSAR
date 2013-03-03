@@ -1,0 +1,41 @@
+{% extends "CaesarAdminBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
+
+{% block breadCrumb%}
+    {{parent()}}
+    <li data-header="3" class="active"><span>{{'admin.breadcrumb.borrowings.list'|trans({})}}</span></li>
+{% endblock %}
+
+{% block contentTitle %}{{'admin.title.borrowings.list'|trans({})}}{% endblock %}
+
+{% block contentBody %}
+<form action="{{ path('caesar_admin_borrowing_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+        {{ form_errors(searchForm) }}
+        {{ form_row(searchForm.archived) }}
+        <br/>
+        <!--
+        {#{ form_row(searchForm.user, { 'attr': {'class': 'borrowing-user-value'} }) }#}
+        <label class="borrowing-user" id="borrowing-user-label">A user</label>
+        <input class="borrowing-user" type="button" value="Browse users ..."/>
+        <br/>
+        {#{ form_row(searchForm.resource, { 'attr': {'class': 'borrowing-resource-value'} }) }#}
+        <label class="borrowing-resource" id="borrowing-resource-label">A resource</label>
+        <input class="borrowing-resource" type="button" value="Browse resources ..."/>
+        -->
+        {{ form_rest(searchForm) }}
+        <br/>
+        <input type="submit" value="Rechercher" class="form-search-button"/>
+    </form>
+    <section class="contentBody">        
+     {% include 'CaesarAdminBundle:Borrowing:list.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
+    </section>
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+        <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+{% endblock %}

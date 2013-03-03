@@ -9,6 +9,18 @@ caesar_admin_resource_homepage:
         page:  \d+
         direction: asc|desc
 
+caesar_admin_resource_description:
+    pattern:  /resource/description/{id}
+    defaults: { _controller: CaesarAdminBundle:Resource:description, id = 1}
+    requirements:
+        shelf_id:  \d+
+
+caesar_admin_borrowing_homepage:
+    pattern:  /borrowing/{page}/{sort}/{direction}/{user}/{resource}
+    defaults: { _controller: CaesarAdminBundle:Borrowing:index, page:1, sort:'id', direction:'asc', user:null, resource:null}
+    requirements:
+        shelf_id:  \d+
+
 caesar_admin_logout:
     pattern:  /logout
     defaults: { _controller: CaesarUserBundle:User:logout }
@@ -78,4 +90,24 @@ caesar_admin_shelf_delete:
     defaults: { _controller: CaesarAdminBundle:Shelf:delete}
     requirements:
         id:  \d+
+
+caesar_admin_tag_homepage:
+    pattern:  /tag/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Tag:index, page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc
+
+caesar_admin_tag_generate:
+    pattern:  /tag/generate
+    defaults: { _controller: CaesarAdminBundle:Tag:generate}
         
+caesar_admin_tag_delete:
+    pattern:  /tag/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:Tag:delete }
+    requirements:
+        id:  \d+
+        
+caesar_admin_tag_barcode:
+    pattern:  /tag/barcode/{text}
+    defaults: { _controller: CaesarAdminBundle:Tag:barcode, text:'' }

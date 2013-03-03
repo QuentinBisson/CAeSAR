@@ -8,8 +8,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\TagBundle\Entity\TagRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tag")
- * @UniqueEntity("code")
  */
 class Tag {
 
@@ -22,14 +22,8 @@ class Tag {
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Caesar\ResourceBundle\Entity\Resource", inversedBy="tag")
-     * */
-    private $resource;
-
-    /**
-     * @var int $codeBu
-     * 
-     * @ORM\Column(name="code", type="integer",length=10, unique=true)
+     * @var  $codeBu
+     * @ORM\Column(name="code", type="string",length=20, nullable=true)
      */
     private $code;
 
@@ -40,14 +34,17 @@ class Tag {
      */
     private $creationDate;
 
+    /** @ORM\PrePersist */
+    public function onPrePersist() {
+        $this->creationDate = new \DateTime("now");
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -57,10 +54,9 @@ class Tag {
      * @param integer $code
      * @return Tag
      */
-    public function setCode($code)
-    {
+    public function setCode($code) {
         $this->code = $code;
-    
+
         return $this;
     }
 
@@ -69,8 +65,7 @@ class Tag {
      *
      * @return integer 
      */
-    public function getCode()
-    {
+    public function getCode() {
         return $this->code;
     }
 
@@ -80,10 +75,9 @@ class Tag {
      * @param \DateTime $creationDate
      * @return Tag
      */
-    public function setCreationDate($creationDate)
-    {
+    public function setCreationDate($creationDate) {
         $this->creationDate = $creationDate;
-    
+
         return $this;
     }
 
@@ -92,8 +86,7 @@ class Tag {
      *
      * @return \DateTime 
      */
-    public function getCreationDate()
-    {
+    public function getCreationDate() {
         return $this->creationDate;
     }
 
@@ -103,10 +96,9 @@ class Tag {
      * @param \Caesar\ResourceBundle\Entity\Resource $resource
      * @return Tag
      */
-    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null)
-    {
+    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null) {
         $this->resource = $resource;
-    
+
         return $this;
     }
 
@@ -115,8 +107,8 @@ class Tag {
      *
      * @return \Caesar\ResourceBundle\Entity\Resource 
      */
-    public function getResource()
-    {
+    public function getResource() {
         return $this->resource;
     }
+
 }
