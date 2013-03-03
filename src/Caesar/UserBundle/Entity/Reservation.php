@@ -48,7 +48,7 @@ class Reservation {
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Resource $resource = null)
+    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null)
     {
         $this->resource = $resource;
     
