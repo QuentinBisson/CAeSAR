@@ -34,26 +34,26 @@ class UserTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals("mail", $data);
 	}
 	
-	public function testConfirmMotDePasse() {
+	public function testConfirmPassword() {
 		$user = new User();
-		$user->setConfirmMotDePasse("john");
-		$data = $user->getConfirmMotDePasse();
+		$user->setConfirmPassword("john");
+		$data = $user->getConfirmPassword();
 	
 		$this->assertEquals("john", $data);
 	}
 	
-	public function testMotDePasse() {
+	public function testPassword() {
 		$user = new User();
-		$user->setMotDePasse("john");
-		$data = $user->getMotDePasse();
+		$user->setPassword("john");
+		$data = $user->getPassword();
 	
 		$this->assertEquals("john", $data);
 	}
 	
-	public function testNom() {
+	public function testName() {
 		$user = new User();
-		$user->setNom("john");
-		$data = $user->getNom();
+		$user->setName("john");
+		$data = $user->getName();
 	
 		$this->assertEquals("john", $data);
 	}
