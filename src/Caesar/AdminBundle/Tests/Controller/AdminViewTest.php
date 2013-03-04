@@ -12,6 +12,9 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/admin');
 
-        $this->assertTrue($crawler->filter('html:contains("Administration")')->count() > 0);
+                file_put_contents("toto.txt", $client->getResponse()->getContent());
+
+
+        $this->assertTrue($crawler->filter('html:contains("administration")')->count() > 0);
     }
 }
