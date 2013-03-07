@@ -114,7 +114,7 @@ class ShelfController extends Controller {
                 $this->get('session')->getFlashBag()->add(
                         'notice', 'L\'emplacement ' . $shelf->getName() . ' a été modifié.'
                 );
-                $this->redirect($this->generateUrl('caesar_admin_shelf_homepage'));
+                return $this->redirect($this->generateUrl('caesar_admin_shelf_homepage'));
             }
         }
 

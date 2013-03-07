@@ -48,7 +48,6 @@ class Resource {
      * @var int $longDescription
      * 
      * @ORM\Column(name="longDescription", type="text")
-     * @Assert\NotBlank()
      */
     private $longDescription;
 

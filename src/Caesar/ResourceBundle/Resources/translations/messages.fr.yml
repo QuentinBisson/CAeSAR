@@ -7,3 +7,7 @@ consultation:
 form:
     resource:
         choose: Choisissez un emplacement
+    borrowing:
+        type:
+            label:
+                archived: Emprunts archivés

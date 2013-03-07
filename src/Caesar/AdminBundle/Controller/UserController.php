@@ -115,7 +115,7 @@ class UserController extends Controller {
                     $this->get('session')->getFlashBag()->add(
                             'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'
                     );
-                    $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
+                    return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
                 } else {
                     $this->get('session')->getFlashBag()->add(
                             'erreur', 'Le mot de passe ne peut pas être vide.'

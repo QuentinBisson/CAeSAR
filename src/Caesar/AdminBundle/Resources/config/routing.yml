@@ -93,7 +93,7 @@ caesar_admin_shelf_delete:
 
 caesar_admin_tag_homepage:
     pattern:  /tag/{page}/{sort}/{direction}
-    defaults: { _controller: CaesarAdminBundle:Tag:index, page:1, sort:'id', direction:'asc'}
+    defaults: { _controller: CaesarAdminBundle:Tag:index, page:1, sort:'code', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc

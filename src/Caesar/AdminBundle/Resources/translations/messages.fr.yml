@@ -46,8 +46,11 @@ admin:
                 skeleton: Modifier le squelette
             tags:
                 header: Étiquettes
+                list: Lister les étiquettes à affecter
+                generate: Générer une nouvelle planche d'étiquettes
             borrowings:
                 header: Emprunts
+                list: Lister les emprunts
     fieldset:
         shelves:
             legend: Informations sur l'emplacement
@@ -79,12 +82,8 @@ admin:
             skeleton: Squelette
         tags:
             add:
-            update:
             delete:
             list: Etiquette
         borrowings:
-            add:
-            update:
-            delete:
             list: Emprunts
             

@@ -2,9 +2,13 @@
 
 namespace Caesar\UserBundle\Entity;
 
+use Caesar\ResourceBundle\Entity\Resource;
+use Caesar\UserBundle\Entity\Borrowing;
+use Caesar\UserBundle\Entity\BorrowingArchive;
+use Caesar\UserBundle\Entity\User;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\BorrowingArchiveRepository")
  * @ORM\Table(name="borrowingArchive"),
@@ -52,7 +56,7 @@ class BorrowingArchive {
     /**
      * Set borrowingDate
      *
-     * @param \DateTime $borrowingDate
+     * @param DateTime $borrowingDate
      * @return Borrowing
      */
     public function setBorrowingDate($borrowingDate) {
@@ -64,7 +68,7 @@ class BorrowingArchive {
     /**
      * Get borrowingDate
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getBorrowingDate() {
         return $this->borrowingDate;
@@ -76,7 +80,7 @@ class BorrowingArchive {
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null) {
+    public function setResource(Resource $resource = null) {
         $this->resource = $resource;
 
         return $this;
@@ -94,10 +98,10 @@ class BorrowingArchive {
     /**
      * Set user
      *
-     * @param \Caesar\UserBundle\Entity\User $user
+     * @param User $user
      * @return Borrowing
      */
-    public function setUser(\Caesar\UserBundle\Entity\User $user = null) {
+    public function setUser(User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -106,7 +110,7 @@ class BorrowingArchive {
     /**
      * Get user
      *
-     * @return \Caesar\UserBundle\Entity\User 
+     * @return User 
      */
     public function getUser() {
         return $this->user;
@@ -115,7 +119,7 @@ class BorrowingArchive {
     /**
      * Set returnDate
      *
-     * @param \DateTime $returnDate
+     * @param DateTime $returnDate
      * @return BorrowingArchive
      */
     public function setReturnDate($returnDate) {
@@ -127,7 +131,7 @@ class BorrowingArchive {
     /**
      * Get returnDate
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getReturnDate() {
         return $this->returnDate;

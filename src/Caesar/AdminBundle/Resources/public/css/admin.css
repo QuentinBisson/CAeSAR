@@ -1,3 +1,9 @@
+.limit-resource-mining{
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
 .codeBu { 
     width:10%;
 }
@@ -50,8 +56,8 @@ img#resource-img{
     width: 20%;
 }
 
-.resource-description {
-    width: 40%;
+.resource-quantity {
+    width:20%;
 }
 
 #borrowing-user-label, #borrowing-resource-label {
@@ -59,10 +65,15 @@ img#resource-img{
     padding: 0 5px;
     vertical-align: baseline;
 }
-.borrowing-resource, .borrowing-user{
-     margin-top: 5px;
-} 
 
-.borrowing-resource {
-    margin-bottom: 5px;
+.borrowing-user {
+    width: 30%;
+}
+
+.borrowing-date, .borrowing-return {
+    width: 15%;
+}
+
+.borrowing-return {
+    margin-bottom: 6px;
 }

@@ -7,3 +7,7 @@ consultation:
 form:
     resource:
         choose: Choose an location
+    borrowing:
+        type:
+            label:
+                archived: Archived borrowings

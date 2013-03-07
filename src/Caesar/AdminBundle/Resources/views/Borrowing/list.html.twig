@@ -10,7 +10,7 @@
             <th{% if 'borrowingDate' == sort %} class="sorted borrowing-date"{% else %} class = "borrowing-date" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.date'|trans({}), 'page': page, 'sort': 'borrowingDate'}  %}
             </th>
-            <th class = "borrowing-return-date">
+            <th class = "borrowing-return">
                 <p class="sort-label">
                     {{ 'table.title.borrowings.return.date'|trans({}) }}
                 </p>

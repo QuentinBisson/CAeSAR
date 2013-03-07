@@ -31,10 +31,19 @@ document.getElementById('caesar_resourceBundle_resourceType_local').addEventList
 
 document.getElementById('apply-image').addEventListener('click', function(){
     var a  = document.getElementById('caesar_resourceBundle_resourceType_url');
+    eraseLocal();
     var img = document.getElementById('resource-img');
     img.src = a.value;
     document.getElementById('caesar_resourceBundle_resourceType_path').value = a.value;
 }, false);
+
+function eraseLocal(){
+    document.getElementById("caesar_resourceBundle_resourceType_local").value="";
+}
+function eraseURL(){
+    document.getElementById("caesar_resourceBundle_resourceType_url").value="";
+}
+document.getElementById("caesar_resourceBundle_resourceType_local").addEventListener('click', eraseURL);
 
 /* Pagination */
 $(document).ready(function() {

@@ -55,6 +55,12 @@ table:
             shelf:
                 name: Nom de l'emplacement
             quantity: Quantité enregistrée
+        borrowings:
+            user: Utilisateur
+            resource: Ressource empruntée
+            date: Date d'emprunt
+            return:
+                date: Date de retour
     sort:
         down: Trier vers le bas
         up: Trier vers le haut

@@ -21,7 +21,7 @@
          {% for tag in tags %}
             <tr>
                 <td>{{ tag.code }}</td>
-                <td>{{ tag.creationDate }}</td>
+                <td>{{ tag.creationDate|date('d/m/Y') }}</td>
                 <td>
                     <a href="{{path('caesar_admin_tag_delete', {'id':tag.id})}}">
                         <i class="icon-remove"></i>

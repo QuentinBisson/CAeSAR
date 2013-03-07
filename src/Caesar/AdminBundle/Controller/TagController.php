@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TagController extends Controller {
 
-    public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
+    public function indexAction($page = 1, $sort = 'code', $direction = 'asc') {
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $em = $this->getDoctrine()->getManager();
 
@@ -69,7 +69,7 @@ class TagController extends Controller {
     }
 
     public function barcodeAction($text) {
-        $size = "60";
+        $size = "80";
         $code_string = "";
 
         $chksum = 104;
@@ -88,14 +88,14 @@ class TagController extends Controller {
 
 
         // Pad the edges of the barcode
-        $code_length = 20;
+        $code_length = 10;
         for ($i = 1; $i <= strlen($code_string); $i++)
             $code_length = $code_length + (integer) (substr($code_string, ($i - 1), 1));
 
-        $img_width = $code_length;
+        $img_width = 2 * $code_length;
         $img_height = $size;
 
-        $image = imagecreate($img_width, $img_height);
+        $image = imagecreate($img_width + 10, $img_height);
         $black = imagecolorallocate($image, 0, 0, 0);
         $white = imagecolorallocate($image, 255, 255, 255);
 
@@ -103,15 +103,14 @@ class TagController extends Controller {
 
         $location = 10;
         for ($position = 1; $position <= strlen($code_string); $position++) {
-            $cur_size = $location + ( substr($code_string, ($position - 1), 1) );
-            imagefilledrectangle($image, $location, 0, $cur_size, $img_height, ($position % 2 == 0 ? $white : $black));
+            $cur_size = $location + 2 * ( substr($code_string, ($position - 1), 1) );
+            imagefilledrectangle($image, $location, 0,  $cur_size, $img_height, ($position % 2 == 0 ? $white : $black));
             $location = $cur_size;
         }
-        // Draw barcode to the screen
-        header('Content-type: image/png');
 
-        imagepng($image);
-        $r = new Response($image);
+        imagejpeg($image);
+        $r = new Response();
+        $r->headers->set('Content-Type', 'image/png');
         imagedestroy($image);
         return $r;
     }

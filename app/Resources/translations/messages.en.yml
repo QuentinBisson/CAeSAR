@@ -54,6 +54,12 @@ table:
             shelf:
                 name: Location's name
             quantity: Registered quantity
+        borrowings:
+            user: User
+            resource: Borrowed resource
+            date: Borrowing date
+            return:
+                date: Return date
     sort:
         down: Sort down
         up: Sort up

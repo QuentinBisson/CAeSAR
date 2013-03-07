@@ -20,69 +20,58 @@
 
 {% block contentBody %}
 <form action="{{ path('caesar_admin_resource_add') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        <div class="left max-width">
-            
-                <div class="left max-width" style="border-bottom:2px solid #111;">
-                    <div style="display:inline-block;">
-                        {{ form_row(form.code)}}
-                    </div>
-                    <div style="display:inline-block;margin-left:250px;">
-                        <input type="button" value="Rechercher les informations"/>
-                    </div>
+    {{ form_errors(form) }}
+    <div class="left max-width">
+
+            <div class="left limit-resource-mining">
+                <div class="left half-width">
+                    {{ form_label(form.code) }}
+                    {{ form_errors(form.code) }}
+                    {{ form_widget(form.code) }}
                 </div>
-                
-                <div class="left half-width" style="min-width: 500px;">
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.quantity) }}
-                    {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}    
-                        <section class="shelf-description">
-                            {% if shelf is defined %}
-                                {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
-                            {% endif %}
-                        </section>
-                    {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
-                    <div>
-                        {{ form_label(form.url) }}
-                        {{ form_errors(form.url) }}
-                        {{ form_widget(form.url) }}
-                       <input type="button" id="apply-image" value="Appliquer"/>
-                    </div>
-                    
-                </div>
-                 <div class="right" style="width: 40%;">
-                    <img id="resource-img" src="" alt="Please, choose an image file"/>
-                </div>
-                <div class="clear"></div>
-                <div> 
-                    <div class="long-description">
-                        {{ form_row(form.longDescription) }}
-                    </div>
-                    <input type="button" value="Réinitialiser le squelette"/>
-                    <input type="submit" value="Enregistrer la ressource"/>
+                <div class="right half-width">
+                    <input type="button" value="Rechercher les informations"/>
                 </div>
             </div>
+            <div class="clear"></div>
+
+            <div class="left half-width">
+                {{ form_row(form.description) }}
+                {{ form_row(form.quantity) }}
+                {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}    
+                    <section class="shelf-description">
+                        {% if shelf is defined %}
+                            {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
+                        {% endif %}
+                    </section>
+                {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
+                <div>
+                    {{ form_label(form.url) }}
+                    {{ form_errors(form.url) }}
+                    {{ form_widget(form.url) }}
+                   <input type="button" id="apply-image" value="Appliquer"/>
+                </div>
+
+            </div>
+             <div class="right half-width">
+                <img id="resource-img" src="" alt="Please, choose an image file"/>
+            </div>
+            <div class="clear"></div>
+            <div> 
+                <div class="long-description">
+                    {{ form_row(form.longDescription) }}
+                </div>
+                <input type="button" value="Réinitialiser le squelette"/>
+                <input type="submit" value="Enregistrer la ressource"/>
+            </div>
+        </div>
 
         {{ form_row(form.path) }}
         {{ form_rest(form) }}
-            <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
-            </form>
+        <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+    </form>
 {% endblock %}
     {% block javascripts %}
 {{parent()}}
-            <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
-            <script type="text/javascript">
-                
-                
-                   function eraseLocal(){
-                       document.getElementById("caesar_resourceBundle_resourceType_local").value="";
-                    }
-                    
-                    function eraseURL(){
-                        document.getElementById("caesar_resourceBundle_resourceType_url").value="";
-                     }
-                     
-                     document.getElementById("caesar_resourceBundle_resourceType_local").addEventListener('click', eraseURL);
-                     document.getElementById("caesar_resourceBundle_resourceType_url").addEventListener('focus', eraseLocal);
-            </script> 
+<script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
 {% endblock %}	

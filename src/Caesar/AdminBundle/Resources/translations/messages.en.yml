@@ -46,8 +46,11 @@ admin:
                 skeleton: Edit skeleton
             tags:
                 header: Tags
+                list: List tags to use
+                generate: Generate new tags
             borrowings:
                 header: Borrowings
+                list: List borrowings
     fieldset:
         shelves:
             legend: Informations about the shelf
@@ -79,12 +82,8 @@ admin:
             skeleton: Skeleton
         tags:
             add:
-            update:
             delete:
             list: Tags
         borrowings:
-            add:
-            update:
-            delete:
             list: Borrowings
             
