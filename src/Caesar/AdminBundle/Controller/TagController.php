@@ -48,28 +48,34 @@ class TagController extends Controller {
     public function generateAction() {
 
         $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('CaesarTagBundle:Tag');
-        
+
         $request = $this->get('request');
-       
         if ($request->isXmlHttpRequest()) {
             $tags = array();
-            for ($i = 0; $i < 12; $i++) {
+            for ($i = 0; $i < 15; $i++) {
                 $tag = new Tag();
                 $em->persist($tag);
                 $em->flush();
-                $tag->setCode('CAeSAR-' . $tag->getId());
-                $em->flush();
                 array_push($tags, $tag);
+            }
+            foreach ($tags as $tag) {
+                $idToString = "" . $tag->getId();
+                $zerosToAdd = 10 - strlen($idToString);
+                $code = 'CAeSAR-';
+                for ($i = 0; $i < $zerosToAdd; $i++) {
+                    $code .= "0";
+                }
+                $tag->setCode($code . $tag->getId());
+                $em->flush();
             }
             return $this->render("CaesarAdminBundle:Tag:barcodes.html.twig", array('tags' => $tags));
         }
-        
+
         return $this->render('CaesarAdminBundle:Tag:generate.html.twig');
     }
 
     public function barcodeAction($text) {
-        $size = "80";
+        $size = "40";
         $code_string = "";
 
         $chksum = 104;
@@ -103,8 +109,8 @@ class TagController extends Controller {
 
         $location = 10;
         for ($position = 1; $position <= strlen($code_string); $position++) {
-            $cur_size = $location + 2 * ( substr($code_string, ($position - 1), 1) );
-            imagefilledrectangle($image, $location, 0,  $cur_size, $img_height, ($position % 2 == 0 ? $white : $black));
+            $cur_size = $location + (substr($code_string, ($position - 1), 1) );
+            imagefilledrectangle($image, $location, 0, $cur_size, $img_height, ($position % 2 == 0 ? $white : $black));
             $location = $cur_size;
         }
 

@@ -108,6 +108,7 @@ class ResourceController extends Controller {
 
         return $this->render('CaesarAdminBundle:Resource:add.html.twig', array(
                     'form' => $form->createView(),
+                    'resource'=> $resource
                 ));
     }
 
@@ -153,6 +154,7 @@ class ResourceController extends Controller {
                 }
                 $resource->setPath($newFileName);
 
+                //TODO check ISBN validator. Un bug sur 978-2749917474
                 if ($this->checkCode($resource->getCode())) {
                     $em->flush();
                     $this->get('session')->getFlashBag()->add(
@@ -282,7 +284,7 @@ class ResourceController extends Controller {
         } else {
             //On enlève les tirets au cas où
            $code = str_replace('-', '', $code);
-            return $this->checkISBN($code);
+           return $this->checkISBN($code);
         }
     }
 

@@ -61,6 +61,9 @@ table:
             date: Date d'emprunt
             return:
                 date: Date de retour
+        tags:
+            code: Code ISBN-10, ISBN-13 ou CAeSAR-xxx
+            creationDate: Date de création
     sort:
         down: Trier vers le bas
         up: Trier vers le haut

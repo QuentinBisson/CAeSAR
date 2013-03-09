@@ -20,6 +20,12 @@ admin:
             delete: Delete a resource
             list: List resources
             skeleton: Edit the resources skeleton
+        borrowings:
+            list: List borrowings
+        tags:
+            list: List tags
+            generate: Generate new tags
+            delete: Delete a tag
     lang: 
         french: French
         english: English    
@@ -81,8 +87,8 @@ admin:
             list: Resources
             skeleton: Skeleton
         tags:
-            add:
-            delete:
+            generate: Generate
+            delete: Delete
             list: Tags
         borrowings:
             list: Borrowings

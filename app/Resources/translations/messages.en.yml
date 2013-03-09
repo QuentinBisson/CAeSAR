@@ -60,6 +60,9 @@ table:
             date: Borrowing date
             return:
                 date: Return date
+        tags:
+            code: ISBN-10, ISBN-13 or CAeSAR-xxx code 
+            creationDate: Creation date
     sort:
         down: Sort down
         up: Sort up

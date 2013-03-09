@@ -20,6 +20,12 @@ admin:
             delete: Supprimer une ressource
             list: Lister les ressources
             skeleton: Modifier le squelette d'une ressource
+        borrowings:
+            list: Lister les emprunts
+        tags:
+            list: Lister les étiquettes
+            generate: Générer de nouvelles étiquettes
+            delete: Supprimer une étiquette
     lang: 
         french: Français
         english: Anglais
@@ -46,8 +52,8 @@ admin:
                 skeleton: Modifier le squelette
             tags:
                 header: Étiquettes
-                list: Lister les étiquettes à affecter
-                generate: Générer une nouvelle planche d'étiquettes
+                list: Lister les étiquettes
+                generate: Générer des étiquettes
             borrowings:
                 header: Emprunts
                 list: Lister les emprunts
@@ -81,8 +87,8 @@ admin:
             list: Ressources
             skeleton: Squelette
         tags:
-            add:
-            delete:
+            generate: Générer
+            delete: Supprimer
             list: Etiquette
         borrowings:
             list: Emprunts

@@ -2,11 +2,10 @@
 
 namespace Caesar\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Caesar\UserBundle\Entity\User;
 use Caesar\UserBundle\Form\UserType;
 use Caesar\UserBundle\Form\UserUpdateType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Description of UserController

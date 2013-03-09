@@ -12,7 +12,7 @@ caesar_client_login:
 
 caesar_client_login_check:
     pattern: /login_check
-
+    
 caesar_client_register:
     pattern:  /register
     defaults: { _controller: "CaesarUserBundle:User:register" }

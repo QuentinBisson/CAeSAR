@@ -1,5 +1,10 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
+
 {% block breadCrumb%}
     {{parent()}}
 <li data-header="4">
@@ -17,14 +22,11 @@
 <section class="contentBody">
     <input type="hidden" value="{{path('caesar_admin_tag_generate')}}" id="generator-url"/>
     <input type="button" value="Générer les codes barres" id="generator"/>
-   
-    <div class="colonnes">
-    
-    </div>
-    </section>
+    <div class="colonnes"></div>
+</section>
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
-        <script type="text/javascript" src="{{ asset('js/barcodes.js') }}" ></script>
+<script type="text/javascript" src="{{ asset('js/barcodes.js') }}" ></script>
 {% endblock %}

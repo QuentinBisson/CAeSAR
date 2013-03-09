@@ -10,7 +10,7 @@
 {% endif %}
 
 <form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post">
-    <label for="username">{{ 'user.login.label.username'|trans({}, 'CaesarUserBundle') }}</label>
+    <label for="_username">{{ 'user.login.label.username'|trans({}, 'CaesarUserBundle') }}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
     {#

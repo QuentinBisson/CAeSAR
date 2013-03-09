@@ -1,9 +1,11 @@
 .limit-resource-mining{
     width: 100%;
     margin-bottom: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ccc;
 }
-
+input[type="button"]#generator {
+    margin-left: 50px;
+}
 .codeBu { 
     width:10%;
 }
@@ -74,6 +76,10 @@ img#resource-img{
     width: 15%;
 }
 
-.borrowing-return {
+.borrowing-return p.sort-label {
     margin-bottom: 6px;
+}
+
+.tag-creationDate {
+    width: 25%;
 }

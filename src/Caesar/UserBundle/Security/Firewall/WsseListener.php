@@ -1,58 +1,39 @@
 <?php
+
 // src/Caesar/UserBundle/Security/Firewall/WsseListener.php
+
 namespace Caesar\UserBundle\Security\Firewall;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Http\Firewall\ListenerInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-
 use Caesar\UserBundle\Security\Authentication\Token\WsseUserToken;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
+use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler;
+use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
+use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterface;
 
-class WsseListener implements ListenerInterface
-{
-    protected $securityContext;
-    protected $authenticationManager;
+class WsseListener extends AbstractAuthenticationListener {
 
-    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
-    {
-        $this->securityContext = $securityContext;
-        $this->authenticationManager = $authenticationManager;
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $httpKernel, $options = array()) {
+        parent::__construct(
+                $securityContext, $authenticationManager, $sessionStrategy, $httpUtils, "caesar", new DefaultAuthenticationSuccessHandler($httpUtils, $options), new DefaultAuthenticationFailureHandler($httpKernel, $httpUtils, $options), array_merge(
+                        array(
+                    'username_parameter' => 'username',
+                    'intention' => 'authenticate',
+                    'post_only' => true
+                        ), $options));
     }
 
-    public function handle(GetResponseEvent $event)
-    {
-        $request = $event->getRequest();
-        $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
-        if (!$request->headers->has('x-wsse') || 1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
-            return;
+    protected function attemptAuthentication(Request $request) {
+        $matches = explode("=", $request->getContent());
+        if (count($matches) != 2 || $matches[0] !== "_username") {
+            return null;
         }
-
         $token = new WsseUserToken();
         $token->setUser($matches[1]);
-
-        $token->digest   = $matches[2];
-        $token->nonce    = $matches[3];
-        $token->created  = $matches[4];
-
-        try {
-            $authToken = $this->authenticationManager->authenticate($token);
-
-            $this->securityContext->setToken($authToken);
-        } catch (AuthenticationException $failed) {
-            // ... you might log something here
-
-            // To deny the authentication clear the token. This will redirect to the login page.
-            // $this->securityContext->setToken(null);
-            // return;
-
-            // Deny authentication with a '403 Forbidden' HTTP response
-            $response = new Response();
-            $response->setStatusCode(403);
-            $event->setResponse($response);
-
-        }
+        return $this->authenticationManager->authenticate($token);
     }
+
 }
