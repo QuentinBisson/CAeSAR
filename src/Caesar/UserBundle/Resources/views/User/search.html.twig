@@ -1,16 +1,27 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+{% endblock %}
+
 {% block bodyTitle %}
 <h1>{{ 'search.title'|trans({}, 'CaesarUserBundle') }}</h1>
 {% endblock %}
 
 {% block body %}
 <section id="search-form">
-    <form action="#" method="post">
-        <input type="text" name="search_form_text" placeholder="{{ 'form.search.placeholder'|trans({}, 'CaesarUserBundle') }}">
+    <form action="{{ path('caesar_client_search') }}" method="post" {{ form_enctype(searchForm) }}>
+        {{ form_errors(searchForm) }}
+        {{ form_widget(searchForm.keywords, { 'attr': {'placeholder': 'form.search.placeholder'|trans({}, 'CaesarUserBundle'), 'class': 'form-text'} }) }}
+        {{ form_rest(searchForm) }}
         <div class="search-form-actions">
-                <input type="submit" name="rechercher" value="{{ 'form.search.search'|trans({}, 'CaesarUserBundle') }}">
+            <input type="submit" name="rechercher" value="{{ 'form.search.search'|trans({}, 'CaesarUserBundle') }}">
         </div>
     </form>
+        <section class="contentBody">        
+            {% include 'CaesarUserBundle:User:resourcesSearchList.html.twig' with {'resources' : resources, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
+        </section>
+
 </section>
 {% endblock %}

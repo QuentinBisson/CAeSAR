@@ -1,7 +1,5 @@
 <?php
 
-// src/Caesar/UserBundle/Security/Firewall/WsseListener.php
-
 namespace Caesar\UserBundle\Security\Firewall;
 
 use Caesar\UserBundle\Security\Authentication\Token\WsseUserToken;

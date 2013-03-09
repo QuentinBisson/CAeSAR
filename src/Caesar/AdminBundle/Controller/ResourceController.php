@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ResourceController extends Controller {
 
     public function indexAction($page = 1, $sort = 'code', $direction = 'asc') {
-
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $searchForm = $this->createForm(new ResourceSearchType());
         $keywords = null;

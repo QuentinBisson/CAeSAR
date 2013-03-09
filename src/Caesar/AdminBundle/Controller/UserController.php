@@ -57,7 +57,7 @@ class UserController extends Controller {
             $form->bind($request);
             if ($form->isValid()) {
                 $user = $form->getData();
-                $user->setRole('USER');
+                $user->setRole('ROLE_USER');
                 $plainPassword = $user->getPlainPassword();
                 if (!empty($plainPassword)) {
                     $encoder = $this->get('security.encoder_factory')->getEncoder($user);

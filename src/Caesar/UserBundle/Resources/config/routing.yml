@@ -3,8 +3,11 @@ caesar_client_homepage:
     defaults: { _controller: "CaesarUserBundle:User:index" }
 
 caesar_client_search:
-    pattern:  /search
-    defaults: { _controller: "CaesarUserBundle:User:search" }
+    pattern:  /search/{page}/{sort}/{direction}
+    defaults: { _controller: "CaesarUserBundle:User:search", page:1, sort:'code', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc
 
 caesar_client_login:
     pattern:  /login
