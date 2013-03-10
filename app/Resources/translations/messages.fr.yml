@@ -4,6 +4,7 @@ client:
         inscription: Inscription
         search_form:
             placeholder: Rechercher ...
+            title: Rechercher une ressource
 form:
     user:
         type:

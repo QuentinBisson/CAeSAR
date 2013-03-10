@@ -4,6 +4,7 @@ client:
         inscription: Register
         search_form:
             placeholder: Search ...
+            title: Search a resource
     user:
         type:
             label:
