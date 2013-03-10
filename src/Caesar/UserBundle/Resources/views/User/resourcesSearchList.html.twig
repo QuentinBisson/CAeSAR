@@ -7,15 +7,12 @@
             <th{% if 'description' == sort %} class="sorted resource-description"{% else %} class = "resource-description" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.description'|trans({}), 'page': page, 'sort': 'description'}  %}
             </th>
-            <th{% if 'quantity' == sort %} class="sorted resource-quantity"{% else %} class = "resource-quantity" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.quantity'|trans({}), 'page': page, 'sort': 'quantity'}  %}
-            </th>
             <th class="consult"></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="4">
+            <td colspan="3">
                 {{ 'table.foot.count.text'|trans({'%value%': count}) }}
             </td>
         </tr>
@@ -24,8 +21,7 @@
          {% for resource in resources %}
             <tr>
                 <td>{{ resource.code }}</td>
-                <td>{{ resource.description }}</td>
-                <td>{{ resource.quantity }}</td>
+                <td>{{ resource.description }}</td>               
                 <td>
                     <a href="{{path('caesar_resource_homepage', {'id':resource.id})}}">
                         <i class="icon-edit"></i>

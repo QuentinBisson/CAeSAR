@@ -83,3 +83,9 @@ img#resource-img{
 .tag-creationDate {
     width: 25%;
 }
+
+.resources, .locations, .tags, .borrowings, .users, .general {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+}

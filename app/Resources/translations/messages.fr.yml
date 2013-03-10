@@ -50,11 +50,11 @@ table:
            name: Nom
            description: Description
         resources: 
-            code: Code (ISBN ou Étiquette)
+            code: Code
             description: Titre
             shelf:
                 name: Nom de l'emplacement
-            quantity: Quantité enregistrée
+            quantity: Quantité
         borrowings:
             user: Utilisateur
             resource: Ressource empruntée

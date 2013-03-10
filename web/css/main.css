@@ -200,18 +200,6 @@ h1 {
     color: #282828;
 }
 
-.sort-link {
-    display: block;
-}
-.sort-link img {
-    width: 10px;
-}
-
-p.sort-label {
-    float: left;
-    padding-top: 6px;
-}
-
 .notice, .error {
     -webkit-border-radius: 8px;
     border-radius: 8px;

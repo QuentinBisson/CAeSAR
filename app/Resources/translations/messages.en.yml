@@ -49,11 +49,11 @@ table:
            name: Name
            description: Description
         resources: 
-            code: Code (ISBN or Tag)
+            code: Code
             description: Title
             shelf:
                 name: Location's name
-            quantity: Registered quantity
+            quantity: Quantity
         borrowings:
             user: User
             resource: Borrowed resource

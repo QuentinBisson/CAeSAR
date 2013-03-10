@@ -40,8 +40,7 @@ border: 1px solid #ddd;
 
 .table-bordered {
     border: 1px solid #dddddd;
-    border-collapse: separate;
-    *border-collapse: collapse;
+    border-collapse: collapse;
     border-left: 0;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -207,4 +206,16 @@ div.navigation li.active a {
     background-image: linear-gradient(top, #5f5f5f, #5c5c5c);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c');
     /* IE6–IE9 */
+}
+
+p.sort-label {
+    float: left;
+    padding-top: 6px;
+}
+
+.sort-link {
+    display: block;
+}
+.sort-link img {
+    width: 10px;
 }
