@@ -26,8 +26,7 @@ caesar_client:
     prefix:   /{_locale}
     requirements: 
         _locale: fr|en
-    defaults: {_locale: 'fr'}
 
-caesar_client_default:
+caesar_client_index:
     pattern:  /
-    defaults: { _controller: CaesarUserBundle:User:index, _locale: 'fr'}
+    defaults: { _controller: CaesarUserBundle:User:index}

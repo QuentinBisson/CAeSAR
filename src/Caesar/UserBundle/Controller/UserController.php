@@ -12,9 +12,14 @@ use Symfony\Component\Security\Core\SecurityContext;
 class UserController extends Controller {
 
     public function indexAction() {
-        return $this->render('CaesarUserBundle:User:index.html.twig');
+        $_locale = substr($this->get('request')->getPreferredLanguage(), 0, 2);
+        return $this->redirect($this->generateUrl('caesar_client_homepage', array('_locale' => $_locale)));
     }
 
+    public function homeAction() {
+        return $this->render('CaesarUserBundle:User:index.html.twig');
+    }
+    
     public function searchAction($page = 1, $sort = 'code', $direction = 'asc') {
         $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
         $searchForm = $this->createForm(new ResourceSearchType());
