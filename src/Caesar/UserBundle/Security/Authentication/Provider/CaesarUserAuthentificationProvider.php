@@ -12,29 +12,25 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class CaesarUserAuthentificationProvider extends DaoAuthenticationProvider {
-    
-    private $userProvider;
 
+  private $userProvider;
 
-    public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker = null, EncoderFactoryInterface $encoderFactory = null, $hideUserNotFoundExceptions = true) {
-        parent::__construct($userProvider, $userChecker, "caesar", $encoderFactory, $hideUserNotFoundExceptions);
-        $this->userProvider = $userProvider;
+  public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker = null, EncoderFactoryInterface $encoderFactory = null, $hideUserNotFoundExceptions = true) {
+    parent::__construct($userProvider, $userChecker, "caesar", $encoderFactory, $hideUserNotFoundExceptions);
+    $this->userProvider = $userProvider;
+  }
+
+  protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token) {
+    $user = $this->userProvider->loadUserByUsername($token->getUsername());
+
+    if ($user) {
+      $authenticatedToken = new WsseUserToken($user->getRoles());
+      $authenticatedToken->setUser($user);
+
+      return $authenticatedToken;
     }
 
-    protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token) {
-        $user = $this->userProvider->loadUserByUsername($token->getUsername());
-
-        if ($user) {
-            $authenticatedToken = new WsseUserToken($user->getRoles());
-            $authenticatedToken->setUser($user);
-
-            return $authenticatedToken;
-        }
-
-        throw new AuthenticationException('The authentication failed.');
-    }
+    throw new AuthenticationException('The authentication failed.');
+  }
 
 }
-
-?>
-    

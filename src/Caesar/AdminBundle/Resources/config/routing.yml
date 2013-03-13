@@ -110,4 +110,4 @@ caesar_admin_tag_delete:
         
 caesar_admin_tag_barcode:
     pattern:  /tag/barcode/{text}
-    defaults: { _controller: CaesarAdminBundle:Tag:barcode, text:'' }
+    defaults: { _controller: CaesarAdminBundle:Tag:barcode }

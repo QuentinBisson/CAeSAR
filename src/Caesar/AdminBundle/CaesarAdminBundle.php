@@ -4,6 +4,6 @@ namespace Caesar\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CaesarAdminBundle extends Bundle
-{
+class CaesarAdminBundle extends Bundle {
+
 }

@@ -43,7 +43,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
         $nb_per_page = 10;
         $min = ($page - 1) * $nb_per_page;
         $qb = $this->createQueryBuilder('u');
-        $qb->where("u.role = 'USER'")
+        $qb->where("u.role = 'ROLE_USER'")
                 ->orderBy('u.' . $sort, $direction)
                 ->setFirstResult($min)
                 ->setMaxResults($nb_per_page);
@@ -53,7 +53,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
     public function count() {
         $qb = $this->createQueryBuilder('u');
         $qb->select('count(u.id)')
-                ->where("u.role = 'USER'");
+                ->where("u.role = 'ROLE_USER'");
         return $qb->getQuery()->getSingleScalarResult();
     }
 
