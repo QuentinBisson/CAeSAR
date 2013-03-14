@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>CAeSAR - Administration</title>
+                        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/icons.css" />
+        <link rel="stylesheet" type="text/css" href="/css/form.css" />
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        
+<link rel="stylesheet" type="text/css" href="/bundles/caesaradmin/css/layout.css" />
+
+<link rel="stylesheet" type="text/css" href="/css/table.css" />
+<link rel="stylesheet" type="text/css" href="/bundles/caesaradmin/css/admin.css" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-content">
+                <section class="left">
+                    <ul id="breadcrumb" class="breadcrumb">
+                                                <li><a href="/fr/admin/">
+                                    <i class="icon-home"></i>
+                                </a>
+                                <span class="divider">></span>
+                            </li>
+                
+<li data-header="1" class="active"><span>Utilisateurs</span></li>
+                        </ul>
+                    </section>
+
+                    <section class="right">
+                        <div class="inline">
+                            <select id="lang" class="lang-select">
+                                <option value="fr" data-imagesrc="/images/fr.png"
+                                     selected="selected" >Français</option>
+                                        <option value="en" data-imagesrc="/images/en.png"
+                                    >Anglais</option>
+                                        </select>
+                                        <a class="link-button-deconnexion" href="/fr/admin/logout">Déconnexion</a>
+                                </div> 
+                            </section>
+                        </div>
+                    </header>
+
+
+                    <section class="main-content">
+                <aside class="sidebar">
+    <nav>
+        <ul class="accordion">
+            <li><a href="/fr/admin/resource">Ressources</a>
+                <ul>
+                    <li><a href="/fr/admin/resource/add">Ajouter une ressource</a></li>
+                    <li><a href="/fr/admin/resource">Lister les ressources</a></li>
+                    <li><a href="/fr/admin/resource/skeleton">Modifier le squelette</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/user">Utilisateurs</a>
+                <ul>
+                    <li><a href="/fr/admin/user/add">Ajouter un utilisateur</a></li>
+                    <li><a href="/fr/admin/user">Lister les utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/shelf">Emplacements</a>
+                <ul>
+                    <li><a href="/fr/admin/shelf/add">Ajouter un emplacement</a></li>
+                    <li><a href="/fr/admin/shelf">Lister les emplacements</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/borrowing">Emprunts</a>
+                <ul>
+                    <li><a href="/fr/admin/borrowing">Lister les emprunts</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/tag">Étiquettes</a>
+                <ul>
+                    <li><a href="/fr/admin/tag">Lister les étiquettes</a></li>
+                    <li><a href="/fr/admin/tag/generate">Générer des étiquettes</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+                            <article><header><h1>Lister les utilisateurs</h1></header>
+
+
+      
+<section class="contentBody">        
+ <table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="sorted codeBu" >
+                <p class="sort-label">
+        Code B.U.
+</p>
+<span class="right">
+    <a class="sort-link sort-up" href="/fr/admin/user">
+        <img src="/images/sort-asc.png" alt="Trier vers le haut"/>
+    </a>
+    <a class="sort-link sort-down" href="/fr/admin/user/1/codeBu/desc">
+        <img src="/images/sort-desc.png" alt="Trier vers le bas"/>
+    </a>
+</span>            </th>
+            <th class = "login" >
+                    <p class="sort-label">
+        Nom d&#039;utilisateur
+</p>
+<span class="right">
+    <a class="sort-link sort-up" href="/fr/admin/user/1/username">
+        <img src="/images/sort-asc.png" alt="Trier vers le haut"/>
+    </a>
+    <a class="sort-link sort-down" href="/fr/admin/user/1/username/desc">
+        <img src="/images/sort-desc.png" alt="Trier vers le bas"/>
+    </a>
+</span>            </th>
+            <th class = "nom" >
+                <p class="sort-label">
+        Nom
+</p>
+<span class="right">
+    <a class="sort-link sort-up" href="/fr/admin/user/1/name">
+        <img src="/images/sort-asc.png" alt="Trier vers le haut"/>
+    </a>
+    <a class="sort-link sort-down" href="/fr/admin/user/1/name/desc">
+        <img src="/images/sort-desc.png" alt="Trier vers le bas"/>
+    </a>
+</span>            </th>
+            <th class = "prenom" >
+                <p class="sort-label">
+        Prénom
+</p>
+<span class="right">
+    <a class="sort-link sort-up" href="/fr/admin/user/1/firstname">
+        <img src="/images/sort-asc.png" alt="Trier vers le haut"/>
+    </a>
+    <a class="sort-link sort-down" href="/fr/admin/user/1/firstname/desc">
+        <img src="/images/sort-desc.png" alt="Trier vers le bas"/>
+    </a>
+</span>            </th>
+            <th class = "email" >
+                <p class="sort-label">
+        Courriel
+</p>
+<span class="right">
+    <a class="sort-link sort-up" href="/fr/admin/user/1/email">
+        <img src="/images/sort-asc.png" alt="Trier vers le haut"/>
+    </a>
+    <a class="sort-link sort-down" href="/fr/admin/user/1/email/desc">
+        <img src="/images/sort-desc.png" alt="Trier vers le bas"/>
+    </a>
+</span>            </th>
+            <th class="edit"></th>
+            <th class="delete"></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                3 lignes ont été trouvées
+            </td>
+        </tr>
+    </tfoot>
+    <tbody id="table_list">
+                     <tr id="12">
+                <td>12</td>
+                <td>toto</td>
+                <td>toto</td>
+                <td>toto</td>
+                <td>toto@toot.fr</td>
+                <td>
+                    <a href="/fr/admin/user/update/6" name="Modifier l'utilisateur">
+                        <i class="icon-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/fr/admin/user/delete/6"  name="Supprimer l'utilisateur">
+                        <i class="icon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+                        <tr id="123">
+                <td>123</td>
+                <td>er</td>
+                <td>er</td>
+                <td>er</td>
+                <td>er@er.fr</td>
+                <td>
+                    <a href="/fr/admin/user/update/9" name="Modifier l'utilisateur">
+                        <i class="icon-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/fr/admin/user/delete/9"  name="Supprimer l'utilisateur">
+                        <i class="icon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+                        <tr id="1111111">
+                <td>1111111</td>
+                <td>Lucas</td>
+                <td>Lucas</td>
+                <td>Lucas</td>
+                <td>Lucas@toot.fr</td>
+                <td>
+                    <a href="/fr/admin/user/update/10" name="Modifier l'utilisateur">
+                        <i class="icon-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/fr/admin/user/delete/10"  name="Supprimer l'utilisateur">
+                        <i class="icon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+                <tbody>
+</table>
+
+
+<div class="navigation">
+    <ul>        
+                                                                                        
+                <li class="active"><a class="_pagination" href="/fr/admin/user">1</a></li> 
+
+                                                                                        
+                                </ul>
+</div></section>
+     
+</article>
+                        </section>
+                                <script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
+                        <script type="text/javascript" src="/js/jquery-ui-1.10.0.custom.min.js" ></script>
+                        <script type="text/javascript" src="/js/jquery.ddslick.min.js" ></script>
+                        <script type="text/javascript">
+                                                                                    $(document).ready(function() {
+                                $('.lang-select').ddslick({
+                                    onSelected: function(data){
+                                        var ddData = $('#lang').data('ddslick');
+                                        if ('fr' != ddData.selectedData.value) {
+                                            if ('en' === ddData.selectedData.value) {
+                                                window.location = '/en/admin/user';
+                                            } else {
+                                                window.location = '/fr/admin/user';
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $( ".accordion" ).accordion({
+                heightStyle: "content",
+                autoHeight: false,
+                navigation: true,
+                collapsible: true,
+                active: getActiveIndex()
+            });
+        });
+
+        function getActiveIndex() {
+            var ul = document.getElementById('breadcrumb');
+            var lis = ul.getElementsByTagName('li');
+            if (lis.length > 1) {
+                var li = lis[1];
+                if (li.dataset.header === undefined) {
+                    return false;
+                }
+                var i = parseInt(li.dataset.header);
+                return i;
+            }
+            return false;
+        }
+        var ul = document.getElementById('breadcrumb');
+        var lis = ul.getElementsByTagName('li');
+        if (lis.length == 1) {
+            var spans = lis[0].getElementsByTagName("span");
+            for (var i = 0; i < spans.length; i++) {
+                if ('divider' === spans[i].className) {
+                    spans[i].style.display = 'none';
+                }
+            }
+        }
+
+        $('.accordion a').each(function(){
+            var href= $(this).attr('href');
+            var url = document.location.toString();
+            if(url.match(href+"$") == href) {
+                $(this).addClass('active');
+            }
+        });
+
+            </script>
+
+    <script type="text/javascript" src="/js/sort.js" ></script>
+                        </body>
+                    </html>

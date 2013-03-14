@@ -3,9 +3,29 @@
 namespace Caesar\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Caesar\UserBundle\Entity\UserRepository
+use Caesar\UserBundle\Entity\UserRepository;
+
 class UserAddControllerTest extends WebTestCase
 {
+
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUp()
+    {
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getEntityManager()
+        ;
+    }
+
     public function testIndex()
     {
         $client = static::createClient();
@@ -29,8 +49,18 @@ class UserAddControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/fr/admin/user');
 
-        $crawler->filter('tr:contains("1111111")')
-        //TODOOOO
+        /*$td = $crawler->filter('tr:contains("1111111")');
+        $link = $crawler->selectLink('Supprimer l\'utilisateur')->link();
+        echo $link->getUri();
+        $crawler = $client->click($link);*/
+
+        file_put_contents("add.html", $client->getResponse()->getContent());
+
+        //$td = $crawler->filter('tr:contains("1111111")');
+        $link = $crawler->filterXpath("//tr[@id='12']//a")->eq(0)->link();
+
+
+        $crawler = $client->click($link);
 
 
 
@@ -51,10 +81,21 @@ class UserAddControllerTest extends WebTestCase
 		// soumet le formulaire
 		$client->submit($form);       
 
-         file_put_contents("tutu.html", $client->getResponse()->getContent());
+        $repository_user = $this->em->getRepository('CaesarUserBundle:User');
+
+        $users = $repository_user->getUserFromToSortBy(1, 'codeBu', 'asc');
+        $count = $repository_user->count();
+
+        echo "\n";
+        echo $count;
+        echo "\nBONJOUR\n";
+
+        file_put_contents("tutu.html", $client->getResponse()->getContent());
+
+        //$crawler = $client->request('GET', '/fr/admin/user');
 
         //$this->assertTrue($crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count() > 0);
-        $this->assertTrue($crawler->filter('html:contains("utilisateur Lucas bob a été ajouté.")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("1111111")')->count() == 1);
         //Lister les utilisateurs
     }
 }
