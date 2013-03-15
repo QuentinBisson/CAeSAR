@@ -29,19 +29,19 @@
     </tfoot>
     <tbody id="table_list">
          {% for user in users %}
-            <tr>
+            <tr id="{{ user.codeBu }}">
                 <td>{{ user.codeBu }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.email }}</td>
                 <td>
-                    <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">
+                    <a href="{{path('caesar_admin_user_update', {'id':user.id})}}" name="Modifier l'utilisateur">
                         <i class="icon-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}">
+                    <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}"  name="Supprimer l'utilisateur">
                         <i class="icon-remove"></i>
                     </a>
                 </td>
