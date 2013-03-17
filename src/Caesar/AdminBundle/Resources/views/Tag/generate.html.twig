@@ -42,19 +42,19 @@
 
     <section class="left tag-positioning-description">
         <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
-        <details class="help" open="open">
-            <summary>{{'admin.summary.tag.help'|trans({})}}</summary>
+        <div class="help">
+            <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
             <dl>
                 <dt>Margin left : </dt>
                 <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
                 <dt>Margin top : </dt>
                 <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
-                <dt>Vertical gap : </dt>
+                <dt>Vgap : </dt>
                 <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
-                <dt>Horizontal gap : </dt>
+                <dt>Hgap : </dt>
                 <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
             </dl>
-        </details>
+        </div>
     </section>
 </section>
 {% endblock %}

@@ -61,9 +61,9 @@ class TagController extends Controller {
         for ($i = 0; $i < $number; $i++) {
           $tag = new Tag();
           $em->persist($tag);
-          $em->flush();
           array_push($tags, $tag);
         }
+        $em->flush();
 
         foreach ($tags as $tag) {
           $idToString = "" . $tag->getId();
@@ -73,9 +73,8 @@ class TagController extends Controller {
             $code .= "0";
           }
           $tag->setCode($code . $tag->getId());
-          $em->flush();
         }
-
+        $em->flush();
         $hgap = $format->getHorizontalGap() - $format->getWidth();
         $vgap = $format->getVerticalGap() - $format->getHeight();
         $pageWidth = $format->getMarginLeft() + (($format->getColumns() - 1) * $hgap) + ($format->getColumns() * $format->getWidth());

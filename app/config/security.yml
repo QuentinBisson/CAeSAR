@@ -26,10 +26,15 @@ security:
         caesar:
             pattern:  ^/
             anonymous: ~
+            logout:
+                path:   caesar_logout
+                target: caesar_client_homepage
             form_login:
                 login_path:  caesar_client_login
                 check_path:  caesar_client_login_check
             http_basic: true
+
+
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
