@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    -webkit-print-color-adjust:exact;
 }
 
 body {
@@ -92,6 +93,7 @@ a {
 .main-content {
     position: absolute;
     top: 52px;
+    height: 100%;
     bottom: 0;
     left: 0;
     right: 0;

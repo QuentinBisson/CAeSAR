@@ -36,7 +36,7 @@ class ShelfController extends Controller {
     }
 
     $shelves = $repository_shelf->getShelfFromToSortBy($page, $sort, $direction, $keywords);
-    $count = $repository_shelf->count();
+    $count = $repository_shelf->count($keywords);
 
     /* Pagination */
     $total = $count;

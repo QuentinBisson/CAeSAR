@@ -14,11 +14,17 @@
 {% block contentTitle %}{{'admin.title.users.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-<section class="contentBody">        
+    <form action="{{ path('caesar_admin_user_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+        {{ form_errors(searchForm) }}
+        {{ form_rest(searchForm) }}
+        <input type="submit" value="{{'admin.button.search'|trans({})}}"/>
+    </form>
+
+<section class="contentBody">
  {% include 'CaesarAdminBundle:User:list.html.twig' with {'users' : users, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
 </section>
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
-    <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
 {% endblock %}

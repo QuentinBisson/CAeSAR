@@ -3,6 +3,8 @@
 namespace Caesar\AdminBundle\Controller;
 
 use Caesar\TagBundle\Entity\Tag;
+use Caesar\TagBundle\Form\Entity\Format;
+use Caesar\TagBundle\Form\TagFormattingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -42,35 +44,51 @@ class TagController extends Controller {
 
   public function generateAction() {
     $em = $this->getDoctrine()->getEntityManager();
+    $format = new Format();
+    $format->setColumns(1);
+    $format->setRows(1);
+    $form = $this->createForm(new TagFormattingType(), $format);
 
     $request = $this->get('request');
-    if ($request->isXmlHttpRequest()) {
-      $tags = array();
-      for ($i = 0; $i < 12; $i++) {
-        $tag = new Tag();
-        $em->persist($tag);
-        $em->flush();
-        array_push($tags, $tag);
-      }
-      foreach ($tags as $tag) {
-        $idToString = "" . $tag->getId();
-        $zerosToAdd = 10 - strlen($idToString);
-        $code = 'C-';
-        for ($i = 0; $i < $zerosToAdd; $i++) {
-          $code .= "0";
+    if ($request->isMethod('POST')) {
+      $form->bind($request);
+      if ($form->isValid()) {
+        $format = $form->getData();
+        //TODO validate
+
+        $number = $format->getColumns() * $format->getRows();
+        $tags = array();
+        for ($i = 0; $i < $number; $i++) {
+          $tag = new Tag();
+          $em->persist($tag);
+          $em->flush();
+          array_push($tags, $tag);
         }
-        $tag->setCode($code . $tag->getId());
-        $em->flush();
+
+        foreach ($tags as $tag) {
+          $idToString = "" . $tag->getId();
+          $zerosToAdd = 10 - strlen($idToString);
+          $code = 'C-';
+          for ($i = 0; $i < $zerosToAdd; $i++) {
+            $code .= "0";
+          }
+          $tag->setCode($code . $tag->getId());
+          $em->flush();
+        }
+
+        $hgap = $format->getHorizontalGap() - $format->getWidth();
+        $vgap = $format->getVerticalGap() - $format->getHeight();
+        $pageWidth = $format->getMarginLeft() + (($format->getColumns() - 1) * $hgap) + ($format->getColumns() * $format->getWidth());
+        return $this->render("CaesarAdminBundle:Tag:barcodes.html.twig", array('tags' => $tags, 'format' => $format,
+            'hgap' => $hgap, 'vgap' => $vgap, 'pagewidth' => $pageWidth));
       }
-      return $this->render("CaesarAdminBundle:Tag:barcodes.html.twig", array('tags' => $tags));
     }
-    return $this->render('CaesarAdminBundle:Tag:generate.html.twig');
+    return $this->render('CaesarAdminBundle:Tag:generate.html.twig', array('form' => $form->createView()));
   }
 
   public function barcodeAction($text) {
     $response = new Response();
     $response->headers->set('Content-Type', 'image/png');
-    $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s.png"', $text));
 
     $size = "40";
     $code_string = "";
@@ -89,18 +107,18 @@ class TagController extends Controller {
     $code_string = "211214" . $code_string . "2331112";
 
     // Pad the edges of the barcode
-    $code_length = 10;
+    $code_length = 0;
     for ($i = 1; $i <= strlen($code_string); $i++) {
       $code_length = $code_length + (integer) (substr($code_string, ($i - 1), 1));
     }
     $img_width = $code_length;
     $img_height = $size;
 
-    $image = imagecreate($img_width + 10, $img_height);
+    $image = imagecreate($img_width, $img_height);
     $black = imagecolorallocate($image, 0, 0, 0);
     $white = imagecolorallocate($image, 255, 255, 255);
     imagefill($image, 0, 0, $white);
-    $location = 10;
+    $location = 0;
     for ($position = 1; $position <= strlen($code_string); $position++) {
       $cur_size = $location + (substr($code_string, ($position - 1), 1) );
       imagefilledrectangle($image, $location, 0, $cur_size, $img_height, ($position % 2 == 0 ? $white : $black));

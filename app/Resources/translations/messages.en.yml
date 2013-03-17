@@ -5,6 +5,7 @@ client:
         search_form:
             placeholder: Search ...
             title: Search a resource
+form:
     user:
         type:
             label:
@@ -25,7 +26,7 @@ client:
     resource:
         type:
             label:
-                code: Code (ISBN or Tag)
+                code: Code (ISBN or Label)
                 description: Title
                 quantity: Quantity
                 shelf: Location
@@ -34,7 +35,26 @@ client:
                 long:
                     description: Detailled description
                 search: Search
-
+    tag:
+        type:
+            label:
+                margin:
+                    left: Left margin (in cm)
+                    top: Top margin (in cm)
+                gap:
+                    horizontal: Horizontal gap (in cm)
+                    vertical: Vertical gap (in cm)
+                height: Height  (in cm)
+                width: Width (in cm)
+                columns: Columns
+                rows: Rows
+            text:
+                margin:
+                    left: Margin between the left border and the first column of labels (in cm)
+                    top:  Margin between the left border and the first row of labels (in cm)
+                gap:
+                    horizontal: Horizontal gap between the beginning of the first label and of the next (in cm)
+                    vertical: Vertical  gap between the beginning of the first label and of the next (in cm)
 table:
     foot:
         count:
@@ -49,7 +69,7 @@ table:
         shelves:
            name: Name
            description: Description
-        resources: 
+        resources:
             code: Code
             description: Title
             shelf:
@@ -62,7 +82,7 @@ table:
             return:
                 date: Return date
         tags:
-            code: ISBN-10, ISBN-13 or CAeSAR-xxx code 
+            code: ISBN-10, ISBN-13 or C-xxx code
             creationDate: Creation date
     sort:
         down: Sort down
@@ -70,7 +90,7 @@ table:
 ajax:
     wait:
         message: Please wait ...
-        
+
 resource:
     label:
         identifier: Identifier

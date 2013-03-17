@@ -1,7 +1,85 @@
-{% for tag in tags %}
-    <div class="barcode">
-        <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
-        <br />
-        <span>{{tag.code}}</span>
-    </div>    
-{% endfor %}
+{% extends "CaesarAdminBundle::layout.html.twig" %}
+
+
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+<style media="print" type="text/css">
+        header.header, .main-content .sidebar, .main-content article header {
+            display: none;
+        }
+        .colonnes {
+            width: {{pagewidth}}cm;
+            margin-top: {{format.marginTop}}cm;
+            margin-left: {{format.marginLeft}}cm;
+        }
+
+        .barcode {
+            float: left;
+            text-align: center;
+            height: {{format.height}}cm;
+            width: {{format.width}}cm;
+            margin-right: {{hgap}}cm;
+            margin-bottom:{{vgap}}cm;
+        }
+
+        .barcode img{
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0 auto;
+        }
+
+        section.main-content article {
+            margin-left:0;
+        }
+    </style>
+
+    <style type="text/css">
+            .colonnes {
+                width: {{pagewidth}}cm;
+                margin-top: {{format.marginTop}}cm;
+                margin-left: {{format.marginLeft}}cm;
+            }
+
+            .barcode {
+                border: 1px solid black;
+                float: left;
+                text-align: center;
+                height: {{format.height}}cm;
+                width: {{format.width}}cm;
+                margin-right: {{hgap}}cm;
+                margin-bottom:{{vgap}}cm;
+            }
+
+            .barcode img{
+                display: block;
+                max-width: 100%;
+                max-height: 100%;
+                margin: 0 auto;
+            }
+        </style>
+{% endblock %}
+
+{% block breadCrumb%}
+    {{parent()}}
+        <li data-header="4">
+            <a href="{{path('caesar_admin_tag_homepage')}}">{{'admin.breadcrumb.tags.list'|trans({})}}</a>
+            <span class="divider">></span>
+        </li>
+        <li class="active"><span>{{'admin.breadcrumb.tags.generate'|trans({})}}</span></li>
+{% endblock %}
+
+{% block contentTitle %}
+{{'admin.title.tags.generate'|trans({})}}
+{% endblock %}
+
+{% block contentBody %}
+        <div class="colonnes">
+    {% for tag in tags %}
+                <div class="barcode">
+                    <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
+                </div>
+    {% endfor %}
+            </div>
+{% endblock %}

@@ -6,7 +6,7 @@ aside.sidebar{
     background: url('../../../images/background.jpg');
 }
 
-aside.sidebar nav {   
+aside.sidebar nav {
     margin: 20px 20px 10px 10px;
 }
 
@@ -46,7 +46,7 @@ aside.sidebar .ui-accordion-header {
 aside.sidebar nav ul li ul li a.active:hover {
     background: #002FA7;
 }
-aside.sidebar a.ui-accordion-header:hover, 
+aside.sidebar a.ui-accordion-header:hover,
 aside.sidebar a.ui-accordion-header-active:hover {
     color: white;
     background: #002FA7 url("../images/fleche-blanche-droite.png") 95% 50% no-repeat;
@@ -57,7 +57,7 @@ aside.sidebar nav ul li, aside.sidebar nav ul li ul li {
 }
 
 aside.sidebar nav ul li a {
-    color: black; 
+    color: black;
     background-color: white;
 }
 aside.sidebar nav ul li a, aside.sidebar nav ul li ul li a {
@@ -76,7 +76,7 @@ aside.sidebar nav ul li ul li a {
 
 h1 {
     text-align: center;
-    padding-top: 20px; 
+    padding-top: 20px;
     padding-bottom: 20px;
 }
 
@@ -94,17 +94,17 @@ aside.sidebar nav li a:hover {
     color: white;
     background-color: #002FA7;
 }
-.breadcrumb { 
+.breadcrumb {
     float: left;
-    display: block; 
+    display: block;
     margin: 0;
     padding: 0;
     padding-left: 10px;
-}  
+}
 .breadcrumb li {
-    display: inline; 
+    display: inline;
     float: left;
-}  
+}
 
 .breadcrumb {
     padding: 0px 14px;
@@ -161,10 +161,4 @@ article {
 .shelf textarea {
     width: 40%;
     height: 150px;
-}
-
-div.colonnes {
-    -moz-column-count:3; /* Firefox */
-    -webkit-column-count:3; /* Safari and Chrome */
-    column-count:3;
 }

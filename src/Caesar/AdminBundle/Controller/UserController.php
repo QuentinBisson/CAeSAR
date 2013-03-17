@@ -2,6 +2,7 @@
 
 namespace Caesar\AdminBundle\Controller;
 
+use Caesar\UserBundle\Form\UserSearchType;
 use Caesar\UserBundle\Entity\User;
 use Caesar\UserBundle\Form\UserType;
 use Caesar\UserBundle\Form\UserUpdateType;
@@ -15,14 +16,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class UserController extends Controller {
 
   public function indexAction($page = 1, $sort = 'codeBu', $direction = 'asc') {
-
     $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
+    $searchForm = $this->createForm(new UserSearchType());
+    $keywords = null;
     $em = $this->getDoctrine()->getManager();
 
-    $repository_user = $em->getRepository('CaesarUserBundle:User');
+    $repository_resource = $em->getRepository('CaesarUserBundle:User');
 
-    $users = $repository_user->getUserFromToSortBy($page, $sort, $direction);
-    $count = $repository_user->count();
+    $request = $this->get('request');
+    if ($request->isMethod('POST')) {
+      $searchForm->bind($request);
+      if ($searchForm->isValid()) {
+        $data = $searchForm->getData();
+        $keywords = $data['keywords'];
+      }
+    }
+    if (!empty($keywords)) {
+      $keywords = explode(" ", $keywords);
+    }
+
+    $users = $repository_resource->getUserFromToSortBy($page, $sort, $direction, $keywords);
+    $count = $repository_resource->count($keywords);
 
     /* Pagination */
     $total = $count;
@@ -43,6 +57,8 @@ class UserController extends Controller {
     if ($request->isXmlHttpRequest()) {
       return $this->render("CaesarAdminBundle:User:list.html.twig", $array);
     }
+
+    $array['searchForm'] = $searchForm->createView();
 
     return $this->render("CaesarAdminBundle:User:index.html.twig", $array);
   }

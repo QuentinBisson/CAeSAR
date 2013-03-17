@@ -17,14 +17,14 @@
 <form action="{{ path('caesar_admin_user_add') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <fieldset>
-            <legend>Données personnelles</legend>
+            <legend>{{'admin.fieldset.user.legend.personnal'|trans({})}}</legend>
             {{ form_row(form.codeBu) }}
             {{ form_row(form.name) }}
             {{ form_row(form.firstname) }}
             {{ form_row(form.email) }}
         </fieldset>
         <fieldset>
-            <legend>Données de connexion</legend>
+            <legend>{{'admin.fieldset.user.legend.connexion'|trans({})}}</legend>
             {{ form_row(form.username) }}
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.confirmPassword) }}

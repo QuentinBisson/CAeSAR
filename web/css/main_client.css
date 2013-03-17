@@ -3,6 +3,7 @@
 html {
     height: 100%;
     min-width: 640px;
+    -webkit-print-color-adjust:exact;
 }
 
 body {
@@ -25,7 +26,7 @@ body {
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
     color: #282828;
     padding: 5px;
-    text-align: left;	
+    text-align: left;
 }
 /**
  * Titre(s)
@@ -205,7 +206,7 @@ header h1 {
 #main-form input[name='main_form_text']:focus,
 #search-form input[name='search_form_text']:focus {
     background-color: #fdf8fd;
-    outline : none;	
+    outline : none;
 }
 
 /**
@@ -337,7 +338,7 @@ a.consult-title {
 
 .consultation-content-block, .consultation-text-details {
     margin-top: 15px;
-    margin-left: 15px; 
+    margin-left: 15px;
 }
 .consultation-text-details {
     display: inline-block;
@@ -364,7 +365,7 @@ p.sort-label {
 
 table.table-bordered,
 table.table-bordered th,
-table.table-bordered td, 
+table.table-bordered td,
 table.table thead th,
 table.table th,
 table.table td{

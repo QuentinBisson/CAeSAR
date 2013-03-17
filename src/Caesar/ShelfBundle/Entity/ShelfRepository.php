@@ -34,9 +34,23 @@ class ShelfRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
 
-    public function count() {
+    public function count($keywords = array()) {
         $qb = $this->createQueryBuilder('s');
         $qb->select('count(s.id)');
+        if (!empty($keywords)) {
+            $iteration = 0;
+            foreach ($keywords as $string) {
+                if ($iteration > 0) {
+                    $qb->andWhere("s.name like :name" . $iteration . " OR s.description like :description" . $iteration);
+                } else {
+                    $qb->where("s.name like :name" . $iteration . " OR s.description like :description" . $iteration);
+                }
+                $qb->setParameter('name' . $iteration, '%' . $string . '%');
+                $qb->setParameter('description' . $iteration, '%' . $string . '%');
+                ++$iteration;
+            }
+        }
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 

@@ -13,34 +13,35 @@ caesar_admin_resource_description:
     pattern:  /resource/description/{id}
     defaults: { _controller: CaesarAdminBundle:Resource:description, id = 1}
     requirements:
-        shelf_id:  \d+
+        id:  \d+
 
 caesar_admin_borrowing_homepage:
-    pattern:  /borrowing/{page}/{sort}/{direction}/{user}/{resource}
-    defaults: { _controller: CaesarAdminBundle:Borrowing:index, page:1, sort:'id', direction:'asc', user:null, resource:null}
+    pattern:  /borrowing/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Borrowing:index, page:1, sort:'id', direction:'asc'}
     requirements:
-        shelf_id:  \d+
-
+        page:  \d+
+        direction: asc|desc
+        
 caesar_admin_logout:
     pattern:  /logout
     defaults: { _controller: CaesarUserBundle:User:logout }
-        
+
 caesar_admin_resource_add:
     pattern:  /resource/add
     defaults: { _controller: CaesarAdminBundle:Resource:add }
-    
+
 caesar_admin_resource_update:
     pattern:  /resource/update/{id}
     defaults: { _controller: CaesarAdminBundle:Resource:update }
     requirements:
         id:  \d+
-        
+
 caesar_admin_resource_delete:
     pattern:  /resource/delete/{id}
     defaults: { _controller: CaesarAdminBundle:Resource:delete }
     requirements:
         id:  \d+
-        
+
 caesar_admin_resource_skeleton:
     pattern:  /resource/skeleton
     defaults: { _controller: CaesarAdminBundle:Resource:skeleton }
@@ -50,41 +51,41 @@ caesar_admin_user_update:
     defaults: { _controller: CaesarAdminBundle:User:update}
     requirements:
         id:  \d+
-        
+
 caesar_admin_user_delete:
     pattern:  /user/delete/{id}
     defaults: { _controller: CaesarAdminBundle:User:delete }
     requirements:
         id:  \d+
-        
+
 caesar_admin_user_homepage:
     pattern:  /user/{page}/{sort}/{direction}
     defaults: { _controller: CaesarAdminBundle:User:index, page:1, sort:'codeBu', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc
-         
+
 caesar_admin_user_add:
     pattern:  /user/add
     defaults: { _controller: CaesarAdminBundle:User:add }
-    
+
 caesar_admin_shelf_homepage:
     pattern:  /shelf/{page}/{sort}/{direction}
     defaults: { _controller: CaesarAdminBundle:Shelf:index, page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc
-        
+
 caesar_admin_shelf_add:
     pattern:  /shelf/add
     defaults: { _controller: CaesarAdminBundle:Shelf:add }
-    
+
 caesar_admin_shelf_update:
     pattern:  /shelf/update/{id}
     defaults: { _controller: CaesarAdminBundle:Shelf:update }
     requirements:
         id:  \d+
-    
+
 caesar_admin_shelf_delete:
     pattern:  /shelf/delete/{id}
     defaults: { _controller: CaesarAdminBundle:Shelf:delete}
@@ -101,13 +102,13 @@ caesar_admin_tag_homepage:
 caesar_admin_tag_generate:
     pattern:  /tag/generate
     defaults: { _controller: CaesarAdminBundle:Tag:generate}
-        
+
 caesar_admin_tag_delete:
     pattern:  /tag/delete/{id}
     defaults: { _controller: CaesarAdminBundle:Tag:delete }
     requirements:
         id:  \d+
-        
+
 caesar_admin_tag_barcode:
     pattern:  /tag/barcode/{text}
     defaults: { _controller: CaesarAdminBundle:Tag:barcode }

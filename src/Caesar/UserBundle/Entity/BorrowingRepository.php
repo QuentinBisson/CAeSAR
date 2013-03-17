@@ -11,23 +11,32 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class BorrowingRepository extends EntityRepository {
-    public function getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user, $resource) {
-        $nb_per_page = 10;
-        $min = ($page - 1) * $nb_per_page;
-        $qb = $this->createQueryBuilder('b');
-        if ($user != null) {
-            $qb->where('b.user.id = ' . $user->getId());
-            if ($resource != null) {
-                $qb->andWhere('b.resource.id = ' . $resource->getId());
-            }
-        }
-        
-        if ($resource != null) {
-            $qb->where('b.resource.id = ' . $resource->getId());
-        }
-        $qb->orderBy('b.' . $sort, $direction)
-                ->setFirstResult($min)
-                ->setMaxResults($nb_per_page);
-        return $qb->getQuery()->getResult();
+
+  public function getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user = null, $resource = null) {
+    $nb_per_page = 10;
+    $min = ($page - 1) * $nb_per_page;
+    $qb = $this->createQueryBuilder('b');
+    if ($user != null) {
+      $qb->where('b.user.id = ' . $user->getId());
+      if ($resource != null) {
+        $qb->andWhere('b.resource.id = ' . $resource->getId());
+      }
     }
+
+    if ($resource != null) {
+      $qb->where('b.resource.id = ' . $resource->getId());
+    }
+    $qb->orderBy('b.' . $sort, $direction)
+      ->setFirstResult($min)
+      ->setMaxResults($nb_per_page);
+    return $qb->getQuery()->getResult();
+  }
+
+  public function count() {
+    $qb = $this->createQueryBuilder('b');
+    $qb->select('count(b.id)');
+
+    return $qb->getQuery()->getSingleScalarResult();
+  }
+
 }

@@ -35,7 +35,7 @@ class ResourceController extends Controller {
     }
 
     $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction, $keywords);
-    $count = $repository_resource->count();
+    $count = $repository_resource->count($keywords);
 
     /* Pagination */
     $total = $count;
@@ -89,6 +89,10 @@ class ResourceController extends Controller {
           $resource->setPath($newFileName);
         }
         $resource->setPath($newFileName);
+
+        if (!$this->isCAeSARCode($resource->getCode())) {
+          $resource->setCode(str_replace(array(' ', '-', '.'), '', $resource->getCode()));
+        }
 
         if ($this->checkCode($resource->getCode())) {
           $em->persist($resource);
@@ -153,7 +157,10 @@ class ResourceController extends Controller {
         }
         $resource->setPath($newFileName);
 
-        //TODO check ISBN validator. Un bug sur 978-2749917474
+        if (!$this->isCAeSARCode($resource->getCode())) {
+          $resource->setCode(str_replace(array(' ', '-', '.'), '', $resource->getCode()));
+        }
+
         if ($this->checkCode($resource->getCode())) {
           $em->flush();
           $this->get('session')->getFlashBag()->add(
@@ -250,6 +257,12 @@ class ResourceController extends Controller {
     }
   }
 
+  private function isCAeSARCode($code) {
+    $code = trim($code);
+    $caesar = "C-";
+    return (strlen($caesar) < strlen($code) && substr($code, 0, strlen($caesar)) === $caesar);
+  }
+
   /**
    * Cette fonction prend le code en paramètre et teste s'il s'agit d'un code géré par l'application.
    * Si c'est un code ISBN-10 ou ISBN-13, la fonction renvoie true
@@ -262,9 +275,9 @@ class ResourceController extends Controller {
    */
   private function checkCode($code) {
     $code = trim($code);
-    $caesar = "CAeSAR-";
-    if (strlen($caesar) < strlen($code) && substr($code, 0, strlen($caesar)) === $caesar) {
+    if ($this->isCAeSARCode($code)) {
       $em = $this->getDoctrine()->getManager();
+      $caesar = "C-";
       if (filter_input(INPUT_GET, substr($code, strlen($caesar), strlen($code)), FILTER_VALIDATE_INT) !== false) {
         $clean = $code;
       } else {
@@ -281,8 +294,7 @@ class ResourceController extends Controller {
       $em->flush();
       return true;
     } else {
-      //On enlève les tirets au cas où
-      $code = str_replace('-', '', $code);
+      $code = str_replace(array(' ', '-', '.'), '', $code);
       return $this->checkISBN($code);
     }
   }
@@ -293,7 +305,7 @@ class ResourceController extends Controller {
    * @return boolean
    */
   private function checkISBN($isbn) {
-    $type = gettype($isbn);
+    $type = $this->gettype($isbn);
     if ($type === -1) {
       return false;
     } else if ($type === 13) {
@@ -359,6 +371,7 @@ class ResourceController extends Controller {
   }
 
   public function genchksum13($isbn) {
+    $tb = 0;
     for ($i = 0; $i <= 12; $i++) {
       $tc = substr($isbn, -1, 1);
       $isbn = substr($isbn, 0, -1);

@@ -26,7 +26,7 @@ admin:
             list: Lister les étiquettes
             generate: Générer de nouvelles étiquettes
             delete: Supprimer une étiquette
-    lang: 
+    lang:
         french: Français
         english: Anglais
     label:
@@ -60,15 +60,23 @@ admin:
     fieldset:
         shelves:
             legend: Informations sur l'emplacement
+        user:
+            legend:
+                personnal: Données personnelles
+                connexion: Données de connexion
+        tag:
+            legend:
+                positioning: Positionnement
+                format: Format
     button:
         logout: Déconnexion
+        search: Rechercher
         user:
             add: Ajouter l'utilisateur
             update: Modifier l'utilisateur
         shelf:
             add: Ajouter l'emplacement
             update: Modifier l'emplacement
-            search: Rechercher
     breadcrumb:
         shelves:
             add: Ajouter
@@ -92,4 +100,6 @@ admin:
             list: Etiquette
         borrowings:
             list: Emprunts
-            
+    summary:
+        tag:
+            help: Aide

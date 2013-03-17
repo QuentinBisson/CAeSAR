@@ -35,7 +35,26 @@ form:
                 long:
                     description: Description détaillée
                 search: Rechercher
-                
+    tag:
+        type:
+            label:
+                margin:
+                    left: Marge gauche (en cm)
+                    top: Marge supérieure (en cm)
+                gap:
+                    horizontal: Écart horizontal (en cm)
+                    vertical: Écart vertical (en cm)
+                height: Hauteur  (en cm)
+                width: Largeur (en cm)
+                columns: Colonnes
+                rows: Lignes
+            text:
+                margin:
+                    left: Marge entre le bord gauche et la première colonne d'étiquette (en cm)
+                    top:  Marge entre le bord supérieur et la ligne colonne d'étiquette (en cm)
+                gap:
+                    horizontal: Écart horizontal entre le début d'une étiquette et le début de la suivante (en cm)
+                    vertical: Écart vertical entre le début d'une étiquette et le début de la suivante (en cm)
 table:
     foot:
         count:
@@ -50,7 +69,7 @@ table:
         shelves:
            name: Nom
            description: Description
-        resources: 
+        resources:
             code: Code
             description: Titre
             shelf:
@@ -72,7 +91,7 @@ table:
 ajax:
     wait:
         message: Veuillez patientez ...
-        
+
 resource:
     label:
         identifier: Identifiant

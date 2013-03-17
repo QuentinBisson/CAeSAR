@@ -10,51 +10,80 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository implements UserProviderInterface {
 
-    public function loadUserByUsername($username) {
-       $q = $this->createQueryBuilder('u')
-                ->where('u.username = :username')
-                ->setParameter('username', $username)
-                ->orWhere('u.codeBu = :codeBu')
-                ->setParameter('codeBu', $username)
-                ->getQuery();
-              
-        try {
-            $user = $q->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new UsernameNotFoundException(sprintf('Unable to find an active admin CaesarUserBundle:User object identified by "%s".', $username), null, 0, $e);
+  public function loadUserByUsername($username) {
+    $q = $this->createQueryBuilder('u')
+      ->where('u.username = :username')
+      ->setParameter('username', $username)
+      ->orWhere('u.codeBu = :codeBu')
+      ->setParameter('codeBu', $username)
+      ->getQuery();
+
+    try {
+      $user = $q->getSingleResult();
+    } catch (NoResultException $e) {
+      throw new UsernameNotFoundException(sprintf('Unable to find an active admin CaesarUserBundle:User object identified by "%s".', $username), null, 0, $e);
+    }
+    return $user;
+  }
+
+  public function refreshUser(UserInterface $user) {
+    $class = get_class($user);
+    if (!$this->supportsClass($class)) {
+      throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+    }
+
+    return $this->find($user->getId());
+  }
+
+  public function supportsClass($class) {
+    return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+  }
+
+  public function getUserFromToSortBy($page, $sort, $direction, $keywords = array()) {
+    $nb_per_page = 10;
+    $min = ($page - 1) * $nb_per_page;
+    $qb = $this->createQueryBuilder('u');
+    $qb->where("u.role = 'ROLE_USER'")
+      ->orderBy('u.' . $sort, $direction)
+      ->setFirstResult($min)
+      ->setMaxResults($nb_per_page);
+    if (!empty($keywords)) {
+      $iteration = 0;
+      foreach ($keywords as $string) {
+        if ($iteration > 0) {
+          $qb->andWhere("u.username like :user" . $iteration . " OR u.name like :name" . $iteration . " OR u.firstname like :first" . $iteration);
+        } else {
+          $qb->andWhere("u.username like :user" . $iteration . " OR u.name like :name" . $iteration . " OR u.firstname like :first" . $iteration);
         }
-        return $user;
+        $qb->setParameter('user' . $iteration, '%' . $string . '%');
+        $qb->setParameter('name' . $iteration, '%' . $string . '%');
+        $qb->setParameter('first' . $iteration, '%' . $string . '%');
+        ++$iteration;
+      }
     }
 
-    public function refreshUser(UserInterface $user) {
-        $class = get_class($user);
-        if (!$this->supportsClass($class)) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+    return $qb->getQuery()->getResult();
+  }
+
+  public function count($keywords = array()) {
+    $qb = $this->createQueryBuilder('u');
+    $qb->select('count(u.id)')
+      ->where("u.role = 'ROLE_USER'");
+    if (!empty($keywords)) {
+      $iteration = 0;
+      foreach ($keywords as $string) {
+        if ($iteration > 0) {
+          $qb->andWhere("u.username like :user" . $iteration . " OR u.name like :name" . $iteration . " OR u.firstname like :first" . $iteration);
+        } else {
+          $qb->andWhere("u.username like :user" . $iteration . " OR u.name like :name" . $iteration . " OR u.firstname like :first" . $iteration);
         }
-
-        return $this->find($user->getId());
+        $qb->setParameter('user' . $iteration, '%' . $string . '%');
+        $qb->setParameter('name' . $iteration, '%' . $string . '%');
+        $qb->setParameter('first' . $iteration, '%' . $string . '%');
+        ++$iteration;
+      }
     }
-
-    public function supportsClass($class) {
-        return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
-    }
-
-    public function getUserFromToSortBy($page, $sort, $direction) {
-        $nb_per_page = 10;
-        $min = ($page - 1) * $nb_per_page;
-        $qb = $this->createQueryBuilder('u');
-        $qb->where("u.role = 'ROLE_USER'")
-                ->orderBy('u.' . $sort, $direction)
-                ->setFirstResult($min)
-                ->setMaxResults($nb_per_page);
-        return $qb->getQuery()->getResult();
-    }
-
-    public function count() {
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('count(u.id)')
-                ->where("u.role = 'ROLE_USER'");
-        return $qb->getQuery()->getSingleScalarResult();
-    }
+    return $qb->getQuery()->getSingleScalarResult();
+  }
 
 }

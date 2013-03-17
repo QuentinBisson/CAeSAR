@@ -6,31 +6,31 @@
 input[type="button"]#generator {
     margin-left: 50px;
 }
-.codeBu { 
+.codeBu {
     width:10%;
 }
 
-.login { 
+.login {
     width:20%;
 }
 
-.nom { 
+.nom {
     width:20%;
 }
 
-.prenom { 
+.prenom {
     width:20%;
 }
 
-.email { 
+.email {
     width:20%;
 }
 
-.edit { 
+.edit {
     width:2%;
 }
 
-.delete { 
+.delete {
     width:2%;
 }
 
@@ -48,7 +48,7 @@ img#resource-img{
 
 .overflow{
     overflow: auto;
-} 
+}
 
 .mid-height{
     height: 50%;
@@ -88,4 +88,37 @@ img#resource-img{
     width: 50%;
     float: left;
     margin-bottom: 10px;
+}
+
+.tag-generate-form {
+    width: 35%;
+}
+
+.tag-positioning-description {
+     width: 40%;
+}
+
+details.help summary {
+    padding: 10px;
+    outline: none;
+    background-color: #053A6C;
+    color: white;
+    font-weight: bold;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+details.help{
+    margin-bottom: 20px;
+}
+
+details.help dl dt {
+    font-weight: bold;
+}
+
+details.help dl dd {
+    padding-left: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }

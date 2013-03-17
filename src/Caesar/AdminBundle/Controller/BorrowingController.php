@@ -7,12 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BorrowingController extends Controller {
 
-  public function indexAction($page = 1, $sort = 'id', $direction = 'asc', $user = null, $resource = null) {
+  public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
-    $user = null;
-    $resource = null;
     $archived = null;
 
     $repository_borrowing = $em->getRepository('CaesarUserBundle:Borrowing');
@@ -22,21 +20,22 @@ class BorrowingController extends Controller {
       $searchForm->bind($request);
       if ($searchForm->isValid()) {
         $data = $searchForm->getData();
-        //$user = $data['user'];
-        //$resource = $data['resource'];
         $archived = $data['archived'];
       }
     }
 
     if ($archived) {
-      $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user, $resource);
+      $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction);
       $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
-      $archivedBorrowings = $repository_archived_borrowing->getArchivedBorrowingsFromToSortBy($page, $sort, $direction, $user, $resource);
+      $archivedBorrowings = $repository_archived_borrowing->getArchivedBorrowingsFromToSortBy($page, $sort, $direction);
       $borrowings = array_merge($currentBorrowings, $archivedBorrowings);
+      $c1 = $repository_borrowing->count();
+      $c2 = $repository_archived_borrowing->count();
+      $count = $c1 + $c2;
     } else {
-      $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user, $resource);
+      $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction);
+      $count = $repository_borrowing->count();
     }
-    $count = count($borrowings);
 
     /* Pagination */
     $total = $count;
