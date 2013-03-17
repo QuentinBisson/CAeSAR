@@ -3,53 +3,44 @@
 namespace Caesar\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Caesar\UserBundle\Entity\UserRepository;
 use Caesar\AdminBundle\Tests\Controller;
 
-class UserAddControllerTest extends WebTestCase {
+class ResourceAddControllerTest extends WebTestCase
+{
 
-  /**
-   * @var \Doctrine\ORM\EntityManager
-   */
-  private $em;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
 
-  /**
-   * {@inheritDoc}
-   */
-  public function setUp() {
-    static::$kernel = static::createKernel();
-    static::$kernel->boot();
-    $this->em = static::$kernel->getContainer()
-      ->get('doctrine')
-      ->getEntityManager()
-    ;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    public function setUp()
+    {
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getEntityManager()
+        ;
+    }
 
-  public function testIndex() {
-    $client = static::createClient();
-    $crawler = $client->request('GET', '/fr/admin/user/add');
+    public function testIndex()
+    {
+        $client = static::createClient();
 
-    file_put_contents("tutu.txt", $client->getResponse()->getContent());
-    //$crawler = $client->followRedirect();
-    //$this->assertEquals(1, $crawler->filter('h1:contains("Ajouter")')->count());
-    //$this->assertEquals(1, $crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count());
+        $crawler = $client->request('GET', '/fr/admin/resource/add');
 
-    $this->assertGreaterThan(
-      0, $crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count()
-    );
-  }
+        file_put_contents("tutu.txt", $client->getResponse()->getContent());
+        
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('html:contains("Ajouter une nouvelle ressource")')->count()
+        );
+    }
 
-    public function testAddSeveralNames() {
-        /*$this->testOnlyName('Lucas');
-        $this->testOnlyName('Tom');
-        $this->testOnlyName('Tam');
-        $this->testOnlyName('Toum');
-        //$this->testOnlyName('789');
-        //$this->testOnlyName('@');
-        $this->testOnlyName('?');
-        $this->testOnlyName('#');*/
-        //$this->testOnlyName('†');       
-
+    /*public function testAddResFromCSV() {
         $arrResult = array();
         $arrLines = file('C:\Web\wamp\www\CAeSAR\src\Caesar\AdminBundle\Tests\Controller\user.csv');
         foreach($arrLines as $line) {
@@ -58,7 +49,6 @@ class UserAddControllerTest extends WebTestCase {
         foreach($arrResult as $res) {
             $this->testAdd($res[0],$res[1],$res[2],$res[3],$res[4],$res[5],$res[6]);
         }
-
 
     }
 
@@ -90,16 +80,18 @@ class UserAddControllerTest extends WebTestCase {
         $count = $repository_user->count(); //compte nb users pour calcul nb de pages (10/page)
         
 
+        file_put_contents("tutu.html", $client->getResponse()->getContent());
+
         $crawler = $client->request('GET', '/fr/admin/user');
 
         $this->assertTrue($crawler->filter('html:contains("'.$name.'")')->count() > 0);
 
-        /* Suppression de l'utilisateur */
+        //Suppression de l'utilisateur
         $crawler = $client->request('GET', '/fr/admin/user');
         file_put_contents("add.html", $client->getResponse()->getContent());
         $link = $crawler->filterXpath("//tr[@id='".$code."']//a")->eq(1)->link();
-        $crawler = $client->click($link);
-        
-    }
+        $crawler = $client->click($link);        
+    }*/
 
+   
 }

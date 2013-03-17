@@ -20,7 +20,7 @@
     </tfoot>
     <tbody id="table_list">
          {% for shelf in shelves %}
-            <tr>
+            <tr id="{{ shelf.name }}">
                 <td>{{ shelf.name }}</td>
                 <td>{{ shelf.description }}</td>
                 <td>
