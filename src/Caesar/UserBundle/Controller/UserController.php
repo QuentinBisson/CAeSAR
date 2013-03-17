@@ -13,6 +13,10 @@ class UserController extends Controller {
 
     public function indexAction() {
         $_locale = substr($this->get('request')->getPreferredLanguage(), 0, 2);
+        if ($_locale != 'en' && $_locale != 'fr')
+        {
+            $_locale = 'en';
+        }
         return $this->redirect($this->generateUrl('caesar_client_homepage', array('_locale' => $_locale)));
     }
 
