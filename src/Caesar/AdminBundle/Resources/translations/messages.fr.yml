@@ -35,6 +35,38 @@ admin:
                 not:
                     empty: Vous devez déplacer les ressources suivantes dans une autre étagère avant de la supprimer.
                 move: Déplacer la ressource
+    form:
+        invalid: Requête invalide
+        resources:
+            exception: La ressource %resource% n'est pas une ressource valide
+            notice:
+                add: La ressource %resource% a bien été ajoutée
+                update: La ressource %resource% a bien été modifiée
+                delete: La ressource %resource% a bien été supprimée
+            error: Le code %resource% n'est pas un code ISBN ou propriétaire valide
+        shelves:
+            exception: L'étagère %shelf% n'est pas une étagère valide
+            notice:
+                add: L'étagère %shelf% a bien été ajoutée
+                update: L'étagère %shelf% a bien été modifiée
+                delete: L'étagère %shelf% a bien été supprimée
+            error: L'étagère %shelf% n'est pas une étagère valide
+        tags:
+            exception: L'étiquette %tag% n'est pas une étiquette valide
+            notice:
+                add: L'étiquette %tag% a bien été ajoutée
+                update: L'étiquette %tag% a bien été modifiée
+                delete: L'étiquette %tag% a bien été supprimée
+            error: L'étiquette %tag% n'est pas une étiquette valide
+        users:
+            exception: L'utilisateur %user% n'est pas un utilisateur valide
+            notice:
+                add: L'utilisateur %user% a bien été ajouté
+                update: L'utilisateur %user% a bien été mis à jour
+                delete: L'utilisateur %user% a bien été supprimé
+            error: L'utilisateur %user% n'est pas un utilisateur valide
+            password:
+                not_empty: Le mot de passe ne peut pas être vide
     menu:
         title:
             shelves:

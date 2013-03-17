@@ -134,22 +134,23 @@ class TagController extends Controller {
   }
 
   public function deleteAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.tags.exception', array('%tag%' =>$id)));
     }
     $em = $this->getDoctrine()->getManager();
     if (isset($clean)) {
       $tag = $em->getRepository('CaesarTagBundle:Tag')->find($clean);
     }
     if (!$tag) {
-      throw $this->createNotFoundException('Tag non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.tags.exception', array('%tag%' =>$id)));
     }
     $em->remove($tag);
     $em->flush();
     $this->get('session')->getFlashBag()->add(
-      'notice', 'L\'étiquette ' . $tag->getCode() . ' a été supprimée.'
+      'notice', $translator->trans('admin.form.tags.notice.delete', array('%tag%' =>$tag->getCode()))
     );
     return $this->render('CaesarAdminBundle:Tag:delete.html.twig');
   }

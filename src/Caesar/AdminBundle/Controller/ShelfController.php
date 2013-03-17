@@ -63,6 +63,7 @@ class ShelfController extends Controller {
   }
 
   public function addAction() {
+      $translator = $this->get('translator');
     $em = $this->getDoctrine()->getEntityManager();
     $shelf = new Shelf();
 
@@ -76,7 +77,7 @@ class ShelfController extends Controller {
         $em->persist($shelf);
         $em->flush();
         $this->get('session')->getFlashBag()->add(
-          'notice', 'L\'emplacement ' . $shelf->getName() . ' a été ajouté.'
+          'notice', $translator->trans('admin.form.shelves.notice.add', array('%shelf%' => $shelf->getName()))
         );
         return $this->redirect($this->generateUrl('caesar_admin_shelf_homepage'));
       }
@@ -88,10 +89,11 @@ class ShelfController extends Controller {
   }
 
   public function updateAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.shelves.exception', array('%shelf%' => $id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -101,7 +103,7 @@ class ShelfController extends Controller {
     }
 
     if (!$shelf) {
-      throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.shelves.exception', array('%shelf%' => $id)));
     }
 
     $form = $this->createForm(new ShelfType(), $shelf);
@@ -112,7 +114,7 @@ class ShelfController extends Controller {
         $shelf = $form->getData();
         $em->flush();
         $this->get('session')->getFlashBag()->add(
-          'notice', 'L\'emplacement ' . $shelf->getName() . ' a été modifié.'
+          'notice', $translator->trans('admin.form.shelves.notice.update', array('%shelf%' => $shelf->getName()))
         );
         return $this->redirect($this->generateUrl('caesar_admin_shelf_homepage'));
       }
@@ -124,10 +126,11 @@ class ShelfController extends Controller {
   }
 
   public function deleteAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.shelves.exception', array('%shelf%' => $id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -136,7 +139,7 @@ class ShelfController extends Controller {
     }
 
     if (!$shelf) {
-      throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.shelves.exception', array('%shelf%' => $id)));
     }
     $books = $em->getRepository('CaesarShelfBundle:Shelf')->findAllResourcesById($shelf->getId());
     if (count($books) > 0) {
@@ -146,7 +149,7 @@ class ShelfController extends Controller {
       $em->flush();
 
       $this->get('session')->getFlashBag()->add(
-        'notice', 'L\'emplacement ' . $shelf->getName() . ' a été supprimé.'
+        'notice', $translator->trans('admin.form.shelves.notice.delete', array('%shelf%' => $shelf->getName()))
       );
 
       return $this->render('CaesarAdminBundle:Shelf:delete.html.twig');

@@ -35,6 +35,38 @@ admin:
                 not:
                     empty: You must first move the following resources to a new location before removing this location.
                 move: Move the resource
+    form:
+        invalid: Invalid request
+        resources:
+            exception: The resource id %resource% is not a valid resource
+            notice:
+                add: The resource %resource% has been added
+                update: The resource %resource% has been updated
+                delete: The resource %resource% has been deleted
+            error: The code %resource% is not a valid ISBN code or local code
+        shelves:
+            exception: The shelf id %shelf% is not a valid shelf
+            notice:
+                add: The shelf %shelf% has been added
+                update: The shelf %shelf% has been updated
+                delete: The shelf %shelf% has been deleted
+            error: The shelf %shelf% is not a valid shelf
+        tags:
+            exception: The tag id %tag% is not a valid tag
+            notice:
+                add: The tag %tag% has been added
+                update: The tag %tag% has been updated
+                delete: The tag %tag% has been deleted
+            error: The tag %tag% is not a valid tag
+        users:
+            exception: The user id %user% is not a valid user
+            notice:
+                add: The user %user% has been added
+                update: The user %user% has been updated
+                delete: The user %user% has been deleted
+            error: The user %user% is not a valid user
+            password:
+                not_empty: The password can't be empty
     menu:
         title:
             shelves:
@@ -59,7 +91,7 @@ admin:
                 list: List borrowings
     fieldset:
         shelves:
-            legend: Informations about the shelf
+            legend: Information about the shelf
         user:
             legend:
                 personnal: Personal data

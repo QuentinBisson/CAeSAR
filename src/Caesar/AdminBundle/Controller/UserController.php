@@ -53,7 +53,6 @@ class UserController extends Controller {
         'count' => $count,
         'pagination' => $pagination);
 
-    $request = $this->get('request');
     if ($request->isXmlHttpRequest()) {
       return $this->render("CaesarAdminBundle:User:list.html.twig", $array);
     }
@@ -65,6 +64,7 @@ class UserController extends Controller {
 
   public function addAction() {
     $em = $this->getDoctrine()->getEntityManager();
+    $translator = $this->get('translator');
     $user = new User();
     $form = $this->createForm(new UserType(), $user);
     $request = $this->get('request');
@@ -82,7 +82,7 @@ class UserController extends Controller {
         $em->persist($user);
         $em->flush();
         $this->get('session')->getFlashBag()->add(
-          'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été ajouté.'
+          'notice', $translator->trans('admin.form.users.notice.add', array('%user%' => $user->getName() . ' ' . $user->getFirstname()))
         );
         return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
       }
@@ -94,10 +94,11 @@ class UserController extends Controller {
   }
 
   public function updateAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.users.exception', array('%user%' => $id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -107,7 +108,7 @@ class UserController extends Controller {
     }
 
     if (!$user) {
-      throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.users.exception', array('%user%' => $id)));
     }
 
     $user->setConfirmPassword($user->getPlainPassword());
@@ -128,12 +129,12 @@ class UserController extends Controller {
           //TODO verifirer unicité codebu et login
           $em->flush();
           $this->get('session')->getFlashBag()->add(
-            'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été modifié.'
+            'notice', $translator->trans('admin.form.users.notice.update', array('%user%' => $user->getName() . ' ' . $user->getFirstname()))
           );
           return $this->redirect($this->generateUrl('caesar_admin_user_homepage'));
         } else {
           $this->get('session')->getFlashBag()->add(
-            'erreur', 'Le mot de passe ne peut pas être vide.'
+            'erreur', $translator->trans('admin.form.users.password.not_empty')
           );
         }
       }
@@ -145,10 +146,11 @@ class UserController extends Controller {
   }
 
   public function deleteAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.users.exception', array('%user%' => $id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -158,14 +160,14 @@ class UserController extends Controller {
     }
 
     if (!$user) {
-      throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.users.exception', array('%user%' => $id)));
     }
 
     $em->remove($user);
     $em->flush();
 
     $this->get('session')->getFlashBag()->add(
-      'notice', 'L\'utilisateur ' . $user->getName() . ' ' . $user->getFirstname() . ' a été supprimé.'
+      'notice', $translator->trans('admin.form.users.notice.delete', array('%user%' => $user->getName() . ' ' . $user->getFirstname()))
     );
 
     return $this->render('CaesarAdminBundle:User:delete.html.twig');

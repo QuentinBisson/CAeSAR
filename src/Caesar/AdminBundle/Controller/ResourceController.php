@@ -63,6 +63,7 @@ class ResourceController extends Controller {
 
   public function addAction() {
     $em = $this->getDoctrine()->getEntityManager();
+    $translator = $this->get('translator');
     $resource = new Resource();
     $form = $this->createForm(new ResourceType(), $resource);
     $request = $this->get('request');
@@ -98,12 +99,12 @@ class ResourceController extends Controller {
           $em->persist($resource);
           $em->flush();
           $this->get('session')->getFlashBag()->add(
-            'notice', 'La ressource ' . $resource->getDescription() . ' a été ajoutée.'
+            'notice', $translator->trans('admin.form.resources.notice.add', array('%resource%'=> $resource->getDescription()))
           );
           return $this->redirect($this->generateUrl('caesar_admin_resource_homepage'));
         } else {
           $this->get('session')->getFlashBag()->add(
-            'errot', 'Le code de la ressource ' . $resource->getCode() . ' n\'est pas un ISBN valide ou un code propriétaire.'
+             'error', $translator->trans('admin.form.resources.error', array('%resource%'=> $resource->getCode()))
           );
         }
       }
@@ -116,10 +117,11 @@ class ResourceController extends Controller {
   }
 
   public function updateAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.resources.exception', array('%resource%'=>$id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -129,7 +131,7 @@ class ResourceController extends Controller {
     }
 
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.resources.exception', array('%resource%'=>$clean)));
     }
 
     $form = $this->createForm(new ResourceType(), $resource);
@@ -164,12 +166,12 @@ class ResourceController extends Controller {
         if ($this->checkCode($resource->getCode())) {
           $em->flush();
           $this->get('session')->getFlashBag()->add(
-            'notice', 'La ressource ' . $resource->getDescription() . ' a été modifiée.'
+            'notice', $translator->trans('admin.form.resources.notice.update', array('%resource%'=>$resource->getDescription()))
           );
           return $this->redirect($this->generateUrl('caesar_admin_resource_homepage'));
         } else {
           $this->get('session')->getFlashBag()->add(
-            'error', 'Le code de la ressource ' . $resource->getCode() . ' n\'est pas un ISBN valide ou un code propriétaire.'
+            'error', $translator->trans('admin.form.resources.error', array('%resource%'=>$resource->getDescription()))
           );
         }
       }
@@ -181,10 +183,11 @@ class ResourceController extends Controller {
   }
 
   public function descriptionAction($id = 1) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.resources.exception', array('%resource%'=>$id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -193,21 +196,22 @@ class ResourceController extends Controller {
         ->find($clean);
     }
     if (!$shelf) {
-      throw $this->createNotFoundException('Emplacement non trouvé avec id ' . $clean);
+      throw $this->createNotFoundException($translator->trans('admin.form.shelves.exception', array('%shelf%'=>$clean)));
     }
 
     $request = $this->get('request');
     if ($request->isXmlHttpRequest()) {
       return $this->render("CaesarAdminBundle:Resource:shelfDescription.html.twig", array('shelf' => $shelf));
     }
-    throw $this->createNotFoundException('Requete invalide');
+    throw $this->createNotFoundException($translator->trans('admin.form.invalid'));
   }
 
   public function deleteAction($id) {
+      $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.resources.exception', array('%resource%'=>$id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -217,14 +221,14 @@ class ResourceController extends Controller {
     }
 
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvé avec id ' . $id);
+      throw $this->createNotFoundException($translator->trans('admin.form.resources.exception', array('%resource%'=>$id)));
     }
 
     $em->remove($resource);
     $em->flush();
 
     $this->get('session')->getFlashBag()->add(
-      'notice', 'La ressource ' . $resource->getId() . ' a été supprimée.'
+      'notice', $translator->trans('admin.form.resources.notice.delete', array('%resource%'=>$resource->getId()))
     );
 
     return $this->render('CaesarAdminBundle:Resource:delete.html.twig');

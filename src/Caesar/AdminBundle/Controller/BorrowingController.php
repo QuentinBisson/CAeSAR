@@ -60,5 +60,9 @@ class BorrowingController extends Controller {
 
     return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
   }
+  
+  public function searchAction() {
+      
+  }
 
 }
