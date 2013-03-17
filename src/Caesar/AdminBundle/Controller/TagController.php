@@ -45,8 +45,6 @@ class TagController extends Controller {
 
   public function generateAction() {
     $format = new Format();
-    $format->setColumns(1);
-    $format->setRows(1);
     $form = $this->createForm(new TagFormattingType(), $format);
 
     $listForm = $this->createForm(new FormatListType());
