@@ -36,6 +36,7 @@ form:
                     description: Detailled description
                 search: Search
     tag:
+        choose: Choose a format
         type:
             label:
                 margin:
@@ -48,6 +49,7 @@ form:
                 width: Width (in cm)
                 columns: Columns
                 rows: Rows
+                code: Code
             text:
                 margin:
                     left: Margin between the left border and the first column of labels (in cm)

@@ -2,8 +2,9 @@
 
 namespace Caesar\AdminBundle\Controller;
 
-use Caesar\TagBundle\Entity\Tag;
 use Caesar\TagBundle\Entity\Format;
+use Caesar\TagBundle\Entity\Tag;
+use Caesar\TagBundle\Form\FormatListType;
 use Caesar\TagBundle\Form\TagFormattingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,46 +44,26 @@ class TagController extends Controller {
   }
 
   public function generateAction() {
-    $em = $this->getDoctrine()->getEntityManager();
     $format = new Format();
     $format->setColumns(1);
     $format->setRows(1);
     $form = $this->createForm(new TagFormattingType(), $format);
+
+    $listForm = $this->createForm(new FormatListType());
 
     $request = $this->get('request');
     if ($request->isMethod('POST')) {
       $form->bind($request);
       if ($form->isValid()) {
         $format = $form->getData();
-        //TODO validate
-
-        $number = $format->getColumns() * $format->getRows();
-        $tags = array();
-        for ($i = 0; $i < $number; $i++) {
-          $tag = new Tag();
-          $em->persist($tag);
-          array_push($tags, $tag);
+        if ($request->request->get('generate')) {
+          return $this->generateLabels($format);
+        } else if ($request->request->get('add')) {
+          $this->addNewFormat($format);
         }
-        $em->flush();
-
-        foreach ($tags as $tag) {
-          $idToString = "" . $tag->getId();
-          $zerosToAdd = 10 - strlen($idToString);
-          $code = 'C-';
-          for ($i = 0; $i < $zerosToAdd; $i++) {
-            $code .= "0";
-          }
-          $tag->setCode($code . $tag->getId());
-        }
-        $em->flush();
-        $hgap = $format->getHorizontalGap() - $format->getWidth();
-        $vgap = $format->getVerticalGap() - $format->getHeight();
-        $pageWidth = $format->getMarginLeft() + (($format->getColumns() - 1) * $hgap) + ($format->getColumns() * $format->getWidth());
-        return $this->render("CaesarAdminBundle:Tag:barcodes.html.twig", array('tags' => $tags, 'format' => $format,
-            'hgap' => $hgap, 'vgap' => $vgap, 'pagewidth' => $pageWidth));
       }
     }
-    return $this->render('CaesarAdminBundle:Tag:generate.html.twig', array('form' => $form->createView()));
+    return $this->render('CaesarAdminBundle:Tag:generate.html.twig', array('form' => $form->createView(), 'listForm' => $listForm->createView()));
   }
 
   public function barcodeAction($text) {
@@ -151,6 +132,68 @@ class TagController extends Controller {
       'notice', 'L\'étiquette ' . $tag->getCode() . ' a été supprimée.'
     );
     return $this->render('CaesarAdminBundle:Tag:delete.html.twig');
+  }
+
+  private function generateLabels($format) {
+    $em = $this->getDoctrine()->getEntityManager();
+    $number = $format->getColumns() * $format->getRows();
+    $tags = array();
+    for ($i = 0; $i < $number; $i++) {
+      $tag = new Tag();
+      $em->persist($tag);
+      array_push($tags, $tag);
+    }
+    $em->flush();
+
+    foreach ($tags as $tag) {
+      $idToString = "" . $tag->getId();
+      $zerosToAdd = 10 - strlen($idToString);
+      $code = 'C-';
+      for ($i = 0; $i < $zerosToAdd; $i++) {
+        $code .= "0";
+      }
+      $tag->setCode($code . $tag->getId());
+    }
+    $em->flush();
+    $hgap = $format->getHorizontalGap() - $format->getWidth();
+    $vgap = $format->getVerticalGap() - $format->getHeight();
+    $pageWidth = $format->getMarginLeft() + (($format->getColumns() - 1) * $hgap) + ($format->getColumns() * $format->getWidth());
+    return $this->render("CaesarAdminBundle:Tag:barcodes.html.twig", array('tags' => $tags, 'format' => $format,
+          'hgap' => $hgap, 'vgap' => $vgap, 'pagewidth' => $pageWidth));
+  }
+
+  private function addNewFormat(Format $format) {
+    if ($format == null || $format->getCode() == null || "" === trim($format->getCode())) {
+      $this->get('session')->getFlashBag()->add(
+        'error', 'admin.validation.tag.code.empty'
+      );
+      return $this->redirect($this->generateUrl('caesar_admin_tag_generate'));
+    }
+
+    $em = $this->getDoctrine()->getEntityManager();
+    $repository = $em->getRepository('CaesarTagBundle:Format');
+    $f = $repository->findOneByCode($format->getCode());
+
+    if (!$f) {
+      $em->persist($format);
+      $this->get('session')->getFlashBag()->add(
+        'notice', 'admin.validation.tag.format.added'
+      );
+    } else {
+      $f->setColumns($format->getColumns());
+      $f->setHeight($format->getHeight());
+      $f->setHorizontalGap($format->getHorizontalGap());
+      $f->setMarginLeft($format->getMarginLeft());
+      $f->setMarginTop($format->getMarginTop());
+      $f->setRows($format->getRows());
+      $f->setVerticalGap($format->getVerticalGap());
+      $f->setWidth($format->getWidth());
+      $this->get('session')->getFlashBag()->add(
+        'notice', 'admin.validation.tag.format.updated'
+      );
+    }
+    $em->flush();
+    return $this->redirect($this->generateUrl('caesar_admin_tag_generate'));
   }
 
 }

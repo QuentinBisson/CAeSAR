@@ -22,7 +22,16 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 input[type="url"],
-textarea, 
+select {
+    width: 165px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+textarea,
 select{
     height: 35px;
     -webkit-box-sizing: border-box;

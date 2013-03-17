@@ -14,7 +14,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TagFormattingType extends AbstractType {
 
   public function buildForm(FormBuilderInterface $builder, array $options) {
-    $builder->add("marginLeft", 'number', array('label' => 'form.tag.type.label.margin.left', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+    $builder
+      ->add("code", 'text', array('label' => 'form.tag.type.label.code', 'required' => false))
+      ->add("marginLeft", 'number', array('label' => 'form.tag.type.label.margin.left', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("marginTop", 'number', array('label' => 'form.tag.type.label.margin.top', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("horizontalGap", 'number', array('label' => 'form.tag.type.label.gap.horizontal', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("verticalGap", 'number', array('label' => 'form.tag.type.label.gap.vertical', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))

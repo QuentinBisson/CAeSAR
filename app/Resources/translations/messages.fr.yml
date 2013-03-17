@@ -36,6 +36,7 @@ form:
                     description: Description détaillée
                 search: Rechercher
     tag:
+        choose: Choisissez un format
         type:
             label:
                 margin:
@@ -48,6 +49,7 @@ form:
                 width: Largeur (en cm)
                 columns: Colonnes
                 rows: Lignes
+                code: Code
             text:
                 margin:
                     left: Marge entre le bord gauche et la première colonne d'étiquette (en cm)

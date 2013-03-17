@@ -23,6 +23,14 @@
     <form class="left tag-generate-form" action="{{ path('caesar_admin_tag_generate') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <fieldset>
+            <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
+            {{ form_errors(listForm) }}
+            {{ form_row(listForm.format) }}
+            {{ form_rest(listForm) }}
+            {{ form_row(form.code) }}
+        </fieldset>
+
+        <fieldset>
             <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
             {{ form_row(form.horizontalGap) }}
             {{ form_row(form.verticalGap) }}
@@ -37,7 +45,8 @@
             {{ form_row(form.rows) }}
         </fieldset>
         {{ form_rest(form)}}
-        <input type="submit" value="Générer les codes barres" id="generator"/>
+        <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate" id="generator"/>
+        <input type="submit" value="{{'admin.button.tag.add'|trans({})}}" name="add" id="generator"/>
     </form>
 
     <section class="left tag-positioning-description">
