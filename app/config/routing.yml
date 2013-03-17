@@ -10,23 +10,29 @@ caesar_tag:
 caesar_admin:
     resource: "@CaesarAdminBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/admin
-    requirements: 
+    requirements:
         _locale: fr|en
     defaults: {_locale: 'fr'}
-    
+
 caesar_resource:
     resource: "@CaesarResourceBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
-    requirements: 
+    requirements:
         _locale: fr|en
-    defaults: {_locale: 'fr'}    
-    
+    defaults: {_locale: 'fr'}
+
 caesar_client:
     resource: "@CaesarUserBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
-    requirements: 
+    requirements:
         _locale: fr|en
 
 caesar_client_index:
     pattern:  /
     defaults: { _controller: CaesarUserBundle:User:index}
+
+caesar_logout:
+     pattern: /{_locale}/logout
+     requirements:
+        _locale: fr|en
+     defaults: {_locale: 'fr'}

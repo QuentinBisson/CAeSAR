@@ -98,7 +98,7 @@ img#resource-img{
      width: 40%;
 }
 
-details.help summary {
+div.help span.help-title {
     padding: 10px;
     outline: none;
     background-color: #053A6C;
@@ -107,17 +107,19 @@ details.help summary {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
 }
 
-details.help{
+div.help{
     margin-bottom: 20px;
 }
 
-details.help dl dt {
+div.help dl dt {
     font-weight: bold;
 }
 
-details.help dl dd {
+div.help dl dd {
     padding-left: 20px;
     margin-bottom: 5px;
     margin-top: 5px;

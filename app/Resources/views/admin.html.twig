@@ -34,8 +34,8 @@
                                         <option value="en" data-imagesrc="{{asset('images/en.png')}}"
                                     {% if app.request.locale == 'en'%} selected="selected" {% endif %}>{{'admin.lang.english'|trans({})}}</option>
                                         </select>
-                                        <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">{{'admin.button.logout'|trans({})}}</a>
-                                </div> 
+                                        <a class="link-button-deconnexion" href="{{path('caesar_logout')}}">{{'admin.button.logout'|trans({})}}</a>
+                                </div>
                             </section>
                         </div>
                     </header>

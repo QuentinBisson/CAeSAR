@@ -91,7 +91,7 @@ admin:
                 list: List borrowings
     fieldset:
         shelves:
-            legend: Information about the shelf
+            legend: Informations about the shelf
         user:
             legend:
                 personnal: Personal data
@@ -100,6 +100,7 @@ admin:
             legend:
                 positioning: Positioning
                 format: Format
+                choice: Identification
     button:
         logout: Log out
         search: Search
@@ -109,6 +110,9 @@ admin:
         shelf:
             add: Add the location
             update: Update the location
+        tag:
+            generate: Generate labels
+            add: Add or modify a preexisting format
     breadcrumb:
         shelves:
             add: Add
@@ -135,3 +139,10 @@ admin:
     summary:
         tag:
             help: Help
+    validation:
+          tag:
+              code:
+                  empty: The code can't be empty
+              format:
+                  added: The format was added
+                  updated: The format was updated

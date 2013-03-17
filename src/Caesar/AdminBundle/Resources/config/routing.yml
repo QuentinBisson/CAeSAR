@@ -21,10 +21,6 @@ caesar_admin_borrowing_homepage:
     requirements:
         page:  \d+
         direction: asc|desc
-        
-caesar_admin_logout:
-    pattern:  /logout
-    defaults: { _controller: CaesarUserBundle:User:logout }
 
 caesar_admin_resource_add:
     pattern:  /resource/add
@@ -112,3 +108,9 @@ caesar_admin_tag_delete:
 caesar_admin_tag_barcode:
     pattern:  /tag/barcode/{text}
     defaults: { _controller: CaesarAdminBundle:Tag:barcode }
+
+caesar_admin_format_json:
+    pattern:  /tag/format/{id}
+    defaults: { _controller: CaesarAdminBundle:Tag:formatAjax, id = 1}
+    requirements:
+        id:  \d+

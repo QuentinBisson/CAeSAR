@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNCodeBU", columns={"codeBu"}),
  * @ORM\UniqueConstraint(name="UNUsername", columns={"username"})})
- * 
+ *
  * @UniqueEntity("codeBu")
  * @UniqueEntity("username")
  */
@@ -28,7 +28,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var int $codeBu
-     * 
+     *
      * @ORM\Column(name="codeBu", type="integer",length=10, unique=true)
      * @Assert\NotBlank()
      * @Assert\Regex("/^[0-9]*$/")
@@ -36,8 +36,8 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     private $codeBu;
 
     /**
-     * @var string $login
-     * 
+     * @var string $username
+     *
      * @ORM\Column(name="username", type="string", length=100, unique=true)
      * @Assert\NotBlank()
      */
@@ -45,28 +45,28 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var string $password
-     * 
+     *
      * @ORM\Column(name="password", type="string", length=100)
      */
     private $password;
 
     /**
      * @var string $plainPassword
-     * 
+     *
      * Il ne sera pas ajouté en base de données
      */
     private $plainPassword;
 
     /**
      * @var string $confirmPassword
-     * 
+     *
      * Il ne sera pas ajouté en base de données
      */
     protected $confirmPassword;
 
     /**
      * @var string $email
-     * 
+     *
      * @ORM\Column(name="email", type="string", length=100)
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -75,10 +75,10 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var string $name
-     * 
+     *
      * @ORM\Column(name="name", type="string", length=60)
      * @Assert\NotBlank()
-     * 
+     *
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
@@ -90,10 +90,10 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var string $firstname
-     * 
+     *
      * @ORM\Column(name="firstname", type="string", length=50)
      * @Assert\NotBlank()
-     * 
+     *
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
@@ -104,7 +104,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var string $role
-     * 
+     *
      * @ORM\Column(name="role", type="string", length=50)
      */
     private $role;
@@ -118,12 +118,12 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\BorrowingArchive", mappedBy="user")
      */
     private $borrowingArchives;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="user")
      */
     private $reservations;
-    
+
     function __construct() {
         $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
@@ -223,7 +223,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     }
 
     public function eraseCredentials() {
-        
+
     }
 
     public function getRoles() {
@@ -266,7 +266,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     public function addBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings)
     {
         $this->borrowings[] = $borrowings;
-    
+
         return $this;
     }
 
@@ -283,7 +283,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     /**
      * Get borrowings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBorrowings()
     {
@@ -299,7 +299,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
     {
         $this->borrowingArchives[] = $borrowingArchives;
-    
+
         return $this;
     }
 
@@ -316,7 +316,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     /**
      * Get borrowingArchives
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBorrowingArchives()
     {
@@ -332,7 +332,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
     {
         $this->reservations[] = $reservations;
-    
+
         return $this;
     }
 
@@ -349,7 +349,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     /**
      * Get reservations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReservations()
     {

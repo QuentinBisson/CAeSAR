@@ -100,6 +100,7 @@ admin:
             legend:
                 positioning: Positionnement
                 format: Format
+                choice: Identification
     button:
         logout: Déconnexion
         search: Rechercher
@@ -109,6 +110,9 @@ admin:
         shelf:
             add: Ajouter l'emplacement
             update: Modifier l'emplacement
+        tag:
+            generate: Générer les étiquettes
+            add: Ajouter ou modifie un format préexistant
     breadcrumb:
         shelves:
             add: Ajouter
@@ -135,3 +139,10 @@ admin:
     summary:
         tag:
             help: Aide
+    validation:
+          tag:
+              code:
+                  empty: Le code ne peut être vide
+              format:
+                  added: Le format a été ajouté
+                  updated: Le format a été modifié

@@ -14,19 +14,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TagFormattingType extends AbstractType {
 
   public function buildForm(FormBuilderInterface $builder, array $options) {
-    $builder->add("marginLeft", 'text', array('label' => 'form.tag.type.label.margin.left', 'attr' => array('min' => 0, 'step' => 'any')))
-      ->add("marginTop", 'text', array('label' => 'form.tag.type.label.margin.top', 'attr' => array('min' => 0, 'step' => 'any')))
-      ->add("horizontalGap", 'text', array('label' => 'form.tag.type.label.gap.horizontal', 'attr' => array('min' => 0, 'step' => 'any')))
-      ->add("verticalGap", 'text', array('label' => 'form.tag.type.label.gap.vertical', 'attr' => array('min' => 0, 'step' => 'any')))
-      ->add("height", 'text', array('label' => 'form.tag.type.label.height', 'attr' => array('min' => 0, 'step' => 'any')))
-      ->add("width", 'text', array('label' => 'form.tag.type.label.width', 'attr' => array('min' => 0, 'step' => 'any')))
+    $builder
+      ->add("code", 'text', array('label' => 'form.tag.type.label.code', 'required' => false))
+      ->add("marginLeft", 'number', array('label' => 'form.tag.type.label.margin.left', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("marginTop", 'number', array('label' => 'form.tag.type.label.margin.top', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("horizontalGap", 'number', array('label' => 'form.tag.type.label.gap.horizontal', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("verticalGap", 'number', array('label' => 'form.tag.type.label.gap.vertical', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("height", 'number', array('label' => 'form.tag.type.label.height', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("width", 'number', array('label' => 'form.tag.type.label.width', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("columns", 'integer', array('label' => 'form.tag.type.label.columns', 'attr' => array('min' => 1)))
       ->add("rows", 'integer', array('label' => 'form.tag.type.label.rows', 'attr' => array('min' => 1)));
   }
 
   public function setDefaultOptions(OptionsResolverInterface $resolver) {
     parent::setDefaultOptions($resolver);
-    $resolver->setDefaults(array('data_class' => "Caesar\TagBundle\Form\Entity\Format"));
+    $resolver->setDefaults(array('data_class' => "Caesar\TagBundle\Entity\Format"));
   }
 
   public function getName() {

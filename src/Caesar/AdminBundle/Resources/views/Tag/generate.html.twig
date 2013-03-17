@@ -23,38 +23,53 @@
     <form class="left tag-generate-form" action="{{ path('caesar_admin_tag_generate') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         <fieldset>
+            <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
+            {{ form_errors(listForm) }}
+            {{ form_row(listForm.format , { 'attr': {'class': 'format-selection'} }) }}
+            {{ form_rest(listForm) }}
+            <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
+
+            {{ form_row(form.code) }}
+        </fieldset>
+
+        <fieldset>
             <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
-            {{ form_row(form.marginLeft) }}
-            {{ form_row(form.marginTop) }}
             {{ form_row(form.horizontalGap) }}
             {{ form_row(form.verticalGap) }}
+            {{ form_row(form.marginLeft) }}
+            {{ form_row(form.marginTop) }}
         </fieldset>
         <fieldset>
              <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
-            {{ form_row(form.height) }}
             {{ form_row(form.width) }}
+            {{ form_row(form.height) }}
             {{ form_row(form.columns) }}
             {{ form_row(form.rows) }}
         </fieldset>
         {{ form_rest(form)}}
-        <input type="submit" value="Générer les codes barres" id="generator"/>
+        <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate" id="generator"/>
+        <input type="submit" value="{{'admin.button.tag.add'|trans({})}}" name="add" id="generator"/>
     </form>
 
     <section class="left tag-positioning-description">
         <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
-        <details class="help" open="open">
-            <summary>{{'admin.summary.tag.help'|trans({})}}</summary>
+        <div class="help">
+            <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
             <dl>
                 <dt>Margin left : </dt>
                 <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
                 <dt>Margin top : </dt>
                 <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
-                <dt>Vertical gap : </dt>
+                <dt>Vgap : </dt>
                 <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
-                <dt>Horizontal gap : </dt>
+                <dt>Hgap : </dt>
                 <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
             </dl>
-        </details>
+        </div>
     </section>
 </section>
+{% endblock %}
+    {% block javascripts %}
+{{parent()}}
+<script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
 {% endblock %}
