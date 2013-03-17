@@ -25,8 +25,10 @@
         <fieldset>
             <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
             {{ form_errors(listForm) }}
-            {{ form_row(listForm.format) }}
+            {{ form_row(listForm.format , { 'attr': {'class': 'format-selection'} }) }}
             {{ form_rest(listForm) }}
+            <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
+
             {{ form_row(form.code) }}
         </fieldset>
 
@@ -66,4 +68,8 @@
         </div>
     </section>
 </section>
+{% endblock %}
+    {% block javascripts %}
+{{parent()}}
+<script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
 {% endblock %}

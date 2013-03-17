@@ -108,3 +108,9 @@ caesar_admin_tag_delete:
 caesar_admin_tag_barcode:
     pattern:  /tag/barcode/{text}
     defaults: { _controller: CaesarAdminBundle:Tag:barcode }
+
+caesar_admin_format_json:
+    pattern:  /tag/format/{id}
+    defaults: { _controller: CaesarAdminBundle:Tag:formatAjax, id = 1}
+    requirements:
+        id:  \d+

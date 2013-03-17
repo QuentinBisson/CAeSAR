@@ -186,4 +186,9 @@ class Format {
     return $this;
   }
 
+  public function getJsonData() {
+    $var = get_object_vars($this);
+    return $var;
+  }
+
 }

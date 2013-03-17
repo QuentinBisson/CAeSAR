@@ -134,6 +134,29 @@ class TagController extends Controller {
     return $this->render('CaesarAdminBundle:Tag:delete.html.twig');
   }
 
+  public function formatAjaxAction($id = 1) {
+    if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
+      $clean = $id;
+    } else {
+      throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    if (isset($clean)) {
+      $format = $em->getRepository('CaesarTagBundle:Format')
+        ->find($clean);
+    }
+    if (!$format) {
+      throw $this->createNotFoundException('Format non trouvé avec id ' . $clean);
+    }
+
+    $request = $this->get('request');
+    if ($request->isXmlHttpRequest()) {
+      return new Response(json_encode($format->getJsonData()));
+    }
+    throw $this->createNotFoundException('Requete invalide');
+  }
+
   private function generateLabels($format) {
     $em = $this->getDoctrine()->getEntityManager();
     $number = $format->getColumns() * $format->getRows();
