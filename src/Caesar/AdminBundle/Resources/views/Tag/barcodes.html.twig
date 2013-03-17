@@ -9,18 +9,40 @@
             display: none;
         }
         .colonnes {
+            border: 0;
             width: {{pagewidth}}cm;
             margin-top: {{format.marginTop}}cm;
             margin-left: {{format.marginLeft}}cm;
         }
 
         .barcode {
+            border: 0;
             float: left;
             text-align: center;
             height: {{format.height}}cm;
             width: {{format.width}}cm;
             margin-right: {{hgap}}cm;
             margin-bottom:{{vgap}}cm;
+
+            /* Safari, Chrome, and Opera */
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+
+            /* W3C */
+            display:box;
+            box-pack:center;
+            box-align:center;
+        }
+
+        .barcode span {
+            width: 100%;
+            height:100%;
+            /* Firefox */
+            display:-moz-box;
+            -moz-box-pack:center;
+            -moz-box-align:center;
+            -moz-box-orient: vertical;
         }
 
         .barcode img{
@@ -43,13 +65,32 @@
             }
 
             .barcode {
-                border: 1px solid black;
                 float: left;
                 text-align: center;
                 height: {{format.height}}cm;
                 width: {{format.width}}cm;
                 margin-right: {{hgap}}cm;
                 margin-bottom:{{vgap}}cm;
+
+                /* Safari, Chrome, and Opera */
+                display:-webkit-box;
+                -webkit-box-pack:center;
+                -webkit-box-align:center;
+
+                /* W3C */
+                display:box;
+                box-pack:center;
+                box-align:center;
+            }
+
+            .barcode span {
+                width: 100%;
+                height:100%;
+                /* Firefox */
+                display:-moz-box;
+                -moz-box-pack:center;
+                -moz-box-align:center;
+                -moz-box-orient: vertical;
             }
 
             .barcode img{
@@ -78,7 +119,10 @@
         <div class="colonnes">
     {% for tag in tags %}
                 <div class="barcode">
-                    <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
+                    <span>
+                        <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
+                        <p>{{tag.code}}</p>
+                    </span>
                 </div>
     {% endfor %}
             </div>

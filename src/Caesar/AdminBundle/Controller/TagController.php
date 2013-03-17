@@ -3,7 +3,7 @@
 namespace Caesar\AdminBundle\Controller;
 
 use Caesar\TagBundle\Entity\Tag;
-use Caesar\TagBundle\Form\Entity\Format;
+use Caesar\TagBundle\Entity\Format;
 use Caesar\TagBundle\Form\TagFormattingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;

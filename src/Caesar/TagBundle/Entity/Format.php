@@ -1,6 +1,6 @@
 <?php
 
-namespace Caesar\TagBundle\Form\Entity;
+namespace Caesar\TagBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,11 +11,34 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Format {
 
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.margin.left")
+     */
   private $marginLeft;
+
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.margin.top")
+     */
   private $marginTop;
+
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.gap.horizontal")
+     */
   private $horizontalGap;
+
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.gap.vertical")
+     */
   private $verticalGap;
+
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.height")
+     */
   private $height;
+
+  /**
+     * @Assert\Type(type="float", message="validation.assert.error.type.width")
+     */
   private $width;
 
   /**

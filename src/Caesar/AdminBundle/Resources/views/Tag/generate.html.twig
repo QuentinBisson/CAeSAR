@@ -24,15 +24,15 @@
         {{ form_errors(form) }}
         <fieldset>
             <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
-            {{ form_row(form.marginLeft) }}
-            {{ form_row(form.marginTop) }}
             {{ form_row(form.horizontalGap) }}
             {{ form_row(form.verticalGap) }}
+            {{ form_row(form.marginLeft) }}
+            {{ form_row(form.marginTop) }}
         </fieldset>
         <fieldset>
              <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
-            {{ form_row(form.height) }}
             {{ form_row(form.width) }}
+            {{ form_row(form.height) }}
             {{ form_row(form.columns) }}
             {{ form_row(form.rows) }}
         </fieldset>
