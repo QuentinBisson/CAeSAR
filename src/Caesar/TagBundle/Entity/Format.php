@@ -92,6 +92,22 @@ class Format {
    */
   private $rows;
 
+  /**
+   *
+   * @ORM\Column(name="pagewidth", type="float")
+   * @Assert\NotBlank()
+   * @Assert\Type(type = "float", message = "validation.assert.error.type.page.width")
+   */
+  private $pageWidth;
+
+  /**
+   *
+   * @ORM\Column(name="pageheight", type="float")
+   * @Assert\NotBlank()
+   * @Assert\Type(type = "float", message = "validation.assert.error.type.page.height")
+   */
+  private $pageHeight;
+
   public function getId() {
     return $this->id;
   }
@@ -184,6 +200,56 @@ class Format {
     $this->rows = $rows;
 
     return $this;
+  }
+
+  public function getPageHeight() {
+    return $this->pageHeight;
+  }
+
+  public function setPageHeight($pageHeight) {
+    $this->pageHeight = $pageHeight;
+
+    return $this;
+  }
+
+  public function getPageWidth() {
+    return $this->pageWidth;
+  }
+
+  public function setPageWidth($pageWidth) {
+    $this->pageWidth = $pageWidth;
+
+    return $this;
+  }
+
+  /**
+   * @Assert\True(message = "admin.validation.tag.format.hgap.over.width")
+   */
+  public function isHgapOverWidth() {
+    return ($this->horizontalGap > $this->width);
+  }
+
+  /**
+   * @Assert\True(message = "admin.validation.tag.format.vgap.over.height")
+   */
+  public function isVgapOverHeight() {
+    return ($this->verticalGap > $this->height);
+  }
+
+  /**
+   * @Assert\True(message = "admin.validation.tag.format.total.under.page.width")
+   */
+  public function isTotalUnderPageWidth() {
+    $hgap = $this->horizontalGap - $this->width;
+    return $this->pageWidth >= $this->marginLeft + (($this->columns - 1) * $hgap) + ($this->columns * $this->width);
+  }
+
+  /**
+   * @Assert\True(message = "admin.validation.tag.format.total.under.page.height")
+   */
+  public function isTotalUnderPageHeight() {
+    $vgap = $this->verticalGap - $this->height;
+    return $this->pageHeight >= $this->marginTop + (($this->rows - 1) * $vgap) + ($this->rows * $this->width);
   }
 
   public function getJsonData() {

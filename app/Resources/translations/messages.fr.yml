@@ -45,11 +45,15 @@ form:
                 gap:
                     horizontal: Écart horizontal (en cm)
                     vertical: Écart vertical (en cm)
+                page:
+                    width: Largeur de page (en cm)
+                    height: Hauteur de page (en cm)
                 height: Hauteur  (en cm)
                 width: Largeur (en cm)
                 columns: Colonnes
                 rows: Lignes
                 code: Code
+                format: Formats existants
             text:
                 margin:
                     left: Marge entre le bord gauche et la première colonne d'étiquette (en cm)

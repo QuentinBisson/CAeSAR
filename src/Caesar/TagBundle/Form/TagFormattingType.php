@@ -23,7 +23,9 @@ class TagFormattingType extends AbstractType {
       ->add("height", 'number', array('label' => 'form.tag.type.label.height', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("width", 'number', array('label' => 'form.tag.type.label.width', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
       ->add("columns", 'integer', array('label' => 'form.tag.type.label.columns', 'attr' => array('min' => 1)))
-      ->add("rows", 'integer', array('label' => 'form.tag.type.label.rows', 'attr' => array('min' => 1)));
+      ->add("rows", 'integer', array('label' => 'form.tag.type.label.rows', 'attr' => array('min' => 1)))
+      ->add("pageWidth", 'number', array('label' => 'form.tag.type.label.page.width', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')))
+      ->add("pageHeight", 'number', array('label' => 'form.tag.type.label.page.height', 'precision' => 2, 'attr' => array('min' => 0, 'step' => 'any')));
   }
 
   public function setDefaultOptions(OptionsResolverInterface $resolver) {

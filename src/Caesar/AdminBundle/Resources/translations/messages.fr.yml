@@ -29,6 +29,14 @@ admin:
     lang:
         french: Français
         english: Anglais
+    home:
+        synopsis:
+            shelves: Gestion des emplacements
+            users: Gestion des utilisateurs
+            resources: Gestion des ressources
+            borrowings: Gestion des emprunts
+            tags: Gestion des étiquettes
+            general: Administration de l'application
     label:
         location:
             delete:
@@ -86,9 +94,12 @@ admin:
                 header: Étiquettes
                 list: Lister les étiquettes
                 generate: Générer des étiquettes
+                format: Ajouter un format
             borrowings:
                 header: Emprunts
                 list: Lister les emprunts
+            general:
+                header: Administration générale
     fieldset:
         shelves:
             legend: Informations sur l'emplacement
@@ -112,7 +123,7 @@ admin:
             update: Modifier l'emplacement
         tag:
             generate: Générer les étiquettes
-            add: Ajouter ou modifie un format préexistant
+            add: Ajouter un nouveau format
     breadcrumb:
         shelves:
             add: Ajouter
@@ -140,9 +151,7 @@ admin:
         tag:
             help: Aide
     validation:
-          tag:
-              code:
-                  empty: Le code ne peut être vide
-              format:
-                  added: Le format a été ajouté
-                  updated: Le format a été modifié
+        tag:
+            format:
+                added: Le format a été ajouté
+                updated: Le format a été modifié

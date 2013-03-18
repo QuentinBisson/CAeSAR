@@ -1,0 +1,21 @@
+validation:
+    assert:
+        error:
+            type:
+                page:
+                    height: La hauteur de page doit être un nombre flottant.
+                    width: La largeur de page doit être un nombre flottant.
+                margin:
+                    left: La marge gauche doit être un nombre flottant.
+                    top: La marge supérieure doit être un nombre flottant.
+                gap:
+                    horizontal: L'écart horizontal doit être un nombre flottant.
+                    vertical: L'écart vertical doit être un nombre flottant.
+                height: La hauteur d'une étiquette doit être un nombre flottant.
+                width: La largeur d'une étiquette doit être un nombre flottant.
+                columns:
+                    below:
+                        one: Le nombre de colonnes doit être supérieur à 1.
+                rows:
+                    below:
+                        one: Le nombre de lignes doit être supérieur à 1.

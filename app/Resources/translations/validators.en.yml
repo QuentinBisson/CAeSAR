@@ -1,0 +1,21 @@
+validation:
+    assert:
+        error:
+            type:
+                page:
+                    height: The page height must be a float.
+                    width: The page width must be a float.
+                margin:
+                    left: The left margin must be a float.
+                    top: The top margin must be a float.
+                gap:
+                    horizontal: The horizontal gap must be a float.
+                    vertical: The vertical gap must be a float.
+                height: The labels height must be a float.
+                width: The labels width must be a float.
+                columns:
+                    below:
+                        one: The number of column has to be over 1.
+                rows:
+                    below:
+                        one: The number of row has to be over 1

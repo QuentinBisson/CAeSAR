@@ -45,11 +45,15 @@ form:
                 gap:
                     horizontal: Horizontal gap (in cm)
                     vertical: Vertical gap (in cm)
+                page:
+                    width: Page width (in cm)
+                    height: Page height (in cm)
                 height: Height  (in cm)
                 width: Width (in cm)
                 columns: Columns
                 rows: Rows
                 code: Code
+                format: Existing formats
             text:
                 margin:
                     left: Margin between the left border and the first column of labels (in cm)
