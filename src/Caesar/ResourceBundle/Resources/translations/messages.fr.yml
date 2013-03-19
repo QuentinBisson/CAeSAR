@@ -11,3 +11,7 @@ form:
         type:
             label:
                 archived: Emprunts archivés
+borrow:
+    title: Emprunter une ressource
+return:
+    title: Rendre une ressource

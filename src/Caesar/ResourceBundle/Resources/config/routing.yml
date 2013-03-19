@@ -5,3 +5,11 @@ caesar_resource_homepage:
 caesar_resource_ajax_get:
     pattern: /ajax/{code}
     defaults: { _controller: CaesarResourceBundle:Resource:ajaxGet, code = ''}
+
+caesar_resource_borrow:
+    pattern:  /borrow/{code}
+    defaults: { _controller: "CaesarResourceBundle:Resource:borrow" , code = ''}
+
+caesar_resource_return:
+    pattern:  /return/{code}
+    defaults: { _controller: "CaesarResourceBundle:Resource:return" , code = ''}

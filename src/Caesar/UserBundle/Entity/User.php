@@ -50,7 +50,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
   /**
    * @var string $password
    *
-   * @ORM\Column(name="password", type="string", length=100)
+   * @ORM\Column(name="password", type="string", length=255)
    * @Assert\MinLength(
    *     limit=8,
    *     message="validation.assert.error.type.password"

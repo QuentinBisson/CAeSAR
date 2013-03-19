@@ -10,15 +10,15 @@ class ResourceController extends Controller {
 
   public function consultAction($code) {
     $em = $this->getDoctrine()->getManager();
-    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code) ) {
+    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
-                ->findOneByCode($code);
+        ->findOneByCode($code);
     } else if (filter_input(INPUT_GET, $code, FILTER_VALIDATE_INT) !== false) {
       $clean = $code;
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
-                ->find($clean);
+        ->find($clean);
     } else {
-        throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
     }
     if (!$resource) {
       throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
@@ -27,11 +27,12 @@ class ResourceController extends Controller {
   }
 
   public function ajaxGetAction($code) {
-    //TODO clean
     $em = $this->getDoctrine()->getManager();
-    if (isset($code)) {
+    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
         ->findOneByCode($code);
+    } else {
+      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
     }
 
     if (!$resource) {
@@ -42,6 +43,34 @@ class ResourceController extends Controller {
       return new Response(json_encode($resource->getJsonData()));
     }
     throw $this->createNotFoundException('Requete invalide');
+  }
+
+  public function borrowAction($code) {
+    $em = $this->getDoctrine()->getManager();
+    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
+      $resource = $em->getRepository('CaesarResourceBundle:Resource')
+        ->findOneByCode($code);
+    } else {
+      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+    }
+    if (!$resource) {
+      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
+    }
+    return $this->render('CaesarResourceBundle:Resource:borrow.html.twig', array('resource' => $resource));
+  }
+
+  public function returnAction($code) {
+    $em = $this->getDoctrine()->getManager();
+    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
+      $resource = $em->getRepository('CaesarResourceBundle:Resource')
+        ->findOneByCode($code);
+    } else {
+      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+    }
+    if (!$resource) {
+      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
+    }
+    return $this->render('CaesarResourceBundle:Resource:return.html.twig', array('resource' => $resource));
   }
 
 }

@@ -88,12 +88,23 @@ function isValidIsbn(text) {
 
             if (new RegExp("^C-[0-9]*$","g").test(code)  || isValidIsbn(code)) {
                 //checkResource(code);
-                $('[name="consulter"]').prop('disabled', false);
-                $('[name="consulter"]').click(function() {
-                    document.location.href='{{path('caesar_resource_homepage')}}/' + code;
+                var button = $('[name="consulter"]');
+                button.prop('disabled', false);
+                button.click(function() {
+                    window.location.replace('{{path('caesar_resource_homepage')}}/' + code);
                 });
-                $('[name="rendre"]').prop('disabled', false);
-                $('[name="emprunter"]').prop('disabled', false);
+
+                button = $('[name="rendre"]');
+                button.prop('disabled', false);
+                button.click(function() {
+                    window.location.replace('{{path('caesar_resource_return')}}/' + code);
+                });
+
+                button = $('[name="emprunter"]');
+                button.prop('disabled', false);
+                button.click(function() {
+                    window.location.replace('{{path('caesar_resource_borrow')}}/' + code);
+                });
             } else {
                 $('input[type="button"]').attr("disabled", 'disabled');
                 //display connexion message

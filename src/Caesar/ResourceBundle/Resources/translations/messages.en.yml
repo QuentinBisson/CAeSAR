@@ -11,3 +11,8 @@ form:
         type:
             label:
                 archived: Archived borrowings
+borrow:
+    title: Borrow a resource
+return:
+    title: Return a resource
+
