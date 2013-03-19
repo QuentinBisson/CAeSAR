@@ -2,26 +2,26 @@
 
 namespace Caesar\ResourceBundle\Controller;
 
+use Caesar\ResourceBundle\Entity\Resource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResourceController extends Controller {
 
-  public function consultAction($id) {
-    if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
-      $clean = $id;
-    } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' n\'est pas valide.');
-    }
-
+  public function consultAction($code) {
     $em = $this->getDoctrine()->getManager();
-    if (isset($clean)) {
+    if (Resource::isCAeSARCode($code) || Resource::checkISBN($code) ) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
-        ->find($clean);
+                ->findOneByCode($code);
+    } else if (filter_input(INPUT_GET, $code, FILTER_VALIDATE_INT) !== false) {
+      $clean = $code;
+      $resource = $em->getRepository('CaesarResourceBundle:Resource')
+                ->find($clean);
+    } else {
+        throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
     }
-
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $id);
+      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
     }
     return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array('resource' => $resource));
   }

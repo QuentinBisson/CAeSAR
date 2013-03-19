@@ -87,7 +87,13 @@ function isValidIsbn(text) {
              }
 
             if (new RegExp("^C-[0-9]*$","g").test(code)  || isValidIsbn(code)) {
-                checkResource(code);
+                //checkResource(code);
+                $('[name="consulter"]').prop('disabled', false);
+                $('[name="consulter"]').click(function() {
+                    document.location.href='{{path('caesar_resource_homepage')}}/' + code;
+                });
+                $('[name="rendre"]').prop('disabled', false);
+                $('[name="emprunter"]').prop('disabled', false);
             } else {
                 $('input[type="button"]').attr("disabled", 'disabled');
                 //display connexion message

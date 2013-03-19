@@ -1,8 +1,6 @@
 caesar_resource_homepage:
-    pattern:  /consult/{id}
-    defaults: { _controller: CaesarResourceBundle:Resource:consult, id = 1 }
-    requirements:
-        id:  \d+
+    pattern:  /consult/{code}
+    defaults: { _controller: CaesarResourceBundle:Resource:consult, code = '' }
 
 caesar_resource_ajax_get:
     pattern: /ajax/{code}
