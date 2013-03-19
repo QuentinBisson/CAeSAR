@@ -16,7 +16,7 @@
 <form action="{{ path('caesar_admin_user_update', {'id': user}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
         <fieldset>
-            legend>{{'admin.fieldset.user.legend.personnal'|trans({})}}</legend>
+            <legend>{{'admin.fieldset.user.legend.personnal'|trans({})}}</legend>
             {{ form_row(form.codeBU) }}
             {{ form_row(form.name) }}
             {{ form_row(form.firstname) }}

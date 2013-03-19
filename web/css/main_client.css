@@ -223,7 +223,7 @@ header h1 {
     margin-bottom: 20px;
 }
 
-#main-form .main-form-actions input[type="submit"],
+#main-form .main-form-actions input[type="button"],
 #search-form .search-form-actions input[type="submit"]{
     font-family: "Trebuchet MS", sans-serif;
     width: 210px;
@@ -261,7 +261,7 @@ header h1 {
 
 }
 
-#main-form .main-form-actions input[type="submit"]:active,
+#main-form .main-form-actions input[type="button"]:active,
 #search-form .search-form-actions input[type="submit"]:active {
     color: #f3f3f6;
     background-color: rgb(83, 126, 192);
@@ -273,7 +273,7 @@ header h1 {
 
 }
 
-#main-form .main-form-actions input[type="submit"][disabled="disabled"],
+#main-form .main-form-actions input[type="button"][disabled="disabled"],
 #main-form .main-form-actions input[type="submit"][disabled="disabled"]:active {
     color: #f3f3f6;
     border: 1px solid rgb(195, 200, 205);

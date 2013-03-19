@@ -20,56 +20,55 @@
 
 {% block contentBody %}
 <section class="contentBody">
-    <form class="left tag-generate-form" action="{{ path('caesar_admin_tag_generate') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        <fieldset>
-            <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
-            {{ form_errors(listForm) }}
+    <form class="left tag-generate-form" action="" method="post" {{ form_enctype(listForm) }}>
+        {{ form_errors(listForm) }}
+            <fieldset>
+                <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
             {{ form_row(listForm.format , { 'attr': {'class': 'format-selection'} }) }}
             {{ form_rest(listForm) }}
-            <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
+                <input type="button" value="{{'admin.button.tag.add'|trans({})}}" onclick="window.location.href='{{path('caesar_admin_format_add')}}'" id="generator"/>
+                <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
+            </fieldset>
 
-            {{ form_row(form.code) }}
-        </fieldset>
+            <fieldset>
+                <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
+                <div><p class="left"><label>{{'form.tag.type.label.gap.horizontal'|trans({})}}:</label><label class="format-data" id="horizontalGap"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.gap.vertical'|trans({})}}:</label><label class="format-data" id="verticalGap"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.margin.left'|trans({})}}:</label><label class="format-data" id="marginLeft"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.margin.top'|trans({})}}:</label><label class="format-data" id="marginTop"></label></p></div>
+            </fieldset>
+            <fieldset>
+                <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
+                <div><p class="left"><label>{{'form.tag.type.label.page.width'|trans({})}}:</label><label class="format-data" id="pageWidth"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.page.height'|trans({})}}:</label><label class="format-data" id="pageHeight"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.width'|trans({})}}:</label><label class="format-data" id="width"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.height'|trans({})}}:</label><label class="format-data" id="height"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.columns'|trans({})}}:</label><label class="format-data" id="columns"></label></p></div>
+                <div><p class="left"><label>{{'form.tag.type.label.rows'|trans({})}}:</label><label class="format-data" id="rows"></label></p></div>
+            </fieldset>
+            <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate"/>
+        </form>
 
-        <fieldset>
-            <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
-            {{ form_row(form.horizontalGap) }}
-            {{ form_row(form.verticalGap) }}
-            {{ form_row(form.marginLeft) }}
-            {{ form_row(form.marginTop) }}
-        </fieldset>
-        <fieldset>
-             <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
-            {{ form_row(form.width) }}
-            {{ form_row(form.height) }}
-            {{ form_row(form.columns) }}
-            {{ form_row(form.rows) }}
-        </fieldset>
-        {{ form_rest(form)}}
-        <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate" id="generator"/>
-        <input type="submit" value="{{'admin.button.tag.add'|trans({})}}" name="add" id="generator"/>
-    </form>
 
-    <section class="left tag-positioning-description">
-        <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
-        <div class="help">
-            <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
-            <dl>
-                <dt>Margin left : </dt>
-                <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
-                <dt>Margin top : </dt>
-                <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
-                <dt>Vgap : </dt>
-                <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
-                <dt>Hgap : </dt>
-                <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
-            </dl>
-        </div>
+        <section class="left tag-positioning-description">
+            <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
+            <div class="help">
+                <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
+                <dl>
+                    <dt>Margin left : </dt>
+                    <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
+                    <dt>Margin top : </dt>
+                    <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
+                    <dt>Vgap : </dt>
+                    <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
+                    <dt>Hgap : </dt>
+                    <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
+                </dl>
+            </div>
+        </section>
     </section>
-</section>
 {% endblock %}
     {% block javascripts %}
 {{parent()}}
-<script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
+    <script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
 {% endblock %}

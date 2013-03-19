@@ -29,6 +29,14 @@ admin:
     lang:
         french: French
         english: English
+    home:
+        synopsis:
+            shelves: Locatio's management
+            users: Users management
+            resources: Resources management
+            borrowings: Borrowings management
+            tags: Labels management
+            general: Application managment
     label:
         location:
             delete:
@@ -86,9 +94,12 @@ admin:
                 header: Labels
                 list: List labels to use
                 generate: Generate new labels
+                format: Add a format
             borrowings:
                 header: Borrowings
                 list: List borrowings
+            general:
+                header: General administration
     fieldset:
         shelves:
             legend: Informations about the shelf
@@ -112,7 +123,7 @@ admin:
             update: Update the location
         tag:
             generate: Generate labels
-            add: Add or modify a preexisting format
+            add: Add a new format
     breadcrumb:
         shelves:
             add: Add
@@ -140,9 +151,7 @@ admin:
         tag:
             help: Help
     validation:
-          tag:
-              code:
-                  empty: The code can't be empty
-              format:
-                  added: The format was added
-                  updated: The format was updated
+        tag:
+            format:
+                added: Le format a été ajouté
+                updated: Le format a été modifié

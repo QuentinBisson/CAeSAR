@@ -1,0 +1,126 @@
+.limit-resource-mining{
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+input[type="button"]#generator {
+    margin-left: 50px;
+}
+.codeBu {
+    width:10%;
+}
+
+.login {
+    width:20%;
+}
+
+.nom {
+    width:20%;
+}
+
+.prenom {
+    width:20%;
+}
+
+.email {
+    width:20%;
+}
+
+.edit {
+    width:2%;
+}
+
+.delete {
+    width:2%;
+}
+
+img#resource-img{
+    float: left;
+    width: 140px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.long-description textarea {
+    width: 70%;
+    height: 100px;
+}
+
+.overflow{
+    overflow: auto;
+}
+
+.mid-height{
+    height: 50%;
+}
+
+.resource-code {
+    width: 20%;
+}
+
+.resource-quantity {
+    width:20%;
+}
+
+#borrowing-user-label, #borrowing-resource-label {
+    border: 1px solid black;
+    padding: 0 5px;
+    vertical-align: baseline;
+}
+
+.borrowing-user {
+    width: 30%;
+}
+
+.borrowing-date, .borrowing-return {
+    width: 15%;
+}
+
+.borrowing-return p.sort-label {
+    margin-bottom: 6px;
+}
+
+.tag-creationDate {
+    width: 25%;
+}
+
+.resources, .locations, .tags, .borrowings, .users, .general {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.tag-generate-form {
+    width: 35%;
+}
+
+.tag-positioning-description {
+     width: 40%;
+}
+
+div.help span.help-title {
+    padding: 10px;
+    outline: none;
+    background-color: #053A6C;
+    color: white;
+    font-weight: bold;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+div.help{
+    margin-bottom: 20px;
+}
+
+div.help dl dt {
+    font-weight: bold;
+}
+
+div.help dl dd {
+    padding-left: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
