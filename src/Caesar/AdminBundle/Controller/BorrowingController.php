@@ -61,8 +61,18 @@ class BorrowingController extends Controller {
     return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
   }
   
-  public function searchAction() {
-      
+  /**
+   * Recherche d'emprunts à partir d'un utilisateur
+   */
+  public function searchAction($keywords) {
+      $em = $this->get('doctrine')->getEntityManager();
+      $users = $em->getRepository('CaesarUserBundle:User')->searchByKeywords($keywords); // TODO
+      $borrows = array();
+      foreach ($users as $user) 
+      {
+          $borrows[$user->getId()] = $em->getRepository('CaesarUserBundle:Borrowing')->findBy(array('user'=>$user));
+      }
+      // $borrows contient, pour chaque user trouvé, les emprunts associés    
   }
 
 }
