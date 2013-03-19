@@ -6,13 +6,88 @@
 
 {% block caesar_user_content %}
 <section id="main-form">
-	<form action="#" method="post" autocomplete="off">
-		<input type="text" id="giveMeFocus" name="main_form_text" placeholder="{{ 'form.main_form.placeholder'|trans({}, 'CaesarUserBundle') }}">
-		<div class="main-form-actions">
-			<input type="submit" name="emprunter" value="{{ 'form.main_form.borrow'|trans({}, 'CaesarUserBundle') }}">
-			<input type="submit" name="rendre" value="{{ 'form.main_form.return'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
-			<input type="submit" name="consulter" value="{{ 'form.main_form.consult'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
-		</div>
-	</form>
+    <form action="" method="post" autocomplete="off">
+        <input type="text" id="giveMeFocus" name="main_form_text" placeholder="{{ 'form.main_form.placeholder'|trans({}, 'CaesarUserBundle') }}">
+        <div class="main-form-actions">
+            <input type="button" name="emprunter" value="{{ 'form.main_form.borrow'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+            <input type="button" name="rendre" value="{{ 'form.main_form.return'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+            <input type="button" name="consulter" value="{{ 'form.main_form.consult'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+        </div>
+    </form>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+function isValidIsbn(text) {
+    var length, j = 0, k;
+    text = text.replace(/-/g,"");
+    length=text.length;
+    switch(length){
+        case 10:
+            k = length;
+            for(var i = 0; i < 9; i++){
+                j += parseInt(text.charAt(i)) * k;
+                k--;
+            }
+            var t = text.charAt(9).toUpperCase();
+            j += t == "X" ? 10 : parseInt(t);
+            return j % 11 == 0;
+            break;
+        case 13:
+            k =- 1;
+            for(var i = 0; i < length; i++){
+                j += parseInt(text.charAt(i)) * (2 + k);
+                k *= -1;
+            }
+            return j % 10 == 0;
+            break;
+    }
+    return false;
+}
+
+    function checkResource (code) {
+        var url = '{{path('caesar_resource_ajax_get')}}' + '/' + code;
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            async: true,
+            success: function(data){
+                var resource = JSON.parse(data);
+                $('[name="consulter"]').prop('disabled', false);
+                $('[name="consulter"]').click(function() {
+                    document.location.href='{{path('caesar_resource_homepage')}}/' + resource['id'];
+                });
+                $('[name="rendre"]').prop('disabled', false);
+                $('[name="emprunter"]').prop('disabled', false);
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $('input[type="button"]').attr("disabled", 'disabled');
+            }
+        });
+
+    }
+
+        $('#giveMeFocus').keyup(function() {
+            var code = $(this).val();
+             if (code.length < 8) {
+                 $('input[type="button"]').attr("disabled", 'disabled');
+                 return true;
+             }
+
+            if (new RegExp("^C-[0-9]*$","g").test(code)  || isValidIsbn(code)) {
+                checkResource(code);
+            } else {
+                $('input[type="button"]').attr("disabled", 'disabled');
+                //display connexion message
+            }
+        });
+    });
+
+    </script>
 {% endblock %}

@@ -253,8 +253,7 @@ class Format {
   }
 
   public function getJsonData() {
-    $var = get_object_vars($this);
-    return $var;
+    return get_object_vars($this);
   }
 
 }

@@ -19,3 +19,5 @@ validation:
                 rows:
                     below:
                         one: Le nombre de lignes doit être supérieur à 1.
+                password: Votre mot de passe doit faire au moins 8 caractères.
+                username: Votre nom d'utilisateur doit faire au moins 8 caractères.
