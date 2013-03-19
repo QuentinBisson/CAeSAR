@@ -38,6 +38,9 @@ admin:
             tags: Gestion des étiquettes
             general: Administration de l'application
     label:
+        infobuble:
+            resource_borrowing: Voir les emprunts associés à cette ressource
+            user_borrowing: Voir les emprunts associés à cet utilisateur
         location:
             delete:
                 not:

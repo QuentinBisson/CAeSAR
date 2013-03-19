@@ -11,12 +11,13 @@
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.resources.quantity'|trans({}), 'page': page, 'sort': 'quantity'}  %}
             </th>
             <th class="edit"></th>
+            <th class="edit"></th>
             <th class="delete"></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="5">
+            <td colspan="6">
                 {{ 'table.foot.count.text'|trans({'%value%': count}) }}
             </td>
         </tr>
@@ -28,6 +29,9 @@
                 <td>{{ resource.description }}</td>
                 <td>{{ resource.quantity }}</td>
                 <td>
+                    <a href="#" title="{{ 'admin.label.infobuble.resource_borrowing'|trans }}"><i class="icon-book"></i></a>
+                </td>
+                <td>
                     <a href="{{path('caesar_admin_resource_update', {'id':resource.id})}}">
                         <i class="icon-edit"></i>
                     </a>
@@ -37,6 +41,7 @@
                         <i class="icon-remove"></i>
                     </a>
                 </td>
+                
             </tr>
             {% endfor %}
     <tbody>

@@ -39,4 +39,13 @@ class BorrowingRepository extends EntityRepository {
     return $qb->getQuery()->getSingleScalarResult();
   }
 
+  public function findBorrowingsByUser($user)
+  {
+      
+  }
+  
+  public function findBorrowingsByResource($resource)
+  {
+      
+  }
 }

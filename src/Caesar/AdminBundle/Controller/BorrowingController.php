@@ -64,15 +64,21 @@ class BorrowingController extends Controller {
   /**
    * Recherche d'emprunts à partir d'un utilisateur
    */
-  public function searchAction($keywords) {
+  public function searchUserAction($user) {
       $em = $this->get('doctrine')->getEntityManager();
-      $users = $em->getRepository('CaesarUserBundle:User')->searchByKeywords($keywords); // TODO
-      $borrows = array();
-      foreach ($users as $user) 
-      {
-          $borrows[$user->getId()] = $em->getRepository('CaesarUserBundle:Borrowing')->findBy(array('user'=>$user));
-      }
-      // $borrows contient, pour chaque user trouvé, les emprunts associés    
+      $user = $em->getRepository('CaesarUserBundle:User')->find($user);
+      $borrowings = $em->getRepository('CaesarUserBundle:Borrowing')->findBy(array('user'=>$user));
+      return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", array('borrowings' => $borrowings));
+  }
+  
+  /**
+   * Recherche d'emprunts à partir d'une ressource
+   */
+  public function searchResourceAction($resource) {
+      $em = $this->get('doctrine')->getEntityManager();
+      $resource = $em->getRepository('CaesarResourceBundle:Resource')->find($resource);
+      $borrowings = $em->getRepository('CaesarUserBundle:Borrowing')->findBy(array('resource'=>$resource));
+      return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", array('borrowings' => $borrowings));
   }
 
 }
