@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>CAeSAR - Administration</title>
+                        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/icons.css" />
+        <link rel="stylesheet" type="text/css" href="/css/form.css" />
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        
+<link rel="stylesheet" type="text/css" href="/bundles/caesaradmin/css/layout.css" />
+
+<link rel="stylesheet" type="text/css" href="/bundles/caesaradmin/css/admin.css" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-content">
+                <section class="left">
+                    <ul id="breadcrumb" class="breadcrumb">
+                                            <li><a href="/fr/admin/">
+                                    <i class="icon-home"></i>
+                                </a>
+                                <span class="divider">></span>
+                            </li>
+                                        </ul>
+                    </section>
+
+                    <section class="right">
+                        <div class="inline">
+                            <select id="lang" class="lang-select">
+                                <option value="fr" data-imagesrc="/images/fr.png"
+                                     selected="selected" >Français</option>
+                                        <option value="en" data-imagesrc="/images/en.png"
+                                    >Anglais</option>
+                                        </select>
+                                        <a class="link-button-deconnexion" href="/fr/logout">Déconnexion</a>
+                                </div>
+                            </section>
+                        </div>
+                    </header>
+
+
+                    <section class="main-content">
+                <aside class="sidebar">
+    <nav>
+        <ul class="accordion">
+            <li><a href="/fr/admin/resource">Ressources</a>
+                <ul>
+                    <li><a href="/fr/admin/resource/add">Ajouter une ressource</a></li>
+                    <li><a href="/fr/admin/resource">Lister les ressources</a></li>
+                    <li><a href="/fr/admin/resource/skeleton">Modifier le squelette</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/user">Utilisateurs</a>
+                <ul>
+                    <li><a href="/fr/admin/user/add">Ajouter un utilisateur</a></li>
+                    <li><a href="/fr/admin/user">Lister les utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/shelf">Emplacements</a>
+                <ul>
+                    <li><a href="/fr/admin/shelf/add">Ajouter un emplacement</a></li>
+                    <li><a href="/fr/admin/shelf">Lister les emplacements</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/borrowing">Emprunts</a>
+                <ul>
+                    <li><a href="/fr/admin/borrowing">Lister les emprunts</a></li>
+                </ul>
+            </li>
+            <li><a href="/fr/admin/tag">Étiquettes</a>
+                <ul>
+                    <li><a href="/fr/admin/tag">Lister les étiquettes</a></li>
+                    <li><a href="/fr/admin/tag/generate">Générer des étiquettes</a></li>
+                    <li><a href="/fr/admin/tag/format/add">Ajouter un format</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+                            <article><header><h1>Bienvenue sur l&#039;interface d&#039;administration
+</h1></header>
+
+
+
+<section class="general">
+    <header>Administration générale</header>
+    <section>
+        <p>Administration de l&#039;application</p>
+    </section>
+</section>
+<section class="resources">
+    <header>Ressources</header>
+    <section><p>Gestion des ressources</p></section>
+</section>
+<section class="users">
+    <header>Utilisateurs</header>
+    <section><p>Gestion des utilisateurs</p></section>
+</section>
+<section class="locations">
+    <header>Emplacements</header>
+    <section><p>Gestion des emplacements</p></section>
+</section>
+<section class="borrowings">
+    <header>Emprunts</header>
+    <section><p>Gestion des emprunts</p></section>
+</section>
+<section class="tags">
+    <header>Étiquettes</header>
+    <section><p>Gestion des étiquettes</p></section>
+</section>
+</article>
+                        </section>
+                                <script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
+                        <script type="text/javascript" src="/js/jquery-ui-1.10.0.custom.min.js" ></script>
+                        <script type="text/javascript" src="/js/jquery.ddslick.min.js" ></script>
+                        <script type="text/javascript">
+                                                                                    $(document).ready(function() {
+                                $('.lang-select').ddslick({
+                                    onSelected: function(data){
+                                        var ddData = $('#lang').data('ddslick');
+                                        if ('fr' != ddData.selectedData.value) {
+                                            if ('en' === ddData.selectedData.value) {
+                                                window.location = '/en/admin/';
+                                            } else {
+                                                window.location = '/fr/admin/';
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
+        
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $( ".accordion" ).accordion({
+            heightStyle: "content",
+            autoHeight: false,
+            navigation: true,
+            collapsible: true,
+            active: getActiveIndex()
+        });
+    });
+
+    function getActiveIndex() {
+        var ul = document.getElementById('breadcrumb');
+        var lis = ul.getElementsByTagName('li');
+        if (lis.length > 1) {
+            var li = lis[1];
+            if (li.dataset.header === undefined) {
+                return false;
+            }
+            var i = parseInt(li.dataset.header);
+            return i;
+        }
+        return false;
+    }
+    var ul = document.getElementById('breadcrumb');
+    var lis = ul.getElementsByTagName('li');
+    if (lis.length == 1) {
+        var spans = lis[0].getElementsByTagName("span");
+        for (var i = 0; i < spans.length; i++) {
+            if ('divider' === spans[i].className) {
+                spans[i].style.display = 'none';
+            }
+        }
+    }
+
+    $('.accordion a').each(function(){
+        var href= $(this).attr('href');
+        var url = document.location.toString();
+        if(url.match(href+"$") == href) {
+            $(this).addClass('active');
+        }
+    });
+
+        </script>
+                        </body>
+                    </html>

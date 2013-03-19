@@ -41,7 +41,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
    * @ORM\Column(name="username", type="string", length=100, unique=true)
    * @Assert\NotBlank()
    * @Assert\MinLength(
-   *     limit=8,
+   *     limit=5,
    *     message="validation.assert.error.type.username"
    * )
    */

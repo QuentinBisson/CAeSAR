@@ -20,4 +20,4 @@ validation:
                     below:
                         one: The number of row has to be over 1.
                 password: Your password must be at least 8 caracters.
-                username: Your username must be at least 8 caracters.
+                username: Your username must be at least 5 caracters.

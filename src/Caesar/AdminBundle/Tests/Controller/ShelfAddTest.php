@@ -42,7 +42,7 @@ class ShelfAddControllerTest extends WebTestCase
 
     public function testAddShelfFromCSV() {
         $arrResult = array();
-        $arrLines = file('C:\Web\wamp\www\CAeSAR\src\Caesar\AdminBundle\Tests\Controller\shelf.csv');
+        $arrLines = file('src\Caesar\AdminBundle\Tests\Controller\shelf.csv');
         foreach($arrLines as $line) {
             $arrResult[] = explode( ',', $line);
         }

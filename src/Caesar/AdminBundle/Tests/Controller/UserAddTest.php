@@ -30,28 +30,16 @@ class UserAddControllerTest extends WebTestCase {
     $crawler = $client->request('GET', '/fr/admin/user/add');
 
     file_put_contents("tutu.txt", $client->getResponse()->getContent());
-    //$crawler = $client->followRedirect();
-    //$this->assertEquals(1, $crawler->filter('h1:contains("Ajouter")')->count());
-    //$this->assertEquals(1, $crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count());
-
+    
     $this->assertGreaterThan(
       0, $crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count()
     );
   }
 
-    public function testAddSeveralNames() {
-        /*$this->testOnlyName('Lucas');
-        $this->testOnlyName('Tom');
-        $this->testOnlyName('Tam');
-        $this->testOnlyName('Toum');
-        //$this->testOnlyName('789');
-        //$this->testOnlyName('@');
-        $this->testOnlyName('?');
-        $this->testOnlyName('#');*/
-        //$this->testOnlyName('†');       
+    public function testAddSeveralNames() {            
 
         $arrResult = array();
-        $arrLines = file('C:\Web\wamp\www\CAeSAR\src\Caesar\AdminBundle\Tests\Controller\user.csv');
+        $arrLines = file('src\Caesar\AdminBundle\Tests\Controller\user.csv');
         foreach($arrLines as $line) {
             $arrResult[] = explode( ',', $line);
         }
@@ -63,7 +51,7 @@ class UserAddControllerTest extends WebTestCase {
     }
 
     public function testAdd($code = '11111', $name = 'Lucas', $firstname='Lucas', $email = 'Lucas@lucas.fr',
-         $username="Lucas", $plainPassword='Lucas', $confirmPassword='Lucas')
+         $username="Lucas", $plainPassword='Lucas', $confirmPassword='Lucasdu76')
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/fr/admin/user/add');
@@ -94,6 +82,7 @@ class UserAddControllerTest extends WebTestCase {
 
         $this->assertTrue($crawler->filter('html:contains("'.$name.'")')->count() > 0);
 
+        echo "CODE :".$code;
         /* Suppression de l'utilisateur */
         $crawler = $client->request('GET', '/fr/admin/user');
         file_put_contents("add.html", $client->getResponse()->getContent());
