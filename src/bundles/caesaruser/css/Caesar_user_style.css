@@ -1,0 +1,135 @@
+/**
+ * Formulaire Principal | Champ unique + trois boutons
+ **/
+
+#main-form, #search-form, .form-client {
+    width: 640px;
+    height: 100px;
+    margin: auto;
+    margin-top: 50px;
+}
+.form-client label {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 18px;
+    color: #2f3235;
+}
+/**
+ * Champ unique
+ **/
+.form-client input,
+#main-form input[name='main_form_text'],
+#search-form input[name='search_form_text'] {
+    width: 640px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", sans-serif;
+    vertical-align: middle;
+
+    background-color: #f6f3f6;
+    border: 1px solid #c5c8cb;
+    -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    -moz-box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    box-shadow: inset 0 3px 3px rgba(0,0,0,0.090);
+    -webkit-transition: border linear .2s,box-shadow linear .2s;
+    -moz-transition: border linear .2s,box-shadow linear .2s;
+    -o-transition: border linear .2s,box-shadow linear .2s;
+    transition: border linear .2s,box-shadow linear .2s;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+
+}
+
+.form-client input:focus,
+#main-form input[name='main_form_text']:focus,
+#search-form input[name='search_form_text']:focus {
+    background-color: #fdf8fd;
+    outline : none;	
+}
+
+/**
+ * Trois boutons
+ **/
+#main-form .main-form-actions {
+    margin: auto;
+    margin-top: 10px;
+}
+#search-form .search-form-actions {
+    width: 210px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.form-client input[type="submit"],
+#main-form .main-form-actions input[type="submit"],
+#search-form .search-form-actions input[type="submit"]{
+    font-family: "Trebuchet MS", sans-serif;
+    width: 210px;
+    height: 60px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #2f3235;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    color: #f3f3f6;
+    background-color: rgb(83, 126, 192);
+
+    background-image: -moz-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(117, 163, 214)),to(rgb(53, 86, 172)));
+    background-image: -webkit-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: -o-linear-gradient(top,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-image: linear-gradient(to bottom,rgb(117, 163, 214),rgb(53, 86, 172));
+    background-repeat: repeat-x;
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462',endColorstr='#ff51a351',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    border: 1px solid rgb(195, 200, 205);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+
+}
+
+.form-client input[type="submit"] {
+    margin-top: 20px;
+    margin-left: 200px;
+}
+.form-client input[type="submit"]:active,
+#main-form .main-form-actions input[type="submit"]:active,
+#search-form .search-form-actions input[type="submit"]:active {
+    color: #f3f3f6;
+    background-color: rgb(83, 126, 192);
+    background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(53, 86, 172)),to(rgb(117, 163, 214)));
+    background-image: -webkit-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: -o-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
+    background-image: linear-gradient(to bottom,rgb(53, 86, 172),rgb(117, 163, 214));
+
+}
+
+#main-form .main-form-actions input[type="submit"][disabled="disabled"],
+#main-form .main-form-actions input[type="submit"][disabled="disabled"]:active {
+    color: #f3f3f6;
+    border: 1px solid rgb(195, 200, 205);
+    background-color: rgb(195, 200, 205);
+    background-image: -moz-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgb(190, 193, 201)),to(rgb(211, 211, 211)));
+    background-image: -webkit-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: -o-linear-gradient(top,rgb(190, 193, 201),rgb(211, 211, 211));
+    background-image: linear-gradient(to bottom,rgb(190, 193, 201),rgb(211, 211, 211));
+    cursor: default;
+}

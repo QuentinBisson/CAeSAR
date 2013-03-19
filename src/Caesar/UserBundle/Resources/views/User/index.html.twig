@@ -51,22 +51,28 @@ function isValidIsbn(text) {
 
     function checkResource (code) {
         var url = '{{path('caesar_resource_ajax_get')}}' + '/' + code;
+        $('#ajax-loader').remove();
         $.ajax({
             type: "POST",
             url: url,
             cache: false,
             async: true,
+            beforeSend : function() { // traitements JS à faire AVANT l'envoi
+                $('#giveMeFocus').after('<img src="{{asset('bundles/caesaruser/img/ajax-loader.gif')}}" alt="loader" id="ajax-loader" />'); // ajout d'un loader pour signifier l'action
+            },
             success: function(data){
                 var resource = JSON.parse(data);
+
                 $('[name="consulter"]').prop('disabled', false);
                 $('[name="consulter"]').click(function() {
                     document.location.href='{{path('caesar_resource_homepage')}}/' + resource['id'];
                 });
                 $('[name="rendre"]').prop('disabled', false);
                 $('[name="emprunter"]').prop('disabled', false);
-
+                $('#ajax-loader').remove();
             },
             error: function(xhr, ajaxOptions, thrownError) {
+                $('#ajax-loader').remove();
                 $('input[type="button"]').attr("disabled", 'disabled');
             }
         });
