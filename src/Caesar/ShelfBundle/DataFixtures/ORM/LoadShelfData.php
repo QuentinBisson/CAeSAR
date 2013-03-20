@@ -1,12 +1,12 @@
 <?php
-namespace CAeSAR\UserBundle\DataFixtures\ORM;
+namespace CAeSAR\ShelfBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CAeSAR\UserBundle\Entity\User;
+use CAeSAR\ShelfBundle\Entity\Shelf;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class LoadShelfData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -14,20 +14,15 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
     	$arrResult = array();
-    	$arrLines = file('src\Caesar\UserBundle\DataFixtures\ORM\userFixtures.csv');
+    	$arrLines = file('src\Caesar\ShelfBundle\DataFixtures\ORM\shelfFixtures.csv');
     	foreach($arrLines as $line) {
     		$arrResult[] = explode( ',', $line);
     	}
     	foreach($arrResult as $res) {
-    		$userAdmin = new User();
-    		$userAdmin->setCodeBu($res[0]);
-    		$userAdmin->setName($res[4]);
-    		$userAdmin->setFirstname($res[5]);
-    		$userAdmin->setEmail($res[3]);
-    		$userAdmin->setUsername($res[1]);
-    		$userAdmin->setPassword($res[2]);
-    		$userAdmin->setRole('ROLE_USER');    		
-    		$manager->persist($userAdmin);
+    		$shelf = new Shelf();
+    		$shelf->setDescription($res[1]);
+    		$shelf->setName($res[0]);    		
+    		$manager->persist($shelf);
     	}        
         
         $manager->flush();        

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Caesar\UserBundle\Entity\UserRepository;
 use Caesar\AdminBundle\Tests\Controller;
 
-class UserAddControllerTest extends WebTestCase {
+class UserAddDeleteTest extends WebTestCase {
 
   /**
    * @var \Doctrine\ORM\EntityManager
@@ -36,7 +36,7 @@ class UserAddControllerTest extends WebTestCase {
     );
   }
 
-    public function testAddSeveralNames() {            
+    public function testAddDeleteSeveralNames() {            
 
         $arrResult = array();
         $arrLines = file('src\Caesar\AdminBundle\Tests\Controller\user.csv');
@@ -51,7 +51,7 @@ class UserAddControllerTest extends WebTestCase {
     }
 
     public function testAdd($code = '11111', $name = 'Lucas', $firstname='Lucas', $email = 'Lucas@lucas.fr',
-         $username="Lucas", $plainPassword='Lucas', $confirmPassword='Lucasdu76')
+         $username="Lucas", $plainPassword='Lucasdu76', $confirmPassword='Lucasdu76')
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/fr/admin/user/add');
@@ -80,9 +80,9 @@ class UserAddControllerTest extends WebTestCase {
 
         $crawler = $client->request('GET', '/fr/admin/user');
 
+        echo "\nname :".$name."\n"; 
         $this->assertTrue($crawler->filter('html:contains("'.$name.'")')->count() > 0);
-
-        echo "CODE :".$code;
+        
         /* Suppression de l'utilisateur */
         $crawler = $client->request('GET', '/fr/admin/user');
         file_put_contents("add.html", $client->getResponse()->getContent());

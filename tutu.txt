@@ -103,7 +103,7 @@
             <div><label for="caesar_userBundle_userType_plainPassword" class="required">Mot de passe</label><input type="password" id="caesar_userBundle_userType_plainPassword" name="caesar_userBundle_userType[plainPassword]" required="required" /></div>
             <div><label for="caesar_userBundle_userType_confirmPassword" class="required">Confirmer le mot de passe</label><input type="password" id="caesar_userBundle_userType_confirmPassword" name="caesar_userBundle_userType[confirmPassword]" required="required" /></div>
         </fieldset>
-        <input type="hidden" id="caesar_userBundle_userType__token" name="caesar_userBundle_userType[_token]" value="a096c6056262b7d35980fbb74cb9ac1ff3e71c7d" />
+        <input type="hidden" id="caesar_userBundle_userType__token" name="caesar_userBundle_userType[_token]" value="e000e3603b4881def1b5c69e05cdfd7d7379badc" />
         <input type="submit" value="Ajouter l&#039;utilisateur"/>
     </form>
 </article>
