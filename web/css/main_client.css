@@ -177,7 +177,6 @@ header h1 {
 #main-form input[name='main_form_text'],
 .form-text {
     width: 640px;
-    height: 50px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -198,7 +197,7 @@ header h1 {
     -moz-border-radius: 2px;
     border-radius: 2px;
 
-    padding: 5px;
+    padding: 10px 5px;
     font-size: 20px;
 
 }
