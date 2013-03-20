@@ -4,9 +4,12 @@
 
 #main-form, #search-form, .form-client {
     width: 640px;
-    height: 100px;
     margin: auto;
     margin-top: 50px;
+}
+
+#search-form > form {
+    margin-bottom: 20px;
 }
 .form-client label {
     font-family: "Trebuchet MS", sans-serif;
@@ -20,7 +23,6 @@
 #main-form input[name='main_form_text'],
 #search-form input[name='search_form_text'] {
     width: 640px;
-    height: 50px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -41,16 +43,15 @@
     -moz-border-radius: 2px;
     border-radius: 2px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px 5px;
     font-size: 20px;
-
 }
 
 .form-client input:focus,
 #main-form input[name='main_form_text']:focus,
 #search-form input[name='search_form_text']:focus {
     background-color: #fdf8fd;
-    outline : none;	
+    outline : none;
 }
 
 /**
@@ -67,7 +68,7 @@
 }
 
 .form-client input[type="submit"],
-#main-form .main-form-actions input[type="submit"],
+#main-form .main-form-actions input[type="button"],
 #search-form .search-form-actions input[type="submit"]{
     font-family: "Trebuchet MS", sans-serif;
     width: 210px;
@@ -109,7 +110,7 @@
     margin-left: 200px;
 }
 .form-client input[type="submit"]:active,
-#main-form .main-form-actions input[type="submit"]:active,
+#main-form .main-form-actions input[type="button"]:active,
 #search-form .search-form-actions input[type="submit"]:active {
     color: #f3f3f6;
     background-color: rgb(83, 126, 192);
@@ -121,8 +122,8 @@
 
 }
 
-#main-form .main-form-actions input[type="submit"][disabled="disabled"],
-#main-form .main-form-actions input[type="submit"][disabled="disabled"]:active {
+#main-form .main-form-actions input[type="button"][disabled="disabled"],
+#main-form .main-form-actions input[type="button"][disabled="disabled"]:active {
     color: #f3f3f6;
     border: 1px solid rgb(195, 200, 205);
     background-color: rgb(195, 200, 205);

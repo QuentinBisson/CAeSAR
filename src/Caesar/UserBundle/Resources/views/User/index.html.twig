@@ -6,14 +6,12 @@
 
 {% block caesar_user_content %}
 <section id="main-form">
-    <form action="" method="post" autocomplete="off">
-        <input type="text" id="giveMeFocus" name="main_form_text" placeholder="{{ 'form.main_form.placeholder'|trans({}, 'CaesarUserBundle') }}">
-        <div class="main-form-actions">
-            <input type="button" name="emprunter" value="{{ 'form.main_form.borrow'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
-            <input type="button" name="rendre" value="{{ 'form.main_form.return'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
-            <input type="button" name="consulter" value="{{ 'form.main_form.consult'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
-        </div>
-    </form>
+    <input type="text"  autocomplete="off" id="giveMeFocus" name="main_form_text" placeholder="{{ 'form.main_form.placeholder'|trans({}, 'CaesarUserBundle') }}">
+    <div class="main-form-actions">
+        <input type="button" name="emprunter" value="{{ 'form.main_form.borrow'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+        <input type="button" name="rendre" value="{{ 'form.main_form.return'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+        <input type="button" name="consulter" value="{{ 'form.main_form.consult'|trans({}, 'CaesarUserBundle') }}" disabled="disabled">
+    </div>
 </section>
 {% endblock %}
 
