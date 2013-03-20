@@ -26,7 +26,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     		$userAdmin->setEmail($res[3]);
     		$userAdmin->setUsername($res[4]);
     		$userAdmin->setPassword($res[5]);
-    		$userAdmin->setConfirmPassword($res[6]); 
+    		$userAdmin->setConfirmPassword($res[6]);
+    		$userAdmin->setRole('ROLE_USER');    		
     		$manager->persist($userAdmin);
     	}        
         
@@ -41,3 +42,4 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         return 1; // the order in which fixtures will be loaded
     }
 }
+?>
