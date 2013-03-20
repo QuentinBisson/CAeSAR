@@ -72,3 +72,17 @@ pour récuperer les types mimes des fichiers
 Pour dessiner les codes-barres, il faut activer l'extension gd2
 
 Il faut également activer l'extension intl.
+
+9) Fixtures
+-------------------------
+
+Avant de charger les fixtures, il faut faire :
+
+	php composer.phar update
+		
+Si cela ne fonctionne pas jusqu'au bout, essayez de supprimer votre dossier vendors et de réessayer.
+
+Puis pour charger les fixtures dans la base :
+
+	php app/console doctrine:fixtures:load
+
