@@ -91,7 +91,8 @@ img#resource-img{
 }
 
 .tag-generate-form {
-    width: 35%;
+    width: 40%;
+    margin-right: 3%;
 }
 
 .tag-positioning-description {
@@ -123,4 +124,8 @@ div.help dl dd {
     padding-left: 20px;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+.format-data {
+    min-width: 20px;
 }

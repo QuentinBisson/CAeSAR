@@ -86,10 +86,4 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
     return $qb->getQuery()->getSingleScalarResult();
   }
 
-  public function searchByKeyword($keywords)
-  {
-     /* $qb = $this->createQueryBuilder('u');
-      $qb->select('u')
-        ->where('u.firstName')*/
-  }
 }

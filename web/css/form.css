@@ -93,7 +93,7 @@ input[type="submit"]:active, input[type="button"]:active {
 
 fieldset {
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border-top: 1px solid #ccc;
     border-left: 0;
     border-bottom: 0;

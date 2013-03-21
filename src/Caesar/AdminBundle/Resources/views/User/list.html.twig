@@ -17,12 +17,13 @@
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.users.email'|trans({}), 'page': page, 'sort': 'email'}  %}
             </th>
             <th class="edit"></th>
+            <th class="edit"></th>
             <th class="delete"></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="7">
+            <td colspan="8">
                 {{ 'table.foot.count.text'|trans({'%value%': count}) }}
             </td>
         </tr>
@@ -35,6 +36,9 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.email }}</td>
+                <td>
+                    <a href="{{ path('caesar_admin_borrowing_search_user', {'user':user.id}) }}" title="{{ 'admin.label.infobuble.user_borrowing'|trans }}"><i class="icon-book"></i></a>
+                </td>
                 <td>
                     <a href="{{path('caesar_admin_user_update', {'id':user.id})}}" name="Modifier l'utilisateur">
                         <i class="icon-edit"></i>

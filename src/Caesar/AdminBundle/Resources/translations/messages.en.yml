@@ -38,6 +38,9 @@ admin:
             tags: Labels management
             general: Application managment
     label:
+        infobuble:
+            resource_borrowing: Show borrowings from this resource
+            user_borrowing: Show borrowings from this user
         location:
             delete:
                 not:
