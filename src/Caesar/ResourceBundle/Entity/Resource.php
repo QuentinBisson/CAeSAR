@@ -56,6 +56,7 @@ class Resource {
    *
    * @ORM\Column(name="quantity", type="integer")
    * @Assert\NotBlank()
+   * @Assert\Min(limit = "1", message = "La valeur doit être supérieur à 1.")
    * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
    */
   private $quantity;
@@ -96,6 +97,7 @@ class Resource {
 
   /**
    * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="resource")
+   * @ORM\OrderBy({"reservationDate" = "ASC"})
    */
   private $reservations;
 
@@ -374,7 +376,7 @@ class Resource {
   /**
    * ISBN
    */
-  
+
   public static function isCAeSARCode($code) {
     return preg_match("/^C-[0-9]*$/", $code);
   }
