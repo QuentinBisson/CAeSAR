@@ -21,7 +21,23 @@ caesar_admin_borrowing_homepage:
     requirements:
         page:  \d+
         direction: asc|desc
-
+        
+caesar_admin_borrowing_search_user:
+    pattern: /borrowing/search/user/{user}/{page}/{sort}/{direction}
+    defaults: {_controller: CaesarAdminBundle:Borrowing:searchUser, page:1, sort:'id', direction:'asc'}
+    requirements:
+        page: \d+
+        user: \d+
+        direction: asc|desc
+        
+caesar_admin_borrowing_search_resource:
+    pattern: /borrowing/search/resource/{resource}/{page}/{sort}/{direction}
+    defaults: {_controller: CaesarAdminBundle:Borrowing:searchResource, page:1, sort:'id', direction:'asc'}
+    requirements:
+        page: \d+
+        resource: \d+
+        direction: asc|desc
+        
 caesar_admin_resource_add:
     pattern:  /resource/add
     defaults: { _controller: CaesarAdminBundle:Resource:add }
