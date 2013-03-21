@@ -91,7 +91,7 @@ class ResourceController extends Controller {
         }
         $resource->setPath($newFileName);
 
-        if (!$this->isCAeSARCode($resource->getCode())) {
+        if (!Resource::isCAeSARCode($resource->getCode())) {
           $resource->setCode(str_replace(array(' ', '-', '.'), '', $resource->getCode()));
         }
 
@@ -159,7 +159,7 @@ class ResourceController extends Controller {
         }
         $resource->setPath($newFileName);
 
-        if (!$this->isCAeSARCode($resource->getCode())) {
+        if (!Resource::isCAeSARCode($resource->getCode())) {
           $resource->setCode(str_replace(array(' ', '-', '.'), '', $resource->getCode()));
         }
 
