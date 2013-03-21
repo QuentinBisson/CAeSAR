@@ -69,6 +69,8 @@ admin:
                 update: The tag %tag% has been updated
                 delete: The tag %tag% has been deleted
             error: The tag %tag% is not a valid tag
+        format:
+            exception: The format %format% is not a valid format
         users:
             exception: The user id %user% is not a valid user
             notice:
@@ -127,6 +129,13 @@ admin:
         tag:
             generate: Generate labels
             add: Add a new format
+        web.mining: Search the web for informations
+        resource:
+            image.alt: Please, choose an image file
+            apply: Apply
+            reinit.skeleton: Reinit the skeleton
+            add: Add the resource
+            update: Update the resource
     breadcrumb:
         shelves:
             add: Add

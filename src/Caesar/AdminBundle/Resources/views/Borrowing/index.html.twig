@@ -18,20 +18,11 @@
         {{ form_errors(searchForm) }}
         {{ form_row(searchForm.archived) }}
         <br/>
-        <!--
-        {#{ form_row(searchForm.user, { 'attr': {'class': 'borrowing-user-value'} }) }#}
-        <label class="borrowing-user" id="borrowing-user-label">A user</label>
-        <input class="borrowing-user" type="button" value="Browse users ..."/>
-        <br/>
-        {#{ form_row(searchForm.resource, { 'attr': {'class': 'borrowing-resource-value'} }) }#}
-        <label class="borrowing-resource" id="borrowing-resource-label">A resource</label>
-        <input class="borrowing-resource" type="button" value="Browse resources ..."/>
-        -->
         {{ form_rest(searchForm) }}
         <br/>
-        <input type="submit" value="Rechercher" class="form-search-button"/>
+        <input type="submit" value="{{'admin.button.search'|trans({})}}" class="margin-left form-search-button"/>
     </form>
-    <section class="contentBody">        
+    <section class="contentBody">
      {% include 'CaesarAdminBundle:Borrowing:list.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
 {% endblock %}

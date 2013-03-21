@@ -14,6 +14,14 @@ use Caesar\ShelfBundle\Form\ShelfSearchType;
  */
 class ShelfController extends Controller {
 
+  /**
+   *
+   * Action permettant de lister les emplacements
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return typ
+   */
   public function indexAction($page = 1, $sort = 'name', $direction = 'asc') {
 
     $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
@@ -62,8 +70,12 @@ class ShelfController extends Controller {
     return $this->render("CaesarAdminBundle:Shelf:index.html.twig", $array);
   }
 
+  /**
+   * Action permettant d'ajouter un emplacement
+   * @return type
+   */
   public function addAction() {
-      $translator = $this->get('translator');
+    $translator = $this->get('translator');
     $em = $this->getDoctrine()->getEntityManager();
     $shelf = new Shelf();
 
@@ -88,8 +100,14 @@ class ShelfController extends Controller {
       ));
   }
 
+  /**
+   * Action permettant de gérer la mise à jour d'un emplacement
+   * @param type $id
+   * @return type
+   * @throws type
+   */
   public function updateAction($id) {
-      $translator = $this->get('translator');
+    $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
@@ -125,8 +143,14 @@ class ShelfController extends Controller {
       ));
   }
 
+  /**
+   * Action permettant de supprimer un emplacement
+   * @param type $id
+   * @return type
+   * @throws type
+   */
   public function deleteAction($id) {
-      $translator = $this->get('translator');
+    $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {

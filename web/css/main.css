@@ -231,6 +231,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+input.notify-web-mining, textarea.notify-web-mining {
+    background-color: green;
+}
+
 @media screen and (max-width:980px) and (min-width:480px) {
 
 }

@@ -13,9 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class BorrowingSearchType extends AbstractType {
 
   public function buildForm(FormBuilderInterface $builder, array $options) {
-    $builder->add("archived", 'checkbox', array('label' => 'form.borrowing.type.label.archived', 'trim' => true, 'required' => false))
-      ->add("user", 'hidden', array('required' => false, 'data' => null))
-      ->add("resource", 'hidden', array('required' => false, 'data' => null));
+    $builder->add("archived", 'checkbox', array('label' => 'form.borrowing.type.label.archived', 'trim' => true, 'required' => false));
   }
 
   public function getName() {

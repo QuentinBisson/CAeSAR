@@ -17,7 +17,7 @@
     <form action="{{ path('caesar_admin_user_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_rest(searchForm) }}
-        <input type="submit" value="{{'admin.button.search'|trans({})}}"/>
+        <input type="submit" class="margin-left" value="{{'admin.button.search'|trans({})}}"/>
     </form>
 
 <section class="contentBody">

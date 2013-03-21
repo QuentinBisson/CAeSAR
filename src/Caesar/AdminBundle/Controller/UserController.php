@@ -15,6 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class UserController extends Controller {
 
+  /**
+   * Lister les utilisateurs gérés dans l'application
+   *
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return type
+   */
   public function indexAction($page = 1, $sort = 'codeBu', $direction = 'asc') {
     $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
     $searchForm = $this->createForm(new UserSearchType());
@@ -62,6 +70,10 @@ class UserController extends Controller {
     return $this->render("CaesarAdminBundle:User:index.html.twig", $array);
   }
 
+  /**
+   * Action permettant de gérer l'ajout d'un utilisateur
+   * @return type
+   */
   public function addAction() {
     $em = $this->getDoctrine()->getEntityManager();
     $translator = $this->get('translator');
@@ -93,8 +105,15 @@ class UserController extends Controller {
       ));
   }
 
+  /**
+   * Action permettant de gérer la mise à jour d'un utilisateur
+   *
+   * @param type $id
+   * @return type
+   * @throws type
+   */
   public function updateAction($id) {
-      $translator = $this->get('translator');
+    $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
@@ -145,8 +164,15 @@ class UserController extends Controller {
       ));
   }
 
+  /**
+   * Action permettant de gérer la suppression d'un utilisateur
+   *
+   * @param type $id
+   * @return type
+   * @throws type
+   */
   public function deleteAction($id) {
-      $translator = $this->get('translator');
+    $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {

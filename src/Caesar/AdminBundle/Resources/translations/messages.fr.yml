@@ -69,6 +69,8 @@ admin:
                 update: L'étiquette %tag% a bien été modifiée
                 delete: L'étiquette %tag% a bien été supprimée
             error: L'étiquette %tag% n'est pas une étiquette valide
+        format:
+            exception: Le format %format% n'est pas un format valide
         users:
             exception: L'utilisateur %user% n'est pas un utilisateur valide
             notice:
@@ -127,6 +129,13 @@ admin:
         tag:
             generate: Générer les étiquettes
             add: Ajouter un nouveau format
+        web.mining: Rechercher les informations sur internet
+        resource:
+            image.alt: Veuillez choisir une image
+            apply: Appliquer
+            reinit.skeleton: Réinitialiser le squelette
+            add: Ajouter la ressource
+            update: Modifier la ressource
     breadcrumb:
         shelves:
             add: Ajouter

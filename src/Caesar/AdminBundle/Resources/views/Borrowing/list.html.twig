@@ -16,7 +16,7 @@
                 </p>
             </th>
         </tr>
-        
+
     </thead>
     <tfoot>
         <tr>
@@ -38,7 +38,7 @@
                 {% endif %}
             </tr>
             {% endfor %}
-    <tbody>
+    </tbody>
 </table>
 
 {# display navigation #}
@@ -59,7 +59,7 @@
         {% endfor %}
 
         {# Affichage de la page courante #}
-        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur})) }}">{{ pagination.cur }}</a></li> 
+        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur})) }}">{{ pagination.cur }}</a></li>
 
         {# Affichage des 3 (ou 2, ou 1, ou 0) pages suivant la page courante #}
         {% for i in 1 .. 3 %}

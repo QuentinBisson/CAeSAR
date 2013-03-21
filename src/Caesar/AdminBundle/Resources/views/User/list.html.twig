@@ -40,18 +40,18 @@
                     <a href="{{ path('caesar_admin_borrowing_search_user', {'user':user.id}) }}" title="{{ 'admin.label.infobuble.user_borrowing'|trans }}"><i class="icon-book"></i></a>
                 </td>
                 <td>
-                    <a href="{{path('caesar_admin_user_update', {'id':user.id})}}" name="Modifier l'utilisateur">
+                    <a href="{{path('caesar_admin_user_update', {'id':user.id})}}">
                         <i class="icon-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}"  name="Supprimer l'utilisateur">
+                    <a href="{{path('caesar_admin_user_delete', {'id':user.id})}}">
                         <i class="icon-remove"></i>
                     </a>
                 </td>
             </tr>
             {% endfor %}
-    <tbody>
+    </tbody>
 </table>
 
 {# display navigation #}
@@ -71,7 +71,7 @@
         {% endfor %}
 
         {# Affichage de la page courante #}
-        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur, 'sort' :sort, 'direction' : direction}) }}">{{ pagination.cur }}</a></li> 
+        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), {'page':pagination.cur, 'sort' :sort, 'direction' : direction}) }}">{{ pagination.cur }}</a></li>
 
         {# Affichage des 3 (ou 2, ou 1, ou 0) pages suivant la page courante #}
         {% for i in 1 .. 3 %}

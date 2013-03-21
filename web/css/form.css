@@ -22,8 +22,13 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 input[type="url"],
+input[type="search"],
 select {
     width: 165px;
+}
+
+.margin-left {
+    margin-left: 200px;
 }
 
 input[type="text"],
@@ -31,6 +36,7 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 input[type="url"],
+input[type="search"],
 textarea,
 select{
     height: 35px;
@@ -61,6 +67,7 @@ input[type="submit"], input[type="button"] {
     height: 35px;
     margin-bottom: 10px;
     border: 1px solid #c5c8cb;
+    vertical-align: middle;
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */

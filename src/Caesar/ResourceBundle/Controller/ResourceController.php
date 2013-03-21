@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ResourceController extends Controller {
 
+  //    $translator = $this->get('translator');
+//$translator->trans('admin.form.users.notice.add'
   public function consultAction($code) {
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {

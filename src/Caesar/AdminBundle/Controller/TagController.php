@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TagController extends Controller {
 
+  /**
+   * Action permettant de lister les étiquettes encore non-utilisées
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return type
+   */
   public function indexAction($page = 1, $sort = 'code', $direction = 'asc') {
     $nb_per_page = 10; // Nombre d'éléments affichés par page (pour la pagination)
     $em = $this->getDoctrine()->getManager();
@@ -43,6 +50,10 @@ class TagController extends Controller {
     return $this->render("CaesarAdminBundle:Tag:index.html.twig", $array);
   }
 
+  /**
+   * Action permettant de générer et d'afficher les étiquettes à imprimer
+   * @return type
+   */
   public function generateAction() {
     $format = new Format();
     $listForm = $this->createForm(new FormatListType());
@@ -53,7 +64,7 @@ class TagController extends Controller {
       if ($listForm->isValid()) {
         $data = $listForm->getData();
         $format = $data['format'];
-        //TODO voir null
+
         $em = $this->getDoctrine()->getEntityManager();
         $number = $format->getColumns() * $format->getRows();
         $tags = array();
@@ -84,6 +95,11 @@ class TagController extends Controller {
     return $this->render('CaesarAdminBundle:Tag:generate.html.twig', array('listForm' => $listForm->createView()));
   }
 
+  /**
+   * Action permettant de générer un code-barre à partir d'une chaîne de caractère
+   * @param type $text
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
   public function barcodeAction($text) {
     $response = new Response();
     $response->headers->set('Content-Type', 'image/png');
@@ -131,6 +147,13 @@ class TagController extends Controller {
     return $response;
   }
 
+  /**
+   * Action permettant de supprimer une étiquette de la base si jamais on a perdu la plaquette d'étiquette par exemple
+   *
+   * @param type $id
+   * @return type
+   * @throws type
+   */
   public function deleteAction($id) {
     $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
@@ -153,6 +176,10 @@ class TagController extends Controller {
     return $this->render('CaesarAdminBundle:Tag:delete.html.twig');
   }
 
+  /**
+   * Action permettant l'ajout d'un format
+   * @return type
+   */
   public function formatAddAction() {
     $translator = $this->get('translator');
     $format = new Format();
@@ -193,11 +220,19 @@ class TagController extends Controller {
     return $this->render('CaesarAdminBundle:Tag:format.html.twig', array('form' => $form->createView(), 'listForm' => $listForm->createView()));
   }
 
+  /**
+   * Action permettant de récupérer un format au format JSON
+   *
+   * @param type $id
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws type
+   */
   public function formatAjaxAction($id = 1) {
+     $translator = $this->get('translator');
     if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
       $clean = $id;
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $id . ' est invalide.');
+      throw $this->createNotFoundException($translator->trans('admin.form.format.exception', array('%format%' => $id)));
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -206,14 +241,14 @@ class TagController extends Controller {
         ->find($clean);
     }
     if (!$format) {
-      throw $this->createNotFoundException('Format non trouvé avec id ' . $clean);
+      throw $this->createNotFoundException($translator->trans('admin.form.format.exception', array('%format%' => $clean)));
     }
 
     $request = $this->get('request');
     if ($request->isXmlHttpRequest()) {
       return new Response(json_encode($format->getJsonData()));
     }
-    throw $this->createNotFoundException('Requete invalide');
+    throw $this->createNotFoundException($translator->trans('admin.form.invalid'));
   }
 
 }

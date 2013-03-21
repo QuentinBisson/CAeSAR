@@ -7,6 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BorrowingController extends Controller {
 
+  /**
+   * Lister les emprunts en cours ou archivés
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return type
+   */
   public function indexAction($page = 1, $sort = 'id', $direction = 'asc') {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
@@ -60,12 +67,18 @@ class BorrowingController extends Controller {
 
     return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
   }
-  
+
   /**
-   * Recherche d'emprunts à partir d'un utilisateur
+   * Rechercher les emprunts à partir d'un utilisateur
+   *
+   * @param type $user
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return type
    */
   public function searchUserAction($user, $page, $sort, $direction) {
-      $nb_per_page = 10;
+    $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
     $archived = null;
@@ -114,14 +127,20 @@ class BorrowingController extends Controller {
     }
 
     $array['searchForm'] = $searchForm->createView();
-      return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
+    return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
   }
-  
+
   /**
-   * Recherche d'emprunts à partir d'une ressource
+   * Rechercher les emprunts à partir d'une ressource
+   *
+   * @param type $resource
+   * @param type $page
+   * @param type $sort
+   * @param type $direction
+   * @return type
    */
   public function searchResourceAction($resource, $page, $sort, $direction) {
-           $nb_per_page = 10;
+    $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
     $archived = null;
@@ -137,9 +156,8 @@ class BorrowingController extends Controller {
       }
     }
     $resource = $em->getRepository('CaesarResourceBundle:Resource')->find($resource);
-    if ($resource == null)
-    {
-        $this->createNotFoundException();
+    if ($resource == null) {
+      $this->createNotFoundException();
     }
     if ($archived) {
       $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);
@@ -174,7 +192,7 @@ class BorrowingController extends Controller {
     }
 
     $array['searchForm'] = $searchForm->createView();
-      return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
+    return $this->render("CaesarAdminBundle:Borrowing:index.html.twig", $array);
   }
 
 }
