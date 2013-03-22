@@ -20,3 +20,15 @@ return:
 client:
     borrow:
         exception: The resource with the code or the identifier %code% is unobtainable
+    borrowing:
+        resource:
+            borrowed: The resource %resource% has been borrowed.
+            reservation:
+                borrowed: The resource %resource% that you reserved has been borrowed.
+                error: You can't borrow %resource% because you are not in the top of the reservation list.
+                none: You can't borrow %resource% right now because at least one user reserved it.
+            unavailable: The resource %resource% is unavailable at the moment.
+    return:
+        impossible:
+            exception: You can't return %resource% because the resource is not currently borrowed.
+        accepted: The resource entitled %resource% is considered returned.
