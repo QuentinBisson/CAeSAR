@@ -54,7 +54,8 @@ admin:
                 add: La ressource %resource% a bien été ajoutée
                 update: La ressource %resource% a bien été modifiée
                 delete: La ressource %resource% a bien été supprimée
-            error: Le code %resource% n'est pas un code ISBN ou propriétaire valide
+            error: Le code %resource% n'est pas un code ISBN, propriétaire ou est déjà géré
+            tag.invalid: Le code propriétaire ne correspond pas à une étiquette
         shelves:
             exception: L'étagère %shelf% n'est pas une étagère valide
             notice:

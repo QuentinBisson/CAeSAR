@@ -5,6 +5,7 @@ consultation:
         borrowing:
             date: Borrowing date
 form:
+    invalid: Invalid request
     resource:
         choose: Choose an location
     borrowing:
@@ -16,3 +17,6 @@ borrow:
 return:
     title: Return a resource
 
+client:
+    borrow:
+        exception: The resource with the code or the identifier %code% is unobtainable

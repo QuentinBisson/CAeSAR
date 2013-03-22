@@ -5,6 +5,7 @@ consultation:
         borrowing:
             date: Date d'emprunt
 form:
+    invalid: Requête invalide
     resource:
         choose: Choisissez un emplacement
     borrowing:
@@ -15,3 +16,7 @@ borrow:
     title: Emprunter une ressource
 return:
     title: Rendre une ressource
+
+client:
+    borrow:
+        exception: La ressource avec le code ou l'identifiant %code% est introuvable

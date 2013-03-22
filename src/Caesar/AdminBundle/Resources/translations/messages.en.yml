@@ -54,7 +54,8 @@ admin:
                 add: The resource %resource% has been added
                 update: The resource %resource% has been updated
                 delete: The resource %resource% has been deleted
-            error: The code %resource% is not a valid ISBN code or local code
+            error: The code %resource% is not a valid ISBN code or local code or already exists
+            tag.invalid: The local code does not correspond to a label
         shelves:
             exception: The shelf id %shelf% is not a valid shelf
             notice:

@@ -9,9 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ResourceController extends Controller {
 
-  //    $translator = $this->get('translator');
-//$translator->trans('admin.form.users.notice.add'
   public function consultAction($code) {
+    $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
@@ -21,43 +20,45 @@ class ResourceController extends Controller {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
         ->find($clean);
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
     return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array('resource' => $resource));
   }
 
   public function ajaxGetAction($code) {
+    $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
         ->findOneByCode($code);
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
 
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvée avec code ' . $code);
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
     $request = $this->get('request');
     if ($request->isXmlHttpRequest()) {
       return new Response(json_encode($resource->getJsonData()));
     }
-    throw $this->createNotFoundException('Requete invalide');
+    throw $this->createNotFoundException($translator->trans('form.invalid'));
   }
 
   public function borrowAction($code) {
+    $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
         ->findOneByCode($code);
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
 
     $q = $resource->getQuantity();
@@ -132,15 +133,16 @@ class ResourceController extends Controller {
   }
 
   public function returnAction($code) {
+    $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
       $resource = $em->getRepository('CaesarResourceBundle:Resource')
         ->findOneByCode($code);
     } else {
-      throw $this->createNotFoundException('L\'identifiant ' . $code . ' n\'est pas valide.');
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
     if (!$resource) {
-      throw $this->createNotFoundException('Ressource non trouvée avec id ' . $code);
+      throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
     }
 
     $q = $resource->getQuantity();
