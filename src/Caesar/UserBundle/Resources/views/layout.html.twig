@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block body %}
-
-{% block caesar_user_content %}{% endblock caesar_user_content %}
+    {% for type, flashMessages in app.session.flashbag.all() %}
+        {% for flashMessage in flashMessages %}
+        <div class="flash-{{ type }}">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% endfor %}
+    {% block caesar_user_content %}{% endblock caesar_user_content %}
 
 {% endblock %}

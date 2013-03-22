@@ -1,23 +1,17 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
 {% block bodyTitle %}
-    <h1>{{ 'user.login.title'|trans({}, 'CaesarUserBundle') }}</h1>
+<h1>{{login_page_title}}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
 {% if error %}
-    <div>{{ error.message }}</div>
+<div>{{ error.message }}</div>
 {% endif %}
 
 <form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post">
     <label for="_username">{{ 'user.login.label.username'|trans({}, 'CaesarUserBundle') }}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-    {#
-        If you want to control the URL the user is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-
     <input type="submit" value="{{ 'user.login.label.login'|trans({}, 'CaesarUserBundle') }}" />
 </form>
 {% endblock caesar_user_content %}

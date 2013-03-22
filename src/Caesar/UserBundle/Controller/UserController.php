@@ -72,6 +72,7 @@ class UserController extends Controller {
 
   public function loginAction() {
     $request = $this->getRequest();
+    $translator = $this->get('translator');
     $session = $request->getSession();
     // get the login error if there is one
     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
@@ -86,6 +87,7 @@ class UserController extends Controller {
     return $this->render(
         'CaesarUserBundle:User:login.html.twig', array(
           // last username entered by the user
+          'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),
           'error' => $error,
         )

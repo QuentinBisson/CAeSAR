@@ -28,7 +28,9 @@ client:
                 error: You can't borrow %resource% because you are not in the top of the reservation list.
                 none: You can't borrow %resource% right now because at least one user reserved it.
             unavailable: The resource %resource% is unavailable at the moment.
+            connect: You need to log in to borrow %resource%.
     return:
         impossible:
             exception: You can't return %resource% because the resource is not currently borrowed.
         accepted: The resource entitled %resource% is considered returned.
+        connect: You need to log in to return %resource%.

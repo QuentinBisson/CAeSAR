@@ -376,121 +376,35 @@ class Resource {
   /**
    * ISBN
    */
-
   public static function isCAeSARCode($code) {
     return preg_match("/^C-[0-9]*$/", $code);
   }
 
-
-  /**
-   * Cette fonction teste si une chaîne est un ISBN-10 ou un ISBN-13
-   * @param type $isbn
-   * @return boolean
-   */
   public static function checkISBN($isbn) {
-    $type = Resource::getISBNtype($isbn);
-    if ($type === -1) {
-      return false;
-    } else if ($type === 13) {
-      return Resource::validatettn($isbn) > 0;
-    } else {
-      return Resource::validateten($isbn) > 0;
+    $j = 0;
+    $code = str_replace(array(' ', '-', '.'), '', $isbn);
+    $length = strlen($code);
+    switch ($length) {
+      case 10:
+        $k = $length;
+        for ($i = 0; $i < 9; $i++) {
+          $j += intval($code[$i]) * $k;
+          $k--;
+        }
+        $t = strtoupper($code[9]);
+        $j += $t == "X" ? 10 : intval($t);
+        return $j % 11 == 0;
+        break;
+      case 13:
+        $k = - 1;
+        for ($i = 0; $i < $length; $i++) {
+          $j += intval($code[$i]) * (2 + $k);
+          $k *= -1;
+        }
+        return $j % 10 == 0;
+        break;
     }
-  }
-
-  /**
-   * Cette fonction permet de savoir si une chaîne est un ISBN-10 ou un ISBN-13
-   * @param type $isbn
-   * @return int
-   */
-  private static function getISBNtype($isbn) {
-    if (preg_match('%[0-9]{12}?[0-9Xx]%s', $isbn)) {
-      return 13;
-    } else if (preg_match('%[0-9]{9}?[0-9Xx]%s', $isbn)) {
-      return 10;
-    } else {
-      return -1;
-    }
-  }
-
-  /**
-   * Cette fonction permet de valider un code ISBN-10
-   *
-   * @param type $isbn
-   * @return int
-   */
-  private static function validateten($isbn) {
-    $chksum = substr($isbn, -1, 1);
-    $isbn = substr($isbn, 0, -1);
-    if (preg_match('/X/i', $chksum)) {
-      $chksum = "10";
-    }
-    $sum = Resource::genchksum10($isbn);
-    if ($chksum == $sum) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  /**
-   * Cette fonction permet de valider un code ISBN-13
-   *
-   * @param type $isbn
-   * @return int
-   */
-  private static function validatettn($isbn) {
-    $chksum = substr($isbn, -1, 1);
-    $isbn = substr($isbn, 0, -1);
-    if (preg_match('/X/i', $chksum)) {
-      $chksum = "10";
-    }
-    $sum = Resource::genchksum13($isbn);
-    if ($chksum == $sum) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private static function genchksum13($isbn) {
-    $tb = 0;
-    for ($i = 0; $i <= 12; $i++) {
-      $tc = substr($isbn, -1, 1);
-      $isbn = substr($isbn, 0, -1);
-      $ta = ($tc * 3);
-      $tci = substr($isbn, -1, 1);
-      $isbn = substr($isbn, 0, -1);
-      $tb = $tb + $ta + $tci;
-    }
-    $tg = ($tb / 10);
-    $tint = intval($tg);
-    if ($tint == $tg) {
-      return 0;
-    }
-    $ts = substr($tg, -1, 1);
-    $tsum = (10 - $ts);
-    return $tsum;
-  }
-
-  private static function genchksum10($isbn) {
-    $t = 2;
-    $isbn = trim($isbn);
-    $a = 0;
-    $b = 0;
-    for ($i = 0; $i <= 9; $i++) {
-      $b = $b + $a;
-      $c = substr($isbn, -1, 1);
-      $isbn = substr($isbn, 0, -1);
-      $a = ($c * $t);
-      $t++;
-    }
-    $s = ($b / 11);
-    $s = intval($s);
-    $s++;
-    $g = ($s * 11);
-    $sum = ($g - $b);
-    return $sum;
+    return false;
   }
 
 }

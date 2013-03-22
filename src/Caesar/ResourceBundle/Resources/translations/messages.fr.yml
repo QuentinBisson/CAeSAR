@@ -28,7 +28,9 @@ client:
                 error: Vous ne pouvez pas emprunter %resource% car vous n'êtes pas en haut de la liste de réservation.
                 none: Vous ne pouvez pas emprunter %resource% car au moins un utilisateur l'a réservé.
             unavailable: La ressource %resource% est momentanément indisponible.
+            connect: Il est nécessaire que vous vous connectiez pour emprunter %resource%.
     return:
         impossible:
             exception: Vous ne pouvez pas rendre %resource% car la ressource n'est pas actuellement empruntée.
         accepted: La ressource intitulée %resource% est considérée rendue.
+        connect: Il est nécessaire que vous vous connectiez pour rendre %resource%.

@@ -6,6 +6,7 @@ use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ResourceController extends Controller {
 
@@ -132,11 +133,29 @@ class ResourceController extends Controller {
           }
         }
       } else {//Je dois me connecter
-        /* $message = "Veuillez vous connecter avant d'emprunter la ressource.";
-          $this->get('session')->getFlashBag()->add(
-          'info', $translator->trans('client.borrowing.resource.unavailable', array('%resource%' => $resource->getDescription()))
+        $this->get('session')->getFlashBag()->add(
+          'info', $translator->trans('client.borrowing.resource.connect', array('%resource%' => $resource->getDescription()))
+        );
+
+        $request = $this->getRequest();
+        $session = $request->getSession();
+
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+          $error = $request->attributes->get(
+            SecurityContext::AUTHENTICATION_ERROR
           );
-          return $this->render('CaesarResourceBundle:Resource:borrow.html.twig', array('resource' => $resource, 'message' => $message)); */
+        } else {
+          $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+          $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render(
+            'CaesarUserBundle:User:login.html.twig', array(
+              'login_page_title' => $translator->trans('borrow.title'),
+              'resource' => $resource,
+              'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+              'error' => $error)
+        );
       }
     }
     //Plus de ressources disponibles
@@ -187,11 +206,29 @@ class ResourceController extends Controller {
       );
     }
 
-    /* $message = "Veuillez vous connecter avant d'emprunter la ressource.";
-      $this->get('session')->getFlashBag()->add(
-      'info', $translator->trans('client.borrowing.resource.unavailable', array('%resource%' => $resource->getDescription()))
+    $this->get('session')->getFlashBag()->add(
+      'info', $translator->trans('client.return.connect', array('%resource%' => $resource->getDescription()))
+    );
+
+    $request = $this->getRequest();
+    $session = $request->getSession();
+
+    if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+      $error = $request->attributes->get(
+        SecurityContext::AUTHENTICATION_ERROR
       );
-      return $this->render('CaesarResourceBundle:Resource:return.html.twig', array('resource' => $resource)); */
+    } else {
+      $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+      $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+    }
+
+    return $this->render(
+        'CaesarUserBundle:User:login.html.twig', array(
+          'login_page_title' => $translator->trans('return.title'),
+          'resource' => $resource,
+          'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+          'error' => $error)
+    );
   }
 
 }

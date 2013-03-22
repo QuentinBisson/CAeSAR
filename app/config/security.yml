@@ -32,9 +32,10 @@ security:
             form_login:
                 login_path:  caesar_client_login
                 check_path:  caesar_client_login_check
+                success_handler: caesar_user_security.component.authentication.handler.login_handler
+                failure_handler: caesar_user_security.component.authentication.handler.login_handler
+                failure_path:   null
             http_basic: true
-
-
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
