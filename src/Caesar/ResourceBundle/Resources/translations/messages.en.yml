@@ -7,7 +7,7 @@ consultation:
 form:
     invalid: Invalid request
     resource:
-        choose: Choose an location
+        choose: Choose a location
     borrowing:
         type:
             label:

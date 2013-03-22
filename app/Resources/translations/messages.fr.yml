@@ -68,7 +68,7 @@ table:
     title:
         users:
           codeBu: Code B.U.
-          login: Nom d'utilisateur
+          login: Login
           nom: Nom
           prenom: Prénom
           email: Courriel

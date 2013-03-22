@@ -6,10 +6,10 @@
 
 {% block caesar_user_content %}
 {% if error %}
-<div>{{ error.message }}</div>
+<div class="flash-error">{{ error.message }}</div>
 {% endif %}
 
-<form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post">
+<form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post" autocomplete="off">
     <label for="_username">{{ 'user.login.label.username'|trans({}, 'CaesarUserBundle') }}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
     <input type="submit" value="{{ 'user.login.label.login'|trans({}, 'CaesarUserBundle') }}" />

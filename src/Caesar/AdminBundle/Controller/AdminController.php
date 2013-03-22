@@ -10,4 +10,20 @@ class AdminController extends Controller {
     return $this->render('CaesarAdminBundle:Admin:index.html.twig');
   }
 
+   public function passwordAction() {
+    return $this->render('CaesarAdminBundle:Admin:password.html.twig');
+  }
+
+   public function webminingAction() {
+    return $this->render('CaesarAdminBundle:Admin:webmining.html.twig');
+  }
+
+   public function createBackupAction() {
+    return $this->render('CaesarAdminBundle:Admin:password.html.twig');
+  }
+
+   public function loadBackupAction() {
+    return $this->render('CaesarAdminBundle:Admin:password.html.twig');
+  }
+
 }

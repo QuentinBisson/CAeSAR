@@ -105,7 +105,12 @@ admin:
                 header: Borrowings
                 list: List borrowings
             general:
+                backup:
+                    create: Create a backup
+                    load: Load a backup
                 header: General administration
+                password: Change password
+                webmining: Webmining module
     fieldset:
         shelves:
             legend: Informations about the shelf
@@ -166,5 +171,5 @@ admin:
     validation:
         tag:
             format:
-                added: Le format a été ajouté
-                updated: Le format a été modifié
+                added: The format was added
+                updated: The format was updated

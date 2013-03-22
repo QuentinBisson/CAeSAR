@@ -106,7 +106,7 @@ class UserController extends Controller {
   }
 
   public function profileAction() {
-    return $this->render('CaesarUserBundle:User:profile.html.twig');
+    return $this->render('CaesarUserBundle:User:profile.html.twig', $user);
   }
 
 }

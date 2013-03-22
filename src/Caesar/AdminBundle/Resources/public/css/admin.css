@@ -7,7 +7,7 @@ input[type="button"]#generator {
     margin-left: 50px;
 }
 .codeBu {
-    width:10%;
+    width:15%;
 }
 
 .login {
@@ -69,11 +69,11 @@ img#resource-img{
 }
 
 .borrowing-user {
-    width: 30%;
+    width: 20%;
 }
 
 .borrowing-date, .borrowing-return {
-    width: 15%;
+    width: 20%;
 }
 
 .borrowing-return p.sort-label {

@@ -105,7 +105,12 @@ admin:
                 header: Emprunts
                 list: Lister les emprunts
             general:
+                backup:
+                    create: Créer une sauvegarde
+                    load: Charger une sauvegarde
                 header: Administration générale
+                password: Changer de mot de passe
+                webmining: Module de webmining
     fieldset:
         shelves:
             legend: Informations sur l'emplacement

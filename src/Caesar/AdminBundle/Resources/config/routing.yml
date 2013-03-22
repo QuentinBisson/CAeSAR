@@ -2,6 +2,22 @@ caesar_admin_homepage:
     pattern:  /
     defaults: { _controller: CaesarAdminBundle:Admin:index}
 
+caesar_admin_general_password:
+    pattern:  /password
+    defaults: { _controller: CaesarAdminBundle:Admin:password}
+
+caesar_admin_general_webmining:
+    pattern:  /webmining
+    defaults: { _controller: CaesarAdminBundle:Admin:webmining}
+
+caesar_admin_general_create_backup:
+    pattern:  /backup/create
+    defaults: { _controller: CaesarAdminBundle:Admin:createBackup}
+
+caesar_admin_general_load_backup:
+    pattern:  /backup/load
+    defaults: { _controller: CaesarAdminBundle:Admin:loadBackup}
+
 caesar_admin_resource_homepage:
     pattern:  /resource/{page}/{sort}/{direction}
     defaults: { _controller: CaesarAdminBundle:Resource:index, page:1, sort:'code', direction:'asc'}
@@ -21,7 +37,7 @@ caesar_admin_borrowing_homepage:
     requirements:
         page:  \d+
         direction: asc|desc
-        
+
 caesar_admin_borrowing_search_user:
     pattern: /borrowing/search/user/{user}/{page}/{sort}/{direction}
     defaults: {_controller: CaesarAdminBundle:Borrowing:searchUser, page:1, sort:'id', direction:'asc'}
@@ -29,7 +45,7 @@ caesar_admin_borrowing_search_user:
         page: \d+
         user: \d+
         direction: asc|desc
-        
+
 caesar_admin_borrowing_search_resource:
     pattern: /borrowing/search/resource/{resource}/{page}/{sort}/{direction}
     defaults: {_controller: CaesarAdminBundle:Borrowing:searchResource, page:1, sort:'id', direction:'asc'}
@@ -37,7 +53,7 @@ caesar_admin_borrowing_search_resource:
         page: \d+
         resource: \d+
         direction: asc|desc
-        
+
 caesar_admin_resource_add:
     pattern:  /resource/add
     defaults: { _controller: CaesarAdminBundle:Resource:add }

@@ -42,10 +42,33 @@ header h1 {
     color: #282828;
     text-align: center;
 }
+
+.flash-notice, .flash-error, .flash-info {
+    -webkit-border-radius: 8px;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px 20px;
+    color: #555;
+}
+
+.flash-notice {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+}
+
+.flash-error {
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+}
+
+.flash-info {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+}
+
 /**
  * Navbar
  **/
-
 .navbar {
     line-height: 52px;
     height:52px;
