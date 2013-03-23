@@ -1,7 +1,7 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
 {% block bodyTitle %}
-    <h1>{{ 'profile.title'|trans({}, 'CaesarUserBundle') }}</h1>
+<h1>{{ 'profile.title'|trans({}, 'CaesarUserBundle') }}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
@@ -15,11 +15,8 @@
             <li>{{'form.user.type.label.email'|trans({}) }} : {{user.email}}</li>
         </ul>
     </div>
-    <div>
-        <form action="#" method="post">
-            <label>Nouveau mot de passe :</label><input type="password">
-            <input type="submit" value="Changer">
-        </form>
+    <div id="modify-profile">
+        <input type="button" value="{{'profile.change.informations'|trans({}, 'CaesarUserBundle') }}"/>
     </div>
 </section>
 {% endblock %}

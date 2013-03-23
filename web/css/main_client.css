@@ -246,9 +246,10 @@ header h1 {
 }
 
 #main-form .main-form-actions input[type="button"],
-#search-form .search-form-actions input[type="submit"]{
+#search-form .search-form-actions input[type="submit"],
+#modify-profile input{
     font-family: "Trebuchet MS", sans-serif;
-    width: 210px;
+    min-width: 210px;
     height: 60px;
     font-size: 22px;
     cursor: pointer;
@@ -284,7 +285,8 @@ header h1 {
 }
 
 #main-form .main-form-actions input[type="button"]:active,
-#search-form .search-form-actions input[type="submit"]:active {
+#search-form .search-form-actions input[type="submit"]:active,
+#modify-profile input:active {
     color: #f3f3f6;
     background-color: rgb(83, 126, 192);
     background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
@@ -296,7 +298,8 @@ header h1 {
 }
 
 #main-form .main-form-actions input[type="button"][disabled="disabled"],
-#main-form .main-form-actions input[type="submit"][disabled="disabled"]:active {
+#main-form .main-form-actions input[type="submit"][disabled="disabled"]:active,
+#modify-profile input[disabled="disabled"]{
     color: #f3f3f6;
     border: 1px solid rgb(195, 200, 205);
     background-color: rgb(195, 200, 205);

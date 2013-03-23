@@ -9,7 +9,7 @@ user:
         label:
             register: "Register"
 search:
-    title: Search    
+    title: Search
 profile:
     title: My profile
 form:
@@ -21,3 +21,4 @@ form:
         return: Return
         consult: Consult
         placeholder: Enter a UL code, ISBN, identifier ...
+profile.change.informations: Change my informations
