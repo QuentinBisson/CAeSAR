@@ -84,9 +84,12 @@ admin:
                 add: The user %user% has been added
                 update: The user %user% has been updated
                 delete: The user %user% has been deleted
+                password.changed: Your password have been altered
             error: The user %user% is not a valid user
             password:
                 not_empty: The password can't be empty
+                no_match: Your current password does not match the current password field
+                not_same: There is no match between the new and the confirm password
     menu:
         title:
             shelves:
@@ -132,6 +135,7 @@ admin:
     button:
         logout: Log out
         search: Search
+        change.password: Modify the password
         user:
             add: Add the user
             update: Update the user

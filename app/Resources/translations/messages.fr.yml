@@ -14,6 +14,8 @@ form:
                 password:
                     normal: Mot de passe
                     confirm: Confirmer le mot de passe
+                    new: Nouveau mot de passe
+                    current: Mot de passe actuel
                 email: Courriel
                 name: Nom
                 firstname: Prénom
