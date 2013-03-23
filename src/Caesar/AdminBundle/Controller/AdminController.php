@@ -19,11 +19,11 @@ class AdminController extends Controller {
   }
 
    public function createBackupAction() {
-    return $this->render('CaesarAdminBundle:Admin:password.html.twig');
+    return $this->render('CaesarAdminBundle:Admin:createBackup.html.twig');
   }
 
    public function loadBackupAction() {
-    return $this->render('CaesarAdminBundle:Admin:password.html.twig');
+    return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig');
   }
 
 }

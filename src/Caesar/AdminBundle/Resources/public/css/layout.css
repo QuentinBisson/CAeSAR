@@ -141,9 +141,13 @@ aside.sidebar nav li a:hover {
     text-decoration: none;
 }
 
+.breadcrumb a .icon-home{
+    margin-top: 4px;
+}
+
 .breadcrumb a:hover {
     color: #005580;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .breadcrumb .active a {

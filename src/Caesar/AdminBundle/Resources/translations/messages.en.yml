@@ -26,6 +26,12 @@ admin:
             list: List labels
             generate: Generate new labels
             delete: Delete a label
+        general:
+            password: Change the administrator password
+            webmining: The webmining module options
+            backup:
+                  load: Load a backup of the application
+                  create: Create a backup of the application
     lang:
         french: French
         english: English
@@ -135,7 +141,11 @@ admin:
         tag:
             generate: Generate labels
             add: Add a new format
-        web.mining: Search the web for informations
+        web:
+            mining: Search the web for informations
+            tooltip:
+                title: Informations
+                content: By clicking this button, the content of the colored field will be replaced
         resource:
             image.alt: Please, choose an image file
             apply: Apply
@@ -165,6 +175,12 @@ admin:
             list: Labels
         borrowings:
             list: Borrowings
+        general:
+            password: Change password
+            webmining: Webmining options
+            backup:
+                  load: Load a backup
+                  create: Create a backup
     summary:
         tag:
             help: Help

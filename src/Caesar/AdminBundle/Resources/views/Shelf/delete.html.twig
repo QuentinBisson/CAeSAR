@@ -6,7 +6,7 @@
 {% endblock %}
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="2">
+    <li data-header="3">
         <a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.breadcrumb.shelves.list'|trans({})}}</a>
         <span class="divider">></span>
     </li>
@@ -23,7 +23,7 @@
         {{'admin.label.location.delete.not.empty'|trans({})}}
     </div>
     <br />
-    <section class="contentBody">        
+    <section class="contentBody">
         <table class="table table-hover table-bordered table-striped overflow mid-height">
             <thead>
                 <tr>
@@ -62,6 +62,6 @@
         {% endfor %}
         </table>
     </section>
-        
+
     {% endif %}
 {% endblock %}

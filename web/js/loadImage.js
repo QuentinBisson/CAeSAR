@@ -72,5 +72,5 @@ $(document).ready(function() {
         document.getElementById('caesar_resourceBundle_resourceType_path').value = a.value;
     }, false);
 
-    $('input.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
+    $('.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
 });

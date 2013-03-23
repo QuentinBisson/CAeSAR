@@ -26,6 +26,12 @@ admin:
             list: Lister les étiquettes
             generate: Générer de nouvelles étiquettes
             delete: Supprimer une étiquette
+        general:
+            password: Changer le mot de passe administrateur
+            webmining: Options du module du webmining
+            backup:
+                  load: Charger un backup de l'application
+                  create: Créer un backup de l'application
     lang:
         french: Français
         english: Anglais
@@ -135,7 +141,11 @@ admin:
         tag:
             generate: Générer les étiquettes
             add: Ajouter un nouveau format
-        web.mining: Rechercher les informations sur internet
+        web:
+            mining: Rechercher les informations sur internet
+            tooltip:
+                title: Informations
+                content: En cliquant sur ce bouton, le contenu des champs colorés va être modifié
         resource:
             image.alt: Veuillez choisir une image
             apply: Appliquer
@@ -165,6 +175,12 @@ admin:
             list: Etiquette
         borrowings:
             list: Emprunts
+        general:
+            password: Changer le mot de passe
+            webmining: Options du webmining
+            backup:
+                  load: Charger un backup
+                  create: Créer un backup
     summary:
         tag:
             help: Aide
