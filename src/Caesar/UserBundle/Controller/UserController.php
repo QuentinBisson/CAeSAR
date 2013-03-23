@@ -74,6 +74,15 @@ class UserController extends Controller {
     $request = $this->getRequest();
     $translator = $this->get('translator');
     $session = $request->getSession();
+
+    if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+      if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        return $this->redirect($this->generateUrl('caesar_admin_homepage'));
+      } elseif ($this->get('security.context')->isGranted('ROLE_USER')) {
+        return $this->redirect($this->generateUrl('caesar_client_homepage'));
+      }
+    }
+
     // get the login error if there is one
     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
       $error = $request->attributes->get(
@@ -86,7 +95,7 @@ class UserController extends Controller {
 
     return $this->render(
         'CaesarUserBundle:User:login.html.twig', array(
-          // last username entered by the user
+// last username entered by the user
           'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),
           'error' => $error,

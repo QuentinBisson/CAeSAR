@@ -185,7 +185,7 @@ class ResourceController extends Controller {
           return $this->redirect($this->generateUrl('caesar_admin_resource_homepage'));
         } else {
           $this->get('session')->getFlashBag()->add(
-            'error', $translator->trans('admin.form.resources.error', array('%resource%' => $resource->getDescription()))
+            'error', $translator->trans('admin.form.resources.error', array('%resource%' => $resource->getCode()))
           );
         }
       }
@@ -292,7 +292,7 @@ class ResourceController extends Controller {
       $newHeight = (($sourceHeight * $reduction) / 100);
       $destinationResource = imagecreatetruecolor($newWidth, $newHeight);
       imagecopyresampled($destinationResource, $image, 0, 0, 0, 0, $newWidth, $newHeight, $sourceWidth, $sourceHeight);
-      imagejpeg($destinationResource, "resources/img/" . $fileName, 90);
+      imagejpeg($destinationResource, "resources/img/" . $fileName, 80);
     }
   }
 
