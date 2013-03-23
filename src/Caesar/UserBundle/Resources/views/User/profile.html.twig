@@ -6,18 +6,20 @@
 
 {% block caesar_user_content %}
 <section class="container">
-	<div>
-		<ul class="label-list">
-			<li>Prénom : Bar</li>
-			<li>Nom : Foo</li>
-			<li>E-mail : foo.bar@mail.fr</li>
-		</ul>
-	</div>
-	<div>
-		<form action="#" method="post">
-			<label>Nouveau mot de passe :</label><input type="password">
-			<input type="submit" value="Changer">
-		</form>
-	</div>
+    <div>
+        <ul class="label-list">
+            <li>{{'form.user.type.label.codeBu'|trans({}) }} : {{user.codeBu}}</li>
+            <li>{{'form.user.type.label.name'|trans({}) }} : {{user.name}}</li>
+            <li>{{'form.user.type.label.firstname'|trans({}) }} : {{user.firstname}}</li>
+            <li>{{'form.user.type.label.login'|trans({}) }} : {{user.username}}</li>
+            <li>{{'form.user.type.label.email'|trans({}) }} : {{user.email}}</li>
+        </ul>
+    </div>
+    <div>
+        <form action="#" method="post">
+            <label>Nouveau mot de passe :</label><input type="password">
+            <input type="submit" value="Changer">
+        </form>
+    </div>
 </section>
 {% endblock %}

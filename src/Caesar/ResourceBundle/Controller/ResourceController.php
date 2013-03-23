@@ -4,6 +4,7 @@ namespace Caesar\ResourceBundle\Controller;
 
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
+use Caesar\UserBundle\Entity\BorrowingArchive;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -186,24 +187,51 @@ class ResourceController extends Controller {
     }
 
     if ($borrowedQuantity == 1) { //if only one borrowed
+      $borrowing = $resource->getBorrowings()->first();
+      $archivedBorrowing = new BorrowingArchive();
+      $archivedBorrowing->setBorrowingDate($borrowing->getBorrowingDate());
+      $archivedBorrowing->setResource($borrowing->getResource());
+      $archivedBorrowing->setUser($borrowing->getUser());
+      $em->remove($borrowing);
+      $em->persist($archivedBorrowing);
+      $em->flush();
       $this->get('session')->getFlashBag()->add(
         'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
       );
       return $this->redirect($this->generateUrl('caesar_client_homepage'));
-    } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) { //Rendre
-      $reservedAvailable = $q - $borrowedQuantity;
-      $reservationsToNotify = array();
-      $reservations = $resource->getReservations();
-      $i = 0;
-      array_push($reservationsToNotify, $reservations->first());
-      while ($i < $reservedAvailable - 1) {
-        array_push($reservationsToNotify, $reservations->next());
-        $i++;
+    } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+      $user = $this->get('security.context')->getToken()->getUser();
+      $borrowing = $em->getRepository('CaesarUserBundle:Borrowing')->findOneByUser($user);
+      if ($borrowing != null) { //je suis un emprunter Rendre
+        $archivedBorrowing = new BorrowingArchive();
+        $archivedBorrowing->setBorrowingDate($borrowing->getBorrowingDate());
+        $archivedBorrowing->setResource($borrowing->getResource());
+        $archivedBorrowing->setUser($borrowing->getUser());
+        $em->remove($borrowing);
+        $em->persist($archivedBorrowing);
+        $em->flush();
+
+        $availableReservations = $q - $borrowedQuantity;
+        $userToNotify = array();
+        $reservations = $resource->getReservations();
+        $i = 0;
+        array_push($userToNotify, $reservations->first());
+        while ($i < $availableReservations - 1) {
+          array_push($userToNotify, $reservations->next());
+          $i++;
+        }
+        //TODO send email to $acceptedReservations
+
+        $this->get('session')->getFlashBag()->add(
+          'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
+        );
+        return $this->redirect($this->generateUrl('caesar_client_homepage'));
+      } else { //message
+        $this->get('session')->getFlashBag()->add(
+          'error', $translator->trans('client.return.refused', array('%resource%' => $resource->getDescription()))
+        );
+        return $this->redirect($this->generateUrl('caesar_client_homepage'));
       }
-      //TODO send email to $acceptedReservations
-      $this->get('session')->getFlashBag()->add(
-        'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
-      );
     }
 
     $this->get('session')->getFlashBag()->add(

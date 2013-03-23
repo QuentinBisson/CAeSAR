@@ -38,8 +38,8 @@ security:
             http_basic: true
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER]}
+        #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: /register, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         #
         # You must uncomment the two following rules to restrict access to paths
         # starting with the /_internal prefix to only localhost

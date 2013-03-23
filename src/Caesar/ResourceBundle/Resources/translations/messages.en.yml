@@ -33,4 +33,5 @@ client:
         impossible:
             exception: You can't return %resource% because the resource is not currently borrowed.
         accepted: The resource entitled %resource% is considered returned.
+        refused: You didn't borrow %resource%. You can't possibly return it.
         connect: You need to log in to return %resource%.

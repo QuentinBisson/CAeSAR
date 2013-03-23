@@ -115,7 +115,8 @@ class UserController extends Controller {
   }
 
   public function profileAction() {
-    return $this->render('CaesarUserBundle:User:profile.html.twig', $user);
+    $user = $this->get('security.context')->getToken()->getUser();
+    return $this->render('CaesarUserBundle:User:profile.html.twig', array('user' => $user));
   }
 
 }
