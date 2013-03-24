@@ -19,6 +19,7 @@
         {{ form_rest(searchForm) }}
         <input type="submit" class="margin-left" value="{{'admin.button.search'|trans({})}}"/>
     </form>
+    <input type="hidden" id="serialize-request" value=""/>
     <section class="contentBody">
      {% include 'CaesarAdminBundle:Shelf:list.html.twig' with {'shelves' : shelves, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
