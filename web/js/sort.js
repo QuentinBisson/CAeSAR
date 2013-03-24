@@ -1,9 +1,16 @@
 function click_sort(e) {
     var url = this.href;
-            
+    var form = $('form');
+    var data = '';
+    if (form != null) {
+        form.action = url;
+        data = form.serialize();
+    }
+
     $.ajax({
         type: "POST",
         url: url,
+        data: data,
         cache: false,
         success: function(data){
             $('.contentBody').html(data);
@@ -19,7 +26,7 @@ function click_sort(e) {
                     $(this).unbind('click');
                     $(this).bind('click', function(e){
                         e.preventDefault();
-                    });    
+                    });
                 }
             });
         }
@@ -34,9 +41,18 @@ function click_paginate(e) {
         $(this).removeClass('active');
     });
     var elem = $(this);
+    var form = $('form');
+    var url = elem.attr('href');
+    var data = '';
+    if (form != null) {
+        form.action = url;
+        data = form.serialize();
+    }
+
     $.ajax({
         type: "POST",
-        url: elem.attr('href'),
+        url: url,
+        data: data,
         cache: false,
         success: function(data){
             $('.contentBody').html(data);
@@ -69,7 +85,7 @@ $(document).ready(function() {
             $(this).unbind('click');
             $(this).bind('click', function(e){
                 e.preventDefault();
-            });    
+            });
         }
     });
     if (bool === false) {
@@ -81,7 +97,7 @@ $(document).ready(function() {
         elem.unbind('click');
         elem.bind('click', function(e){
             e.preventDefault();
-        });    
+        });
     }
     $("._pagination").click(click_paginate);
 });

@@ -32,10 +32,8 @@ class BorrowingController extends Controller {
     }
 
     if ($archived) {
-      $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction);
+      $borrowings = $repository_borrowing->getAllBorrowingsFromToSortBy($page, $sort, $direction);
       $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
-      $archivedBorrowings = $repository_archived_borrowing->getArchivedBorrowingsFromToSortBy($page, $sort, $direction);
-      $borrowings = array_merge($currentBorrowings, $archivedBorrowings);
       $c1 = $repository_borrowing->count();
       $c2 = $repository_archived_borrowing->count();
       $count = $c1 + $c2;
@@ -77,7 +75,7 @@ class BorrowingController extends Controller {
    * @param type $direction
    * @return type
    */
-  public function searchUserAction($user, $page, $sort, $direction) {
+  public function searchUserAction($user, $page, $sort, $direction, $archived = null) {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
@@ -95,12 +93,10 @@ class BorrowingController extends Controller {
     }
     $user = $em->getRepository('CaesarUserBundle:User')->find($user);
     if ($archived) {
-      $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user);
+      $borrowings = $repository_borrowing->getAllBorrowingsFromToSortBy($page, $sort, $direction, $user);
       $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
-      $archivedBorrowings = $repository_archived_borrowing->getArchivedBorrowingsFromToSortBy($page, $sort, $direction, $user);
-      $borrowings = array_merge($currentBorrowings, $archivedBorrowings);
-      $c1 = $repository_borrowing->count();
-      $c2 = $repository_archived_borrowing->count();
+      $c1 = $repository_borrowing->count($user);
+      $c2 = $repository_archived_borrowing->count($user);
       $count = $c1 + $c2;
     } else {
       $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user);
@@ -139,7 +135,7 @@ class BorrowingController extends Controller {
    * @param type $direction
    * @return type
    */
-  public function searchResourceAction($resource, $page, $sort, $direction) {
+  public function searchResourceAction($resource, $page, $sort, $direction, $archived = null) {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
@@ -160,12 +156,10 @@ class BorrowingController extends Controller {
       $this->createNotFoundException();
     }
     if ($archived) {
-      $currentBorrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);
+      $borrowings = $repository_borrowing->getAllBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);
       $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
-      $archivedBorrowings = $repository_archived_borrowing->getArchivedBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);
-      $borrowings = array_merge($currentBorrowings, $archivedBorrowings);
-      $c1 = $repository_borrowing->count();
-      $c2 = $repository_archived_borrowing->count();
+      $c1 = $repository_borrowing->count(null, $resource);
+      $c2 = $repository_archived_borrowing->count(null, $resource);
       $count = $c1 + $c2;
     } else {
       $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);

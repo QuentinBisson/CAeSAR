@@ -119,4 +119,41 @@ class UserController extends Controller {
     return $this->render('CaesarUserBundle:User:profile.html.twig', array('user' => $user));
   }
 
+  public function borrowingAction($page, $sort, $direction) {
+    $nb_per_page = 10;
+    $em = $this->getDoctrine()->getManager();
+    $user = $this->get('security.context')->getToken()->getUser();
+    $repository_borrowing = $em->getRepository('CaesarUserBundle:Borrowing');
+
+    $user = $em->getRepository('CaesarUserBundle:User')->find($user->getId());
+    $borrowings = $repository_borrowing->getAllBorrowingsFromToSortBy($page, $sort, $direction, $user);
+    $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
+
+    $c1 = $repository_borrowing->count();
+    $c2 = $repository_archived_borrowing->count();
+    $count = $c1 + $c2;
+
+    /* Pagination */
+    $total = $count;
+    $pagination = array(
+        'cur' => $page,
+        'max' => floor($total / $nb_per_page),
+    );
+
+    $array = array(
+        'borrowings' => $borrowings,
+        'page' => $page,
+        'sort' => $sort,
+        'direction' => $direction,
+        'count' => $count,
+        'pagination' => $pagination);
+
+    $request = $this->get('request');
+    if ($request->isXmlHttpRequest()) {
+      return $this->render("CaesarUserBundle:User:list.html.twig", $array);
+    }
+
+    return $this->render("CaesarUserBundle:User:borrowing.html.twig", $array);
+  }
+
 }

@@ -27,3 +27,10 @@ caesar_client_profile:
 caesar_client_resetting:
     pattern:  /resetting
     defaults: { _controller: "CaesarUserBundle:User:resetting" }
+
+caesar_client_borrowing:
+    pattern:  /borrowing
+    defaults: { _controller: "CaesarUserBundle:User:borrowing", page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc

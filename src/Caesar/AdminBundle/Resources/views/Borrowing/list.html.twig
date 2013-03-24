@@ -28,10 +28,19 @@
     <tbody id="table_list">
          {% for borrowing in borrowings %}
             <tr>
-                <td>{{ borrowing.user.name ~ ' ' ~ borrowing.user.firstname }}</td>
-                <td>{{ borrowing.resource.description }}</td>
+                {% if borrowing.user.name is defined %}
+                    <td>{{ borrowing.user.name ~ ' ' ~ borrowing.user.firstname }}</td>
+                {% else %}
+                    <td>{{ borrowing.user }}</td>
+                {% endif %}
+                {% if borrowing.resource.description is defined %}
+                    <td>{{ borrowing.resource.description }}</td>
+                {% else %}
+                    <td>{{ borrowing.resource }}</td>
+                {% endif %}
+                    
                 <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
-                {% if borrowing.returnDate is defined %}
+                {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
                     <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
                 {% else %}
                     <td></td>

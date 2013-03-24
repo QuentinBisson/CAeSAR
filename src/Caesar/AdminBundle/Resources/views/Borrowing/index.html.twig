@@ -14,7 +14,8 @@
 {% block contentTitle %}{{'admin.title.borrowings.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_borrowing_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+{% set route_params = app.request.get('_route_params') %}
+<form id="formToUpdate" action="{{ path('caesar_admin_borrowing_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_row(searchForm.archived) }}
         <br/>

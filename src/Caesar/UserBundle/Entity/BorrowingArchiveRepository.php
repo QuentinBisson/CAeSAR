@@ -17,14 +17,17 @@ class BorrowingArchiveRepository extends EntityRepository {
     $min = ($page - 1) * $nb_per_page;
     $qb = $this->createQueryBuilder('b');
     if ($user != null) {
-      $qb->where('b.user.id = ' . $user->getId());
+      $qb->where('b.user = :user');
+      $qb->setParameter("user", $user->getId());
       if ($resource != null) {
-        $qb->andWhere('b.resource.id = ' . $resource->getId());
+        $qb->andWhere('b.resource = :resource');
+        $qb->setParameter("resource", $resource->getId());
       }
     }
 
     if ($resource != null) {
-      $qb->where('b.resource.id = ' . $resource->getId());
+      $qb->where('b.resource = :resource');
+      $qb->setParameter("resource", $resource->getId());
     }
     $qb->orderBy('b.' . $sort, $direction)
       ->setFirstResult($min)
@@ -32,9 +35,23 @@ class BorrowingArchiveRepository extends EntityRepository {
     return $qb->getQuery()->getResult();
   }
 
-  public function count() {
+  public function count($user = null, $resource = null) {
     $qb = $this->createQueryBuilder('b');
     $qb->select('count(b.id)');
+
+    if ($user != null) {
+      $qb->where('b.user = :user');
+      $qb->setParameter("user", $user->getId());
+      if ($resource != null) {
+        $qb->andWhere('b.resource = :resource');
+        $qb->setParameter("resource", $resource->getId());
+      }
+    }
+
+    if ($resource != null) {
+      $qb->where('b.resource = :resource');
+      $qb->setParameter("resource", $resource->getId());
+    }
 
     return $qb->getQuery()->getSingleScalarResult();
   }
