@@ -75,7 +75,7 @@ class BorrowingController extends Controller {
    * @param type $direction
    * @return type
    */
-  public function searchUserAction($user, $page, $sort, $direction, $archived = null) {
+  public function searchUserAction($user, $page, $sort, $direction) {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());
@@ -135,7 +135,7 @@ class BorrowingController extends Controller {
    * @param type $direction
    * @return type
    */
-  public function searchResourceAction($resource, $page, $sort, $direction, $archived = null) {
+  public function searchResourceAction($resource, $page, $sort, $direction) {
     $nb_per_page = 10;
     $em = $this->getDoctrine()->getManager();
     $searchForm = $this->createForm(new BorrowingSearchType());

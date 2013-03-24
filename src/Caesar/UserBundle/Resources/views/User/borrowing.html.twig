@@ -7,15 +7,11 @@
 
 
 {% block bodyTitle %}
-<h1>{{'admin.title.borrowings.list'|trans({})}}</h1>
+<h1>{{'borrowings.title'|trans({}, 'CaesarUserBundle')}}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
 <section class="contentBody">
      {% include 'CaesarUserBundle:User:list.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
-{% endblock %}
-{% block javascripts %}
-{{parent()}}
-    <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
 {% endblock %}

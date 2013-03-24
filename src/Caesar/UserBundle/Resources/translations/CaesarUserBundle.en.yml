@@ -22,3 +22,4 @@ form:
         consult: Consult
         placeholder: Enter a UL code, ISBN, identifier ...
 profile.change.informations: Change my informations
+borrowings.title: My borrowings

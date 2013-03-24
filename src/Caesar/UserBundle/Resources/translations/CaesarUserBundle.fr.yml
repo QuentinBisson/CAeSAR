@@ -22,3 +22,4 @@ form:
         consult: Consulter
         placeholder: Entrez un code BU, ISBN, identifiant ...
 profile.change.informations: Changer mes informations
+borrowings.title: Mes emprunts

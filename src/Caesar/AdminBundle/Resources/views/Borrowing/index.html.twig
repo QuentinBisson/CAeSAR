@@ -15,7 +15,8 @@
 
 {% block contentBody %}
 {% set route_params = app.request.get('_route_params') %}
-<form id="formToUpdate" action="{{ path('caesar_admin_borrowing_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+{% set route = app.request.get('_route') %}
+<form id="formToUpdate" action="{{ path(route, route_params) }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_row(searchForm.archived) }}
         <br/>

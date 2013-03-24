@@ -97,7 +97,7 @@ class BorrowingRepository extends EntityRepository {
       $stmt->bindValue('user', $user->getId());
     }
     if ($resource != null) {
-      $stmt->bindValue('resource', $user->getId());
+      $stmt->bindValue('resource', $resource->getId());
     }
 
     $stmt->bindValue('sort', $sort);
