@@ -34,3 +34,10 @@ caesar_client_borrowing:
     requirements:
         page:  \d+
         direction: asc|desc
+
+caesar_client_reservation:
+    pattern:  /reservation
+    defaults: { _controller: "CaesarUserBundle:User:reservation", page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc

@@ -95,7 +95,7 @@ class UserController extends Controller {
 
     return $this->render(
         'CaesarUserBundle:User:login.html.twig', array(
-// last username entered by the user
+        // last username entered by the user
           'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),
           'error' => $error,
@@ -105,10 +105,11 @@ class UserController extends Controller {
 
   public function registerAction() {
     $user = new User();
+    $translator = $this->get('translator');
     $form = $this->createForm(new UserType(), $user);
     $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
     if ($formHandler->process()) {
-      $this->get('session')->setFlash('success', 'Inscription réussie');
+      $this->get('session')->setFlash('notice', $translator->trans('user.register.successfull', array(), 'CaesarUserBundle'));
       return $this->redirect($this->generateUrl('caesar_client_homepage'));
     }
     return $this->render('CaesarUserBundle:User:register.html.twig', array('form' => $form->createView()));

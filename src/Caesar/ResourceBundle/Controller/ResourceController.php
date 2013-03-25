@@ -5,6 +5,8 @@ namespace Caesar\ResourceBundle\Controller;
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
 use Caesar\UserBundle\Entity\BorrowingArchive;
+use Swift_Message;
+use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -73,66 +75,74 @@ class ResourceController extends Controller {
 
       if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
         $user = $this->get('security.context')->getToken()->getUser();
-
-        if ($available > 0) { //Si pas de réservation bloquante
-          $borrow = new Borrowing();
-          $borrow->setResource($resource);
-          $borrow->setUser($user);
-          $em->persist($borrow);
-          $em->flush();
-          $this->get('session')->getFlashBag()->add(
-            'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
-          );
-          return $this->redirect($this->generateUrl('caesar_client_homepage'));
-        } else {
-          $reservedAvailable = $q - $borrowedQuantity;
-          $acceptedReservations = array();
-          $reservations = $resource->getReservations();
-          $i = 0;
-          array_push($acceptedReservations, $reservations->first());
-          while ($i < $reservedAvailable - 1) {
-            array_push($acceptedReservations, $reservations->next());
-            $i++;
-          }
-          $reservation = null;
-          foreach ($acceptedReservations as $r) {
-            if ($r->getUser()->isEqualTo($user)) {
-              $reservation = $r;
-            }
-          }
-          //Si user parmi les premiers à réserver
-          if ($reservation != null) {
-            $em->remove($reservation);
+        $borrowing = $em->getRepository('CaesarUserBundle:Borrowing')
+          ->findOneBy(array('user' => $user->getId(), 'resource' => $resource->getId()));
+        if (!$borrowing) {
+          if ($available > 0) { //Si pas de réservation bloquante
             $borrow = new Borrowing();
             $borrow->setResource($resource);
             $borrow->setUser($user);
             $em->persist($borrow);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-              'notice', $translator->trans('client.borrowing.resource.reservation.borrowed', array('%resource%' => $resource->getDescription()))
+              'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
             );
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
           } else {
-            $isInList = false;
-            foreach ($resource->getReservations()->toArray() as $reservation) {
-              if ($reservation->getUser()->isEqualTo($user)) {
-                $isInList = true;
+            $reservedAvailable = $q - $borrowedQuantity;
+            $acceptedReservations = array();
+            $reservations = $resource->getReservations();
+            $i = 0;
+            array_push($acceptedReservations, $reservations->first());
+            while ($i < $reservedAvailable - 1) {
+              array_push($acceptedReservations, $reservations->next());
+              $i++;
+            }
+            $reservation = null;
+            foreach ($acceptedReservations as $r) {
+              if ($r->getUser()->isEqualTo($user)) {
+                $reservation = $r;
               }
             }
-            //Pas le premier sur la liste de réservation
-            if ($isInList) {
+            //Si user parmi les premiers à réserver
+            if ($reservation != null) {
+              $em->remove($reservation);
+              $borrow = new Borrowing();
+              $borrow->setResource($resource);
+              $borrow->setUser($user);
+              $em->persist($borrow);
+              $em->flush();
               $this->get('session')->getFlashBag()->add(
-                'error', $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()))
+                'notice', $translator->trans('client.borrowing.resource.reservation.borrowed', array('%resource%' => $resource->getDescription()))
               );
               return $this->redirect($this->generateUrl('caesar_client_homepage'));
-            } else { //Ressource non réservée.
-              $this->get('session')->getFlashBag()->add(
-                'error', $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()))
-              );
-              return $this->redirect($this->generateUrl('caesar_client_homepage'));
+            } else {
+              $isInList = false;
+              foreach ($resource->getReservations()->toArray() as $reservation) {
+                if ($reservation->getUser()->isEqualTo($user)) {
+                  $isInList = true;
+                }
+              }
+              //Pas le premier sur la liste de réservation
+              if ($isInList) {
+                $this->get('session')->getFlashBag()->add(
+                  'error', $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()))
+                );
+                return $this->redirect($this->generateUrl('caesar_client_homepage'));
+              } else { //Ressource non réservée.
+                $this->get('session')->getFlashBag()->add(
+                  'error', $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()))
+                );
+                return $this->redirect($this->generateUrl('caesar_client_homepage'));
+              }
             }
           }
+        } else {
+          $this->get('session')->getFlashBag()->add(
+            'error', $translator->trans('client.borrowing.resource.already', array('%resource%' => $resource->getDescription()))
+          );
         }
+        return $this->redirect($this->generateUrl('caesar_client_homepage'));
       } else {//Je dois me connecter
         $this->get('session')->getFlashBag()->add(
           'info', $translator->trans('client.borrowing.resource.connect', array('%resource%' => $resource->getDescription()))
@@ -158,12 +168,13 @@ class ResourceController extends Controller {
               'error' => $error)
         );
       }
+    } else {
+      //Plus de ressources disponibles
+      $this->get('session')->getFlashBag()->add(
+        'error', $translator->trans('client.borrowing.resource.unavailable', array('%resource%' => $resource->getDescription()))
+      );
+      return $this->redirect($this->generateUrl('caesar_client_homepage'));
     }
-    //Plus de ressources disponibles
-    $this->get('session')->getFlashBag()->add(
-      'error', $translator->trans('client.borrowing.resource.unavailable', array('%resource%' => $resource->getDescription()))
-    );
-    return $this->redirect($this->generateUrl('caesar_client_homepage'));
   }
 
   public function returnAction($code) {
@@ -202,7 +213,7 @@ class ResourceController extends Controller {
     } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
       $user = $this->get('security.context')->getToken()->getUser();
       $borrowing = $em->getRepository('CaesarUserBundle:Borrowing')->findOneByUser($user);
-      if ($borrowing != null) { //je suis un emprunter Rendre
+      if ($borrowing != null) { //je suis un emprunteur Rendre
         $archivedBorrowing = new BorrowingArchive();
         $archivedBorrowing->setBorrowingDate($borrowing->getBorrowingDate());
         $archivedBorrowing->setResource($borrowing->getResource());
@@ -220,7 +231,21 @@ class ResourceController extends Controller {
           array_push($userToNotify, $reservations->next());
           $i++;
         }
+
         //TODO send email to $acceptedReservations
+        $to = array();
+        foreach ($userToNotify as $r) {
+          array_push($to, $r->getUser()->getEmail());
+        }
+        $transport = Swift_SmtpTransport::newInstance();
+        $message = Swift_Message::newInstance($transport)
+          ->setSubject('Notification: Livre réservé')
+          ->setFrom('noreply@caesar.com')
+          ->setTo($to)
+          ->setBody($this->renderView(
+            'CaesarResourceBundle:Resource:reservation.html.twig', array('resource' => $resource)), 'text/html'
+        );
+        $this->get('mailer')->send($message);
 
         $this->get('session')->getFlashBag()->add(
           'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))

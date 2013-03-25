@@ -34,7 +34,7 @@ class UserHandler {
 
   public function onSuccess(User $user) {
     $user->setPassword($this->encoder->encodePassword($user->getPlainPassword(), $user->getSalt()));
-    $user->setRole('USER');
+    $user->setRole('ROLE_USER');
     $this->em->persist($user);
     $this->em->flush();
   }

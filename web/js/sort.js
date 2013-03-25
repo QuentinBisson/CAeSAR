@@ -125,4 +125,7 @@ $(document).ready(function() {
     }
     $("._pagination").click(click_paginate);
     $("form").submit(form_submit);
+    $(window).unload(function() {
+        $("#serialize-request").val("");
+    })
 });

@@ -8,6 +8,7 @@ user:
         title: "Inscription"
         label:
             register: "Enregistrer"
+        successfull: Inscription réussie
 search:
     title: Recherche
 profile:

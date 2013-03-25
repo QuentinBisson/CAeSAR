@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{'mail.title'|trans({})}}{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <section>
+            <header>
+                <b>{{resource.description}}</b>
+            </header>
+
+            <section>
+                <p>{{'mail.hello'|trans({})}},<br />
+                    {{'mail.objective'|trans({})}}
+                    <br />
+                    <br />
+                    {{'mail.returned'|trans({'%resource%': resource.description})}}. {{'mail.borrow'|trans({})}}.<br />
+                    <br />
+                    {{'mail.regards'|trans({})}},<br />
+                    CAeSAR Application
+                </p>
+            </section>
+            </section>
+        </body>
+    </html>

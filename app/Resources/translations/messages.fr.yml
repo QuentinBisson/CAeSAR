@@ -5,6 +5,11 @@ client:
         search_form:
             placeholder: Rechercher ...
             title: Rechercher une ressource
+        profile: Mon profil
+        borrowings: Mes emprunts
+        reservations: Mes réservations
+        logout: Déconnexion
+
 form:
     user:
         type:

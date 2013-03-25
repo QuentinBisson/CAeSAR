@@ -5,6 +5,10 @@ client:
         search_form:
             placeholder: Search ...
             title: Search a resource
+        profile: My profile
+        borrowings: My borrowings
+        reservations: My reservations
+        logout: Log out
 form:
     user:
         type:

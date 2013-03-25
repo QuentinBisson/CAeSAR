@@ -8,6 +8,7 @@ user:
         title: "Registration"
         label:
             register: "Register"
+        successfull: Successfull registration
 search:
     title: Search
 profile:
