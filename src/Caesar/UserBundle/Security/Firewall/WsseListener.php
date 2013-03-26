@@ -2,7 +2,7 @@
 
 namespace Caesar\UserBundle\Security\Firewall;
 
-use Caesar\UserBundle\Security\Authentication\Token\WsseUserToken;
+use Caesar\UserBundle\Security\Authentication\Token\CaesarUserToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -29,7 +29,8 @@ class WsseListener extends AbstractAuthenticationListener {
     if (count($matches) != 2 || $matches[0] !== "_username") {
       return null;
     }
-    $token = new WsseUserToken();
+
+    $token = new CaesarUserToken();
     $token->setUser($matches[1]);
     return $this->authenticationManager->authenticate($token);
   }

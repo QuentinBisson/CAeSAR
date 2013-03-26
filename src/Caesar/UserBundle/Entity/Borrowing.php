@@ -35,7 +35,7 @@ class Borrowing {
   /**
    * @var date $borrowingDate
    *
-   * @ORM\Column(name="borrowingDate", type="date")
+   * @ORM\Column(name="borrowingDate", type="datetime")
    */
   private $borrowingDate;
 
