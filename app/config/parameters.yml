@@ -6,13 +6,13 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:    gmail
+    mailer_transport:    mail
     mailer_host:         ~
     mailer_user:         ~
     mailer_password:     ~
-    #mailer_auth_mode:    ~
-    #mailer_encryption:   ~
-    #mailer_port:         ~
+    mailer_auth_mode:    ~
+    mailer_encryption:   ~
+    mailer_port:         ~
 
     locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt

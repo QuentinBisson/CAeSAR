@@ -36,7 +36,7 @@
                                     {% if app.request.locale == 'en'%} selected="selected" {% endif %}>{{'admin.lang.english'|trans({})}}</option>
                                         </select>
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="link-button-deconnexion" href="{{path('caesar_logout')}}">{{'admin.button.logout'|trans({})}}</a>
+                                        <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">{{'admin.button.logout'|trans({})}}</a>
                                     {% endif %}
                                 </div>
                             </section>

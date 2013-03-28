@@ -78,7 +78,7 @@ class UserController extends Controller {
     $security = $this->get('security.context');
 
     if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
-      if($security->isGranted('ROLE_ADMIN_IDENTIFIED') || $security->isGranted('ROLE_ADMIN_AUTHENTIFIED')) {
+      if ($security->isGranted('ROLE_ADMIN')) {
         return $this->redirect($this->generateUrl('caesar_admin_homepage'));
       } elseif ($security->isGranted('ROLE_USER_IDENTIFIED') || $security->isGranted('ROLE_USER_AUTHENTIFIED')) {
         return $this->redirect($this->generateUrl('caesar_client_homepage'));
@@ -97,8 +97,8 @@ class UserController extends Controller {
 
     return $this->render(
         'CaesarUserBundle:User:login.html.twig', array(
-          // last username entered by the user
           'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
+          // last username entered by the user
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),
           'error' => $error,
         )

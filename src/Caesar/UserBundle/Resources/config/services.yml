@@ -12,7 +12,7 @@ services:
         class:  Caesar\UserBundle\Security\Authentication\Provider\CaesarUserAuthentificationProvider
         arguments: ['@caesar_user_provider', "@security.user_checker", "@security.encoder_factory"]
     caesar.security.authentication.listener:
-        class: Caesar\UserBundle\Security\Firewall\WsseListener
+        class: Caesar\UserBundle\Security\Firewall\CaesarUserListener
         arguments: ["@security.context", "@caesar.security.authentication.provider",  "@security.authentication.session_strategy", "@security.http_utils","@kernel"]
     caesar_user_security.component.authentication.handler.login_handler:
         class:  %caesar_user_security.component.authentication.handler.login_handler.class%

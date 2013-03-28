@@ -30,9 +30,3 @@ caesar_client:
 caesar_client_index:
     pattern:  /
     defaults: { _controller: CaesarUserBundle:User:index}
-
-caesar_logout:
-     pattern: /{_locale}/logout
-     requirements:
-        _locale: fr|en
-     defaults: {_locale: 'fr'}

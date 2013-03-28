@@ -19,18 +19,17 @@ security:
             id: caesar_user_provider
         main:
             entity: { class: Caesar\UserBundle\Entity\User, property: username }
-
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
             anonymous: ~
         caesar_admin:
-            pattern:   /admin/.*
+            pattern:   /admin
             anonymous: ~
             logout:
-                path:   caesar_logout
-                target: caesar_admin_homepage
+                path:   caesar_admin_logout
+                target: caesar_admin_login
             form_login:
                 login_path:  caesar_admin_login
                 check_path:  caesar_admin_login_check
@@ -39,10 +38,10 @@ security:
                 failure_path:   null
             http_basic: true
         caesar:
-            pattern:   ^/.*
+            pattern:   ^/
             anonymous: ~
             logout:
-                path:   caesar_logout
+                path:   caesar_client_logout
                 target: caesar_client_homepage
             form_login:
                 login_path:  caesar_client_login
@@ -53,13 +52,7 @@ security:
             http_basic: true
     access_control:
         - { path: login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: profile, roles: ROLE_USER_IDENTIFIED}
-        - { path: admin/.*, roles: ROLE_ADMIN }
-        - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        #
-        # You must uncomment the two following rules to restrict access to paths
-        # starting with the /_internal prefix to only localhost
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        #- { path: ^/_internal/secure, roles: ROLE_NO_ACCESS }
+        - { path: admin, roles: ROLE_ADMIN }

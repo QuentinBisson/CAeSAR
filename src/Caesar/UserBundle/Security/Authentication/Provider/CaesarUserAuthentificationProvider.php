@@ -22,19 +22,18 @@ class CaesarUserAuthentificationProvider extends DaoAuthenticationProvider {
   protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token) {
     $user = $this->userProvider->loadUserByUsername($token->getUsername());
     if ($user) {
-      $authenticatedToken = new CaesarUserToken($user->getRoles());
-      $authenticatedToken->setUser($user);
-
-      $encoder = $this->encoderFactory->getEncoder($user);
-      if ($token->getCredentials() != null  && $encoder->encodePassword($token->getCredentials(), $user->getSalt()) === $user->getPassword()) {
-        $user->setAuthentified(true);
-      } else {
+      if (!in_array('ROLE_ADMIN', $user->getRoles())) {
+        $authenticatedToken = new CaesarUserToken($user->getRoles());
+        $authenticatedToken->setUser($user);
         $user->setIdentified(true);
+        return $authenticatedToken;
+      } else {
+        //TODO traduction
+        throw new AuthenticationException('Un administrateur ne peut accéder ....');
       }
-
-      return $authenticatedToken;
     }
 
+    //TODO traduction
     throw new AuthenticationException('The authentication failed.');
   }
 

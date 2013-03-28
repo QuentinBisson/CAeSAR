@@ -22,18 +22,24 @@ class LoginHandler implements AuthenticationSuccessHandlerInterface, Authenticat
   }
 
   public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
+    $session = $request->getSession();
     if ($this->security->isGranted('ROLE_ADMIN')) {
       $response = new RedirectResponse($this->router->generate('caesar_admin_homepage'));
     } elseif ($this->security->isGranted('ROLE_USER')) {
       $referer_url = $request->headers->get('referer');
+      if (strpos($referer_url, 'admin')) {
+        $session->getFlashBag()->add(
+          'error', "Vous ne possédez pas de compte admin"
+        );
+      }
       $response = new RedirectResponse($referer_url);
     }
     return $response;
   }
 
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
-    $referer_url = $request->headers->get('referer');
 
+    $referer_url = $request->headers->get('referer');
     $response = new RedirectResponse($referer_url);
     $session = $request->getSession();
 

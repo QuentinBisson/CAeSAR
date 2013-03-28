@@ -113,3 +113,5 @@ resource:
         details: Détails de la ressource
         borrowings: Emprunts en cours
         cover: Couverture de la ressource
+
+Bad credentials: Le login ou le mot de passe est invalide

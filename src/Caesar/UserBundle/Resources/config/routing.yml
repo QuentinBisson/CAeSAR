@@ -9,6 +9,9 @@ caesar_client_search:
         page:  \d+
         direction: asc|desc
 
+caesar_client_logout:
+     pattern: /logout
+
 caesar_client_login:
     pattern:  /login
     defaults: { _controller: "CaesarUserBundle:User:login" }
