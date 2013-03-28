@@ -1,0 +1,18 @@
+{% extends '::admin.html.twig' %}
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/icons.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/security.css') }}" />
+{% endblock %}
+{% block content %}
+{{ parent() }}
+<div class="page">
+    <h1>Administration</h1>
+    <div class="top"></div>
+    <div class="bot"></div>
+    <div class="log">
+        {% include 'CaesarAdminBundle:Security:login_form.html.twig' %}
+    </div>
+</div>
+{% endblock %}

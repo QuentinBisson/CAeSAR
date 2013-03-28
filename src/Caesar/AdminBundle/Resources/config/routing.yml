@@ -2,13 +2,9 @@ caesar_admin_homepage:
     pattern:  /
     defaults: { _controller: CaesarAdminBundle:Admin:index}
 
-caesar_admin_connexion_homepage:
-    pattern:  /login
-    defaults: { _controller: CaesarAdminBundle:Admin:login}
-
 caesar_admin_login:
     pattern:  /login
-    defaults: { _controller: "CaesarAdminBundle:Admin:login" }
+    defaults: { _controller: "CaesarAdminBundle:Security:login" }
 
 caesar_admin_login_check:
     pattern: /login_check

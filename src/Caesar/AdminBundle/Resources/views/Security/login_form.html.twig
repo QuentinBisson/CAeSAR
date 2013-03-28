@@ -1,0 +1,12 @@
+<form action="{{ path('caesar_admin_login') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+        
+    {{ form_label(form.username) }}<br />
+    {{ form_widget(form.username) }}<br />
+
+    {{ form_label(form.plainPassword, null, {'label_attr': {'class':'last'}}) }}<br />
+    {{ form_widget(form.plainPassword) }}<br />
+        
+    {{ form_rest(form) }}
+    <input type="submit" value="Connexion" />
+</form>
