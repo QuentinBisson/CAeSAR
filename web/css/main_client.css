@@ -188,7 +188,7 @@ header h1 {
  * Formulaire Principal | Champ unique + trois boutons
  **/
 
-#main-form, #search-form {
+#main-form, #search-form, #return-as-form {
     width: 640px;
     margin: auto;
     margin-top: 50px;
@@ -198,7 +198,7 @@ header h1 {
  * Champ unique
  **/
 #main-form input[name='main_form_text'],
-.form-text {
+.form-text, #return-as-form select {
     width: 640px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -226,7 +226,7 @@ header h1 {
 }
 
 #main-form input[name='main_form_text']:focus,
-#search-form input[name='search_form_text']:focus {
+#search-form input[name='search_form_text']:focus, #return-as-form select:focus {
     background-color: #fdf8fd;
     outline : none;
 }
@@ -247,7 +247,7 @@ header h1 {
 
 #main-form .main-form-actions input[type="button"],
 #search-form .search-form-actions input[type="submit"],
-#modify-profile input{
+#modify-profile input, #return-as-form input[type="submit"]{
     font-family: "Trebuchet MS", sans-serif;
     min-width: 210px;
     height: 60px;

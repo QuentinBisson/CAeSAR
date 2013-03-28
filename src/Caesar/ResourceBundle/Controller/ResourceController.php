@@ -3,6 +3,7 @@
 namespace Caesar\ResourceBundle\Controller;
 
 use Caesar\ResourceBundle\Entity\Resource;
+use Caesar\ResourceBundle\Form\ReturnAsType;
 use Caesar\UserBundle\Entity\Borrowing;
 use Caesar\UserBundle\Entity\BorrowingArchive;
 use Swift_Message;
@@ -75,74 +76,84 @@ class ResourceController extends Controller {
 
       if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
         $user = $this->get('security.context')->getToken()->getUser();
-        $borrowing = $em->getRepository('CaesarUserBundle:Borrowing')
-          ->findOneBy(array('user' => $user->getId(), 'resource' => $resource->getId()));
-        if (!$borrowing) {
-          if ($available > 0) { //Si pas de réservation bloquante
+        if ($available > 0) { //Si pas de réservation bloquante
+          $borrow = new Borrowing();
+          $borrow->setResource($resource);
+          $borrow->setUser($user);
+          $em->persist($borrow);
+          $em->flush();
+          $this->get('session')->getFlashBag()->add(
+            'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
+          );
+          return $this->redirect($this->generateUrl('caesar_client_homepage'));
+        } else {
+          $reservedAvailable = $q - $borrowedQuantity;
+          $acceptedReservations = array();
+          $reservations = $resource->getReservations();
+          $i = 0;
+          array_push($acceptedReservations, $reservations->first());
+          while ($i < $reservedAvailable - 1) {
+            array_push($acceptedReservations, $reservations->next());
+            $i++;
+          }
+          $reservation = null;
+          foreach ($acceptedReservations as $r) {
+            if ($r->getUser()->isEqualTo($user)) {
+              $reservation = $r;
+            }
+          }
+          //Si user parmi les premiers à réserver
+          if ($reservation != null) {
+            $em->remove($reservation);
             $borrow = new Borrowing();
             $borrow->setResource($resource);
             $borrow->setUser($user);
             $em->persist($borrow);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-              'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
+              'notice', $translator->trans('client.borrowing.resource.reservation.borrowed', array('%resource%' => $resource->getDescription()))
             );
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
           } else {
-            $reservedAvailable = $q - $borrowedQuantity;
-            $acceptedReservations = array();
-            $reservations = $resource->getReservations();
-            $i = 0;
-            array_push($acceptedReservations, $reservations->first());
-            while ($i < $reservedAvailable - 1) {
-              array_push($acceptedReservations, $reservations->next());
-              $i++;
-            }
-            $reservation = null;
-            foreach ($acceptedReservations as $r) {
-              if ($r->getUser()->isEqualTo($user)) {
-                $reservation = $r;
+            $isInList = false;
+            foreach ($resource->getReservations()->toArray() as $reservation) {
+              if ($reservation->getUser()->isEqualTo($user)) {
+                $isInList = true;
               }
             }
-            //Si user parmi les premiers à réserver
-            if ($reservation != null) {
-              $em->remove($reservation);
-              $borrow = new Borrowing();
-              $borrow->setResource($resource);
-              $borrow->setUser($user);
-              $em->persist($borrow);
-              $em->flush();
-              $this->get('session')->getFlashBag()->add(
-                'notice', $translator->trans('client.borrowing.resource.reservation.borrowed', array('%resource%' => $resource->getDescription()))
-              );
-              return $this->redirect($this->generateUrl('caesar_client_homepage'));
-            } else {
-              $isInList = false;
-              foreach ($resource->getReservations()->toArray() as $reservation) {
-                if ($reservation->getUser()->isEqualTo($user)) {
-                  $isInList = true;
+            //Pas le premier sur la liste de réservation
+            if ($isInList) {
+              $text = $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()));
+              $string = "<ul>";
+
+              foreach ($resource->getReservations() as $res) {
+                if ($res->getUser()->isEqualTo($user)) {
+                  break;
                 }
+                $u = $res->getUser();
+                $string .= '<li>';
+                $string .= $u->getName() . " " . $u->getFirstname();
+                $string .= '</li>';
               }
-              //Pas le premier sur la liste de réservation
-              if ($isInList) {
-                $this->get('session')->getFlashBag()->add(
-                  'error', $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()))
-                );
-                return $this->redirect($this->generateUrl('caesar_client_homepage'));
-              } else { //Ressource non réservée.
-                $this->get('session')->getFlashBag()->add(
-                  'error', $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()))
-                );
-                return $this->redirect($this->generateUrl('caesar_client_homepage'));
+              $string .= '</ul>';
+            } else { //Ressource non réservée.
+              $text = $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()));
+              $string = "";
+              foreach ($resource->getReservations() as $res) {
+                $u = $res->getUser();
+                $string .= '<li>';
+                $string .= $u->getName() . " " . $u->getFirstname();
+                $string .= '</li>';
               }
             }
+
+            $text .= "<br />" . $translator->trans('client.borrowing.resource.reservators', array('%resource%' => $resource->getDescription())) . "<br />" . $string;
+            $this->get('session')->getFlashBag()->add(
+              'error', $text
+            );
+            return $this->redirect($this->generateUrl('caesar_client_homepage'));
           }
-        } else {
-          $this->get('session')->getFlashBag()->add(
-            'error', $translator->trans('client.borrowing.resource.already', array('%resource%' => $resource->getDescription()))
-          );
         }
-        return $this->redirect($this->generateUrl('caesar_client_homepage'));
       } else {//Je dois me connecter
         $this->get('session')->getFlashBag()->add(
           'info', $translator->trans('client.borrowing.resource.connect', array('%resource%' => $resource->getDescription()))
@@ -197,6 +208,7 @@ class ResourceController extends Controller {
       throw $this->createNotFoundException($translator->trans('client.return.impossible.exception', array('%resource%' => $resource->getDescription())));
     }
 
+    $shelf = $resource->getShelf();
     if ($borrowedQuantity == 1) { //if only one borrowed
       $borrowing = $resource->getBorrowings()->first();
       $archivedBorrowing = new BorrowingArchive();
@@ -209,11 +221,29 @@ class ResourceController extends Controller {
       $this->get('session')->getFlashBag()->add(
         'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
       );
+      $this->get('session')->getFlashBag()->add(
+        'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
+            '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
+      );
+
       return $this->redirect($this->generateUrl('caesar_client_homepage'));
     } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
       $user = $this->get('security.context')->getToken()->getUser();
+      $request = $this->get('request');
+
+      //retourer à la place de
+      /*$form = $this->createForm(new ReturnAsType($resource));
+      if ($request->isMethod('POST')) {
+        $form->bind($request);
+        if ($form->isValid()) {
+
+          $data = $form->getData();
+          $user = $data['user'];
+        }
+      }*/
       $borrowing = $em->getRepository('CaesarUserBundle:Borrowing')->findOneByUser($user);
-      if ($borrowing != null) { //je suis un emprunteur Rendre
+
+      if ($borrowing != null) { //je suis ou je remplace un emprunteur Rendre
         $archivedBorrowing = new BorrowingArchive();
         $archivedBorrowing->setBorrowingDate($borrowing->getBorrowingDate());
         $archivedBorrowing->setResource($borrowing->getResource());
@@ -232,7 +262,6 @@ class ResourceController extends Controller {
           $i++;
         }
 
-        //TODO send email to $acceptedReservations
         $to = array();
         foreach ($userToNotify as $r) {
           array_push($to, $r->getUser()->getEmail());
@@ -250,39 +279,48 @@ class ResourceController extends Controller {
         $this->get('session')->getFlashBag()->add(
           'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
         );
+        $this->get('session')->getFlashBag()->add(
+          'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
+              '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
+        );
         return $this->redirect($this->generateUrl('caesar_client_homepage'));
       } else { //message
         $this->get('session')->getFlashBag()->add(
-          'error', $translator->trans('client.return.refused', array('%resource%' => $resource->getDescription()))
+          'info', $translator->trans('client.return.refused', array('%resource%' => $resource->getDescription()))
         );
+        /*$count = count($resource->getBorrowings());
+
+        return $this->render(
+            'CaesarResourceBundle:Resource:returnInsteadOf.html.twig', array(
+              'count' => $count, 'form' => $form->createView(), 'code' => $code)
+        );*/
         return $this->redirect($this->generateUrl('caesar_client_homepage'));
       }
-    }
-
-    $this->get('session')->getFlashBag()->add(
-      'info', $translator->trans('client.return.connect', array('%resource%' => $resource->getDescription()))
-    );
-
-    $request = $this->getRequest();
-    $session = $request->getSession();
-
-    if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-      $error = $request->attributes->get(
-        SecurityContext::AUTHENTICATION_ERROR
+    } else { //connexion
+      $this->get('session')->getFlashBag()->add(
+        'info', $translator->trans('client.return.connect', array('%resource%' => $resource->getDescription()))
       );
-    } else {
-      $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-      $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-    }
 
-    return $this->render(
-        'CaesarUserBundle:User:login.html.twig', array(
-          'login_page_title' => $translator->trans('return.title'),
-          'resource' => $resource,
-          'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-          'error' => $error)
-    );
+      $request = $this->getRequest();
+      $session = $request->getSession();
+
+      if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+        $error = $request->attributes->get(
+          SecurityContext::AUTHENTICATION_ERROR
+        );
+      } else {
+        $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+      }
+
+      return $this->render(
+          'CaesarUserBundle:User:login.html.twig', array(
+            'login_page_title' => $translator->trans('return.title'),
+            'resource' => $resource,
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error' => $error)
+      );
+    }
   }
 
 }
-

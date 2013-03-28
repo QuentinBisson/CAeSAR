@@ -380,5 +380,8 @@ class User implements UserInterface, EquatableInterface, \Serializable {
   public function getReservations() {
     return $this->reservations;
   }
+  public function getUserDescription() {
+    return $this->name . ' ' . $this->firstname . '(' . $this->email . ')';
+  }
 
 }

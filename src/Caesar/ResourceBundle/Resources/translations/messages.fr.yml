@@ -29,13 +29,15 @@ client:
                 none: Vous ne pouvez pas emprunter %resource% car au moins un utilisateur l'a réservé
             unavailable: La ressource %resource% est momentanément indisponible
             connect: Il est nécessaire que vous vous connectiez pour emprunter %resource%
-            already: Vous empruntez déjà un exemplaire de %resource%
+            reservators: La ressource a été réservé par les utilisateurs suivant
     return:
         impossible:
             exception: Vous ne pouvez pas rendre %resource% car la ressource n'est pas actuellement empruntée
         accepted: La ressource intitulée %resource% est considérée rendue
-        refused: Vous n'avez pas emprunté %resource%. Il vous est donc impossible de la rendre
+        refused: Vous ne pouvez pas emprunter %resource% car vous ne l'avez pas emprunté.
+        #Si un utilisateur vous a demandé de rendre la ressource pour lui, vous pouvez le faire.
         connect: Il est nécessaire que vous vous connectiez pour rendre %resource%
+        shelf: La ressource %resource% doit être placé sur l'étagère %shelf_name%. <br /><b>Plus d'informations:</b><br /> %shelf_description%
 mail:
     hello: Bonjour
     objective: Vous recevez ce courriel d'information pour vous signaler qu'une ressource que vous avez réservé est disponible.

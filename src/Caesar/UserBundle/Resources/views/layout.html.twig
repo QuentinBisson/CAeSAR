@@ -9,7 +9,7 @@
     {% for type, flashMessages in app.session.flashbag.all() %}
         {% for flashMessage in flashMessages %}
         <div class="flash-{{ type }}">
-            {{ flashMessage }}
+            {{ flashMessage|raw }}
         </div>
     {% endfor %}
     {% endfor %}
