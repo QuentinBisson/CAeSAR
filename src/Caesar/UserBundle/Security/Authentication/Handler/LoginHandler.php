@@ -29,7 +29,7 @@ class LoginHandler implements AuthenticationSuccessHandlerInterface, Authenticat
       $referer_url = $request->headers->get('referer');
       if (strpos($referer_url, 'admin')) {
         $session->getFlashBag()->add(
-          'error', "Vous ne possédez pas de compte admin"
+          'error', "Votre compte ce vous permet pas d'accéder à l'interface d'administration"
         );
       }
       $response = new RedirectResponse($referer_url);

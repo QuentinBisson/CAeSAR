@@ -15,8 +15,6 @@ security:
         ROLE_USER_AUTHENTIFIED: [ROLE_USER_AUTHENTIFIED, ROLE_USER_IDENTIFIED]
         ROLE_ADMIN: ROLE_ADMIN
     providers:
-        caesar:
-            id: caesar_user_provider
         main:
             entity: { class: Caesar\UserBundle\Entity\User, property: username }
     firewalls:

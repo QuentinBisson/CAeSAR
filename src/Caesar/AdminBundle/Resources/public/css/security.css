@@ -1,11 +1,20 @@
 html, body{
-	width:100%;	
-	height:100%;
-	padding:0px;
-	margin:0px;
-	font-family: "Trebuchet MS",Helvetica,Arial,sans-serif;
+    width:100%;	
+    height:100%;
+    padding:0px;
+    margin:0px;
+    font-family: "Trebuchet MS",Helvetica,Arial,sans-serif;
 }
 
+.header{
+    background-image: inherit;
+    height: 5%;
+}
+
+.main-content{
+    height: 95%;
+    top: 5%;
+}
 
 h1 {
     color: white;
@@ -16,13 +25,13 @@ h1 {
     font-family: "Helvetica";
 }
 .page{
-	position:relative;
-	width:100%;	
-	height:100%;
+    position:relative;
+    width:100%;	
+    height:100%;
 }
 .top {
     background-color: #505050;
-    height: 30%;
+    height: 45%;
     position: absolute;
     width: 100%;
     z-index: -1;
@@ -30,9 +39,9 @@ h1 {
 
 .bot {
     background: url("../../../images/background.jpg") repeat scroll 0 0 transparent;
-    height: 100%;
+    height: 55%;
     position: absolute;
-    top: 30%;
+    top: 45%;
     width: 100%;
     z-index: -1;
 }
@@ -40,14 +49,13 @@ h1 {
 .log{
     border: 2px solid white;
     border-radius: 15px 15px 15px 15px;
-    height: 30%;
     margin: auto;
-    position: relative;
-    top: 17%;
-    width: 30%;
-    padding:10px;
+    min-height: 230px;
     min-width: 400px;
-    min-height: 200px;
+    padding: 10px;
+    position: relative;
+    top: 34%;
+    width: 30%;
 }
 
 .page label{
@@ -60,14 +68,14 @@ h1 {
 }
 
 input[type="text"], input[type="password"] {
- -moz-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     background-color: #F6F3F6;
     border: 1px solid #C5C8CB;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.09) inset;
     font-family: "Trebuchet MS",sans-serif;
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 15px;
     padding: 10px 5px;
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
     vertical-align: middle;
@@ -76,7 +84,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="submit"] {
-   font-family: "Trebuchet MS", sans-serif;
+    font-family: "Trebuchet MS", sans-serif;
     min-width: 210px;
     height: 60px;
     width: 100%;
