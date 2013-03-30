@@ -1,53 +1,31 @@
 <table class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
-            <th{% if 'user' == sort %} class="sorted borrowing-user"{% else %} class = "borrowing-user" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.user'|trans({}), 'page': page, 'sort': 'user'}  %}
-                </th>
-                <th{% if 'resource' == sort %} class="sorted borrowing-resource"{% else %} class = "borrowing-resource" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
-                    </th>
-                    <th{% if 'borrowingDate' == sort %} class="sorted borrowing-date"{% else %} class = "borrowing-date" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.date'|trans({}), 'page': page, 'sort': 'borrowingDate'}  %}
-                        </th>
-                        <th class = "borrowing-return">
-                <p class="sort-label">
-                    {{ 'table.title.borrowings.return.date'|trans({}) }}
-                    </p>
-                </th>
-            </tr>
+            <th{% if 'resource' == sort %} class="sorted reservation-resource"{% else %} class = "reservation-resource" {% endif %} >
+            {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.reservations.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
+            </th>
+            <th{% if 'reservationDate' == sort %} class="sorted reservation-date"{% else %} class = "reservation-date" {% endif %} >
+            {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.reservations.date'|trans({}), 'page': page, 'sort': 'reservationDate'}  %}
+            </th>
+        </tr>
 
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="4">
-                {{ 'table.foot.count.text'|trans({'%value%': count}) }}
-                    </td>
-                </tr>
-            </tfoot>
-            <tbody id="table_list">
-         {% for borrowing in borrowings %}
-                    <tr>
-                {% if borrowing.user.name is defined %}
-                            <td>{{ borrowing.user.name ~ ' ' ~ borrowing.user.firstname }}</td>
-                {% else %}
-                            <td>{{ borrowing.user }}</td>
-                {% endif %}
-                {% if borrowing.resource.description is defined %}
-                            <td>{{ borrowing.resource.description }}</td>
-                {% else %}
-                            <td>{{ borrowing.resource }}</td>
-                {% endif %}
-                            <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
-                {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
-                            <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
-                {% else %}
-                            <td></td>
-                {% endif %}
-                        </tr>
-            {% endfor %}
-                    </tbody>
-                </table>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+            {{ 'table.foot.count.text'|trans({'%value%': count}) }}
+            </td>
+        </tr>
+    </tfoot>
+    <tbody id="table_list">
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.resource }}</td>
+            <td>{{ reservation.reservationDate|date('d/m/Y') }}</td>
+        </tr>
+    {% endfor %}
+            </tbody>
+        </table>
 
 {# display navigation #}
 

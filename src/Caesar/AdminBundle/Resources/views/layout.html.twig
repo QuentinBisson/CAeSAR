@@ -11,6 +11,7 @@
             <li><a href="#">{{'admin.menu.title.general.header'|trans({})}}</a>
                 <ul>
                     <li><a href="{{path('caesar_admin_general_password')}}">{{'admin.menu.title.general.password'|trans({})}}</a></li>
+                    <li><a href="{{path('caesar_admin_general_reservations')}}">{{'admin.menu.title.general.clean_reservations'|trans({})}}</a></li>
                     <li><a href="{{path('caesar_admin_general_webmining')}}">{{'admin.menu.title.general.webmining'|trans({})}}</a></li>
                     <li><a href="{{path('caesar_admin_general_create_backup')}}">{{'admin.menu.title.general.backup.create'|trans({})}}</a></li>
                     <li><a href="{{path('caesar_admin_general_load_backup')}}">{{'admin.menu.title.general.backup.load'|trans({})}}</a></li>
@@ -53,19 +54,21 @@
 {% endblock %}
 
 {% block content %}
-<header><h1>{% block contentTitle %}{% endblock %}</h1></header>
+<article>
+    <header><h1>{% block contentTitle %}{% endblock %}</h1></header>
 
 
 {% for type, flashMessages in app.session.flashbag.all() %}
     {% for flashMessage in flashMessages %}
     <div class="flash-{{ type }}">
         {{ flashMessage }}
-    </div>
+        </div>
     {% endfor %}
 {% endfor %}
 
 {% block contentBody %}
 {% endblock %}
+    </article>
 {% endblock %}
 
 {% block javascripts %}

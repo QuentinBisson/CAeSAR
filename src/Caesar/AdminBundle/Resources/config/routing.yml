@@ -16,6 +16,13 @@ caesar_admin_general_password:
     pattern:  /password
     defaults: { _controller: CaesarAdminBundle:Admin:password}
 
+caesar_admin_general_reservations:
+    pattern:  /reservation/clean/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Admin:reservation, page:1, sort:'user', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc
+
 caesar_admin_general_webmining:
     pattern:  /webmining
     defaults: { _controller: CaesarAdminBundle:Admin:webmining}

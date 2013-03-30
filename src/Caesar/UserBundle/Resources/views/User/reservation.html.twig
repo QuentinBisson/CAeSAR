@@ -7,11 +7,11 @@
 
 
 {% block bodyTitle %}
-<h1>{{'borrowings.title'|trans({}, 'CaesarUserBundle')}}</h1>
+<h1>{{'reservations.title'|trans({}, 'CaesarUserBundle')}}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
 <section class="contentBody">
-     {% include 'CaesarUserBundle:User:borrowingList.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
+     {% include 'CaesarUserBundle:User:reservationList.html.twig' with {'reservations' : reservations, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
 {% endblock %}

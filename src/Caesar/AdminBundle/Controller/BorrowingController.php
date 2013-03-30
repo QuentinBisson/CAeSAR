@@ -100,7 +100,7 @@ class BorrowingController extends Controller {
       $count = $c1 + $c2;
     } else {
       $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, $user);
-      $count = $repository_borrowing->count();
+      $count = $repository_borrowing->count($user);
     }
 
     /* Pagination */
@@ -163,7 +163,7 @@ class BorrowingController extends Controller {
       $count = $c1 + $c2;
     } else {
       $borrowings = $repository_borrowing->getCurrentBorrowingsFromToSortBy($page, $sort, $direction, null, $resource);
-      $count = $repository_borrowing->count();
+      $count = $repository_borrowing->count(null, $resource);
     }
 
     /* Pagination */

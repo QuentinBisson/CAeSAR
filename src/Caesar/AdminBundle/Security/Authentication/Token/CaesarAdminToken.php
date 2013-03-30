@@ -4,7 +4,7 @@ namespace Caesar\AdminBundle\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
-class CaesarUserToken extends AbstractToken {
+class CaesarAdminToken extends AbstractToken {
 
   private $identified;
 

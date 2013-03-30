@@ -2,7 +2,7 @@
 
 namespace Caesar\AdminBundle\Security\Authentication\Provider;
 
-use Caesar\AdminBundle\Security\Authentication\Token\CaesarUserToken;
+use Caesar\AdminBundle\Security\Authentication\Token\CaesarAdminToken;
 use Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -20,12 +20,14 @@ class CaesarAdminAuthentificationProvider extends DaoAuthenticationProvider {
   }
 
   protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token) {
-
     $user = $this->userProvider->loadUserByUsername($token->getUsername());
+    $encoder = $this->encoderFactory->getEncoder($user);
     if ($user) {
-      if (!in_array('ROLE_USER', $user->getRoles()) && $user->getPassword() != null || $user->getPassword() != "") {
-        //check password
-        $authenticatedToken = new CaesarUserToken($user->getRoles());
+      if (!in_array('ROLE_USER', $user->getRoles())        //check password
+        && ($token->getCredentials() != null
+        && $encoder->encodePassword($token->getCredentials(), $user->getSalt()) != $user->getPassword())) {
+
+        $authenticatedToken = new CaesarAdminToken($user->getRoles());
         $authenticatedToken->setUser($user);
         return $authenticatedToken;
       } else {

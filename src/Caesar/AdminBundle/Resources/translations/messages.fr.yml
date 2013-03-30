@@ -32,6 +32,7 @@ admin:
             backup:
                   load: Charger un backup de l'application
                   create: Créer un backup de l'application
+            clean_reservations: Nettoyer les reservations
     lang:
         french: Français
         english: Anglais
@@ -52,6 +53,8 @@ admin:
                 not:
                     empty: Vous devez déplacer les ressources suivantes dans une autre étagère avant de la supprimer.
                 move: Déplacer la ressource
+        reservations:
+                message: En soumettant ce formulaire, vous supprimerez les réservations antérieure à la date saisie.
     form:
         invalid: Requête invalide
         resources:
@@ -120,6 +123,7 @@ admin:
                 header: Administration générale
                 password: Changer de mot de passe
                 webmining: Module de webmining
+                clean_reservations: Nettoyer les reservations
     fieldset:
         shelves:
             legend: Informations sur l'emplacement
@@ -156,6 +160,7 @@ admin:
             reinit.skeleton: Réinitialiser le squelette
             add: Ajouter la ressource
             update: Modifier la ressource
+        reservations.clean: Nettoyer les reservations
     breadcrumb:
         shelves:
             add: Ajouter
@@ -185,6 +190,7 @@ admin:
             backup:
                   load: Charger un backup
                   create: Créer un backup
+            clean_reservations: Nettoyer les reservations
     summary:
         tag:
             help: Aide

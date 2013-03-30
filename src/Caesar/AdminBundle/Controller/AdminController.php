@@ -2,6 +2,7 @@
 
 namespace Caesar\AdminBundle\Controller;
 
+use Caesar\AdminBundle\Form\ReservationDeleteType;
 use Caesar\UserBundle\Form\ChangePasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -51,6 +52,31 @@ class AdminController extends Controller {
     }
 
     return $this->render('CaesarAdminBundle:Admin:password.html.twig', array('form' => $form->createView()));
+  }
+
+  public function reservationAction() {
+    $translator = $this->get('translator');
+    $form = $this->createForm(new ReservationDeleteType());
+
+    $em = $this->getDoctrine()->getManager();
+    $repository_reservation = $em->getRepository('CaesarUserBundle:Reservation');
+
+    $request = $this->get('request');
+    if ($request->isMethod('POST')) {
+      $form->bind($request);
+      if ($form->isValid()) {
+        $data = $form->getData();
+        $reservations = $repository_reservation->getOldFromToSortBy($data['reservationDate']);
+        foreach ($reservations as $r) {
+          $em->remove($r);
+        }
+        $em->flush();
+        $this->get('session')->getFlashBag()->add(
+          'notice', $translator->trans('admin.form.reservations.delete', array("%count%" => count($reservations)))
+        );
+      }
+    }
+    return $this->render('CaesarAdminBundle:Admin:cleanReservations.html.twig', array('form' => $form->createView()));
   }
 
   public function webminingAction() {
