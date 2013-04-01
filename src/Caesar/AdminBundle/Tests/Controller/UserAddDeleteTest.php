@@ -29,7 +29,6 @@ class UserAddDeleteTest extends WebTestCase {
     $client = static::createClient();
     $crawler = $client->request('GET', '/fr/admin/user/add');
 
-    file_put_contents("tutu.txt", $client->getResponse()->getContent());
     
     $this->assertGreaterThan(
       0, $crawler->filter('html:contains("Ajouter un nouvel utilisateur")')->count()
@@ -85,7 +84,6 @@ class UserAddDeleteTest extends WebTestCase {
         
         /* Suppression de l'utilisateur */
         $crawler = $client->request('GET', '/fr/admin/user');
-        file_put_contents("add.html", $client->getResponse()->getContent());
         $link = $crawler->filterXpath("//tr[@id='".$code."']//a")->eq(1)->link();
         $crawler = $client->click($link);
         

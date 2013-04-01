@@ -24,7 +24,7 @@
     </tfoot>
     <tbody id="table_list">
          {% for resource in resources %}
-            <tr>
+            <tr id="{{ resource.code }}">
                 <td>{{ resource.code }}</td>
                 <td>{{ resource.description }}</td>
                 <td>{{ resource.quantity }}</td>

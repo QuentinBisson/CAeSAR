@@ -32,7 +32,6 @@ class ResourceAddControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/fr/admin/resource/add');
 
-        file_put_contents("tutu.txt", $client->getResponse()->getContent());
         
         $this->assertGreaterThan(
             0,
@@ -40,58 +39,63 @@ class ResourceAddControllerTest extends WebTestCase
         );
     }
 
-    /*public function testAddResFromCSV() {
+    public function testAddDeleteSeveralResources() {            
+
         $arrResult = array();
-        $arrLines = file('C:\Web\wamp\www\CAeSAR\src\Caesar\AdminBundle\Tests\Controller\user.csv');
+        $arrLines = file('..\src\Caesar\AdminBundle\Tests\Controller\resource.csv');
         foreach($arrLines as $line) {
             $arrResult[] = explode( ',', $line);
         }
         foreach($arrResult as $res) {
-            $this->testAdd($res[0],$res[1],$res[2],$res[3],$res[4],$res[5],$res[6]);
+            $this->testAdd($res[0],$res[1],$res[2],$res[3],$res[4],$res[5]);
         }
+
 
     }
 
-    public function testAdd($code = '11111', $name = 'Lucas', $firstname='Lucas', $email = 'Lucas@lucas.fr',
-         $username="Lucas", $plainPassword='Lucas', $confirmPassword='Lucas')
+    public function testAdd($code = '9782360570409', $description = 'Manuel de Russe vol 1', $quantity='1', $shelf='107',
+    		$url='http://connectnigeria.com/articles/wp-content/uploads/2012/12/Google.jpg', $longDescription='Oui.')
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/fr/admin/user/add');
+        $crawler = $client->request('GET', '/fr/admin/resource/add');
 
-        echo "Test sur :".$code." ,".$name." ,".$firstname." ,".$email." ,".$username." ,".$plainPassword." ,".$confirmPassword."\n";
+        echo "Test sur :".$code." ,".$description." \n";
 
-        $form = $crawler->selectButton("Ajouter l'utilisateur")->form();
+        $form = $crawler->selectButton("Ajouter la ressource")->form();
 
         // définit certaines valeurs
-        $form['caesar_userBundle_userType[codeBu]'] = $code;
-        $form['caesar_userBundle_userType[name]'] = $name;
-        $form['caesar_userBundle_userType[firstname]'] = $firstname;
-        $form['caesar_userBundle_userType[email]'] = $email;
-        $form['caesar_userBundle_userType[username]'] = $username;
-        $form['caesar_userBundle_userType[plainPassword]'] = $plainPassword;
-        $form['caesar_userBundle_userType[confirmPassword]'] = $confirmPassword;
+        $form['caesar_resourceBundle_resourceType[code]'] = $code;
+        $form['caesar_resourceBundle_resourceType[description]'] = $description;
+        $form['caesar_resourceBundle_resourceType[quantity]'] = $quantity;
+        $form['caesar_resourceBundle_resourceType[shelf]']->select($shelf);
+        //$form['caesar_resourceBundle_resourceType[local]']->upload($local);
+        $form['caesar_resourceBundle_resourceType[url]'] = $url;
+        $form['caesar_resourceBundle_resourceType[path]'] = $url;
+               
+        $form['caesar_resourceBundle_resourceType[longDescription]'] = $longDescription;
+        
         
         // soumet le formulaire
-        $client->submit($form);       
+        $client->submit($form);    
 
-
+        file_put_contents("admin.html", $client->getResponse()->getContent());
+        
         $repository_user = $this->em->getRepository('CaesarUserBundle:User');
         $users = $repository_user->getUserFromToSortBy(1, 'codeBu', 'asc');
         $count = $repository_user->count(); //compte nb users pour calcul nb de pages (10/page)
         
 
-        file_put_contents("tutu.html", $client->getResponse()->getContent());
+        $crawler = $client->request('GET', '/fr/admin/resource');
 
-        $crawler = $client->request('GET', '/fr/admin/user');
-
-        $this->assertTrue($crawler->filter('html:contains("'.$name.'")')->count() > 0);
-
-        //Suppression de l'utilisateur
-        $crawler = $client->request('GET', '/fr/admin/user');
-        file_put_contents("add.html", $client->getResponse()->getContent());
+        //echo "\n name :".$name."\n"; 
+        $this->assertTrue($crawler->filter('html:contains("'.$code.'")')->count() > 0);
+        
+        /* Suppression de l'utilisateur */
+        $crawler = $client->request('GET', '/fr/admin/resource');
         $link = $crawler->filterXpath("//tr[@id='".$code."']//a")->eq(1)->link();
-        $crawler = $client->click($link);        
-    }*/
+        $crawler = $client->click($link);
+        
+    }
 
    
 }

@@ -32,8 +32,7 @@ class ShelfAddControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/fr/admin/shelf/add');
 
-        file_put_contents("tutu.txt", $client->getResponse()->getContent());
-        
+     
         $this->assertGreaterThan(
             0,
             $crawler->filter('html:contains("Ajouter un nouvel emplacement")')->count()
@@ -75,7 +74,6 @@ class ShelfAddControllerTest extends WebTestCase
         $count = $repository_user->count(); //compte nb users pour calcul nb de pages (10/page)
         
 
-        //file_put_contents("tutu.html", $client->getResponse()->getContent());
 
         $crawler = $client->request('GET', '/fr/admin/shelf');
 
@@ -83,7 +81,6 @@ class ShelfAddControllerTest extends WebTestCase
 
         //Suppression de l'utilisateur
         $crawler = $client->request('GET', '/fr/admin/shelf');
-        //file_put_contents("add.html", $client->getResponse()->getContent());
         $link = $crawler->filterXpath("//tr[@id='".$name."']//a")->eq(1)->link();
         $crawler = $client->click($link);        
     }
