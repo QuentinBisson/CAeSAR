@@ -75,10 +75,12 @@ class UserController extends Controller {
     $translator = $this->get('translator');
     $session = $request->getSession();
 
-    if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-      if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+    $security = $this->get('security.context');
+
+    if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
+      if ($security->isGranted('ROLE_ADMIN')) {
         return $this->redirect($this->generateUrl('caesar_admin_homepage'));
-      } elseif ($this->get('security.context')->isGranted('ROLE_USER')) {
+      } elseif ($security->isGranted('ROLE_USER_IDENTIFIED') || $security->isGranted('ROLE_USER_AUTHENTIFIED')) {
         return $this->redirect($this->generateUrl('caesar_client_homepage'));
       }
     }
@@ -95,8 +97,8 @@ class UserController extends Controller {
 
     return $this->render(
         'CaesarUserBundle:User:login.html.twig', array(
-// last username entered by the user
           'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
+          // last username entered by the user
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),
           'error' => $error,
         )
@@ -105,10 +107,11 @@ class UserController extends Controller {
 
   public function registerAction() {
     $user = new User();
+    $translator = $this->get('translator');
     $form = $this->createForm(new UserType(), $user);
     $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
     if ($formHandler->process()) {
-      $this->get('session')->setFlash('success', 'Inscription réussie');
+      $this->get('session')->setFlash('notice', $translator->trans('user.register.successfull', array(), 'CaesarUserBundle'));
       return $this->redirect($this->generateUrl('caesar_client_homepage'));
     }
     return $this->render('CaesarUserBundle:User:register.html.twig', array('form' => $form->createView()));
@@ -117,6 +120,75 @@ class UserController extends Controller {
   public function profileAction() {
     $user = $this->get('security.context')->getToken()->getUser();
     return $this->render('CaesarUserBundle:User:profile.html.twig', array('user' => $user));
+  }
+
+  public function borrowingAction($page, $sort, $direction) {
+    $nb_per_page = 10;
+    $em = $this->getDoctrine()->getManager();
+    $user = $this->get('security.context')->getToken()->getUser();
+    $repository_borrowing = $em->getRepository('CaesarUserBundle:Borrowing');
+
+    $borrowings = $repository_borrowing->getAllBorrowingsFromToSortBy($page, $sort, $direction, $user);
+    $repository_archived_borrowing = $em->getRepository('CaesarUserBundle:BorrowingArchive');
+
+    $c1 = $repository_borrowing->count($user);
+    $c2 = $repository_archived_borrowing->count($user);
+    $count = $c1 + $c2;
+
+    /* Pagination */
+    $total = $count;
+    $pagination = array(
+        'cur' => $page,
+        'max' => floor($total / $nb_per_page),
+    );
+
+    $array = array(
+        'borrowings' => $borrowings,
+        'page' => $page,
+        'sort' => $sort,
+        'direction' => $direction,
+        'count' => $count,
+        'pagination' => $pagination);
+
+    $request = $this->get('request');
+    if ($request->isXmlHttpRequest()) {
+      return $this->render("CaesarUserBundle:User:borrowingList.html.twig", $array);
+    }
+
+    return $this->render("CaesarUserBundle:User:borrowing.html.twig", $array);
+  }
+
+   public function reservationAction($page, $sort, $direction) {
+    $nb_per_page = 10;
+    $em = $this->getDoctrine()->getManager();
+    $user = $this->get('security.context')->getToken()->getUser();
+    $repository_reservation = $em->getRepository('CaesarUserBundle:Reservation');
+
+    $reservations = $repository_reservation->getReservationsFromToSortBy($page, $sort, $direction, $user);
+
+    $count = $repository_reservation->count($user);
+
+    /* Pagination */
+    $total = $count;
+    $pagination = array(
+        'cur' => $page,
+        'max' => floor($total / $nb_per_page),
+    );
+
+    $array = array(
+        'reservations' => $reservations,
+        'page' => $page,
+        'sort' => $sort,
+        'direction' => $direction,
+        'count' => $count,
+        'pagination' => $pagination);
+
+    $request = $this->get('request');
+    if ($request->isXmlHttpRequest()) {
+      return $this->render("CaesarUserBundle:User:reservationList.html.twig", $array);
+    }
+
+    return $this->render("CaesarUserBundle:User:reservation.html.twig", $array);
   }
 
 }

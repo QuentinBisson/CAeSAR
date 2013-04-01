@@ -33,8 +33,8 @@ class Reservation {
 
     /**
      * @var date $reservationDate
-     * 
-     * @ORM\Column(name="reservationDate", type="date")
+     *
+     * @ORM\Column(name="reservationDate", type="datetime")
      */
     private $reservationDate;
 
@@ -51,14 +51,14 @@ class Reservation {
     public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null)
     {
         $this->resource = $resource;
-    
+
         return $this;
     }
 
     /**
      * Get resource
      *
-     * @return \Caesar\ResourceBundle\Resource 
+     * @return \Caesar\ResourceBundle\Resource
      */
     public function getResource()
     {
@@ -74,14 +74,14 @@ class Reservation {
     public function setUser(\Caesar\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Caesar\UserBundle\Entity\User 
+     * @return \Caesar\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -97,14 +97,14 @@ class Reservation {
     public function setReservationDate($reservationDate)
     {
         $this->reservationDate = $reservationDate;
-    
+
         return $this;
     }
 
     /**
      * Get reservationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getReservationDate()
     {

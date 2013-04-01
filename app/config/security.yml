@@ -10,24 +10,42 @@ security:
             iterations:       1
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
-
+        ROLE_USER:  ROLE_USER
+        ROLE_USER_IDENTIFIED: ROLE_USER_IDENTIFIED
+        ROLE_USER_AUTHENTIFIED: [ROLE_USER_AUTHENTIFIED, ROLE_USER_IDENTIFIED]
+        ROLE_ADMIN: ROLE_ADMIN
     providers:
-        caesar:
-            id: caesar_user_provider
-        main:
+         user_secured:
+            name: user_security
             entity: { class: Caesar\UserBundle\Entity\User, property: username }
-
+         admin_secured:
+            name: admin_security
+            entity: { class: Caesar\UserBundle\Entity\User, property: username }
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        caesar:
-            pattern:  ^/
             anonymous: ~
+        caesar_admin:
+            pattern:   /admin
+            anonymous: ~
+            provider: admin_security
             logout:
-                path:   caesar_logout
+                path:   caesar_admin_logout
+                target: caesar_admin_login
+            form_login:
+                login_path:  caesar_admin_login
+                check_path:  caesar_admin_login_check
+                success_handler: caesar_user_security.component.authentication.handler.login_handler
+                failure_handler: caesar_user_security.component.authentication.handler.login_handler
+                failure_path:   null
+            http_basic: true
+        caesar:
+            pattern:   ^/
+            anonymous: ~
+            provider: user_security
+            logout:
+                path:   caesar_client_logout
                 target: caesar_client_homepage
             form_login:
                 login_path:  caesar_client_login
@@ -35,13 +53,9 @@ security:
                 success_handler: caesar_user_security.component.authentication.handler.login_handler
                 failure_handler: caesar_user_security.component.authentication.handler.login_handler
                 failure_path:   null
-            http_basic: true
-
     access_control:
-        #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: /register, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        #
-        # You must uncomment the two following rules to restrict access to paths
-        # starting with the /_internal prefix to only localhost
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        #- { path: ^/_internal/secure, roles: ROLE_NO_ACCESS }
+        - { path: login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: profile, roles: ROLE_USER_IDENTIFIED}
+        - { path: admin, roles: ROLE_ADMIN }

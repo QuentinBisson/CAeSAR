@@ -17,11 +17,9 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
       ->orWhere('u.codeBu = :codeBu')
       ->setParameter('codeBu', $username)
       ->getQuery();
-
-    try {
-      $user = $q->getSingleResult();
-    } catch (NoResultException $e) {
-      throw new UsernameNotFoundException(sprintf('Unable to find an active admin CaesarUserBundle:User object identified by "%s".', $username), null, 0, $e);
+    $user = $q->getOneOrNullResult();
+    if ($user == null) {
+      throw new UsernameNotFoundException(sprintf('Unable to find an active admin CaesarUserBundle:User object identified by "%s".', $username), null, 0);
     }
     return $user;
   }

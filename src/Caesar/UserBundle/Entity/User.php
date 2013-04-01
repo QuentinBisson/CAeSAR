@@ -57,6 +57,8 @@ class User implements UserInterface, EquatableInterface, \Serializable {
    * )
    */
   private $password;
+  private $identified;
+  private $authentified;
 
   /**
    * @var string $plainPassword
@@ -136,6 +138,8 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
     $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
     $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->identified = false;
+    $this->authentified = false;
   }
 
   public function getId() {
@@ -235,7 +239,30 @@ class User implements UserInterface, EquatableInterface, \Serializable {
   }
 
   public function getRoles() {
-    return array($this->role);
+    $roles = array($this->role);
+    if ($this->isIdentified()) {
+      array_push($roles, $this->role . "_IDENTIFIED");
+    }
+    if ($this->isAuthentified()) {
+      array_push($roles, $this->role . "_AUTHENTIFIED");
+    }
+    return $roles;
+  }
+
+  public function isIdentified() {
+    return $this->identified;
+  }
+
+  public function setIdentified($identified) {
+    $this->identified = $identified;
+  }
+
+  public function isAuthentified() {
+    return $this->authentified;
+  }
+
+  public function setAuthentified($authentified) {
+    $this->authentified = $authentified;
   }
 
   public function getSalt() {
@@ -352,6 +379,9 @@ class User implements UserInterface, EquatableInterface, \Serializable {
    */
   public function getReservations() {
     return $this->reservations;
+  }
+  public function getUserDescription() {
+    return $this->name . ' ' . $this->firstname . '(' . $this->email . ')';
   }
 
 }

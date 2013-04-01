@@ -16,6 +16,9 @@ borrow:
     title: Borrow a resource
 return:
     title: Return a resource
+return:
+    instead_of:
+        title: Return a resource
 
 client:
     borrow:
@@ -24,14 +27,24 @@ client:
         resource:
             borrowed: The resource %resource% has been borrowed.
             reservation:
-                borrowed: The resource %resource% that you reserved has been borrowed.
-                error: You can't borrow %resource% because you are not in the top of the reservation list.
-                none: You can't borrow %resource% right now because at least one user reserved it.
-            unavailable: The resource %resource% is unavailable at the moment.
-            connect: You need to log in to borrow %resource%.
+                borrowed: The resource %resource% that you reserved has been borrowed
+                error: You can't borrow %resource% because you are not in the top of the reservation list
+                none: You can't borrow %resource% right now because at least one user reserved it
+            unavailable: The resource %resource% is unavailable at the moment
+            connect: You need to log in to borrow %resource%
+            reservators: The resource was reserved by the following users
     return:
         impossible:
-            exception: You can't return %resource% because the resource is not currently borrowed.
-        accepted: The resource entitled %resource% is considered returned.
-        refused: You didn't borrow %resource%. You can't possibly return it.
-        connect: You need to log in to return %resource%.
+            exception: You can't return %resource% because the resource is not currently borrowed
+        accepted: The resource entitled %resource% is considered returned
+        refused: You can't return %resource% because you didn't borrow it.
+        #If someone asked you to returned the resource for him, you can do it. Else, you can't return the resource
+        connect: You need to log in to return %resource%
+        shelf: The resource %resource% must be stow at the location %shelf_name%. <br /><b>More informations</b><br />%shelf_description%
+mail:
+    hello: Hello
+    objective: You receive this e-mail of information to indicate you that a resource that you reserved is available
+    returned: A copy of the resource%resource% was returned
+    borrow: You can borrow it
+    regards: Best regards
+    title: Reservation

@@ -1,0 +1,16 @@
+{% extends "CaesarUserBundle::layout.html.twig" %}
+
+{% block bodyTitle %}
+<h1>{{'return.instead_of.title'|trans({})}}</h1>
+{% endblock %}
+
+{% block caesar_user_content %}
+<section>
+    <form id="return-as-form" action="{{ path('caesar_resource_return') ~ '/' ~code }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        {{form_row(form.user, {'attr': {'size': count + 1} }) }}
+        {{form_rest(form)}}
+        <input type="submit" value="{{'button.return_as.value'|trans({})}}"/>
+    </form>
+</section>
+{% endblock %}

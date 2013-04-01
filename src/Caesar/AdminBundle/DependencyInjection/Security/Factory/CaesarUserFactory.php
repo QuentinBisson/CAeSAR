@@ -1,23 +1,21 @@
 <?php
 
-// src/Caesar/UserBundle/DependencyInjection/Security/Factory/WsseFactory.php
-
-namespace Caesar\UserBundle\DependencyInjection\Security\Factory;
+namespace Caesar\AdminBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
-class WsseFactory implements SecurityFactoryInterface {
+class CaesarUserFactory implements SecurityFactoryInterface {
 
   public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint) {
-    $providerId = 'security.authentication.provider.' . $id;
+    $providerId = 'security.authentication.provider.admin.' . $id;
     $container
-      ->setDefinition($providerId, new DefinitionDecorator('caesar.security.authentication.provider'));
+      ->setDefinition($providerId, new DefinitionDecorator('caesar_admin.security.authentication.provider'));
 
-    $listenerId = 'security.authentication.listener.' . $id;
-    $listener = $container->setDefinition($listenerId, new DefinitionDecorator('caesar.security.authentication.listener'));
+    $listenerId = 'security.authentication.listener.admin.' . $id;
+    $listener = $container->setDefinition($listenerId, new DefinitionDecorator('caesar_admin.security.authentication.listener'));
 
     return array($providerId, $listenerId, $defaultEntryPoint);
   }

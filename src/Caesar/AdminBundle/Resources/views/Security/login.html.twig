@@ -1,0 +1,29 @@
+{% extends '::admin.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/icons.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/security.css') }}" />
+{% endblock %}
+{% block content %}
+{{ parent() }}
+<div class="page">
+    <h1>Administration</h1>
+    <div class="top">
+    {% if error %}
+            <div class="flash-error">{{ error.message|trans }}</div>
+    {% endif %}
+     {% for type, flashMessages in app.session.flashbag.all() %}
+        {% for flashMessage in flashMessages %}
+            <div class="flash-{{ type }}">
+            {{ flashMessage|raw }}
+                </div>
+    {% endfor %}
+        {% endfor %}
+            </div>
+            <div class="bot"></div>
+            <div class="log">
+        {% include 'CaesarAdminBundle:Security:login_form.html.twig' %}
+                </div>
+            </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "CaesarAdminBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/datepicker.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/modalwindow.css') }}" />
+{% endblock %}
+
+{% block breadCrumb%}
+    {{parent()}}
+<li data-header="0" class="active"><span>{{'admin.breadcrumb.general.clean_reservations'|trans({})}}</span></li>
+{% endblock %}
+
+{% block contentTitle %}
+{{'admin.title.general.clean_reservations'|trans({})}}
+{% endblock %}
+{% block contentBody %}
+<section class="contentBody">
+    <p class="intro">{{'admin.label.reservations.message'|trans({})}}</p>
+    <form id="form-reservation-clean" action="{{ path('caesar_admin_general_reservations') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        {{ form_row(form.reservationDate, { 'disabled': 'disabled' }) }}
+            <input type="submit" id="reservation-button" value="{{'admin.button.reservations.clean'|trans({})}}" />
+        {{ form_rest(form) }}
+        </form>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript">
+            jQuery(function($){
+                $.datepicker.regional['fr'] = {
+                    closeText: 'Fermer',
+                    prevText: 'Précédent',
+                    nextText: 'Suivant',
+                    currentText: 'Aujourd\'hui',
+                    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+                    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+                    monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin',
+                    'Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
+                    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+                    dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
+                    dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+                    weekHeader: 'Sem.',
+                    dateFormat: 'dd/mm/yy',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ''};
+                {% if  app.request.attributes.get('_locale') == 'fr' %}
+                    $.datepicker.setDefaults($.datepicker.regional['fr']);
+                {% endif %}
+        });
+        $('.date').datepicker({
+              dateFormat: 'dd/mm/yy',
+              constrainInput: true,
+              showOn: 'button',
+              buttonImage: '{{asset("images/date-picker-icon.png")}}',
+              buttonImageOnly: true
+          }
+        );
+
+        </script>
+{% endblock %}

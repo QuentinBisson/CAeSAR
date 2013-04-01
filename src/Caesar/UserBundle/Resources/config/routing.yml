@@ -9,6 +9,9 @@ caesar_client_search:
         page:  \d+
         direction: asc|desc
 
+caesar_client_logout:
+     pattern: /logout
+
 caesar_client_login:
     pattern:  /login
     defaults: { _controller: "CaesarUserBundle:User:login" }
@@ -27,3 +30,17 @@ caesar_client_profile:
 caesar_client_resetting:
     pattern:  /resetting
     defaults: { _controller: "CaesarUserBundle:User:resetting" }
+
+caesar_client_borrowing:
+    pattern:  /borrowing
+    defaults: { _controller: "CaesarUserBundle:User:borrowing", page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc
+
+caesar_client_reservation:
+    pattern:  /reservation
+    defaults: { _controller: "CaesarUserBundle:User:reservation", page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc

@@ -5,6 +5,11 @@ client:
         search_form:
             placeholder: Rechercher ...
             title: Rechercher une ressource
+        profile: Mon profil
+        borrowings: Mes emprunts
+        reservations: Mes réservations
+        logout: Déconnexion
+
 form:
     user:
         type:
@@ -63,6 +68,10 @@ form:
                 gap:
                     horizontal: Écart horizontal entre le début d'une étiquette et le début de la suivante (en cm)
                     vertical: Écart vertical entre le début d'une étiquette et le début de la suivante (en cm)
+    reservation:
+        type:
+            label:
+                date: Avant le
 table:
     foot:
         count:
@@ -108,3 +117,5 @@ resource:
         details: Détails de la ressource
         borrowings: Emprunts en cours
         cover: Couverture de la ressource
+
+Bad credentials: Le login ou le mot de passe est invalide

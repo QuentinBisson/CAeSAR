@@ -1,10 +1,10 @@
 <?php
 
-namespace Caesar\UserBundle\Security\Firewall;
+namespace Caesar\AdminBundle\Security\Firewall;
 
-use Caesar\UserBundle\Security\Authentication\Token\WsseUserToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler;
@@ -12,11 +12,11 @@ use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterface;
 
-class WsseListener extends AbstractAuthenticationListener {
+class CaesarAdminListener extends AbstractAuthenticationListener {
 
   public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $httpKernel, $options = array()) {
     parent::__construct(
-      $securityContext, $authenticationManager, $sessionStrategy, $httpUtils, "caesar", new DefaultAuthenticationSuccessHandler($httpUtils, $options), new DefaultAuthenticationFailureHandler($httpKernel, $httpUtils, $options), array_merge(
+      $securityContext, $authenticationManager, $sessionStrategy, $httpUtils, "caesar_admin", new DefaultAuthenticationSuccessHandler($httpUtils, $options), new DefaultAuthenticationFailureHandler($httpKernel, $httpUtils, $options), array_merge(
         array(
           'username_parameter' => 'username',
           'intention' => 'authenticate',
@@ -25,12 +25,17 @@ class WsseListener extends AbstractAuthenticationListener {
   }
 
   protected function attemptAuthentication(Request $request) {
+    die();
     $matches = explode("=", $request->getContent());
-    if (count($matches) != 2 || $matches[0] !== "_username") {
+    $split = explode("&", $matches[1]);
+
+    if (count($matches) != 3 || $matches[0] !== "_username" || $split[1] != "_password") {
       return null;
     }
-    $token = new WsseUserToken();
+
+    $token = new UsernamePasswordToken();
     $token->setUser($matches[1]);
+    $token->setCredentials($matches[2]);
     return $this->authenticationManager->authenticate($token);
   }
 

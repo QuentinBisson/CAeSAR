@@ -14,7 +14,7 @@
 {% block contentTitle %}{{'admin.title.tags.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-    <section class="contentBody">
+<section class="contentBody">
      {% include 'CaesarAdminBundle:Tag:list.html.twig' with {'tags' : tags, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
 {% endblock %}

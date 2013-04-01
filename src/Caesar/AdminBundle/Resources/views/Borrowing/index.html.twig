@@ -14,7 +14,9 @@
 {% block contentTitle %}{{'admin.title.borrowings.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_borrowing_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+{% set route_params = app.request.get('_route_params') %}
+{% set route = app.request.get('_route') %}
+    <form action="{{ path(route, route_params) }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_row(searchForm.archived) }}
         <br/>
@@ -22,6 +24,7 @@
         <br/>
         <input type="submit" value="{{'admin.button.search'|trans({})}}" class="margin-left form-search-button"/>
     </form>
+    <input type="hidden" id="serialize-request" value=""/>
     <section class="contentBody">
      {% include 'CaesarAdminBundle:Borrowing:list.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>

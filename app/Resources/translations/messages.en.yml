@@ -5,6 +5,10 @@ client:
         search_form:
             placeholder: Search ...
             title: Search a resource
+        profile: My profile
+        borrowings: My borrowings
+        reservations: My reservations
+        logout: Log out
 form:
     user:
         type:
@@ -37,6 +41,10 @@ form:
                 long:
                     description: Detailled description
                 search: Search
+    reservation:
+        type:
+            label:
+                date: Before
     tag:
         choose: Choose a format
         type:

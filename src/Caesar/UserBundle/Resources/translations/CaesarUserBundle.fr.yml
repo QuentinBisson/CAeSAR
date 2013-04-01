@@ -8,6 +8,7 @@ user:
         title: "Inscription"
         label:
             register: "Enregistrer"
+        successfull: Inscription réussie
 search:
     title: Recherche
 profile:
@@ -21,3 +22,5 @@ form:
         return: Rendre
         consult: Consulter
         placeholder: Entrez un code BU, ISBN, identifiant ...
+profile.change.informations: Changer mes informations
+borrowings.title: Mes emprunts

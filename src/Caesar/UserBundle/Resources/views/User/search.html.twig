@@ -9,7 +9,7 @@
 <h1>{{ 'search.title'|trans({}, 'CaesarUserBundle') }}</h1>
 {% endblock %}
 
-{% block body %}
+{% block caesar_user_content %}
 <section id="search-form">
     <form action="{{ path('caesar_client_search') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
@@ -20,7 +20,7 @@
         </div>
     </form>
 </section>
-<section class="contentBody">        
+<section class="contentBody">
     {% include 'CaesarUserBundle:User:resourcesSearchList.html.twig' with {'resources' : resources, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
 </section>
 {% endblock %}

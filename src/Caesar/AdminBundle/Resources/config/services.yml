@@ -1,7 +1,16 @@
 parameters:
-#    caesar_resource.example.class: Caesar\ResourceBundle\Example
-
+    caesar_user_provider.class: Caesar\UserBundle\Entity\UserRepository
+    caesar_user_security.component.authentication.handler.login_handler.class: Caesar\UserBundle\Security\Authentication\Handler\LoginHandler
 services:
-#    caesar_resource.example:
-#        class: %caesar_resource.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    user_metadata:
+        class: Doctrine\ORM\Mapping\ClassMetaData
+        arguments: ['Caesar\UserBundle\Entity\User']
+    caesar_user_provider:
+        class: "%caesar_user_provider.class%"
+        arguments: ["@doctrine.orm.entity_manager", "@user_metadata"]
+    caesar_admin.security.authentication.provider:
+        class:  Caesar\AdminBundle\Security\Authentication\Provider\CaesarAdminAuthentificationProvider
+        arguments: ['@caesar_user_provider', "@security.user_checker", "@security.encoder_factory"]
+    caesar_admin.security.authentication.listener:
+        class: Caesar\AdminBundle\Security\Firewall\CaesarAdminListener
+        arguments: ["@security.context", "@caesar.security.authentication.provider",  "@security.authentication.session_strategy", "@security.http_utils","@kernel"]

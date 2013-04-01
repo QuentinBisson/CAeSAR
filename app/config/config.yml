@@ -1,11 +1,12 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: "@CaesarAdminBundle/Resources/config/services.yml" }
     - { resource: "@CaesarUserBundle/Resources/config/services.yml" }
-    
+
 framework:
     #esi:             ~
-    translator:      { fallback: "%locale%" } 
+    translator:      { fallback: "%locale%" }
     default_locale: "%locale%"
     secret:          "%secret%"
     router:
@@ -54,9 +55,11 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-    
+    transport:  "%mailer_transport%"
+    host:       "%mailer_host%"
+    encryption: "%mailer_encryption%"
+    port:       "%mailer_port%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    auth_mode:  "%mailer_auth_mode%"
+    spool:      { type: memory }

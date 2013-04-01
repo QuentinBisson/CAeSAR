@@ -110,6 +110,12 @@ a {
     margin: auto;
 }
 
+.contentBody p.intro {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+}
+
 .inline {
     display: inline;
 }
@@ -316,6 +322,16 @@ h1 {
 
 input.notify-web-mining, textarea.notify-web-mining {
     background-color: #D9EDF7;
+}
+
+.ui-widget-header {
+    color: #222222;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 2.3em;
+    line-height: 1.8em;
+    text-align: center;
 }
 
 @media screen and (max-width:980px) and (min-width:480px) {

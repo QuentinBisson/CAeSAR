@@ -32,12 +32,13 @@ admin:
             backup:
                   load: Load a backup of the application
                   create: Create a backup of the application
+            clean_reservations: Clean reservations
     lang:
         french: French
         english: English
     home:
         synopsis:
-            shelves: Locatio's management
+            shelves: Location's management
             users: Users management
             resources: Resources management
             borrowings: Borrowings management
@@ -52,6 +53,8 @@ admin:
                 not:
                     empty: You must first move the following resources to a new location before removing this location.
                 move: Move the resource
+        reservations:
+                message: By submitting the form, you will delete the reservations previous to the submitted date.
     form:
         invalid: Invalid request
         resources:
@@ -120,6 +123,7 @@ admin:
                 header: General administration
                 password: Change password
                 webmining: Webmining module
+                clean_reservations: Clean reservations
     fieldset:
         shelves:
             legend: Informations about the shelf
@@ -156,6 +160,7 @@ admin:
             reinit.skeleton: Reinit the skeleton
             add: Add the resource
             update: Update the resource
+        reservations.clean: Clean reservations
     breadcrumb:
         shelves:
             add: Add
@@ -185,6 +190,7 @@ admin:
             backup:
                   load: Load a backup
                   create: Create a backup
+            clean_reservations: Clean reservations
     summary:
         tag:
             help: Help

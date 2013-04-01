@@ -6,7 +6,7 @@
 
 {% block caesar_user_content %}
 {% if error %}
-<div class="flash-error">{{ error.message }}</div>
+<div class="flash-error">{{ error.message|trans }}</div>
 {% endif %}
 
 <form class="form-client" action="{{ path('caesar_client_login_check') }}" method="post" autocomplete="off">

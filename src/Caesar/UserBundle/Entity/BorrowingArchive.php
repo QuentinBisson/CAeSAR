@@ -40,14 +40,14 @@ class BorrowingArchive {
   /**
    * @var date $borrowingDate
    *
-   * @ORM\Column(name="borrowingDate", type="date")
+   * @ORM\Column(name="borrowingDate", type="datetime")
    */
   private $borrowingDate;
 
   /**
    * @var date $returnDate
    *
-   * @ORM\Column(name="returnDate", type="date")
+   * @ORM\Column(name="returnDate", type="datetime")
    */
   private $returnDate;
 

@@ -14,6 +14,7 @@
     <body>
         <header class="header">
             <div class="header-content">
+                {% if is_granted('ROLE_ADMIN') %}
                 <section class="left">
                     <ul id="breadcrumb" class="breadcrumb">
                 {% block breadCrumb%}
@@ -25,7 +26,7 @@
                 {% endblock %}
                         </ul>
                     </section>
-
+                {% endif %}
                     <section class="right">
                         <div class="inline">
                             <select id="lang" class="lang-select">
@@ -34,7 +35,9 @@
                                         <option value="en" data-imagesrc="{{asset('images/en.png')}}"
                                     {% if app.request.locale == 'en'%} selected="selected" {% endif %}>{{'admin.lang.english'|trans({})}}</option>
                                         </select>
-                                        <a class="link-button-deconnexion" href="{{path('caesar_logout')}}">{{'admin.button.logout'|trans({})}}</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">{{'admin.button.logout'|trans({})}}</a>
+                                    {% endif %}
                                 </div>
                             </section>
                         </div>
@@ -43,7 +46,7 @@
 
                     <section class="main-content">
                 {% block menu %}{% endblock %}
-                            <article>{% block content %}{% endblock %}</article>
+                            {% block content %}{% endblock %}
                         </section>
         {% block javascripts %}
                         <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>

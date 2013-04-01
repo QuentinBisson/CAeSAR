@@ -20,25 +20,26 @@
                 {% if app.request.locale == 'fr' %}
                     <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'en' })) }}"><img src="{{ asset('images/en.png') }}" alt="English verison" /></a>
                 {% else %}
-                        <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'fr' })) }}"><img src="{{ asset('images/fr.png') }}" alt="Version française" /></a>
+                    <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'fr' })) }}"><img src="{{ asset('images/fr.png') }}" alt="Version française" /></a>
                 {% endif %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a class="nav-el nav-btn" href="{{ path('caesar_client_profile')}}"><i class="icon-user icon-white"></i> {{ app.user.firstName }}</a>
-                            <a class="nav-el" id="toggle_user_panel" href="#"><i class="icon-chevron-down icon-white"></i></a>
+                    <a class="nav-el nav-btn" href="{{ path('caesar_client_profile')}}"><i class="icon-user icon-white"></i> {{ app.user.firstName }}</a>
+                    <a class="nav-el" id="toggle_user_panel" href="#"><i class="icon-chevron-down icon-white"></i></a>
                 {% else %}
-                            <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'client.navbar.inscription'|trans }}</a>
-                            <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'client.navbar.connexion'|trans }}</a>
+                    <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'client.navbar.inscription'|trans }}</a>
+                    <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'client.navbar.connexion'|trans }}</a>
                 {% endif %}
             </div>
         </div>
         <div id="user_panel">
-            <a class="btn" href="{{ path('caesar_client_profile')}}">Mon profil</a>
-            <a class="btn" href="{{ path('caesar_client_search') }}">Mes emprunts</a>
-            <a class="btn" href="{{ path('caesar_logout') }}">Déconnexion</a>
+            <a class="btn" href="{{ path('caesar_client_profile')}}">{{ 'client.navbar.profile'|trans({}) }}</a>
+            <a class="btn" href="{{ path('caesar_client_borrowing') }}">{{ 'client.navbar.borrowings'|trans({}) }}</a>
+            <a class="btn" href="{{ path('caesar_client_reservation') }}">{{ 'client.navbar.reservations'|trans({}) }}</a>
+            <a class="btn" href="{{ path('caesar_client_logout') }}">{{ 'client.navbar.logout'|trans({}) }}</a>
         </div>
         <section>
             <header>
-                {% block bodyTitle %}{% endblock %}
+            {% block bodyTitle %}{% endblock %}
             </header>
 
             <section>
@@ -66,7 +67,7 @@
                                 return false;
                         })
                 })
-            </script>
+                </script>
         {% endblock %}
     </body>
 </html>
