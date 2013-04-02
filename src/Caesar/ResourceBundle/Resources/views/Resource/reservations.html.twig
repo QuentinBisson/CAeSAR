@@ -1,0 +1,17 @@
+{% extends "CaesarUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+{% endblock %}
+
+
+{% block bodyTitle %}
+<h1>{{'reservations.blocking.title'|trans({})}}</h1>
+{% endblock %}
+
+{% block caesar_user_content %}
+<section class="contentBody">
+     {% include 'CaesarResourceBundle:Resource:reservationList.html.twig' with {'reservations' : reservations, 'page' : page, 'pagination' : pagination, 'count': count}  %}
+    </section>
+{% endblock %}

@@ -1,15 +1,22 @@
 caesar_resource_homepage:
     pattern:  /consult/{code}
-    defaults: { _controller: CaesarResourceBundle:Resource:consult, code = '' }
+    defaults: { _controller: CaesarResourceBundle:Resource:consult, code: '' }
 
 caesar_resource_ajax_get:
     pattern: /ajax/{code}
-    defaults: { _controller: CaesarResourceBundle:Resource:ajaxGet, code = ''}
+    defaults: { _controller: CaesarResourceBundle:Resource:ajaxGet, code: ''}
 
 caesar_resource_borrow:
     pattern:  /borrow/{code}
-    defaults: { _controller: "CaesarResourceBundle:Resource:borrow" , code = ''}
+    defaults: { _controller: "CaesarResourceBundle:Resource:borrow" , code: ''}
 
 caesar_resource_return:
     pattern:  /return/{code}
-    defaults: { _controller: "CaesarResourceBundle:Resource:return" , code = ''}
+    defaults: { _controller: "CaesarResourceBundle:Resource:return" , code: ''}
+
+caesar_blocking_reservations:
+    pattern:  /blocking/reservations/{page}/{resource}/{user}
+    defaults: { _controller: "CaesarResourceBundle:Resource:blockingReservations" , page: 1, resource: -1, user: null}
+    requirements:
+        page: \d+
+        resource: \d+

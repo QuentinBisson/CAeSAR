@@ -60,6 +60,8 @@
 #main-form .main-form-actions {
     margin: auto;
     margin-top: 10px;
+    width: 640px;
+    text-align: center;
 }
 #search-form .search-form-actions {
     width: 210px;

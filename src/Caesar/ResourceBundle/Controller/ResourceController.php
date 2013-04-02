@@ -53,7 +53,7 @@ class ResourceController extends Controller {
     throw $this->createNotFoundException($translator->trans('form.invalid'));
   }
 
-  public function borrowAction($code) {
+  public function borrowAction($code = '') {
     $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
@@ -122,36 +122,20 @@ class ResourceController extends Controller {
               }
             }
             //Pas le premier sur la liste de réservation
+            $params = array();
             if ($isInList) {
               $text = $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()));
-              $string = "<ul>";
-
-              foreach ($resource->getReservations() as $res) {
-                if ($res->getUser()->isEqualTo($user)) {
-                  break;
-                }
-                $u = $res->getUser();
-                $string .= '<li>';
-                $string .= $u->getName() . " " . $u->getFirstname();
-                $string .= '</li>';
-              }
-              $string .= '</ul>';
+               $params['user'] = $user->getId();
+               $params['resource'] = $resource->getId();
             } else { //Ressource non réservée.
               $text = $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()));
-              $string = "";
-              foreach ($resource->getReservations() as $res) {
-                $u = $res->getUser();
-                $string .= '<li>';
-                $string .= $u->getName() . " " . $u->getFirstname();
-                $string .= '</li>';
-              }
+              $params['resource'] = $resource->getId();
             }
 
-            $text .= "<br />" . $translator->trans('client.borrowing.resource.reservators', array('%resource%' => $resource->getDescription())) . "<br />" . $string;
             $this->get('session')->getFlashBag()->add(
               'error', $text
             );
-            return $this->redirect($this->generateUrl('caesar_client_homepage'));
+            return  $this->redirect($this->generateUrl('caesar_blocking_reservations', $params));
           }
         }
       } else {//Je dois me connecter
@@ -188,7 +172,7 @@ class ResourceController extends Controller {
     }
   }
 
-  public function returnAction($code) {
+  public function returnAction($code = '') {
     $translator = $this->get('translator');
     $em = $this->getDoctrine()->getManager();
     if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
@@ -225,7 +209,7 @@ class ResourceController extends Controller {
         'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
             '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
       );
-
+      $this->notify($resource);
       return $this->redirect($this->generateUrl('caesar_client_homepage'));
     } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
       $user = $this->get('security.context')->getToken()->getUser();
@@ -253,28 +237,7 @@ class ResourceController extends Controller {
         $em->flush();
 
         $availableReservations = $q - $borrowedQuantity;
-        $userToNotify = array();
-        $reservations = $resource->getReservations();
-        $i = 0;
-        array_push($userToNotify, $reservations->first());
-        while ($i < $availableReservations - 1) {
-          array_push($userToNotify, $reservations->next());
-          $i++;
-        }
-
-        $to = array();
-        foreach ($userToNotify as $r) {
-          array_push($to, $r->getUser()->getEmail());
-        }
-        $transport = Swift_SmtpTransport::newInstance();
-        $message = Swift_Message::newInstance($transport)
-          ->setSubject('Notification: Livre réservé')
-          ->setFrom('noreply@caesar.com')
-          ->setTo($to)
-          ->setBody($this->renderView(
-            'CaesarResourceBundle:Resource:reservation.html.twig', array('resource' => $resource)), 'text/html'
-        );
-        $this->get('mailer')->send($message);
+        $this->notify($resource);
 
         $this->get('session')->getFlashBag()->add(
           'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
@@ -321,6 +284,66 @@ class ResourceController extends Controller {
             'error' => $error)
       );
     }
+  }
+
+  public function blockingReservationsAction($page, $resource = -1, $user = null) {
+    $nb_per_page = 10;
+    $em = $this->getDoctrine()->getManager();
+    $archived = null;
+
+    $repository_reservation = $em->getRepository('CaesarUserBundle:Reservation');
+
+    $request = $this->get('request');
+    if ($user != null) {
+      $user = $em->getRepository('CaesarUserBundle:User')->findOneById($user);
+    }
+
+    $reservations = $repository_reservation->getPreviousReservations($page, $resource, $user);
+    //TODO countFunction
+
+    $count = 5;
+    /* Pagination */
+    $pagination = array(
+        'cur' => $page,
+        'max' => floor($count / $nb_per_page),
+    );
+
+    $array = array(
+        'reservations' => $reservations,
+        'page' => $page,
+        'count' => $count,
+        'pagination' => $pagination);
+
+    if ($request->isXmlHttpRequest()) {
+      return $this->render("CaesarResourceBundle:Resource:reservationList.html.twig", $array);
+    }
+    return $this->render("CaesarResourceBundle:Resource:reservations.html.twig", $array);
+ }
+
+  private function notify($resource) {
+     $userToNotify = array();
+        $reservations = $resource->getReservations();
+        $i = 0;
+        array_push($userToNotify, $reservations->first());
+        while ($i < $availableReservations - 1) {
+          array_push($userToNotify, $reservations->next());
+          $i++;
+        }
+
+        $to = array();
+        foreach ($userToNotify as $r) {
+          array_push($to, $r->getUser()->getEmail());
+        }
+        $transport = Swift_SmtpTransport::newInstance();
+        $message = Swift_Message::newInstance($transport)
+          ->setSubject('Notification: Livre réservé')
+          ->setFrom('noreply@caesar.com')
+          ->setTo($to)
+          ->setBody($this->renderView(
+            'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource)), 'text/html'
+        );
+        $this->get('mailer')->send($message);
+
   }
 
 }
