@@ -129,3 +129,20 @@ div.help dl dd {
 .format-data {
     min-width: 20px;
 }
+
+.shelf-description {
+    display: none;
+    border: 2px solid white;
+    padding: 5px;
+    width: 410px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    
+    background-color: #999999;
+    color: white;
+}
+
+.shelf-description .location-description {
+    font-style: italic;
+}
