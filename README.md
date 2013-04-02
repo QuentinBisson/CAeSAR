@@ -35,20 +35,7 @@ Exécutez les commandes :
 
 	php app/console doctrine:schema:create --force
 
-6) Mise à jour des routes
--------------------------
-Lorsque vous modifier une route, lancez les commandes suivantes :
-
-    php app/console translation:extract fr --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
-
-    php app/console translation:extract en --dir=./src/ --output-dir=./app/Resources/translations --enable-extractor=jms_i18n_routing
-
-Ainsi les routes seront préfixés par la locale en cours.
-Exemple :
-    - L'url http://localhost/CAeSAR/web/admin/resource/ ne fonctionne pas
-    - L'url http://localhost/CAeSAR/web/en/admin/resource/add est valide
-
-7) Installation de PHPUnit
+6) Installation de PHPUnit
 -------------------------
 
 Tout est au bout de ce lien :
@@ -61,7 +48,7 @@ Pour lancer les tests, executez la commande
 
 A la racine du projet.
 
-8) Module PHP
+7) Module PHP
 -------------------------
 
 Pour l'upload de fichier, un validateur necessite l'activation du module
@@ -73,7 +60,7 @@ Pour dessiner les codes-barres, il faut activer l'extension gd2
 
 Il faut également activer l'extension intl.
 
-9) Fixtures
+8) Fixtures
 -------------------------
 
 Avant de charger les fixtures, il faut faire :

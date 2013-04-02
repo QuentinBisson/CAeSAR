@@ -3,7 +3,7 @@ parameters:
     caesar_user_security.component.authentication.handler.login_handler.class: Caesar\UserBundle\Security\Authentication\Handler\LoginHandler
 services:
     user_metadata:
-        class: Doctrine\ORM\Mapping\ClassMetaData
+        class: Doctrine\ORM\Mapping\ClassMetadata
         arguments: ['Caesar\UserBundle\Entity\User']
     caesar_user_provider:
         class: "%caesar_user_provider.class%"

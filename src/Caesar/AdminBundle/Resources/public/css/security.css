@@ -5,23 +5,28 @@ html, body{
     margin:0px;
     font-family: "Trebuchet MS",Helvetica,Arial,sans-serif;
 }
-
+body {
+    background: url("../../../images/background.jpg");
+}
 .header{
-    background-image: inherit;
-    height: 5%;
+    background-image: none;
+    background-color: #505050;
+    min-width: 400px;
 }
 
 .main-content{
-    height: 95%;
-    top: 5%;
+    height: 400px;
+    min-height: 400px;
+    top: 0;
 }
 
 h1 {
     color: white;
-    font-size: 50px;
-    position: absolute;
+    font-size: 40px;
+    margin-top: 50px;
+    margin-bottom: 40px;
     text-align: center;
-    width: 100%;
+    min-width: 400px;
     font-family: "Helvetica";
 }
 .page{
@@ -31,19 +36,22 @@ h1 {
 }
 .top {
     background-color: #505050;
-    height: 45%;
+    height: 182px;
+    min-height: 182px;
     position: absolute;
+    top: 0;
     width: 100%;
     z-index: -1;
 }
 
 .bot {
-    background: url("../../../images/background.jpg") repeat scroll 0 0 transparent;
-    height: 55%;
+    background: url("../../../images/background.jpg");
+    height: 100%;
+    min-height: 300px;
     position: absolute;
-    top: 45%;
+    bottom: 0px;
     width: 100%;
-    z-index: -1;
+    z-index: -2;
 }
 
 .log{
@@ -54,10 +62,14 @@ h1 {
     min-width: 400px;
     padding: 10px;
     position: relative;
-    top: 34%;
-    width: 30%;
+    width: 400px;
 }
 
+.errors {
+    width: 400px;
+    min-width: 400px;
+    margin: auto;
+}
 .page label{
     font-size:20px;
     color : white;
