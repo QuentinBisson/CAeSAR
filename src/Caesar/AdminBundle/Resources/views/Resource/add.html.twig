@@ -45,39 +45,78 @@
                 {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color'} }) }}
                 {{ form_row(form.quantity) }}
                 {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
-                        <section class="shelf-description">
-                        {% if shelf is defined %}
-                            {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
-                        {% endif %}
-                            </section>
+                        <section class="shelf-description"></section>
                 {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
-                                <div>
+                        <div>
                     {{ form_label(form.url) }}
                     {{ form_errors(form.url) }}
                     {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color'} }) }}
-                                        <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
-                                    </div>
+                                <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
+                            </div>
 
-                            </div>
-                            <div class="right half-width">
-                                <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
-                            </div>
-                            <div class="clear"></div>
-                            <div>
-                                <div class="long-description">
+                        </div>
+                        <div class="right half-width">
+                            <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                        </div>
+                        <div class="clear"></div>
+                        <div>
+                            <div class="long-description">
                     {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color'} }) }}
-                                    </div>
-                                    <input type="button" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
-                                    <input type="submit" value="{{'admin.button.resource.add'|trans({})}}"/>
                                 </div>
+                                <input type="button" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
+                                <input type="submit" value="{{'admin.button.resource.add'|trans({})}}"/>
                             </div>
+                        </div>
 
         {{ form_row(form.path) }}
         {{ form_rest(form) }}
-                            <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
-                        </form>
+                        <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+                    </form>
 {% endblock %}
     {% block javascripts %}
 {{parent()}}
-                        <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+                    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+                    <script type="text/javascript">            
+/* Pagination */
+$(document).ready(function() {
+var onChange = false;
+$("select.shelf-selection").change(function(e){
+    if (!onChange) {
+        onChange = true;
+        $('.shelf-selection').parent('div').append('<img id="loading-description" src="{{ asset('images/loading.gif') }}" alt="loading" />');
+        var url = $('.shelf-description-url').attr('value');
+        url += '/' + $(this).find(":selected").attr('value');
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            success: function(data){
+                $('.shelf-description').html(data);
+                $('.shelf-description').css('display', 'block');
+                $('#loading-description').remove();
+                onChange = false;
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $('.shelf-description').css('display', 'none');
+                $('#loading-description').remove();
+                onChange = false;
+            }
+        });
+    }
+    e.preventDefault();
+    return false; // Empêche la redirection normale
+});
+
+document.getElementById('caesar_resourceBundle_resourceType_local').addEventListener('change', handleFileSelect, false);
+document.getElementById("caesar_resourceBundle_resourceType_local").addEventListener('click', eraseURL);
+document.getElementById('apply-image').addEventListener('click', function(){
+    var a  = document.getElementById('caesar_resourceBundle_resourceType_url');
+    eraseLocal();
+    var img = document.getElementById('resource-img');
+    img.src = a.value;
+    document.getElementById('caesar_resourceBundle_resourceType_path').value = a.value;
+}, false);
+
+$('.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
+});</script>
 {% endblock %}
