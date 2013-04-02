@@ -14,7 +14,7 @@ class LoadShelfData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
     	$arrResult = array();
-    	$arrLines = file('src\Caesar\ShelfBundle\DataFixtures\ORM\shelfFixtures.csv');
+        $arrLines = file('src/Caesar/ShelfBundle/DataFixtures/ORM/shelfFixtures.csv');
     	foreach($arrLines as $line) {
     		$arrResult[] = explode( ',', $line);
     	}

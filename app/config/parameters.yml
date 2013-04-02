@@ -6,9 +6,9 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:    mail
-    mailer_host:         ~
-    mailer_user:         ~
+    mailer_transport:    sendmail
+    mailer_host:         smtp.caesar.fr
+    mailer_user:         noreply
     mailer_password:     ~
     mailer_auth_mode:    ~
     mailer_encryption:   ~

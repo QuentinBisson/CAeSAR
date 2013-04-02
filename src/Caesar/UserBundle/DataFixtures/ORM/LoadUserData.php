@@ -14,7 +14,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
     	$arrResult = array();
-    	$arrLines = file('src\Caesar\UserBundle\DataFixtures\ORM\userFixtures.csv');
+    	$arrLines = file('src/Caesar/UserBundle/DataFixtures/ORM/userFixtures.csv');
     	foreach($arrLines as $line) {
     		$arrResult[] = explode( ',', $line);
     	}
