@@ -69,7 +69,62 @@
         </section>
     </section>
 {% endblock %}
-    {% block javascripts %}
+{% block javascripts %}
 {{parent()}}
     <script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
+        <script type="text/javascript">
+        /* Pagination */
+        $(document).ready(function() {
+            var onChange = false;
+            $("select.format-selection").change(function(e){
+                if (!onChange) {
+                    onChange = true;
+                    $(this).parent('div').append('<img id="loading-format" src="{{ asset('images/loading.gif') }}" alt="loading" />');
+                    var url = $('input.format-url').attr('value');
+
+                    e.preventDefault();
+                    if ("" === $(this).find(":selected").attr('value')) {
+                        var form = document.getElementsByTagName("form")[0];
+                        var elements = form.elements;
+                        for (i = 0; i < elements.length; i++) {
+                            var field_type = elements[i].type.toLowerCase();
+                            switch (field_type) {
+                                case "number":
+                                case "text":
+                                    elements[i].value = "";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        $('label.format-data').each(function() {
+                            $(this).text('');
+                        });
+                        $('#loading-format').remove();
+                        onChange = false;
+                        return false;
+                    }
+
+                    url += '/' + $(this).find(":selected").attr('value');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        cache: false,
+                        success: function(data){
+                            var format = JSON.parse(data);
+                            fillForm(format);
+                            $('#loading-format').remove();
+                            onChange = false;
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            $('#loading-format').remove();
+                            onChange = false;
+                        }
+                    });
+                }
+                e.preventDefault();
+                return false; // Empêche la redirection normale
+            });
+        });
+    </script>
 {% endblock %}
