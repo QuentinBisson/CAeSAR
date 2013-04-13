@@ -16,7 +16,9 @@
         </ul>
     </div>
     <div id="modify-profile">
-        <input type="button" value="{{'profile.change.informations'|trans({}, 'CaesarUserBundle') }}"/>
+        <form class="form-client" action="{{ path('caesar_client_modif_user') }}" method="post" autocomplete="off">
+            <input type="button" name="modifProfile" value="{{'profile.change.informations'|trans({}, 'CaesarUserBundle') }}" onclick="submit()"/>
+        </form>
     </div>
 </section>
 {% endblock %}
