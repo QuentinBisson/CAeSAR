@@ -18,7 +18,7 @@
 
             <div class="right nav-group">
                 {% if app.request.locale == 'fr' %}
-                    <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'en' })) }}"><img src="{{ asset('images/en.png') }}" alt="English verison" /></a>
+                    <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'en' })) }}"><img src="{{ asset('images/en.png') }}" alt="English version" /></a>
                 {% else %}
                     <a class="nav-el" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ '_locale': 'fr' })) }}"><img src="{{ asset('images/fr.png') }}" alt="Version française" /></a>
                 {% endif %}

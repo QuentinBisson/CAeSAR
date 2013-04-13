@@ -25,8 +25,7 @@ class CaesarAdminAuthentificationProvider extends DaoAuthenticationProvider {
     if ($user) {
       if (!in_array('ROLE_USER', $user->getRoles())        //check password
         && ($token->getCredentials() != null
-        && $encoder->encodePassword($token->getCredentials(), $user->getSalt()) != $user->getPassword())) {
-
+        && $encoder->encodePassword($token->getCredentials(), $user->getSalt()) === $user->getPassword())) {
         $authenticatedToken = new CaesarAdminToken($user->getRoles());
         $authenticatedToken->setUser($user);
         return $authenticatedToken;
