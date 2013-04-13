@@ -109,41 +109,43 @@ class UserController extends Controller {
     public function modifProfileAction() {
         $user = $this->get('security.context')->getToken()->getUser();
         if ($user->isAuthentified()) {
+            die("!auth");
             //mettre la route  pour la modif des infos
             return $this->render();
         } else {
-            return $this->forward("CaesarUserBundle:User:authentification");
+            $request = $this->getRequest();
+            return $this->forward("CaesarUserBundle:User:authenticate", array('_route_params' => $request->get('_route_params'),'_route' => $request->get('_route')));
         }
     }
 
-    public function authentificationAction() {
-        //$translator = $this->get('translator');
-        //$user = $this->get('security.context')->getToken()->getUser();
+    public function authenticateAction() {
+        $translator = $this->get('translator');
+        $user = $this->get('security.context')->getToken()->getUser();
         $form = $this->createForm(new PasswordType());
-        
-        //$request = $this->get('request');
-        /*if ($request->isMethod('POST')) {
-            $form->bind($request);
-            if ($form->isValid()) {
-                $data = $form->getData();
 
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $encoded = $encoder->encodePassword($data['password'], $user->getSalt());
-                if ($encoded === $user->getPassword()) {
-                    $user->setAuthentified(true);
-                    //mettre la route de la modif de profile
-                    return $this->render();
-                } else {
-                   $this->get('session')->getFlashBag()->add(
-                            'error', $translator->trans('admin.form.users.password.not_same')
-                    );
-                }
-            } else {
-               $this->get('session')->getFlashBag()->add(
-                        'error', $translator->trans('admin.form.users.password.no_match')
-                )
-            }
-        }*/
+        //$request = $this->get('request');
+        /* if ($request->isMethod('POST')) {
+          $form->bind($request);
+          if ($form->isValid()) {
+          $data = $form->getData();
+
+          $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+          $encoded = $encoder->encodePassword($data['password'], $user->getSalt());
+          if ($encoded === $user->getPassword()) {
+          $user->setAuthentified(true);
+          //mettre la route de la modif de profile
+          return $this->render();
+          } else {
+          $this->get('session')->getFlashBag()->add(
+          'error', $translator->trans('admin.form.users.password.not_same')
+          );
+          }
+          } else {
+          $this->get('session')->getFlashBag()->add(
+          'error', $translator->trans('admin.form.users.password.no_match')
+          )
+          }
+          } */
         return $this->render('CaesarUserBundle:User:authentification.html.twig', array('form' => $form->createView()));
     }
 
