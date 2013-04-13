@@ -1,0 +1,16 @@
+{% extends "CaesarUserBundle::layout.html.twig" %}
+
+{% block bodyTitle %}
+
+{% endblock %}
+
+{% block caesar_user_content %}
+
+
+<form action="{{ path('caesar_client_modif_user') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_row(form.plainPassword) }}
+        <input type="submit" value="{{ 'user.login.label.login'|trans({}, 'CaesarUserBundle') }}"/>
+    {{ form_rest(form) }}
+    </form>
+{% endblock caesar_user_content %}
