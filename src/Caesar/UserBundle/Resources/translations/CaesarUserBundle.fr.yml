@@ -4,6 +4,8 @@ user:
         label:
             login: "Connexion"
             username: "Nom d'utilisateur"
+    authenticate:
+        title: "Authentification"
     register:
         title: "Inscription"
         label:
@@ -24,3 +26,4 @@ form:
         placeholder: Entrez un code BU, ISBN, identifiant ...
 profile.change.informations: Changer mes informations
 borrowings.title: Mes emprunts
+fail.password: Erreur dans le mot de passe

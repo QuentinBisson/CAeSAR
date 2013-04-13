@@ -114,7 +114,7 @@ class UserController extends Controller {
             return $this->render();
         } else {
             $request = $this->getRequest();
-            return $this->forward("CaesarUserBundle:User:authenticate", array('_route_params' => $request->get('_route_params'),'_route' => $request->get('_route')));
+            return $this->forward("CaesarUserBundle:User:authenticate", array('_route_params' => $request->get('_route_params'), '_route' => $request->get('_route')));
         }
     }
 
@@ -122,31 +122,27 @@ class UserController extends Controller {
         $translator = $this->get('translator');
         $user = $this->get('security.context')->getToken()->getUser();
         $form = $this->createForm(new PasswordType());
-
-        //$request = $this->get('request');
-        /* if ($request->isMethod('POST')) {
-          $form->bind($request);
-          if ($form->isValid()) {
-          $data = $form->getData();
-
-          $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-          $encoded = $encoder->encodePassword($data['password'], $user->getSalt());
-          if ($encoded === $user->getPassword()) {
-          $user->setAuthentified(true);
-          //mettre la route de la modif de profile
-          return $this->render();
-          } else {
-          $this->get('session')->getFlashBag()->add(
-          'error', $translator->trans('admin.form.users.password.not_same')
-          );
-          }
-          } else {
-          $this->get('session')->getFlashBag()->add(
-          'error', $translator->trans('admin.form.users.password.no_match')
-          )
-          }
-          } */
-        return $this->render('CaesarUserBundle:User:authentification.html.twig', array('form' => $form->createView()));
+        $error="";
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $data = $form->getData();                
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $encoded = $encoder->encodePassword($data['plainPassword'], $user->getSalt());
+                if ($encoded === $user->getPassword()) {
+                    $user->setAuthentified(true);
+                    //mettre la route de la modif de profile
+                    return $this->render();
+                } else {
+                    $error = $this->get('session')->getFlashBag()->add(
+                            'error', $translator->trans('fail.password', array(), 'CaesarUserBundle')
+                    );
+                }
+            }
+        }
+        return $this->render('CaesarUserBundle:User:authentification.html.twig', array('form' => $form->createView(),
+            'authenticate_page_title' => $translator->trans('user.authenticate.title', array(), 'CaesarUserBundle')));
     }
 
     public function registerAction() {
