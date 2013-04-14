@@ -11,30 +11,32 @@
 {% endblock %}
 
 {% block contentBody %}
-<section class="general">
-    <header>{{'admin.menu.title.general.header'|trans({})}}</header>
-    <section>
-        <p>{{'admin.home.synopsis.general'|trans({})}}</p>
-    </section>
-</section>
-<section class="resources">
-    <header>{{'admin.menu.title.resources.header'|trans({})}}</header>
-    <section><p>{{'admin.home.synopsis.resources'|trans({})}}</p></section>
-</section>
-<section class="users">
-    <header>{{'admin.menu.title.users.header'|trans({})}}</header>
-    <section><p>{{'admin.home.synopsis.users'|trans({})}}</p></section>
-</section>
-<section class="locations">
-    <header>{{'admin.menu.title.shelves.header'|trans({})}}</header>
-    <section><p>{{'admin.home.synopsis.shelves'|trans({})}}</p></section>
-</section>
-<section class="borrowings">
-    <header>{{'admin.menu.title.borrowings.header'|trans({})}}</header>
-    <section><p>{{'admin.home.synopsis.borrowings'|trans({})}}</p></section>
-</section>
-<section class="tags">
-    <header>{{'admin.menu.title.tags.header'|trans({})}}</header>
-    <section><p>{{'admin.home.synopsis.tags'|trans({})}}</p></section>
+<section class="general-administraction">
+    <fieldset class="general">
+        <legend>{{'admin.menu.title.general.header'|trans({})}}</legend>
+        <section>
+            <p>{{'admin.home.synopsis.general'|trans({})}}</p>
+        </section>
+    </fieldset>
+    <fieldset class="resources">
+        <legend>{{'admin.menu.title.resources.header'|trans({})}}</legend>
+        <section><p>{{'admin.home.synopsis.resources'|trans({})}}</p></section>
+    </fieldset>
+    <fieldset class="users">
+        <legend>{{'admin.menu.title.users.header'|trans({})}}</legend>
+        <section><p>{{'admin.home.synopsis.users'|trans({})}}</p></section>
+    </fieldset>
+    <fieldset class="locations">
+        <legend>{{'admin.menu.title.shelves.header'|trans({})}}</legend>
+        <section><p>{{'admin.home.synopsis.shelves'|trans({})}}</p></section>
+    </fieldset>
+    <fieldset class="borrowings">
+        <legend>{{'admin.menu.title.borrowings.header'|trans({})}}</legend>
+        <section><p>{{'admin.home.synopsis.borrowings'|trans({})}}</p></section>
+    </fieldset>
+    <fieldset class="tags">
+        <legend>{{'admin.menu.title.tags.header'|trans({})}}</legend>
+        <section><p>{{'admin.home.synopsis.tags'|trans({})}}</p></section>
+    </fieldset>
 </section>
 {% endblock %}

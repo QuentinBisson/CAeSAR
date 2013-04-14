@@ -27,9 +27,9 @@ caesar_client_profile:
     pattern:  /profile
     defaults: { _controller: "CaesarUserBundle:User:profile" }
     
-caesar_client_modif_user:
-    pattern: /modifProfile
-    defaults: { _controller: "CaesarUserBundle:User:modifProfile" }
+caesar_client_modify_user:
+    pattern: /profile/modify
+    defaults: { _controller: "CaesarUserBundle:User:modifyProfile" }
     
 caesar_client_authenticate:
     pattern: /authenticate

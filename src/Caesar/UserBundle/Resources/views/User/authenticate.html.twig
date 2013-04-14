@@ -6,7 +6,6 @@
 
 {% block caesar_user_content %}
 
-
 <form class="form-client" action="{{ path('caesar_client_authenticate') }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
     {{ form_row(form.plainPassword) }}

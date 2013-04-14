@@ -19,9 +19,9 @@
 {% block contentBody %}
 <section class="contentBody">
     <p class="intro">{{'admin.label.reservations.message'|trans({})}}</p>
-    <form id="form-reservation-clean" action="{{ path('caesar_admin_general_reservations') }}" method="post" {{ form_enctype(form) }}>
+    <form id="form-reservation-clean" action="{{ path('caesar_admin_general_purge') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
-        {{ form_row(form.reservationDate, { 'disabled': 'disabled' }) }}
+        {{ form_row(form.reservationDate) }}
             <input type="submit" id="reservation-button" value="{{'admin.button.reservations.clean'|trans({})}}" />
         {{ form_rest(form) }}
         </form>
@@ -57,12 +57,12 @@
         });
         $('.date').datepicker({
               dateFormat: 'dd/mm/yy',
-              constrainInput: true,
+              constraintInput: true,
               showOn: 'button',
               buttonImage: '{{asset("images/date-picker-icon.png")}}',
-              buttonImageOnly: true
           }
         );
+        $('.date').datepicker('show');
 
         </script>
 {% endblock %}

@@ -22,6 +22,8 @@ admin:
             skeleton: Edit the resources skeleton
         borrowings:
             list: List borrowings
+        reservations:
+            list: List reservations
         tags:
             list: List labels
             generate: Generate new labels
@@ -32,7 +34,7 @@ admin:
             backup:
                   load: Load a backup of the application
                   create: Create a backup of the application
-            clean_reservations: Clean reservations
+            clean_reservations: Purge reservations
     lang:
         french: French
         english: English
@@ -93,6 +95,11 @@ admin:
                 not_empty: The password can't be empty
                 no_match: Your current password does not match the current password field
                 not_same: There is no match between the new and the confirm password
+        reservations:
+            exception: The reservation id %reservation% is not a valid reservation
+            notice:
+                delete: The reservation %reservation% was deleted
+            delete: %count% reservations existed before %date%. They were deleted.
     menu:
         title:
             shelves:
@@ -123,7 +130,8 @@ admin:
                 header: General administration
                 password: Change password
                 webmining: Webmining module
-                clean_reservations: Clean reservations
+                clean_reservations: Purge reservations
+                list_reservations: List reservations
     fieldset:
         shelves:
             legend: Informations about the shelf
@@ -184,6 +192,8 @@ admin:
             list: Labels
         borrowings:
             list: Borrowings
+        reservations:
+            list: Reservations
         general:
             password: Change password
             webmining: Webmining options

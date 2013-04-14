@@ -16,12 +16,25 @@ caesar_admin_general_password:
     pattern:  /password
     defaults: { _controller: CaesarAdminBundle:Admin:password}
 
-caesar_admin_general_reservations:
-    pattern:  /reservation/clean/{page}/{sort}/{direction}
-    defaults: { _controller: CaesarAdminBundle:Admin:reservation, page:1, sort:'user', direction:'asc'}
+caesar_admin_general_purge:
+    pattern:  /purge/
+    defaults: { _controller: CaesarAdminBundle:Admin:purge}
     requirements:
         page:  \d+
         direction: asc|desc
+              
+caesar_admin_general_reservation_homepage:
+    pattern:  /reservation/{page}/{sort}/{direction}
+    defaults: { _controller: CaesarAdminBundle:Admin:listReservations, page:1, sort:'id', direction:'asc'}
+    requirements:
+        page:  \d+
+        direction: asc|desc
+        
+caesar_admin_general_reservation_delete:
+    pattern:  /reservation/delete/{id}
+    defaults: { _controller: CaesarAdminBundle:Admin:deleteReservation }
+    requirements:
+        id:  \d+
 
 caesar_admin_general_webmining:
     pattern:  /webmining

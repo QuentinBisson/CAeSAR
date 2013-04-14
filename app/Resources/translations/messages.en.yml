@@ -97,6 +97,10 @@ table:
             date: Borrowing date
             return:
                 date: Return date
+        reservations:
+            user: User
+            resource: Reserved resource
+            date: Reservation date
         tags:
             code: ISBN-10, ISBN-13 or C-xxx code
             creationDate: Creation date

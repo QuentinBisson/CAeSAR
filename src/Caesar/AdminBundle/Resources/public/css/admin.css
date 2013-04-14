@@ -85,9 +85,9 @@ img#resource-img{
 }
 
 .resources, .locations, .tags, .borrowings, .users, .general {
-    width: 50%;
-    float: left;
     margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .tag-generate-form {
@@ -145,4 +145,8 @@ div.help dl dd {
 
 .shelf-description .location-description {
     font-style: italic;
+}
+
+section.general-administraction {
+    width: 100%;
 }

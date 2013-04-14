@@ -4,10 +4,13 @@ namespace Caesar\UserBundle\Controller;
 
 use Caesar\ResourceBundle\Form\ResourceSearchType;
 use Caesar\UserBundle\Entity\User;
-use Caesar\UserBundle\Form\UserHandler;
-use Caesar\UserBundle\Form\UserType;
 use Caesar\UserBundle\Form\PasswordType;
+use Caesar\UserBundle\Form\UserHandler;
+use Caesar\UserBundle\Form\UserProfileHandler;
+use Caesar\UserBundle\Form\UserType;
+use Caesar\UserBundle\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class UserController extends Controller {
@@ -106,15 +109,20 @@ class UserController extends Controller {
         );
     }
 
-    public function modifProfileAction() {
+    public function modifyProfileAction() {
+        $translator = $this->get('translator');
         $user = $this->get('security.context')->getToken()->getUser();
-        if ($user->isAuthentified()) {
-            die("!auth");
-            //mettre la route  pour la modif des infos
-            return $this->render();
+		$security = $this->get('security.context');
+		if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
+            $form = $this->createForm(new UserUpdateType(), $user);
+            $formHandler = new UserProfileHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
+            if ($formHandler->process()) {
+                $this->get('session')->setFlash('notice', $translator->trans('user.update_profile.successfull', array(), 'CaesarUserBundle'));
+                return $this->redirect($this->generateUrl('caesar_client_homepage'));
+            }
+            return $this->render('CaesarUserBundle:User:modifyProfile.html.twig', array('form' => $form->createView()));
         } else {
-            $request = $this->getRequest();
-            return $this->forward("CaesarUserBundle:User:authenticate", array('_route_params' => $request->get('_route_params'), '_route' => $request->get('_route')));
+            return $this->redirect($this->generateUrl('caesar_client_authenticate'));
         }
     }
 
@@ -122,27 +130,37 @@ class UserController extends Controller {
         $translator = $this->get('translator');
         $user = $this->get('security.context')->getToken()->getUser();
         $form = $this->createForm(new PasswordType());
-        $error="";
         $request = $this->get('request');
+        $security = $this->get('security.context');
+		if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
+			return $this->redirect($this->generateUrl('caesar_client_modify_user'));
+		}
         if ($request->isMethod('POST')) {
-            $form->bind($request);
+            $form->bindRequest($request);
             if ($form->isValid()) {
-                $data = $form->getData();                
+                $data = $form->getData();
                 $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                 $encoded = $encoder->encodePassword($data['plainPassword'], $user->getSalt());
                 if ($encoded === $user->getPassword()) {
-                    $user->setAuthentified(true);
-                    //mettre la route de la modif de profile
-                    return $this->render();
+					$user->setAuthentified(true);
+					$user->setIdentified(true);
+                    $token = new UsernamePasswordToken (
+                    $user->getUsername(), $encoded, "caesar", $user->getRoles());
+                    $token->setUser($user);
+                    $this->get('security.context')->setToken($token);
+                    //invalidate
+                    $token->setAuthenticated(false);
+                    
+                    return $this->redirect($this->generateUrl('caesar_client_modify_user'));
                 } else {
-                    $error = $this->get('session')->getFlashBag()->add(
+                    $this->get('session')->getFlashBag()->add(
                             'error', $translator->trans('fail.password', array(), 'CaesarUserBundle')
                     );
                 }
             }
         }
-        return $this->render('CaesarUserBundle:User:authentification.html.twig', array('form' => $form->createView(),
-            'authenticate_page_title' => $translator->trans('user.authenticate.title', array(), 'CaesarUserBundle')));
+        return $this->render('CaesarUserBundle:User:authenticate.html.twig', array('form' => $form->createView(),
+                    'authenticate_page_title' => $translator->trans('user.authenticate.title', array(), 'CaesarUserBundle')));
     }
 
     public function registerAction() {

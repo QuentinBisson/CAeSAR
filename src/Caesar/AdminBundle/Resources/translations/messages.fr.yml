@@ -22,6 +22,8 @@ admin:
             skeleton: Modifier le squelette d'une ressource
         borrowings:
             list: Lister les emprunts
+        reservations:
+            list: Lister les réservations
         tags:
             list: Lister les étiquettes
             generate: Générer de nouvelles étiquettes
@@ -32,7 +34,7 @@ admin:
             backup:
                   load: Charger un backup de l'application
                   create: Créer un backup de l'application
-            clean_reservations: Nettoyer les reservations
+            clean_reservations: Purger les reservations
     lang:
         french: Français
         english: Anglais
@@ -93,6 +95,11 @@ admin:
                 not_empty: Le mot de passe ne peut pas être vide
                 no_match: Le champ mot de passe actuel ne correspond pas à votre mot de passe
                 not_same: Le mot de passe de confirmation n'est pas identique au nouveau mot de passe
+        reservations:
+            exception: La réservation %reservation% n'est pas une réservation valide
+            notice:
+                delete: La réservation %reservation% a bien été supprimée
+            delete: %count% réservations existaient avant le %date%. Elles ont été supprimées.
     menu:
         title:
             shelves:
@@ -123,7 +130,8 @@ admin:
                 header: Administration générale
                 password: Changer de mot de passe
                 webmining: Module de webmining
-                clean_reservations: Nettoyer les reservations
+                clean_reservations: Purger les reservations
+                list_reservations: Lister les reservations
     fieldset:
         shelves:
             legend: Informations sur l'emplacement
@@ -184,6 +192,8 @@ admin:
             list: Etiquette
         borrowings:
             list: Emprunts
+        reservations:
+            list: Réservations
         general:
             password: Changer le mot de passe
             webmining: Options du webmining

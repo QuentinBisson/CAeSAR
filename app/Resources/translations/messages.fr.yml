@@ -98,6 +98,10 @@ table:
             date: Date d'emprunt
             return:
                 date: Date de retour
+        reservations:
+            user: Utilisateur
+            resource: Ressource réservée
+            date: Date de réservation
         tags:
             code: Code ISBN-10, ISBN-13 ou CAeSAR-xxx
             creationDate: Date de création

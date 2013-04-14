@@ -19,13 +19,16 @@ class CaesarUserAuthentificationProvider extends DaoAuthenticationProvider {
     $this->encoderFactory = $encoderFactory;
   }
 
-  protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token) {
+  protected function checkAuthentication(UserInterface $userInterface, UsernamePasswordToken $token) {
     $user = $this->userProvider->loadUserByUsername($token->getUsername());
     if ($user) {
       if (!in_array('ROLE_ADMIN', $user->getRoles())) {
         $authenticatedToken = new CaesarUserToken($user->getRoles());
         $authenticatedToken->setUser($user);
         $user->setIdentified(true);
+        if ($token->getCredentials() != null && $token->getCredentials() != "" && $user->getPassword() === $token->getCredentials()) {
+			$user->setAuthentified(true);
+		}
         return $authenticatedToken;
       } else {
         //TODO traduction

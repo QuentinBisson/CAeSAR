@@ -58,4 +58,5 @@ security:
         - { path: admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: profile, roles: ROLE_USER_IDENTIFIED}
+        - { path: authenticate, roles: ROLE_USER_IDENTIFIED}
         - { path: admin, roles: ROLE_ADMIN }

@@ -1,0 +1,26 @@
+{% extends "CaesarAdminBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
+
+{% block breadCrumb%}
+    {{parent()}}
+<li data-header="0" class="active"><span>{{'admin.breadcrumb.reservations.list'|trans({})}}</span></li>
+{% endblock %}
+
+{% block contentTitle %}{{'admin.title.reservations.list'|trans({})}}{% endblock %}
+
+{% block contentBody %}
+{% set route_params = app.request.get('_route_params') %}
+{% set route = app.request.get('_route') %}
+        <section class="contentBody">
+     {% include 'CaesarAdminBundle:Admin:listReservations.html.twig' with {'reservations' : reservations, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
+            </section>
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+            <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+{% endblock %}
