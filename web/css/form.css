@@ -23,6 +23,7 @@ input[type="email"],
 input[type="number"],
 input[type="url"],
 input[type="search"],
+input[type="checkbox"],
 select {
     min-width: 165px;
 }
@@ -39,7 +40,21 @@ input[type="url"],
 input[type="search"],
 textarea,
 select{
+        height: 35px;
+}
+
+.smallElements {
     height: 35px;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+input[type="search"],
+input[type="checkbox"],
+textarea,
+select{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

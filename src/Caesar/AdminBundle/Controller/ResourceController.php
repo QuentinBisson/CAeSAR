@@ -273,6 +273,39 @@ class ResourceController extends Controller {
         return $this->render('CaesarAdminBundle:Resource:delete.html.twig');
     }
 
+    public function ajaxEmptySkeletonAction() {
+        $translator = $this->get('translator');
+
+        $skeleton = str_replace("\\r\\n", "\r\n", Config::getResourceSkeleton($this->container));
+
+        $key = Config::getAuthorsKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getPublisherKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getDescriptionKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        $key = Config::getPublishedDateKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        $key = Config::getCategoriesKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        $key = Config::getLanguageKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        $key = Config::getPageCountKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        $request = $this->get('request');
+        if ($request->isXmlHttpRequest()) {
+            return new Response($skeleton);
+        }
+        throw $this->createNotFoundException($translator->trans('admin.form.invalid'));
+    }
+    
     /**
      * Permet de modifier le squelette d'une ressource
      * @return type

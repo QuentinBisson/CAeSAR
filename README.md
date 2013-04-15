@@ -73,3 +73,6 @@ Puis pour charger les fixtures dans la base :
 
 	php app/console doctrine:fixtures:load
 
+9) Droits
+-------------------------
+chmod a+w src/Caesar/AdminBundle/Resources/config/params.yml

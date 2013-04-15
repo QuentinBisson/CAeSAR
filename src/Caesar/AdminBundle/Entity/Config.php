@@ -18,7 +18,13 @@ class Config {
     
 
     private static function getParameter($container, $parameter) {
-        return $container->getParameter($parameter);
+        $value = "";
+        try {
+            return $container->getParameter($parameter);
+        } catch(Exception $e) {
+            var_dump(e);
+        }
+        return $value;
     }
 
     public static function isGoogleBooksWebmining($container) {

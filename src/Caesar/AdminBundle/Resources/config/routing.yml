@@ -61,6 +61,10 @@ caesar_admin_resource_description:
     requirements:
         id:  \d+
 
+caesar_admin_resource_clear_skeleton:
+  pattern:  /resource/clear/skeleton/
+  defaults: { _controller: CaesarAdminBundle:Resource:ajaxEmptySkeleton}
+    
 caesar_admin_borrowing_homepage:
     pattern:  /borrowing/{page}/{sort}/{direction}
     defaults: { _controller: CaesarAdminBundle:Borrowing:index, page:1, sort:'id', direction:'asc'}

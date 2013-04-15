@@ -20,62 +20,62 @@
 
 {% block contentBody %}
 <form action="{{ path('caesar_admin_resource_update', {'id': resource.id}) }}" method="post" {{ form_enctype(form) }}>
-            {{ form_errors(form) }}
-        <div class="left max-width">
-            <div class="left limit-resource-mining">
-                <div class="left half-width">
-                    {{ form_label(form.code) }}
-                    {{ form_errors(form.code) }}
-                    {{ form_widget(form.code, { 'attr': {'class': 'resource-code'} }) }}
-                    </div>
-                    {% if active_module %}
-                    <div class="right half-width">
-                        <a class="web-mining-button">{{'admin.button.web.mining'|trans({})}}
-                            <span>
-                                <b>{{'admin.button.web.tooltip.title'|trans({})}}</b>
-                                <br />
-                                {{'admin.button.web.tooltip.content'|trans({})}}
-                            </span>
-                        </a>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="clear"></div>
-                <div class="left half-width">
-                {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color web-mining-description'} }) }}
-                {{ form_row(form.quantity) }}
-                {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
-                        <section class="shelf-description">
-                    {% if shelf is defined %}
-                        {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
-                    {% endif %}
-                            </section>
-                {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
-                            <div>
-                    {{ form_label(form.url) }}
-                    {{ form_errors(form.url) }}
-                    {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color web-mining-image-url'} }) }}
-                                    <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
-                                </div>
-                            </div>
-                            <div class="right half-width">
-                                <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
-                            </div>
-                            <div class="clear"></div>
-                            <div>
-                                <div class="long-description">
-                    {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color web-mining-long-description'} }) }}
-                                    </div>
-
-                                    <input type="button" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
-                                    <input type="submit" value="{{'admin.button.resource.update'|trans({})}}"/>
-                                </div>
-                            </div>
-        {{ form_row(form.path) }}
-        {{ form_rest(form) }}
-                            <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
-                            <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
-                    </form>
+    {{ form_errors(form) }}
+    <div class="left max-width">
+        <div class="left limit-resource-mining">
+            <div class="left half-width">
+                {{ form_label(form.code) }}
+                {{ form_errors(form.code) }}
+                {{ form_widget(form.code, { 'attr': {'class': 'resource-code'} }) }}
+            </div>
+            {% if active_module %}
+            <div class="right half-width">
+                <a class="web-mining-button">{{'admin.button.web.mining'|trans({})}}
+                    <span>
+                        <b>{{'admin.button.web.tooltip.title'|trans({})}}</b>
+                        <br />
+                        {{'admin.button.web.tooltip.content'|trans({})}}
+                    </span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+        <div class="left half-width">
+            {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color web-mining-description'} }) }}
+            {{ form_row(form.quantity) }}
+            {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
+            <section class="shelf-description">
+                {% if shelf is defined %}
+                    {% include 'CaesarAdminBundle:Resource:shelfDescription.html.twig' with {'shelf' : shelf}  %}
+                {% endif %}
+            </section>
+            {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
+            <div>
+                {{ form_label(form.url) }}
+                {{ form_errors(form.url) }}
+                {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color web-mining-image-url'} }) }}
+                <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
+            </div>
+        </div>
+        <div class="right half-width">
+            <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+        </div>
+        <div class="clear"></div>
+        <div>
+            <div class="long-description">
+                {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color web-mining-long-description'} }) }}
+            </div>
+            <input type="button" id="clearSkeleton" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
+            <input type="submit" value="{{'admin.button.resource.update'|trans({})}}"/>
+        </div>
+    </div>
+    {{ form_row(form.path) }}
+    {{ form_rest(form) }}
+    <input type = "hidden" class="empty-skeleton-url" value="{{path('caesar_admin_resource_clear_skeleton')}}" /> 
+    <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+    <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
+</form>
 {% endblock %}
 {% block javascripts %}
 {{parent()}}

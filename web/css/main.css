@@ -260,6 +260,9 @@ h1 {
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
+.disabled-webmining-button {
+    color: red;
+}
 
 .web-mining-button span{
     visibility: hidden;
