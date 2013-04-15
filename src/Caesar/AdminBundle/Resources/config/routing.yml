@@ -100,6 +100,10 @@ caesar_admin_resource_delete:
     requirements:
         id:  \d+
 
+caesar_admin_resource_webmining:
+    pattern:  /resource/webmining/{code}
+    defaults: { _controller: CaesarAdminBundle:Resource:webmining, code: ''}
+
 caesar_admin_resource_skeleton:
     pattern:  /resource/skeleton
     defaults: { _controller: CaesarAdminBundle:Resource:skeleton }

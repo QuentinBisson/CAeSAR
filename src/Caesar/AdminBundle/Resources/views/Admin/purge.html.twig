@@ -18,7 +18,7 @@
 {% endblock %}
 {% block contentBody %}
 <section class="contentBody">
-    <p class="intro">{{'admin.label.reservations.message'|trans({})}}</p>
+    <p class="flash-info">{{'admin.label.reservations.message'|trans({})}}</p>
     <form id="form-reservation-clean" action="{{ path('caesar_admin_general_purge') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         {{ form_row(form.reservationDate) }}

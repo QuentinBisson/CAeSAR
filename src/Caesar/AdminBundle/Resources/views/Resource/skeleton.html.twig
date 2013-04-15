@@ -1,5 +1,10 @@
 {% extends "CaesarAdminBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{parent()}}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+{% endblock %}
+
 {% block breadCrumb%}
     {{parent()}}
     <li data-header="1">
@@ -14,4 +19,11 @@
 {% endblock %}
 
 {% block contentBody %}
+    <p class="flash-info">{{'admin.skeleton.change.info'|trans({})}}</p>
+    <form action="{{ path('caesar_admin_resource_skeleton') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        {{ form_row(form.skeleton, { 'attr' : { 'class': 'skeleton-textarea'} }) }}
+        <input type="submit" value="{{'admin.button.skeleton.change'|trans({})}}"/>
+        {{ form_rest(form) }}
+    </form>
 {% endblock %}

@@ -14,3 +14,7 @@ services:
     caesar_admin.security.authentication.listener:
         class: Caesar\AdminBundle\Security\Firewall\CaesarAdminListener
         arguments: ["@security.context", "@caesar.security.authentication.provider",  "@security.authentication.session_strategy", "@security.http_utils","@kernel"]
+    caesar.params:
+        class: Caesar\AdminBundle\Services\Params
+        arguments: ['params.yml']
+        # On injecte le nom de notre fichier au service    

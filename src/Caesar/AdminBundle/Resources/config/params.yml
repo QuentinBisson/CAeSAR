@@ -1,0 +1,12 @@
+parameters:
+    active_webmining: true
+    google_books_url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
+    google_books_webmining: true
+    authors_webmining_key: authors
+    publisher_webmining_key: publisher
+    publishedDate_webmining_key: publishedDate
+    language_webmining_key: language
+    description_webmining_key: description
+    pageCount_webmining_key: pageCount
+    categories_webmining_key: categories
+    resource_skeleton: "Authors (Autheurs): $authors\r\nPublisher (Editeur): $publisher\r\nPublished date (Date de publication): $publishedDate\r\nCategories (Catégories): $categories\r\nLanguage (Langue): $language\r\nDescription (Description): $description\r\nPage count (Nombre de pages): $pageCount"

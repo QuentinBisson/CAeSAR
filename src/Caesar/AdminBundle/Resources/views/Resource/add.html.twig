@@ -27,8 +27,9 @@
                 <div class="left half-width">
                     {{ form_label(form.code) }}
                     {{ form_errors(form.code) }}
-                    {{ form_widget(form.code) }}
+                    {{ form_widget(form.code, { 'attr': {'class': 'resource-code'} }) }}
                     </div>
+                    {% if active_module %}
                     <div class="right half-width">
                         <a class="web-mining-button">{{'admin.button.web.mining'|trans({})}}
                             <span>
@@ -38,11 +39,12 @@
                             </span>
                         </a>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="clear"></div>
 
                 <div class="left half-width">
-                {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color'} }) }}
+                {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color web-mining-description'} }) }}
                 {{ form_row(form.quantity) }}
                 {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
                         <section class="shelf-description"></section>
@@ -50,18 +52,22 @@
                         <div>
                     {{ form_label(form.url) }}
                     {{ form_errors(form.url) }}
-                    {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color'} }) }}
+                    {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color web-mining-image-url'} }) }}
                                 <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
                             </div>
 
                         </div>
                         <div class="right half-width">
-                            <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                            {% if resource.path is defined and resource.path != "" %}
+                                <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                            {% else %}
+                                <img id="resource-img" src="" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                            {% endif %}
                         </div>
                         <div class="clear"></div>
                         <div>
                             <div class="long-description">
-                    {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color'} }) }}
+                    {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color web-mining-long-description'} }) }}
                                 </div>
                                 <input type="button" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
                                 <input type="submit" value="{{'admin.button.resource.add'|trans({})}}"/>
@@ -71,6 +77,7 @@
         {{ form_row(form.path) }}
         {{ form_rest(form) }}
                         <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+                        <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
                     </form>
 {% endblock %}
     {% block javascripts %}
@@ -119,4 +126,8 @@ document.getElementById('apply-image').addEventListener('click', function(){
 
 $('.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
 });</script>
+{% if active_module %}
+<script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
+<script type="text/javascript" src="{{asset("js/webmining.js")}}"></script>
+{% endif %}
 {% endblock %}

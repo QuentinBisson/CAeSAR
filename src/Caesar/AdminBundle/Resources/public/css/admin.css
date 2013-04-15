@@ -42,8 +42,8 @@ img#resource-img{
 }
 
 .long-description textarea {
-    width: 70%;
-    height: 100px;
+    width: 75%;
+    height: 250px;
 }
 
 .overflow{
@@ -149,4 +149,9 @@ div.help dl dd {
 
 section.general-administraction {
     width: 100%;
+}
+
+.skeleton-textarea {
+    width: 500px;
+    height: 200px;
 }

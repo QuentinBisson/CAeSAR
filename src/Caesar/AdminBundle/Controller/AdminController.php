@@ -2,7 +2,9 @@
 
 namespace Caesar\AdminBundle\Controller;
 
+use Caesar\AdminBundle\Entity\Config;
 use Caesar\AdminBundle\Form\ReservationDeleteType;
+use Caesar\AdminBundle\Form\WebminingModuleType;
 use Caesar\UserBundle\Form\ChangePasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -139,7 +141,48 @@ class AdminController extends Controller {
     }
 
     public function webminingAction() {
-        return $this->render('CaesarAdminBundle:Admin:webmining.html.twig');
+        $translator = $this->get('translator');
+
+        $array = array();
+        $array['active_module'] = Config::isWebminingModuleActivated($this->container);
+        $array['authors_key'] = Config::getAuthorsKey($this->container);
+        $array['publisher_key'] = Config::getPublisherKey($this->container);
+        $array['published_date_key'] = Config::getPublishedDateKey($this->container);
+        $array['language_key'] = Config::getLanguageKey($this->container);
+        $array['description_key'] = Config::getDescriptionKey($this->container);
+        $array['page_count_key'] = Config::getPageCountKey($this->container);
+        $array['google_books_url'] = Config::getGoogleBooksURL($this->container);
+        $array['categories_key'] = Config::getCategoriesKey($this->container);
+        $form = $this->createForm(new WebminingModuleType(), $array);
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $this->get('caesar.params')->save(
+                        array(
+                            'active_webmining' => $data['active_module'],
+                            'authors_webmining_key' => $data['authors_key'],
+                            'publisher_webmining_key' => $data['publisher_key'],
+                            'publishedDate_webmining_key' => $data['published_date_key'],
+                            'language_webmining_key' => $data['language_key'],
+                            'description_webmining_key' => $data['description_key'],
+                            'pageCount_webmining_key' => $data['page_count_key'],
+                            'google_books_url' => $data['google_books_url'],
+                            'categories_webmining_key' => $data['categories_key'],
+                ));
+                $this->get('session')->getFlashBag()->add(
+                        'notice', $translator->trans('admin.form.webmining.notice')
+                );
+                return $this->redirect($this->generateUrl('caesar_admin_general_webmining'));
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                        'error', $translator->trans('admin.form.webmining.error')
+                );
+            }
+        }
+
+        return $this->render('CaesarAdminBundle:Admin:webmining.html.twig', array('form' => $form->createView()));
     }
 
     public function createBackupAction() {

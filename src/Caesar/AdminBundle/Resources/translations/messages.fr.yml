@@ -40,9 +40,9 @@ admin:
         english: Anglais
     home:
         synopsis:
-            shelves: Gestion des emplacements
-            users: Gestion des utilisateurs
-            resources: Gestion des ressources
+            shelves: Cette section de l'application vous permet d'ajouter, modifier ou supprimer un emplacement
+            users: Cette section de l'application vous permet d'ajouter, modifier ou supprimer un utilisateur. Il est également possible de visualiser les emprunts d'un utilisateur
+            resources: Cette section de l'application vous permet d'ajouter, modifier ou supprimer une ressource. De plus, il vous est possible de visualiser les réservations concernant une ressource. Enfin, il vous est possible de modifier le squelette d'une ressource.
             borrowings: Gestion des emprunts
             tags: Gestion des étiquettes
             general: Administration de l'application
