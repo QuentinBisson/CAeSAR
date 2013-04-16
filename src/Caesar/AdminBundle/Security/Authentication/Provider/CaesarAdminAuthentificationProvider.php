@@ -29,11 +29,9 @@ class CaesarAdminAuthentificationProvider extends DaoAuthenticationProvider {
                 $authenticatedToken->setUser($user);
                 return $authenticatedToken;
             } else {
-                //TODO traduction
                 throw new AuthenticationException('Un administrateur ne peut accéder ....');
             }
         }
-        //TODO traduction
         throw new AuthenticationException('The authentication failed.');
     }
 

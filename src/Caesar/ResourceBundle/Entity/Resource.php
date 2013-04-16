@@ -81,7 +81,6 @@ class Resource {
   /**
    * @var string $url
    * @Assert\Url()
-   * @Assert\Regex("/^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|png)$/")
    */
   private $url;
 

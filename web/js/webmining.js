@@ -13,6 +13,7 @@ $(document).ready(function() {
             cache: false,
             success: function(json) {
                 var resource = JSON && JSON.parse(json) || $.parseJSON(json);
+                //TODO afficher message si aucun contenu
                 $(".web-mining-image-url").attr('value', resource.image);
                 $(".web-mining-description").val(resource.description);
                 $(".web-mining-long-description").text(resource.longDescription.replace(/\\r\\n/g, '\r\n'));

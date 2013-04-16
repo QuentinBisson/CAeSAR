@@ -31,12 +31,9 @@ class CaesarUserAuthentificationProvider extends DaoAuthenticationProvider {
 		}
         return $authenticatedToken;
       } else {
-        //TODO traduction
         throw new AuthenticationException('Un administrateur ne peut accéder ....');
       }
     }
-
-    //TODO traduction
     throw new AuthenticationException('The authentication failed.');
   }
 

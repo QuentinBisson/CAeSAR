@@ -1,10 +1,10 @@
 <?php
 namespace CAeSAR\UserBundle\DataFixtures\ORM;
 
+use CAeSAR\UserBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CAeSAR\UserBundle\Entity\User;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -15,6 +15,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
     	$arrResult = array();
     	$arrLines = file('src/Caesar/UserBundle/DataFixtures/ORM/userFixtures.csv');
+        $encoder = $this->container->get('security.encoder_factory')->getEncoder(new User());
+        
     	foreach($arrLines as $line) {
     		$arrResult[] = explode( ',', $line);
     	}
@@ -25,7 +27,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     		$userAdmin->setFirstname($res[5]);
     		$userAdmin->setEmail($res[3]);
     		$userAdmin->setUsername($res[1]);
-    		$userAdmin->setPassword($res[2]);
+                $userAdmin->setPassword($encoder->encodePassword($res[2], $userAdmin->getSalt()));
     		$userAdmin->setRole('ROLE_USER');    		
     		$manager->persist($userAdmin);
     	}        

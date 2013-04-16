@@ -75,4 +75,25 @@ class ReservationRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
 
+    public function countPreviousReservations($resource, $user = null) {
+        $qb = $this->createQueryBuilder('r');
+        $qb->where('r.resource = :resource');
+        $qb->setParameter("resource", $resource);
+        if ($user != null) {
+            $reservations = $user->getReservations();
+            $date = null;
+            foreach ($reservations as $r) {
+                if ($r->getResource()->getId() == $resource) {
+                    $date = $r->getReservationDate();
+                }
+            }
+            if ($date != null) {
+                $qb->andWhere('r.reservationDate < :date');
+                $qb->setParameter("date", $date);
+            }
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

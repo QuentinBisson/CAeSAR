@@ -171,13 +171,11 @@ class AdminController extends Controller {
                             'google_books_url' => $data['google_books_url'],
                             'categories_webmining_key' => $data['categories_key'],
                 ));
-                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.webmining.notice')
                 );
                 return $this->redirect($this->generateUrl('caesar_admin_general_webmining'));
             } else {
-                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'error', $translator->trans('admin.form.webmining.error')
                 );

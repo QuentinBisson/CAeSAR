@@ -59,6 +59,9 @@ admin:
                 message: By submitting the form, you will delete the reservations previous to the submitted date.
     form:
         invalid: Invalid request
+        skeleton: 
+            notice: The skeleton was modified
+            error: An error occured when you submitted the form
         resources:
             exception: The resource id %resource% is not a valid resource
             notice:
@@ -100,6 +103,11 @@ admin:
             notice:
                 delete: The reservation %reservation% was deleted
             delete: %count% reservations existed before %date%. They were deleted.
+        webmining:
+            notice: The modifications have been saved
+            error: An error happened when you tried to submit the form
+            activated.exception: The webmining module is not activated
+            exception: The code used is not valid
     menu:
         title:
             shelves:

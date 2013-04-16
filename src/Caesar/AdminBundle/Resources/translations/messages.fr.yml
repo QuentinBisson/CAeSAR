@@ -59,6 +59,9 @@ admin:
                 message: En soumettant ce formulaire, vous supprimerez les réservations antérieure à la date saisie.
     form:
         invalid: Requête invalide
+        skeleton: 
+            notice: Le squelette a été modifié
+            error: Une erreur a eu lieu lors de la modification du squelette
         resources:
             exception: La ressource %resource% n'est pas une ressource valide
             notice:
@@ -99,7 +102,12 @@ admin:
             exception: La réservation %reservation% n'est pas une réservation valide
             notice:
                 delete: La réservation %reservation% a bien été supprimée
-            delete: %count% réservations existaient avant le %date%. Elles ont été supprimées.
+            delete: %count% réservations existaient avant le %date%. Elles ont été supprimées
+        webmining:
+            notice: Les modifications ont été prises en compte
+            error: Une erreur a eu lieu lors de la soumission du formulaire
+            activated.exception: Le module de webmining est désactivé. Il ne peut être utilisé
+            exception: Le code saisie est invalide
     menu:
         title:
             shelves:

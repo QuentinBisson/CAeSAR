@@ -221,13 +221,11 @@ class ResourceController extends Controller {
     public function webminingAction($code) {
         $translator = $this->get('translator');
         if (!Config::isWebminingModuleActivated($this->container)) {
-            //TODO
             throw $this->createNotFoundException($translator->trans('admin.form.webmining.activated.exception'));
         }
         if (filter_input(INPUT_GET, $code, FILTER_VALIDATE_INT) !== false) {
             $clean = $code;
         } else {
-            //TODO
             throw $this->createNotFoundException($translator->trans('admin.form.webmining.exception', array('%code%' => $code)));
         }
         if (!Resource::checkISBN($clean)) {
@@ -306,13 +304,11 @@ class ResourceController extends Controller {
                         array(
                             'resource_skeleton' => $data['skeleton']
                 ));
-                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.skeleton.notice')
                 );
                 return $this->redirect($this->generateUrl('caesar_admin_resource_skeleton'));
             } else {
-                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'error', $translator->trans('admin.form.skeleton.error')
                 );
@@ -333,7 +329,7 @@ class ResourceController extends Controller {
         } else if ($resource->getUrl() != null && $resource->getUrl() != "") {
             $url = $resource->getUrl();
             $extension = explode('.', $url);
-            $newFileName = $resource->getCode() . "." . $extension[count($extension) - 1];
+            $newFileName = $resource->getCode() . ".jpeg";
             $img = 'resources/img/' . $newFileName;
             file_put_contents($img, file_get_contents($url));
             $this->resizeImg($newFileName);

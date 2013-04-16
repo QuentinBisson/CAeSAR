@@ -3,7 +3,6 @@
 namespace Caesar\ResourceBundle\Controller;
 
 use Caesar\ResourceBundle\Entity\Resource;
-use Caesar\ResourceBundle\Form\ReturnAsType;
 use Caesar\UserBundle\Entity\Borrowing;
 use Caesar\UserBundle\Entity\BorrowingArchive;
 use Swift_Message;
@@ -288,7 +287,6 @@ class ResourceController extends Controller {
     public function blockingReservationsAction($page, $resource = -1, $user = null) {
         $nb_per_page = 10;
         $em = $this->getDoctrine()->getManager();
-        $archived = null;
 
         $repository_reservation = $em->getRepository('CaesarUserBundle:Reservation');
 
@@ -298,9 +296,7 @@ class ResourceController extends Controller {
         }
 
         $reservations = $repository_reservation->getPreviousReservations($page, $resource, $user);
-        //TODO countFunction
-
-        $count = 5;
+        $count = $repository_reservation->countPreviousReservations($resource, $user);
         /* Pagination */
         $pagination = array(
             'cur' => $page,
