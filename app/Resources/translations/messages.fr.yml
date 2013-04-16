@@ -85,6 +85,7 @@ form:
        page_count: Nombre de pages
        variables: Nom des variables utilisées par le module de webmining
        general: Aspect général
+    password.type.label.password: Input your password
 table:
     foot:
         count:
@@ -134,5 +135,3 @@ resource:
         details: Détails de la ressource
         borrowings: Emprunts en cours
         cover: Couverture de la ressource
-
-Bad credentials: Le login ou le mot de passe est invalide

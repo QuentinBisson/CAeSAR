@@ -26,4 +26,4 @@ form:
         placeholder: Enter a UL code, ISBN, identifier ...
 profile.change.informations: Change my informations
 borrowings.title: My borrowings
-fail.password: Bad password
+fail.password: Invalid password

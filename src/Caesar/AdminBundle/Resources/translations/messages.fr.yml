@@ -213,3 +213,5 @@ admin:
                 added: Le format a été ajouté
                 updated: Le format a été modifié
     skeleton.change.info: Les éléments du squelette commençant par un $ sont des variables utilisées par le module de webmining. Il est possible de modifier le nom de ces variables grâce à l'écran de gestion du module de webmining. En cas de modification, il ne faut pas oublier de répercuter le changement dans le squelette.
+
+Bad credentials: Le login ou le mot de passe est invalide

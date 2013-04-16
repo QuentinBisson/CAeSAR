@@ -554,7 +554,7 @@ class ResourceController extends Controller {
 
         $key = Config::getPageCountKey($this->container);
         $skeleton = str_replace('$' . $key, "", $skeleton);
-        
+
         return $skeleton;
     }
 
