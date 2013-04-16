@@ -1,7 +1,0 @@
-parameters:
-#    caesar_web_mining.example.class: Caesar\WebMiningBundle\Example
-
-services:
-#    caesar_web_mining.example:
-#        class: %caesar_web_mining.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

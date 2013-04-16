@@ -43,8 +43,6 @@ class Config {
         return self::getParameter($container, self::$CATEGORIES);
     }
     
-    
-    
     public static function getResourceSkeleton($container) {
         return self::getParameter($container, self::$RESOURCE_SKELETON);
     }

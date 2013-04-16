@@ -17,19 +17,25 @@
 {% block contentBody %}
     <form action="{{ path('caesar_admin_general_webmining') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
-        <div class="smallElements">
-        {{ form_label(form.active_module) }}
-        {{ form_errors(form.active_module) }}
-        {{ form_widget(form.active_module) }}
-        </div>
-        {{ form_row(form.google_books_url) }}
-        {{ form_row(form.authors_key) }}
-        {{ form_row(form.publisher_key) }}
-        {{ form_row(form.published_date_key) }}
-        {{ form_row(form.categories_key) }}
-        {{ form_row(form.language_key) }}
-        {{ form_row(form.description_key) }}
-        {{ form_row(form.page_count_key) }}
+        <fieldset>
+            <legend>{{'form.webmining.type.label.general'|trans({})}}</legend>
+            <div class="smallElements">
+            {{ form_label(form.active_module) }}
+            {{ form_errors(form.active_module) }}
+            {{ form_widget(form.active_module) }}
+            </div>
+            {{ form_row(form.google_books_url) }}
+        </fieldset>    
+        <fieldset>
+            <legend>{{'form.webmining.type.label.variables'|trans({})}}</legend>
+            {{ form_row(form.authors_key) }}
+            {{ form_row(form.publisher_key) }}
+            {{ form_row(form.published_date_key) }}
+            {{ form_row(form.categories_key) }}
+            {{ form_row(form.language_key) }}
+            {{ form_row(form.description_key) }}
+            {{ form_row(form.page_count_key) }}
+        </fieldset>  
         <input type="submit" value="{{'admin.button.webmining.manage'|trans({})}}"/>
         {{ form_rest(form) }}
     </form>

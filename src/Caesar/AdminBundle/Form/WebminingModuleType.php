@@ -12,7 +12,7 @@ class WebminingModuleType extends AbstractType {
                 ->add("authors_key", "text", array('label' => 'form.webmining.type.label.authors'))
                 ->add("publisher_key", "text", array('label' => 'form.webmining.type.label.publisher'))
                 ->add("published_date_key", "text", array('label' => 'form.webmining.type.label.published_date'))
-                ->add("categories_key", "text", array('label' => 'form.webmining.type.label.published_date'))
+                ->add("categories_key", "text", array('label' => 'form.webmining.type.label.categories'))
                 ->add("language_key", "text", array('label' => 'form.webmining.type.label.language'))
                 ->add("description_key", "text", array('label' => 'form.webmining.type.label.description'))
                 ->add("page_count_key", "text", array('label' => 'form.webmining.type.label.page_count'))

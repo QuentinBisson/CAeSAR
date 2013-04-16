@@ -162,6 +162,9 @@ admin:
             tooltip:
                 title: Informations
                 content: By clicking this button, the content of the colored field will be replaced
+        webmining:
+            manage: Save modifications
+        skeleton.change: Modify the resources skeleton
         resource:
             image.alt: Please, choose an image file
             apply: Apply
@@ -209,3 +212,4 @@ admin:
             format:
                 added: The format was added
                 updated: The format was updated
+    skeleton.change.info: The skeleton's element starting with a $ are variables used by the webmining module. You can change their value in the webmining module page. Don't forget to modify the skeleton when you change the name of the webmining variables.   

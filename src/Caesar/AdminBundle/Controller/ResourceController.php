@@ -75,6 +75,7 @@ class ResourceController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $translator = $this->get('translator');
         $resource = new Resource();
+        $resource->setLongDescription($this->clearSkeleton());
         $form = $this->createForm(new ResourceType(), $resource);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
@@ -220,15 +221,17 @@ class ResourceController extends Controller {
     public function webminingAction($code) {
         $translator = $this->get('translator');
         if (!Config::isWebminingModuleActivated($this->container)) {
+            //TODO
             throw $this->createNotFoundException($translator->trans('admin.form.webmining.activated.exception'));
         }
         if (filter_input(INPUT_GET, $code, FILTER_VALIDATE_INT) !== false) {
             $clean = $code;
         } else {
+            //TODO
             throw $this->createNotFoundException($translator->trans('admin.form.webmining.exception', array('%code%' => $code)));
         }
         if (!Resource::checkISBN($clean)) {
-            throw $this->createNotFoundException($translator->trans('admin.form.webmining.exception', array('%shelf%' => $clean)));
+            throw $this->createNotFoundException($translator->trans('admin.form.webmining.exception', array('%code%' => $clean)));
         }
 
         $request = $this->get('request');
@@ -276,36 +279,13 @@ class ResourceController extends Controller {
     public function ajaxEmptySkeletonAction() {
         $translator = $this->get('translator');
 
-        $skeleton = str_replace("\\r\\n", "\r\n", Config::getResourceSkeleton($this->container));
-
-        $key = Config::getAuthorsKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-
-        $key = Config::getPublisherKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-
-        $key = Config::getDescriptionKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-        
-        $key = Config::getPublishedDateKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-        
-        $key = Config::getCategoriesKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-        
-        $key = Config::getLanguageKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-        
-        $key = Config::getPageCountKey($this->container);
-        $skeleton = str_replace('$' . $key, "", $skeleton);
-        
         $request = $this->get('request');
         if ($request->isXmlHttpRequest()) {
-            return new Response($skeleton);
+            return new Response($this->clearSkeleton());
         }
         throw $this->createNotFoundException($translator->trans('admin.form.invalid'));
     }
-    
+
     /**
      * Permet de modifier le squelette d'une ressource
      * @return type
@@ -326,11 +306,13 @@ class ResourceController extends Controller {
                         array(
                             'resource_skeleton' => $data['skeleton']
                 ));
+                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.skeleton.notice')
                 );
                 return $this->redirect($this->generateUrl('caesar_admin_resource_skeleton'));
             } else {
+                //TODO
                 $this->get('session')->getFlashBag()->add(
                         'error', $translator->trans('admin.form.skeleton.error')
                 );
@@ -469,7 +451,6 @@ class ResourceController extends Controller {
         if ($resource == null) {
             return null;
         }
-        $request = $this->getRequest();
         $skeleton = Config::getResourceSkeleton($this->container);
         $result = array();
 
@@ -548,6 +529,33 @@ class ResourceController extends Controller {
 
         $result['longDescription'] = $longDescription;
         return json_encode($result);
+    }
+
+    private function clearSkeleton() {
+        $skeleton = str_replace("\\r\\n", "\r\n", Config::getResourceSkeleton($this->container));
+
+        $key = Config::getAuthorsKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getPublisherKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getDescriptionKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getPublishedDateKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getCategoriesKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getLanguageKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+
+        $key = Config::getPageCountKey($this->container);
+        $skeleton = str_replace('$' . $key, "", $skeleton);
+        
+        return $skeleton;
     }
 
 }

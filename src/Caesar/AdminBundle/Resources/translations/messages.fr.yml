@@ -162,6 +162,9 @@ admin:
             tooltip:
                 title: Informations
                 content: En cliquant sur ce bouton, le contenu des champs colorés va être modifié
+        webmining:
+            manage: Enregistrer les modifications
+        skeleton.change: Modifier le squelette des ressources
         resource:
             image.alt: Veuillez choisir une image
             apply: Appliquer
@@ -209,3 +212,4 @@ admin:
             format:
                 added: Le format a été ajouté
                 updated: Le format a été modifié
+    skeleton.change.info: Les éléments du squelette commençant par un $ sont des variables utilisées par le module de webmining. Il est possible de modifier le nom de ces variables grâce à l'écran de gestion du module de webmining. En cas de modification, il ne faut pas oublier de répercuter le changement dans le squelette.

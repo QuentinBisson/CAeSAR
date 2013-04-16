@@ -42,6 +42,7 @@ form:
                 long:
                     description: Description détaillée
                 search: Rechercher
+                skeleton: Squelette d'une ressource
     tag:
         choose: Choisissez un format
         type:
@@ -72,6 +73,18 @@ form:
         type:
             label:
                 date: Avant le
+    webmining.type.label:
+       active: Activer (ou non) le module 
+       google_books_url: URL de l'API Google books
+       authors: Autheur
+       publisher: Editeur
+       published_date: Date de publication
+       categories: Catégories
+       language: Langue
+       description: Description
+       page_count: Nombre de pages
+       variables: Nom des variables utilisées par le module de webmining
+       general: Aspect général
 table:
     foot:
         count:

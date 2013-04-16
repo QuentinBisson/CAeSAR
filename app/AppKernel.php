@@ -23,9 +23,7 @@ class AppKernel extends Kernel {
             new Caesar\UserBundle\CaesarUserBundle(),
             new Caesar\ResourceBundle\CaesarResourceBundle(),
             new Caesar\TagBundle\CaesarTagBundle(),
-            new Caesar\ShelfBundle\CaesarShelfBundle(),
-            new Caesar\WebMiningBundle\CaesarWebMiningBundle()
-
+            new Caesar\ShelfBundle\CaesarShelfBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

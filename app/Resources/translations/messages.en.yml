@@ -10,9 +10,7 @@ client:
         reservations: My reservations
         logout: Log out
 form:
-    user:
-        type:
-            label:
+    user.type.label:
                 codeBu: U.L. Code
                 login: Login
                 password:
@@ -23,15 +21,11 @@ form:
                 email: Email address
                 name: Last name
                 firstname: First name
-    shelf:
-        type:
-            label:
+    shelf.type.label:
                 name: Shelf name
                 description: Description
                 search: Search
-    resource:
-        type:
-            label:
+    resource.type.label:
                 code: Code (ISBN or Label)
                 description: Title
                 quantity: Quantity
@@ -41,10 +35,8 @@ form:
                 long:
                     description: Detailled description
                 search: Search
-    reservation:
-        type:
-            label:
-                date: Before
+                skeleton: Resource's skeleton
+    reservation.type.label.date: Before
     tag:
         choose: Choose a format
         type:
@@ -71,6 +63,18 @@ form:
                 gap:
                     horizontal: Horizontal gap between the beginning of the first label and of the next (in cm)
                     vertical: Vertical  gap between the beginning of the first label and of the next (in cm)
+    webmining.type.label:
+       active: Enable (or not) the module 
+       google_books_url: URL of Google books API
+       authors: Authors 
+       publisher: Publisher 
+       published_date: Published date 
+       categories: Categories 
+       language: Language 
+       description: Description 
+       page_count: Page count 
+       variables: Name of the variables used by the webmining module
+       general: General aspect
 table:
     foot:
         count:
