@@ -26,4 +26,10 @@ class TagRepository extends EntityRepository {
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findAllInArray() {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select();
+        return $qb->getQuery()->getArrayResult();
+    }
+
 }

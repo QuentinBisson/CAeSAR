@@ -12,48 +12,57 @@ use Doctrine\ORM\EntityRepository;
  */
 class BorrowingArchiveRepository extends EntityRepository {
 
-  public function getArchivedBorrowingsFromToSortBy($page, $sort, $direction, $user = null, $resource = null) {
-    $nb_per_page = 10;
-    $min = ($page - 1) * $nb_per_page;
-    $qb = $this->createQueryBuilder('b');
-    if ($user != null) {
-      $qb->where('b.user = :user');
-      $qb->setParameter("user", $user->getId());
-      if ($resource != null) {
-        $qb->andWhere('b.resource = :resource');
-        $qb->setParameter("resource", $resource->getId());
-      }
+    public function getArchivedBorrowingsFromToSortBy($page, $sort, $direction, $user = null, $resource = null) {
+        $nb_per_page = 10;
+        $min = ($page - 1) * $nb_per_page;
+        $qb = $this->createQueryBuilder('b');
+        if ($user != null) {
+            $qb->where('b.user = :user');
+            $qb->setParameter("user", $user->getId());
+            if ($resource != null) {
+                $qb->andWhere('b.resource = :resource');
+                $qb->setParameter("resource", $resource->getId());
+            }
+        }
+
+        if ($resource != null) {
+            $qb->where('b.resource = :resource');
+            $qb->setParameter("resource", $resource->getId());
+        }
+        $qb->orderBy('b.' . $sort, $direction)
+                ->setFirstResult($min)
+                ->setMaxResults($nb_per_page);
+        return $qb->getQuery()->getResult();
     }
 
-    if ($resource != null) {
-      $qb->where('b.resource = :resource');
-      $qb->setParameter("resource", $resource->getId());
-    }
-    $qb->orderBy('b.' . $sort, $direction)
-      ->setFirstResult($min)
-      ->setMaxResults($nb_per_page);
-    return $qb->getQuery()->getResult();
-  }
+    public function count($user = null, $resource = null) {
+        $qb = $this->createQueryBuilder('b');
+        $qb->select('count(b.id)');
 
-  public function count($user = null, $resource = null) {
-    $qb = $this->createQueryBuilder('b');
-    $qb->select('count(b.id)');
+        if ($user != null) {
+            $qb->where('b.user = :user');
+            $qb->setParameter("user", $user->getId());
+            if ($resource != null) {
+                $qb->andWhere('b.resource = :resource');
+                $qb->setParameter("resource", $resource->getId());
+            }
+        }
 
-    if ($user != null) {
-      $qb->where('b.user = :user');
-      $qb->setParameter("user", $user->getId());
-      if ($resource != null) {
-        $qb->andWhere('b.resource = :resource');
-        $qb->setParameter("resource", $resource->getId());
-      }
+        if ($resource != null) {
+            $qb->where('b.resource = :resource');
+            $qb->setParameter("resource", $resource->getId());
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
-    if ($resource != null) {
-      $qb->where('b.resource = :resource');
-      $qb->setParameter("resource", $resource->getId());
+  public function findAllInArray() {
+        $array_return = array();
+        $all = $this->findAll();
+        foreach($all as $one){
+            $tab = array($one->getId(), $one->getResource()->getId(),$one->getUser()->getId(), $one->getBorrowingDate(), $one->getReturnDate());
+            array_push($array_return, $tab);
+        }
+        return $array_return;
     }
-
-    return $qb->getQuery()->getSingleScalarResult();
-  }
-
 }

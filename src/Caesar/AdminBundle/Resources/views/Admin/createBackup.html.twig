@@ -14,7 +14,12 @@
 {{'admin.title.general.backup.create'|trans({})}}
 {% endblock %}
 {% block contentBody %}
-
+        <p class="flash-info">Le backup sera généré dans le repertoire web/resources/backup dans un sous repertoire avec la date et l'heure de la génération.<br/>
+            Les données sauvegardé seront les données en base de données et les images miniatures des resources.</p>
+ 
+                <form ction="{{ path('caesar_admin_general_create_backup') }}" method="post">
+                    <input type="submit" value="Générer le backup"/>
+                </form>
 {% endblock %}
 
 {% block javascripts %}

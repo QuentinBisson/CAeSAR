@@ -6,7 +6,11 @@ use Caesar\AdminBundle\Entity\Config;
 use Caesar\AdminBundle\Form\ReservationDeleteType;
 use Caesar\AdminBundle\Form\WebminingModuleType;
 use Caesar\UserBundle\Form\ChangePasswordType;
+use Caesar\AdminBundle\Form\LoadBackupType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class AdminController extends Controller {
 
@@ -186,11 +190,103 @@ class AdminController extends Controller {
     }
 
     public function createBackupAction() {
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $save_table = array(
+                'user' => 'CaesarUserBundle:User',
+                'shelf' => 'CaesarShelfBundle:Shelf',
+                'resource' => 'CaesarResourceBundle:Resource',
+                'borrowing' => 'CaesarUserBundle:Borrowing',
+                'borrowingArchive' => 'CaesarUserBundle:BorrowingArchive',
+                'reservation' => 'CaesarUserBundle:Reservation',
+                'tag' => 'CaesarTagBundle:Tag',
+                'format' => 'CaesarTagBundle:Format',
+            );
+            $date = date("d-m-Y");
+            $heure = date("H-i-s");
+            $repertoire = $date . "-" . $heure;
+            $fileName = "backup.sql";
+            mkdir("resources/backup/" . $repertoire, 777, true);
+            $fp = fopen("resources/backup/" . $repertoire . "/" . $fileName, "a+");
+            fputs($fp, "/*====== Drop des données  */\n");
+            fputs($fp, "DELETE FROM borrowing;\n");
+            fputs($fp, "DELETE FROM borrowingArchive;\n");
+            fputs($fp, "DELETE FROM reservation;\n");
+            fputs($fp, "DELETE FROM reservation;\n");
+            fputs($fp, "DELETE FROM resource;\n");
+            fputs($fp, "DELETE FROM tag;\n");
+            fputs($fp, "DELETE FROM format;\n");
+            fputs($fp, "DELETE FROM shelf;\n");
+            fputs($fp, "DELETE FROM user;\n\n");
+
+            foreach ($save_table as $key => $value) {
+                fputs($fp, "/* ====== Sauvegarde de la table " . $key . " */\n\n");
+                $repo = $em->getRepository($value);
+                $alldata = $repo->findAllInArray();
+                foreach ($alldata as $datum) {
+                    $insert = "INSERT INTO " . $key . " VALUES(";
+                    foreach ($datum as $colum) {
+                        if (!$colum instanceof \DateTime) {
+                            $insert .= "'" . $colum . "',";
+                        } else {
+                            $insert .= "'" . date_format($colum, 'Y-m-d H:i:s') . "',";
+                        }
+                    }
+                    fputs($fp, substr($insert, 0, strlen($insert) - 1) . ");\n");
+                }
+                fputs($fp, "\n");
+            }
+            fclose($fp);
+            mkdir("resources/backup/" . $repertoire . "/img", 777, true);
+            $this->CopyDir("resources/img", "resources/backup/" . $repertoire . "/img");
+            /* $zip = new ZipArchive();
+              if ($zip->open('fichier.zip', ZipArchive::CREATE) === true) {
+              $zip->addFile("resources/backup/" . $repertoire);
+              }
+              $zip->close(); */
+        }
         return $this->render('CaesarAdminBundle:Admin:createBackup.html.twig');
     }
 
+    function CopyDir($origine, $destination) {
+        $test = scandir($origine);
+
+        $file = 0;
+        $file_tot = 0;
+
+        foreach ($test as $val) {
+            if ($val != "." && $val != "..") {
+                if (is_dir($origine . "/" . $val)) {
+                    CopyDir($origine . "/" . $val, $destination . "/" . $val);
+                    IsDir_or_CreateIt($destination . "/" . $val);
+                } else {
+                    $file_tot++;
+                    if (copy($origine . "/" . $val, $destination . "/" . $val)) {
+                        $file++;
+                    } else {
+                        if (!file_exists($origine . "/" . $val)) {
+                            echo $origine . "/" . $val;
+                        };
+                    };
+                };
+            };
+        }
+        return true;
+    }
+
     public function loadBackupAction() {
-        return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig');
+        $file = null;
+        $form = $this->createForm(new LoadBackupType(), $file);
+
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->bind($this->getRequest());
+            if ($form->isValid()) {
+                $data = file_get_contents($form['fileName']->getData());
+                $this->getDoctrine()->getManager()->getConnection()->executeUpdate($data);
+            }
+        }
+        return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig', array('form' => $form->createView()));
     }
 
 }
