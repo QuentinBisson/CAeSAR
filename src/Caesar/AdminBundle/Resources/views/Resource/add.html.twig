@@ -80,54 +80,10 @@
 </form>
 {% include 'CaesarAdminBundle:Resource:modal.html.twig' %}        
 {% endblock %}
-    {% block javascripts %}
-{{parent()}}
-    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
-    <script type="text/javascript">            
-/* Pagination */
-$(document).ready(function() {
-var onChange = false;
-$("select.shelf-selection").change(function(e){
-    if (!onChange) {
-        onChange = true;
-        $('.shelf-selection').parent('div').append('<img id="loading-description" src="{{ asset('images/loading.gif') }}" alt="loading" />');
-        var url = $('.shelf-description-url').attr('value');
-        url += '/' + $(this).find(":selected").attr('value');
-        $.ajax({
-            type: "POST",
-            url: url,
-            cache: false,
-            success: function(data){
-                $('.shelf-description').html(data);
-                $('.shelf-description').css('display', 'block');
-                $('#loading-description').remove();
-                onChange = false;
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                $('.shelf-description').css('display', 'none');
-                $('#loading-description').remove();
-                onChange = false;
-            }
-        });
-    }
-    e.preventDefault();
-    return false; // Empêche la redirection normale
-});
-
-document.getElementById('caesar_resourceBundle_resourceType_local').addEventListener('change', handleFileSelect, false);
-document.getElementById("caesar_resourceBundle_resourceType_url").addEventListener('click', eraseURL);
-document.getElementById('apply-image').addEventListener('click', function(){
-    var a  = document.getElementById('caesar_resourceBundle_resourceType_url');
-    eraseLocal();
-    var img = document.getElementById('resource-img');
-    img.src = a.value;
-    document.getElementById('caesar_resourceBundle_resourceType_path').value = a.value;
-}, false);
-
-$('.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
-});</script>
-{% if active_module %}
-<script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
-<script type="text/javascript" src="{{asset("js/webmining.js")}}"></script>
-{% endif %}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset("js/adminResources.js")}}"></script>   
+    {% if active_module %}
+        <script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
+    {% endif %}
 {% endblock %}
