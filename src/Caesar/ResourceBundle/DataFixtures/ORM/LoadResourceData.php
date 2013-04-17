@@ -1,13 +1,13 @@
 <?php
 
-namespace CAeSAR\UserBundle\DataFixtures\ORM;
+namespace CAeSAR\ResourceBundle\DataFixtures\ORM;
 
+use Caesar\ResourceBundle\Entity\Resource;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Caesar\ResourceBundle\Entity\Resource;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadResourceData extends AbstractFixture implements OrderedFixtureInterface {
 
     /**
      * {@inheritDoc}
@@ -19,7 +19,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $shelfRepository = $manager->getRepository('CaesarShelfBundle:Shelf');
         
         foreach ($arrLines as $line) {
-            $arrResult[] = explode(',', $line);
+            $arrResult[] = explode(';', $line);
         }
         foreach ($arrResult as $res) {
             $resource = new Resource();
@@ -39,7 +39,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $newFileName = "";
         $extension = explode('.', $url);
         $newFileName = $code . ".jpeg";
-        $img = 'resources/img/' . $newFileName;
+        $img = 'web/resources/img/' . $newFileName;
         file_put_contents($img, file_get_contents($url));
         $this->resizeImg($newFileName);
         return $newFileName;
@@ -50,7 +50,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
      * @param type $fileName
      */
     private function resizeImg($fileName) {
-        $prefix = "resources/img/";
+        $prefix = "web/resources/img/";
         $info = getimagesize($prefix . $fileName);
 
         if ($info['mime'] == 'image/jpeg')
@@ -68,7 +68,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             $newHeight = (($sourceHeight * $reduction) / 100);
             $destinationResource = imagecreatetruecolor($newWidth, $newHeight);
             imagecopyresampled($destinationResource, $image, 0, 0, 0, 0, $newWidth, $newHeight, $sourceWidth, $sourceHeight);
-            imagejpeg($destinationResource, "resources/img/" . $fileName, 80);
+            imagejpeg($destinationResource, "web/resources/img/" . $fileName, 80);
         }
     }
 
