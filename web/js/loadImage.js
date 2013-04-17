@@ -29,15 +29,17 @@ function handleFileSelect(evt) {
 
 function colorAndDisplayOnEnter() {
     $(".web-mining-to-color").addClass('notify-web-mining');
+    $(".web-mining-to-color").removeClass('unnotify-web-mining');
 }
 
 function colorAndDisplayOnLeave() {
     $(".web-mining-to-color").removeClass('notify-web-mining');
+    $(".web-mining-to-color").addClass('unnotify-web-mining');
 }
 
-function eraseLocal(){
-    document.getElementById("caesar_resourceBundle_resourceType_local").value="";
+function eraseLocal() {
+    document.getElementById("caesar_resourceBundle_resourceType_local").value = "";
 }
-function eraseURL(){
-    document.getElementById("caesar_resourceBundle_resourceType_url").value="";
+function eraseURL() {
+    document.getElementById("caesar_resourceBundle_resourceType_url").value = "";
 }

@@ -241,11 +241,9 @@ h1 {
     position: relative;
     background: #eaeaea;
     cursor: help;
-    /*display: inline-block;*/
     text-decoration: none;
     padding: 10px 10px;
-    display:inlin-block;
-    height: 35px;
+    display:inline-block;
     margin-bottom: 10px;
     border: 1px solid #c5c8cb;
     vertical-align: middle;
@@ -265,26 +263,28 @@ h1 {
 }
 
 .web-mining-button span{
-    visibility: hidden;
     position: absolute;
     bottom: 30px;
     left: 50%;
     z-index: 999;
     width: 230px;
-    margin-left: -127px;
     padding: 10px;
     border: 2px solid #ccc;
-    opacity: .9;
+    margin-left: -126px;
+    opacity: 0;
     color: #fff;
     text-shadow: 0 1px 0 #000;
     border-color: #161a1f;
-    background-color: #1e2227;
+    background-color: #515c69;
     -moz-border-radius: 4px;
     border-radius: 4px;
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
     box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
     text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
 }
 
 .web-mining-button span b {
@@ -298,12 +298,60 @@ h1 {
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
 }
 
 .web-mining-button:hover span {
-    visibility: visible;
+    opacity: 1;
+    animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s; /* Firefox */
+    -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+    -o-animation: fadeIn 1s; /* Opera */
 }
 
+@keyframes fadeIn {
+    from {
+        opacity:0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;  
+    }
+}
+
+@-moz-keyframes fadeIn { /* Firefox */
+    from {
+        opacity:0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+@-webkit-keyframes fadeIn { /* Safari and Chrome */
+    from {
+        opacity:0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+@-o-keyframes fadeIn { /* Opera */
+    from {
+        opacity:0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}​
 .web-mining-button span:before,
 .web-mining-button span:after {
     content: "";
@@ -325,6 +373,16 @@ h1 {
 
 input.notify-web-mining, textarea.notify-web-mining {
     background-color: #e3dddd;
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+
+input.unnotify-web-mining, textarea.unnotify-web-mining {
+    background-color: #f6f3f6;
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
 }
 
 .ui-widget-header {
@@ -335,6 +393,10 @@ input.notify-web-mining, textarea.notify-web-mining {
     margin: 0 2.3em;
     line-height: 1.8em;
     text-align: center;
+}
+
+fieldset p.left {    
+    clear: both;
 }
 
 @media screen and (max-width:980px) and (min-width:480px) {

@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{parent()}}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/modal.css') }}" />
 {% endblock %}
 
 {% block breadCrumb%}
@@ -26,7 +27,7 @@
             <div class="left half-width">
                 {{ form_label(form.code) }}
                 {{ form_errors(form.code) }}
-                {{ form_widget(form.code, { 'attr': {'class': 'resource-code'} }) }}
+                {{ form_widget(form.code, { 'attr': {'class': 'resource-code', 'autocomplete' : 'off'} }) }}
             </div>
             {% if active_module %}
                 <div class="right half-width">
@@ -75,12 +76,14 @@
     <input type = "hidden" class="empty-skeleton-url" value="{{path('caesar_admin_resource_clear_skeleton')}}" /> 
     <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
     <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
+    <input type = "hidden" id="loading-image-path" value="{{ asset('images/loading.gif') }}" />
 </form>
+{% include 'CaesarAdminBundle:Resource:modal.html.twig' %}        
 {% endblock %}
     {% block javascripts %}
 {{parent()}}
-                    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
-                    <script type="text/javascript">            
+    <script type="text/javascript" src="{{asset("js/loadImage.js")}}"></script>
+    <script type="text/javascript">            
 /* Pagination */
 $(document).ready(function() {
 var onChange = false;
@@ -112,7 +115,7 @@ $("select.shelf-selection").change(function(e){
 });
 
 document.getElementById('caesar_resourceBundle_resourceType_local').addEventListener('change', handleFileSelect, false);
-document.getElementById("caesar_resourceBundle_resourceType_local").addEventListener('click', eraseURL);
+document.getElementById("caesar_resourceBundle_resourceType_url").addEventListener('click', eraseURL);
 document.getElementById('apply-image').addEventListener('click', function(){
     var a  = document.getElementById('caesar_resourceBundle_resourceType_url');
     eraseLocal();

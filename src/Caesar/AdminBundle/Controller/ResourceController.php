@@ -444,9 +444,6 @@ class ResourceController extends Controller {
     }
 
     private function transformResourceToJSON($resource) {
-        if ($resource == null) {
-            return null;
-        }
         $skeleton = Config::getResourceSkeleton($this->container);
         $result = array();
 

@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{parent()}}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/admin.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/caesaradmin/css/modal.css') }}" />
 {% endblock %}
 
 {% block breadCrumb%}
@@ -26,7 +27,7 @@
             <div class="left half-width">
                 {{ form_label(form.code) }}
                 {{ form_errors(form.code) }}
-                {{ form_widget(form.code, { 'attr': {'class': 'resource-code'} }) }}
+                {{ form_widget(form.code, { 'attr': {'class': 'resource-code', 'autocomplete' : 'off'} }) }}
             </div>
             {% if active_module %}
             <div class="right half-width">
@@ -75,7 +76,9 @@
     <input type = "hidden" class="empty-skeleton-url" value="{{path('caesar_admin_resource_clear_skeleton')}}" /> 
     <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
     <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
+    <input type = "hidden" id="loading-image-path" value="{{ asset('images/loading.gif') }}" />
 </form>
+{% include 'CaesarAdminBundle:Resource:modal.html.twig' %}
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
@@ -122,9 +125,10 @@ document.getElementById('apply-image').addEventListener('click', function(){
 }, false);
 
 $('.web-mining-button').hover(colorAndDisplayOnEnter, colorAndDisplayOnLeave);
-});</script>
+});
+</script>
 {% if active_module %}
-<script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
-<script type="text/javascript" src="{{asset("js/webmining.js")}}"></script>
+    <script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
+    <script type="text/javascript" src="{{asset("js/webmining.js")}}"></script>
 {% endif %}
 {% endblock %}

@@ -226,14 +226,14 @@ class Format {
    * @Assert\True(message = "admin.validation.tag.format.hgap.over.width")
    */
   public function isHgapOverWidth() {
-    return ($this->horizontalGap > $this->width);
+    return ($this->horizontalGap >= $this->width);
   }
 
   /**
    * @Assert\True(message = "admin.validation.tag.format.vgap.over.height")
    */
   public function isVgapOverHeight() {
-    return ($this->verticalGap > $this->height);
+    return ($this->verticalGap >= $this->height);
   }
 
   /**
@@ -249,7 +249,7 @@ class Format {
    */
   public function isTotalUnderPageHeight() {
     $vgap = $this->verticalGap - $this->height;
-    return $this->pageHeight >= $this->marginTop + (($this->rows - 1) * $vgap) + ($this->rows * $this->width);
+    return $this->pageHeight >= $this->marginTop + (($this->rows - 1) * $vgap) + ($this->rows * $this->height);
   }
 
   public function getJsonData() {
