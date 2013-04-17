@@ -60,6 +60,8 @@ Pour dessiner les codes-barres, il faut activer l'extension gd2
 
 Il faut également activer l'extension intl.
 
+Le webmining nécessite l'activation de l'extension php_openssl
+
 8) Fixtures
 -------------------------
 
