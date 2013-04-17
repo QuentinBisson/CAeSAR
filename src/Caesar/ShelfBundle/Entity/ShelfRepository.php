@@ -63,6 +63,12 @@ class ShelfRepository extends EntityRepository {
                         ->getResult();
     }
 
+    public function findAllInArray() {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select();
+        return $qb->getQuery()->getArrayResult();
+    }
+
 }
 
 ?>

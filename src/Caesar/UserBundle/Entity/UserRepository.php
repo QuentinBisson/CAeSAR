@@ -97,4 +97,10 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findAllInArray() {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select();
+        return $qb->getQuery()->getArrayResult();
+    }
+
 }
