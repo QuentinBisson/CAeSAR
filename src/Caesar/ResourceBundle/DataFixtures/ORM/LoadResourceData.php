@@ -18,6 +18,7 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
 
         $shelfRepository = $manager->getRepository('CaesarShelfBundle:Shelf');
         
+        $conn = $manager->getConnection();
         foreach ($arrLines as $line) {
             $arrResult[] = explode(';', $line);
         }

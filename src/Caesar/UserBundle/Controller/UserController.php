@@ -112,8 +112,8 @@ class UserController extends Controller {
     public function modifyProfileAction() {
         $translator = $this->get('translator');
         $user = $this->get('security.context')->getToken()->getUser();
-		$security = $this->get('security.context');
-		if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
+        $security = $this->get('security.context');
+        if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
             $form = $this->createForm(new UserUpdateType(), $user);
             $formHandler = new UserProfileHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
             if ($formHandler->process()) {
@@ -132,9 +132,9 @@ class UserController extends Controller {
         $form = $this->createForm(new PasswordType());
         $request = $this->get('request');
         $security = $this->get('security.context');
-		if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
-			return $this->redirect($this->generateUrl('caesar_client_modify_user'));
-		}
+        if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
+            return $this->redirect($this->generateUrl('caesar_client_modify_user'));
+        }
         if ($request->isMethod('POST')) {
             $form->bindRequest($request);
             if ($form->isValid()) {
@@ -142,15 +142,15 @@ class UserController extends Controller {
                 $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                 $encoded = $encoder->encodePassword($data['plainPassword'], $user->getSalt());
                 if ($encoded === $user->getPassword()) {
-					$user->setAuthentified(true);
-					$user->setIdentified(true);
-                    $token = new UsernamePasswordToken (
-                    $user->getUsername(), $encoded, "caesar", $user->getRoles());
+                    $user->setAuthentified(true);
+                    $user->setIdentified(true);
+                    $token = new UsernamePasswordToken(
+                            $user->getUsername(), $encoded, "caesar", $user->getRoles());
                     $token->setUser($user);
                     $this->get('security.context')->setToken($token);
                     //invalidate
                     $token->setAuthenticated(false);
-                    
+
                     return $this->redirect($this->generateUrl('caesar_client_modify_user'));
                 } else {
                     $this->get('session')->getFlashBag()->add(

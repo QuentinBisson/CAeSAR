@@ -230,5 +230,7 @@ Bad credentials: Le login ou le mot de passe est invalide
 form.backup.load.label: Archive Zip de backup
 backup.generate: Générer le backup
 backup.create.info: Les données sauvegardées seront les données en base de données et les images miniatures des resources
-backup.load.info: Permet d'upload et de charger un backup généré avec l'application
-backup.load.generate: Upload de l'archive du backup
+backup.load.info: Permet de charger un backup généré par l'application
+backup.load.generate: Charger un backup de l'application sous forme d'archive
+load.backup.badMimeType: Le type MIME n'est pas correct
+load.backup.badFormat: Le format de l'archive est incorrecte

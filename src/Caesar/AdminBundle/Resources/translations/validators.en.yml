@@ -14,5 +14,3 @@ admin.validation:
                           page:
                               height: The page height must be bigger than the total of all labels height added to the top margin as well as the vertical gaps.
                               height: The page width must be bigger than the total of all labels width added to the left margin as well as the horizontal gaps.
-load.backup.badMimeType: Bad type MIME
-load.backup.badFormat: Bad format

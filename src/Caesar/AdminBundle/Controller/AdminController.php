@@ -301,7 +301,7 @@ class AdminController extends Controller {
                 if (!file_exists("resources/backup/load/backup.sql") && !is_dir("resources/backup/load/img")) {
                     $this->deleteDirectory("resources/backup/load");
                     $this->get('session')->getFlashBag()->add(
-                            'error', $translator->trans('load.backup.badFormat', array(), 'CaesarAdminBundle')
+                            'error', $translator->trans('load.backup.badFormat')
                     );
                     return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig', array('form' => $form->createView()));
                 }
@@ -318,7 +318,7 @@ class AdminController extends Controller {
                 $this->deleteDirectory("resources/backup/load");
             } else {
                 $this->get('session')->getFlashBag()->add(
-                        'error', $translator->trans('load.backup.badMimeType', array(), 'CaesarAdminBundle')
+                        'error', $translator->trans('load.backup.badMimeType')
                 );
             }
         }
