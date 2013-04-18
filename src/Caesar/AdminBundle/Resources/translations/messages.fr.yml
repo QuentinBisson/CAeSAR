@@ -227,3 +227,8 @@ admin:
       heading: Information
         
 Bad credentials: Le login ou le mot de passe est invalide
+form.backup.load.label: Archive Zip de backup
+backup.generate: Générer le backup
+backup.create.info: Les données sauvegardées seront les données en base de données et les images miniatures des resources
+backup.load.info: Permet d'upload et de charger un backup généré avec l'application
+backup.load.generate: Upload de l'archive du backup

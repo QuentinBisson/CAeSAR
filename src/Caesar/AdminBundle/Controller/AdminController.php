@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use \ZipArchive;
+use \Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\File;
 
 class AdminController extends Controller {
 
@@ -206,22 +209,20 @@ class AdminController extends Controller {
             $date = date("d-m-Y");
             $heure = date("H-i-s");
             $repertoire = $date . "-" . $heure;
-            $fileName = "backup.sql";
-            mkdir("resources/backup/" . $repertoire, 777, true);
-            $fp = fopen("resources/backup/" . $repertoire . "/" . $fileName, "a+");
-            fputs($fp, "/*====== Drop des données  */\n");
-            fputs($fp, "DELETE FROM borrowing;\n");
-            fputs($fp, "DELETE FROM borrowingArchive;\n");
-            fputs($fp, "DELETE FROM reservation;\n");
-            fputs($fp, "DELETE FROM reservation;\n");
-            fputs($fp, "DELETE FROM resource;\n");
-            fputs($fp, "DELETE FROM tag;\n");
-            fputs($fp, "DELETE FROM format;\n");
-            fputs($fp, "DELETE FROM shelf;\n");
-            fputs($fp, "DELETE FROM user;\n\n");
+            $save_file = "";
+            $save_file.= "/*====== Drop des données  */\n";
+            $save_file.="DELETE FROM borrowing;\n";
+            $save_file.="DELETE FROM borrowingArchive;\n";
+            $save_file.="DELETE FROM reservation;\n";
+            $save_file.="DELETE FROM reservation;\n";
+            $save_file.="DELETE FROM resource;\n";
+            $save_file.="DELETE FROM tag;\n";
+            $save_file.="DELETE FROM format;\n";
+            $save_file.="DELETE FROM shelf;\n";
+            $save_file.="DELETE FROM user;\n\n";
 
             foreach ($save_table as $key => $value) {
-                fputs($fp, "/* ====== Sauvegarde de la table " . $key . " */\n\n");
+                $save_file.= "/* ====== Sauvegarde de la table " . $key . " */\n\n";
                 $repo = $em->getRepository($value);
                 $alldata = $repo->findAllInArray();
                 foreach ($alldata as $datum) {
@@ -233,57 +234,92 @@ class AdminController extends Controller {
                             $insert .= "'" . date_format($colum, 'Y-m-d H:i:s') . "',";
                         }
                     }
-                    fputs($fp, substr($insert, 0, strlen($insert) - 1) . ");\n");
+                    $save_file.=substr($insert, 0, strlen($insert) - 1) . ");\n";
                 }
-                fputs($fp, "\n");
+                $save_file.="\n";
             }
-            fclose($fp);
-            mkdir("resources/backup/" . $repertoire . "/img", 777, true);
-            $this->CopyDir("resources/img", "resources/backup/" . $repertoire . "/img");
-            /* $zip = new ZipArchive();
-              if ($zip->open('fichier.zip', ZipArchive::CREATE) === true) {
-              $zip->addFile("resources/backup/" . $repertoire);
-              }
-              $zip->close(); */
+            $zip = new ZipArchive();
+            if ($zip->open('resources/backup/backup-' . $repertoire . ".zip", ZipArchive::CREATE) === true) {
+                $zip->addFile("resources/backup/" . $repertoire . "/backup.sql", "backup.sql");
+                $file_in_img = scandir("resources/img");
+                foreach ($file_in_img as $file) {
+                    if ($file != "." && $file != "..") {
+                        $zip->addFile("resources/img/" . $file, "img/" . $file);
+                    }
+                }
+                $zip->addFromString("backup.sql", $save_file);
+            }
+            $zip->close();
+            $response = new Response();
+            $response->setContent(file_get_contents('resources/backup/backup-' . $repertoire . ".zip"));
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', "application/zip");
+            $response->headers->set('Content-Disposition', sprintf('attachment;filename="%s"', "backup-" . $repertoire . ".zip", "zip"));
+            $response->setCharset('UTF-8');
+            $response->send();
+            unlink('resources/backup/backup-' . $repertoire . ".zip");
+            return $response;
         }
+
         return $this->render('CaesarAdminBundle:Admin:createBackup.html.twig');
     }
 
-    function CopyDir($origine, $destination) {
-        $test = scandir($origine);
-
-        $file = 0;
-        $file_tot = 0;
-
-        foreach ($test as $val) {
-            if ($val != "." && $val != "..") {
-                if (is_dir($origine . "/" . $val)) {
-                    CopyDir($origine . "/" . $val, $destination . "/" . $val);
-                    IsDir_or_CreateIt($destination . "/" . $val);
-                } else {
-                    $file_tot++;
-                    if (copy($origine . "/" . $val, $destination . "/" . $val)) {
-                        $file++;
-                    } else {
-                        if (!file_exists($origine . "/" . $val)) {
-                            echo $origine . "/" . $val;
-                        };
-                    };
-                };
+    private function deleteDirectory($dir) {
+        if (!file_exists($dir))
+            return true;
+        if (!is_dir($dir) || is_link($dir))
+            return unlink($dir);
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..')
+                continue;
+            if (!$this->deleteDirectory($dir . "/" . $item)) {
+                chmod($dir . "/" . $item, 0777);
+                if (!deleteDirectory($dir . "/" . $item))
+                    return false;
             };
         }
-        return true;
+        return rmdir($dir);
     }
 
     public function loadBackupAction() {
         $file = null;
         $form = $this->createForm(new LoadBackupType(), $file);
+        $translator = $this->get('translator');
 
         if ($this->getRequest()->isMethod('POST')) {
             $form->bind($this->getRequest());
-            if ($form->isValid()) {
-                $data = file_get_contents($form['fileName']->getData());
+            $constraint = new File(array('mimeTypes' => "application/zip"));
+            $errorList = $this->get('validator')->validateValue($form['fileName']->getData(), $constraint);
+            if (count($errorList) == 0) {
+                $form['fileName']->getData()->move("resources/backup/load", "backup.zip");
+                $zip = new ZipArchive();
+                if ($zip->open("resources/backup/load/backup.zip") === TRUE) {
+                    $zip->extractTo("resources/backup/load");
+                    $zip->close();
+                    unlink("resources/backup/load/backup.zip");
+                }
+                if (!file_exists("resources/backup/load/backup.sql") && !is_dir("resources/backup/load/img")) {
+                    $this->deleteDirectory("resources/backup/load");
+                    $this->get('session')->getFlashBag()->add(
+                            'error', $translator->trans('load.backup.badFormat', array(), 'CaesarAdminBundle')
+                    );
+                    return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig', array('form' => $form->createView()));
+                }
+                $data = file_get_contents("resources/backup/load/backup.sql");
                 $this->getDoctrine()->getManager()->getConnection()->executeUpdate($data);
+                $file_in_img = scandir("resources/backup/load/img");
+                $this->deleteDirectory("resources/img");
+                mkdir("resources/img");
+                foreach ($file_in_img as $file) {
+                    if ($file != "." && $file != "..") {
+                        rename("resources/backup/load/img/" . $file, "resources/img/" . $file);
+                    }
+                }
+                $this->deleteDirectory("resources/backup/load");
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                        'error', $translator->trans('load.backup.badMimeType', array(), 'CaesarAdminBundle')
+                );
             }
         }
         return $this->render('CaesarAdminBundle:Admin:loadBackup.html.twig', array('form' => $form->createView()));

@@ -14,7 +14,7 @@ class LoadBackupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $builder->add('fileName', 'file',array('label' => 'form.backup.load.label'));
+       $builder->add('fileName','file',array('label' => 'form.backup.load.label'));
     }
 
     public function getName() {

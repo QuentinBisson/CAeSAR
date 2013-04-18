@@ -225,3 +225,8 @@ admin:
       close: Close
       no_content: No data were found with the webmining module with the given ISBN
       heading: Information
+form.backup.load.label: Put Zip Archive
+backup.generate: Generate backup
+backup.create.info: The saved data will be the data in the database and thumbnails of resources
+backup.load.info: Allows you to upload and download a backup generated with the application
+backup.load.generate: Upload backup
