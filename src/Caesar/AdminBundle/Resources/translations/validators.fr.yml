@@ -15,3 +15,5 @@ admin:
                           page:
                               height: La hauteur de la page doit être plus grande que la hauteur totale des étiquettes ajouté à la marge supérieure ainsi qu'aux écarts verticaux.
                               width: La largeur de la page doit être plus grande que la largeur totale des étiquettes ajouté à la marge gauche ainsi qu'aux écarts horizontaux.
+load.backup.badMimeType: Le type MIME n'est pas correcte
+load.backup.badFormat: Le format de l'archive est incorrecte

@@ -14,10 +14,11 @@
 {{'admin.title.general.backup.load'|trans({})}}
 {% endblock %}
 {% block contentBody %}
+        <p class="flash-info">{{'backup.load.info'|trans({})}}</p>
         <form action="#" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
-                <input type="submit" value="Upload du fichier SQL" />
+                <input type="submit" value="{{'backup.load.generate'|trans({})}}" />
             </form>
 
 {% endblock %}
