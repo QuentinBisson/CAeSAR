@@ -100,8 +100,10 @@ resource:
     quantity: "Quantité de ressources"
 table: 
   foot: 
-    count: 
-      text: "%value% ligne a été trouvé | %value% lignes ont été trouvé"
+    count:
+      zero: "Aucune ligne n'a été trouvé"
+      one: "%value% ligne a été trouvé"
+      more_than_one: "%value% lignes ont été trouvé"
   sort: 
     down: "Trier vers le bas"
     up: "Trier vers le haut"

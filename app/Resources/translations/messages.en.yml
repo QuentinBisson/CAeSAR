@@ -91,8 +91,10 @@ resource:
     quantity: "Resource's quantity"
 table: 
   foot: 
-    count: 
-      text: "%value% row was found | %value% rows were found"
+    count:
+      zero: "No row was found"
+      one: "%value% row was found"
+      more_than_one: "%value% rows were found"
   sort: 
     down: "Sort down"
     up: "Sort up"
