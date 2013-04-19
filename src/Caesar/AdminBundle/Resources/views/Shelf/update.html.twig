@@ -13,14 +13,14 @@
 {% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_shelf_update', {'id': shelf}) }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('caesar_admin_shelf_update', {'id': shelf}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
-        <fieldset class="shelf">
-            <legend>{{'admin.fieldset.shelves.legend'|trans({})}}</legend>
+                <fieldset class="shelf">
+                    <legend>{{'admin.fieldset.shelves.legend'|trans({})}}</legend>
             {{ form_row(form.name) }}
             {{ form_row(form.description) }}
-        </fieldset>
+                </fieldset>
         {{ form_rest(form) }}
-        <input type="submit" value="{{'admin.button.shelf.update'|trans({})}}"/>
-    </form>
+                <input type="submit" value="{{'admin.button.shelf.update'|trans({})}}"/>
+            </form>
 {% endblock %}

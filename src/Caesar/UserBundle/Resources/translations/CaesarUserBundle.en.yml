@@ -1,29 +1,34 @@
-user:
-    login:
-        title: "Login"
-        label:
-            login: "Login"
-            username: "Username"
-    authenticate:
-        title: "Authenticate"        
-    register:
-        title: "Registration"
-        label:
-            register: "Register"
-        successfull: Successfull registration
-search:
-    title: Search
-profile:
-    title: My profile
-form:
-    search:
-        placeholder: Enter keywords ...
-        search: Search
-    main_form:
-        borrow: Borrow
-        return: Return
-        consult: Consult
-        placeholder: Enter a UL code, ISBN, identifier ...
-profile.change.informations: Change my informations
-borrowings.title: My borrowings
-fail.password: Invalid password
+--- 
+borrowings.title: "My borrowings"
+fail.password: "Invalid password"
+form: 
+  main_form: 
+    borrow: Borrow
+    consult: Consult
+    placeholder: "Enter a UL code, ISBN, identifier ..."
+    return: Return
+  search: 
+    placeholder: "Enter keywords ..."
+    search: Search
+profile: 
+  title: "My profile"
+profile.change.informations: "Change my informations"
+search: 
+  title: Search
+user: 
+  authenticate: 
+    title: Authenticate
+  login: 
+    label: 
+      login: Login
+      username: Username
+    title: Login
+  profile: 
+    label.modify: "Modify my profile"
+    modify.title: "Modify my informations"
+  register: 
+    label: 
+      register: Register
+    successfull: "Successfull registration"
+    title: Registration
+  update_profile.successfull: "Successfull profile update"

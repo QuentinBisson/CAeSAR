@@ -56,8 +56,7 @@ class ShelfUpdateTest extends WebTestCase {
         $client->request('GET', '/fr/admin/shelf/delete/' . $shelf_bis->getId());
     }
 
-    
-     public function testDatainValide() {
+    public function testDatainValide() {
         $client = static::createClient();
         $shelf = new Shelf();
         $shelf->setName("étagére 1")
@@ -87,6 +86,7 @@ class ShelfUpdateTest extends WebTestCase {
 
         $client->request('GET', '/fr/admin/shelf/delete/' . $shelf_bis->getId());
     }
+
 }
 
 ?>

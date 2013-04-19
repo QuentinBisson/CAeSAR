@@ -12,7 +12,7 @@ function click_sort(e) {
         url: url,
         data: data,
         cache: false,
-        success: function(data){
+        success: function(data) {
             window.history.pushState('state', 'page', url);
             onSuccessAjaxRequest(data, url);
         },
@@ -25,7 +25,7 @@ function click_sort(e) {
 }
 
 function click_paginate(e) {
-    window.history.pushState('state', 'page',  $(this).attr('href'));
+    window.history.pushState('state', 'page', $(this).attr('href'));
     $(".navigation a").each(function() {
         $(this).removeClass('active');
     });
@@ -43,7 +43,7 @@ function click_paginate(e) {
         url: url,
         data: data,
         cache: false,
-        success: function(data){
+        success: function(data) {
             elem.addClass('active');
             window.history.pushState('state', 'page', url);
             onSuccessAjaxRequest(data, url);
@@ -60,13 +60,13 @@ function onSuccessAjaxRequest(data, url) {
     $('.contentBody').html(data);
     $(".table > thead > tr > th a").each(function() {
         $(this).bind('click', click_sort);
-        if (url.match($(this).attr('href')+'$')) {
+        if (url.match($(this).attr('href') + '$')) {
             var src = $(this).children("img").attr("src");
             var idx = src.indexOf('.png');
             src = src.slice(0, idx) + "-active" + src.slice(idx);
             $(this).children("img").attr("src", src);
             $(this).unbind('click');
-            $(this).bind('click', function(e){
+            $(this).bind('click', function(e) {
                 e.preventDefault();
             });
         }
@@ -83,7 +83,7 @@ function form_submit(e) {
         url: url,
         data: data,
         cache: false,
-        success: function(data){
+        success: function(data) {
             onSuccessAjaxRequest(data, url);
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -100,14 +100,14 @@ $(document).ready(function() {
     $(".table > thead > tr > th a").each(function() {
         $(this).bind('click', click_sort);
         var url = document.location.href;
-        if (url.match($(this).attr('href')+'$')) {
+        if (url.match($(this).attr('href') + '$')) {
             bool = true;
             var src = $(this).children("img").attr("src");
             var idx = src.indexOf('.png');
             src = src.slice(0, idx) + "-active" + src.slice(idx);
             $(this).children("img").attr("src", src);
             $(this).unbind('click');
-            $(this).bind('click', function(e){
+            $(this).bind('click', function(e) {
                 e.preventDefault();
             });
         }
@@ -119,7 +119,7 @@ $(document).ready(function() {
         src = src.slice(0, idx) + "-active" + src.slice(idx);
         elem.children("img").attr("src", src);
         elem.unbind('click');
-        elem.bind('click', function(e){
+        elem.bind('click', function(e) {
             e.preventDefault();
         });
     }

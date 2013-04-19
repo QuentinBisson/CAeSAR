@@ -63,13 +63,13 @@ class UserUpdateTest extends WebTestCase {
         $this->assertEquals('titi', $user_bis->getFirstName());
         $this->assertEquals('titi@titi.fr', $user_bis->getEmail());
         $this->assertEquals('tititi', $user_bis->getUsername());
-        
+
         $encoder = static::$kernel->getContainer()->get('security.encoder_factory')->getEncoder($user_bis);
         $this->assertEquals($encoder->encodePassword('titititi', $user_bis->getSalt()), $user_bis->getPassword());
 
         $client->request('GET', '/fr/admin/user/delete/' . $user_bis->getId());
     }
-    
+
     public function testDataInValide() {
         $client = static::createClient();
         $user = new User();
@@ -96,7 +96,7 @@ class UserUpdateTest extends WebTestCase {
 
         $client->submit($form);
     }
-    
+
     /**
      * @depends testDataInValide
      */
@@ -109,7 +109,7 @@ class UserUpdateTest extends WebTestCase {
         $this->assertEquals('totooooo', $user_bis->getFirstName());
         $this->assertEquals('toto@toto.fr', $user_bis->getEmail());
         $this->assertEquals('tototo', $user_bis->getUsername());
-        
+
         $encoder = static::$kernel->getContainer()->get('security.encoder_factory')->getEncoder($user_bis);
         $this->assertEquals($encoder->encodePassword('totootototototo', $user_bis->getSalt()), $user_bis->getPassword());
 

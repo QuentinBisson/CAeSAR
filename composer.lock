@@ -1367,10 +1367,8 @@
         }
     ],
     "packages-dev": [
-
     ],
     "aliases": [
-
     ],
     "minimum-stability": "stable",
     "stability-flags": {
@@ -1383,6 +1381,5 @@
         "php": ">=5.3.4"
     },
     "platform-dev": [
-
     ]
 }

@@ -8,10 +8,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CaesarAdminBundle extends Bundle {
 
-  public function build(ContainerBuilder $container) {
-    parent::build($container);
-    $extension = $container->getExtension('security');
-    $extension->addSecurityListenerFactory(new CaesarUserFactory());
-  }
+    public function build(ContainerBuilder $container) {
+        parent::build($container);
+        $extension = $container->getExtension('security');
+        $extension->addSecurityListenerFactory(new CaesarUserFactory());
+    }
 
 }

@@ -1,12 +1,12 @@
 <p class="sort-label">
         {{ title }}
-</p>
-<span class="right">
+    </p>
+    <span class="right">
     {% set route_params = app.request.get('_route_params') %}
-    <a class="sort-link sort-up" href="{{path(app.request.attributes.get('_route'), route_params | merge({'page': page, 'sort' :sort, 'direction' : 'asc'}))}}">
-        <img src="{{asset('images/sort-asc.png')}}" alt="{{'table.sort.up'|trans({})}}"/>
-    </a>
-    <a class="sort-link sort-down" href="{{path(app.request.attributes.get('_route'), route_params | merge({'page': page, 'sort' :sort, 'direction' : 'desc'}))}}">
-        <img src="{{asset('images/sort-desc.png')}}" alt="{{'table.sort.down'|trans({})}}"/>
-    </a>
-</span>
+            <a class="sort-link sort-up" href="{{path(app.request.attributes.get('_route'), route_params | merge({'page': page, 'sort' :sort, 'direction' : 'asc'}))}}">
+                <img src="{{asset('images/sort-asc.png')}}" alt="{{'table.sort.up'|trans({})}}"/>
+            </a>
+            <a class="sort-link sort-down" href="{{path(app.request.attributes.get('_route'), route_params | merge({'page': page, 'sort' :sort, 'direction' : 'desc'}))}}">
+                <img src="{{asset('images/sort-desc.png')}}" alt="{{'table.sort.down'|trans({})}}"/>
+            </a>
+        </span>

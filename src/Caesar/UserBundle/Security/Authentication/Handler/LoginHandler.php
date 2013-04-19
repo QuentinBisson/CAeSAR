@@ -13,38 +13,38 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class LoginHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface {
 
-  protected $router;
-  protected $security;
+    protected $router;
+    protected $security;
 
-  public function __construct(Router $router, SecurityContext $security) {
-    $this->router = $router;
-    $this->security = $security;
-  }
-
-  public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
-    $session = $request->getSession();
-    if ($this->security->isGranted('ROLE_ADMIN')) {
-      $response = new RedirectResponse($this->router->generate('caesar_admin_homepage'));
-    } elseif ($this->security->isGranted('ROLE_USER')) {
-      $referer_url = $request->headers->get('referer');
-      if (strpos($referer_url, 'admin')) {
-        $session->getFlashBag()->add(
-          'error', "Votre compte ce vous permet pas d'accéder à l'interface d'administration"
-        );
-      }
-      $response = new RedirectResponse($referer_url);
+    public function __construct(Router $router, SecurityContext $security) {
+        $this->router = $router;
+        $this->security = $security;
     }
-    return $response;
-  }
 
-  public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
+        $session = $request->getSession();
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $response = new RedirectResponse($this->router->generate('caesar_admin_homepage'));
+        } elseif ($this->security->isGranted('ROLE_USER')) {
+            $referer_url = $request->headers->get('referer');
+            if (strpos($referer_url, 'admin')) {
+                $session->getFlashBag()->add(
+                        'error', "Votre compte ce vous permet pas d'accéder à l'interface d'administration"
+                );
+            }
+            $response = new RedirectResponse($referer_url);
+        }
+        return $response;
+    }
 
-    $referer_url = $request->headers->get('referer');
-    $response = new RedirectResponse($referer_url);
-    $session = $request->getSession();
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
 
-    $session->set(SecurityContext::AUTHENTICATION_ERROR, $exception);
-    return $response;
-  }
+        $referer_url = $request->headers->get('referer');
+        $response = new RedirectResponse($referer_url);
+        $session = $request->getSession();
+
+        $session->set(SecurityContext::AUTHENTICATION_ERROR, $exception);
+        return $response;
+    }
 
 }

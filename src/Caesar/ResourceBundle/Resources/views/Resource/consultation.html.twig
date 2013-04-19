@@ -31,21 +31,22 @@
         <p>
             <span class="consult-title">{{'resource.label.details'|trans({})}}:</span><br />
             <span class="consultation-text-details">{{resource.longDescription|nl2br}}</span>
+
         </p>
     </div>
     <div class="consultation-div clear">
         <span class="consult-title">{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</span>
         {% if resource.borrowings.count > 0 %}
-            <div class="consultation-content-block">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>{{'consultation.text.name'|trans({})}}</th>
-                            <th>{{'consultation.text.firstname'|trans({})}}</th>
-                            <th>{{'consultation.text.borrowing.date'|trans({})}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div class="consultation-content-block">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{'consultation.text.name'|trans({})}}</th>
+                        <th>{{'consultation.text.firstname'|trans({})}}</th>
+                        <th>{{'consultation.text.borrowing.date'|trans({})}}</th>
+                    </tr>
+                </thead>
+                <tbody>
                         {% for borrowing in resource.borrowings %}
                         <tr>
                             <td>{{borrowing.user.name}}</td>
@@ -57,6 +58,6 @@
                 </table>
             </div>
         {% endif %}
-    </div>
-</section>
+        </div>
+    </section>
 {% endblock %}

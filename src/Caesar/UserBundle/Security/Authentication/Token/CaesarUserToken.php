@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class CaesarUserToken extends AbstractToken {
 
-  private $identified;
+    private $identified;
 
     public function __construct(array $roles = array()) {
         parent::__construct($roles);

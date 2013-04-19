@@ -14,34 +14,34 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ReturnAsType extends AbstractType {
 
-  private $resource;
+    private $resource;
 
-  function __construct($resource) {
-    $this->resource = $resource;
-  }
-
-  public function buildForm(FormBuilderInterface $builder, array $options) {
-    $users = array();
-    foreach ($this->resource->getBorrowings() as $b) {
-      array_push($users, $b->getUser()->getId());
+    function __construct($resource) {
+        $this->resource = $resource;
     }
 
-    $builder->add('user', 'entity', array(
-        'class' => 'CaesarUserBundle:User',
-        'property' => 'userDescription',
-        'label' => 'form.return.type.label.user',
-        'empty_value' => 'form.user.choose',
-        'query_builder' => function(EntityRepository $er) use ($users) {
-          return $er->createQueryBuilder('u')
-              ->where('u.id in (:users)')
-              ->setParameter('users', $users)
-              ->orderBy('u.name', 'ASC');
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $users = array();
+        foreach ($this->resource->getBorrowings() as $b) {
+            array_push($users, $b->getUser()->getId());
         }
-    ));
-  }
 
-  public function getName() {
-    return "caesar_resourceBundle_resourceReturnType";
-  }
+        $builder->add('user', 'entity', array(
+            'class' => 'CaesarUserBundle:User',
+            'property' => 'userDescription',
+            'label' => 'form.return.type.label.user',
+            'empty_value' => 'form.user.choose',
+            'query_builder' => function(EntityRepository $er) use ($users) {
+                return $er->createQueryBuilder('u')
+                                ->where('u.id in (:users)')
+                                ->setParameter('users', $users)
+                                ->orderBy('u.name', 'ASC');
+            }
+        ));
+    }
+
+    public function getName() {
+        return "caesar_resourceBundle_resourceReturnType";
+    }
 
 }

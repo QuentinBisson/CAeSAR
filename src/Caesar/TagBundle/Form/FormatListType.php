@@ -12,19 +12,19 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class FormatListType extends AbstractType {
 
-  public function buildForm(FormBuilderInterface $builder, array $options) {
-    $builder->add('format', 'entity', array(
-        'required' => false,
-        'class' => 'CaesarTagBundle:Format',
-        'property' => 'code',
-        'label' => 'form.tag.type.label.format',
-        'empty_value' => 'form.tag.choose'
-    ));
-    ;
-  }
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('format', 'entity', array(
+            'required' => false,
+            'class' => 'CaesarTagBundle:Format',
+            'property' => 'code',
+            'label' => 'form.tag.type.label.format',
+            'empty_value' => 'form.tag.choose'
+        ));
+        ;
+    }
 
-  public function getName() {
-    return "caesar_tagBundle_formatListType";
-  }
+    public function getName() {
+        return "caesar_tagBundle_formatListType";
+    }
 
 }

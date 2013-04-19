@@ -149,7 +149,7 @@ input[type="submit"][disabled]:hover, input[type="button"][disabled]:hover, a.di
     color: #333333;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     background-color: #f5f5f5;
-   background-image: none;
+    background-image: none;
 }
 
 #apply-image {

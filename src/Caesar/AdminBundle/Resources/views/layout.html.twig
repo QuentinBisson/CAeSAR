@@ -75,47 +75,47 @@
 {% block javascripts %}
 {{parent()}}
     <script type="text/javascript">
-    $(document).ready(function() {
-        $( ".accordion" ).accordion({
-            heightStyle: "content",
-            autoHeight: false,
-            navigation: true,
-            collapsible: true,
-            active: getActiveIndex()
+        $(document).ready(function() {
+            $(".accordion").accordion({
+                heightStyle: "content",
+                autoHeight: false,
+                navigation: true,
+                collapsible: true,
+                active: getActiveIndex()
+            });
         });
-    });
 
-    function getActiveIndex() {
+        function getActiveIndex() {
+            var ul = document.getElementById('breadcrumb');
+            var lis = ul.getElementsByTagName('li');
+            if (lis.length > 1) {
+                var li = lis[1];
+                if (li.dataset.header === undefined) {
+                    return false;
+                }
+                var i = parseInt(li.dataset.header);
+                return i;
+            }
+            return false;
+        }
         var ul = document.getElementById('breadcrumb');
         var lis = ul.getElementsByTagName('li');
-        if (lis.length > 1) {
-            var li = lis[1];
-            if (li.dataset.header === undefined) {
-                return false;
-            }
-            var i = parseInt(li.dataset.header);
-            return i;
-        }
-        return false;
-    }
-    var ul = document.getElementById('breadcrumb');
-    var lis = ul.getElementsByTagName('li');
-    if (lis.length == 1) {
-        var spans = lis[0].getElementsByTagName("span");
-        for (var i = 0; i < spans.length; i++) {
-            if ('divider' === spans[i].className) {
-                spans[i].style.display = 'none';
+        if (lis.length == 1) {
+            var spans = lis[0].getElementsByTagName("span");
+            for (var i = 0; i < spans.length; i++) {
+                if ('divider' === spans[i].className) {
+                    spans[i].style.display = 'none';
+                }
             }
         }
-    }
 
-    $('.accordion a').each(function(){
-        var href= $(this).attr('href');
-        var url = document.location.toString();
-        if(url.match(href+"$") == href) {
-            $(this).addClass('active');
-        }
-    });
+        $('.accordion a').each(function() {
+            var href = $(this).attr('href');
+            var url = document.location.toString();
+            if (url.match(href + "$") == href) {
+                $(this).addClass('active');
+            }
+        });
 
         </script>
 {% endblock %}

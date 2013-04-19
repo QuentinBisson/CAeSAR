@@ -239,8 +239,10 @@ class AdminController extends Controller {
                 $save_file.="\n";
             }
             $zip = new ZipArchive();
+            if (!is_dir('resources/backup')) {
+                mkdir('resources/backup');
+            }
             if ($zip->open('resources/backup/backup-' . $repertoire . ".zip", ZipArchive::CREATE) === true) {
-                $zip->addFile("resources/backup/" . $repertoire . "/backup.sql", "backup.sql");
                 $file_in_img = scandir("resources/img");
                 foreach ($file_in_img as $file) {
                     if ($file != "." && $file != "..") {

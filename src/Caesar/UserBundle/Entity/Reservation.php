@@ -3,7 +3,6 @@
 namespace Caesar\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\ReservationRepository")
@@ -48,8 +47,7 @@ class Reservation {
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null)
-    {
+    public function setResource(Resource2 $resource = null) {
         $this->resource = $resource;
 
         return $this;
@@ -60,8 +58,7 @@ class Reservation {
      *
      * @return \Caesar\ResourceBundle\Resource
      */
-    public function getResource()
-    {
+    public function getResource() {
         return $this->resource;
     }
 
@@ -71,8 +68,7 @@ class Reservation {
      * @param \Caesar\UserBundle\Entity\User $user
      * @return Borrowing
      */
-    public function setUser(\Caesar\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Caesar\UserBundle\Entity\User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -83,19 +79,17 @@ class Reservation {
      *
      * @return \Caesar\UserBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
     /**
      * Set reservationDate
      *
-     * @param \DateTime $reservationDate
+     * @param DateTime $reservationDate
      * @return Reservation
      */
-    public function setReservationDate($reservationDate)
-    {
+    public function setReservationDate($reservationDate) {
         $this->reservationDate = $reservationDate;
 
         return $this;
@@ -104,10 +98,10 @@ class Reservation {
     /**
      * Get reservationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getReservationDate()
-    {
+    public function getReservationDate() {
         return $this->reservationDate;
     }
+
 }

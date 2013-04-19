@@ -24,9 +24,9 @@ class ResourceType extends AbstractType {
                 ->add('shelf', 'entity', array(
                     'class' => 'CaesarShelfBundle:Shelf',
                     'property' => 'name',
-                    'label'=> 'form.resource.type.label.shelf',
+                    'label' => 'form.resource.type.label.shelf',
                     'empty_value' => 'form.resource.choose'
-                 ));
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

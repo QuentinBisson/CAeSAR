@@ -14,17 +14,17 @@
 {% block contentTitle %}{{'admin.title.resources.list'|trans({})}}{% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_resource_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
+        <form action="{{ path('caesar_admin_resource_homepage') }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_rest(searchForm) }}
-        <input type="submit" class="margin-left" value="{{'admin.button.search'|trans({})}}"/>
-    </form>
-    <input type="hidden" id="serialize-request" value=""/>
-    <section class="contentBody">
+                <input type="submit" class="margin-left" value="{{'admin.button.search'|trans({})}}"/>
+            </form>
+            <input type="hidden" id="serialize-request" value=""/>
+            <section class="contentBody">
      {% include 'CaesarAdminBundle:Resource:list.html.twig' with {'resources' : resources, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
-        </section>
+                </section>
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
-        <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+                <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
 {% endblock %}

@@ -3,84 +3,84 @@
         <tr>
             <th{% if 'user' == sort %} class="sorted borrowing-user"{% else %} class = "borrowing-user" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.user'|trans({}), 'page': page, 'sort': 'user'}  %}
-            </th>
-            <th{% if 'resource' == sort %} class="sorted borrowing-resource"{% else %} class = "borrowing-resource" {% endif %} >
+                </th>
+                <th{% if 'resource' == sort %} class="sorted borrowing-resource"{% else %} class = "borrowing-resource" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
-            </th>
-            <th{% if 'borrowingDate' == sort %} class="sorted borrowing-date"{% else %} class = "borrowing-date" {% endif %} >
+                    </th>
+                    <th{% if 'borrowingDate' == sort %} class="sorted borrowing-date"{% else %} class = "borrowing-date" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.date'|trans({}), 'page': page, 'sort': 'borrowingDate'}  %}
-            </th>
-            <th class = "borrowing-return">
+                        </th>
+                        <th class = "borrowing-return">
                 <p class="sort-label">
                     {{ 'table.title.borrowings.return.date'|trans({}) }}
-                </p>
-            </th>
-        </tr>
+                    </p>
+                </th>
+            </tr>
 
-    </thead>
-    <tfoot>
-        <tr>
-            <td colspan="4">
-                {{ 'table.foot.count.text'|trans({'%value%': count}) }}
-            </td>
-        </tr>
-    </tfoot>
-    <tbody id="table_list">
-         {% for borrowing in borrowings %}
+        </thead>
+        <tfoot>
             <tr>
+                <td colspan="4">
+                {{ 'table.foot.count.text'|trans({'%value%': count}) }}
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody id="table_list">
+         {% for borrowing in borrowings %}
+                    <tr>
                 {% if borrowing.user.name is defined %}
-                    <td>{{ borrowing.user.name ~ ' ' ~ borrowing.user.firstname }}</td>
+                            <td>{{ borrowing.user.name ~ ' ' ~ borrowing.user.firstname }}</td>
                 {% else %}
-                    <td>{{ borrowing.user }}</td>
+                            <td>{{ borrowing.user }}</td>
                 {% endif %}
                 {% if borrowing.resource.description is defined %}
-                    <td>{{ borrowing.resource.description }}</td>
+                            <td>{{ borrowing.resource.description }}</td>
                 {% else %}
-                    <td>{{ borrowing.resource }}</td>
+                            <td>{{ borrowing.resource }}</td>
                 {% endif %}
-                    
-                <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
+
+                            <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
                 {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
-                    <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
+                            <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
                 {% else %}
-                    <td></td>
+                            <td></td>
                 {% endif %}
-            </tr>
+                        </tr>
             {% endfor %}
-    </tbody>
-</table>
+                    </tbody>
+                </table>
 
 {# display navigation #}
 
 {% set route_params = app.request.get('_route_params') %}
-<div class="navigation">
-    <ul>{# Affichage des boutons "Précédent" et "Première page" (si page > 1) #}
+                <div class="navigation">
+                    <ul>{# Affichage des boutons "Précédent" et "Première page" (si page > 1) #}
         {% if pagination.cur > 1 %}
-            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':1})) }}" title="{{ "pagination.first"|trans({}, 'CaesarAdminBundle') }}"><<</a></li>
-            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur-1})) }}" title="{{ "pagination.prev"|trans({}, 'CaesarAdminBundle') }}"><</a></li>
+                            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':1})) }}" title="{{ "pagination.first"|trans({}, 'CaesarAdminBundle') }}"><<</a></li>
+                            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur-1})) }}" title="{{ "pagination.prev"|trans({}, 'CaesarAdminBundle') }}"><</a></li>
         {% endif %}
 
         {# Affichage des boutons vers les 3 pages précédent la page courante (ou 2, ou 1, ou 0) #}
         {% for i in 3 .. 1 %}
                 {% if pagination.cur - i > 0 %}
-                <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur - i})) }}">{{ pagination.cur - i }}</a></li>
+                                <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur - i})) }}">{{ pagination.cur - i }}</a></li>
                 {% endif %}
         {% endfor %}
 
         {# Affichage de la page courante #}
-        <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur})) }}">{{ pagination.cur }}</a></li>
+                                    <li class="active"><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur})) }}">{{ pagination.cur }}</a></li>
 
         {# Affichage des 3 (ou 2, ou 1, ou 0) pages suivant la page courante #}
         {% for i in 1 .. 3 %}
                 {% if pagination.cur + i <= pagination.max %}
-                <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur + i})) }}">{{ pagination.cur + i }}</a></li>
+                                    <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur + i})) }}">{{ pagination.cur + i }}</a></li>
                 {% endif %}
         {% endfor %}
 
                     {# Affichage des boutons "Suivant" et "Dernière page" (si page différente du max de page ) #}
         {% if pagination.cur <= pagination.max %}
-            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur + 1})) }}" title="{{ "pagination.next"|trans({}, 'CaesarAdminBundle') }}">></a></li>
-            <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.max})) }}" title="{{ 'pagination.last'|trans({}, 'CaesarAdminBundle') }}">>></a></li>
+                                        <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.cur + 1})) }}" title="{{ "pagination.next"|trans({}, 'CaesarAdminBundle') }}">></a></li>
+                                        <li><a class="_pagination" href="{{ path(app.request.attributes.get('_route'), route_params | merge({'page':pagination.max})) }}" title="{{ 'pagination.last'|trans({}, 'CaesarAdminBundle') }}">>></a></li>
         {% endif %}
-    </ul>
-</div>
+                                        </ul>
+                                    </div>

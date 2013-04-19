@@ -17,14 +17,13 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
         $arrLines = file('src/Caesar/ResourceBundle/DataFixtures/ORM/resourceFixtures.csv');
 
         $shelfRepository = $manager->getRepository('CaesarShelfBundle:Shelf');
-        
-        $conn = $manager->getConnection();
+
         foreach ($arrLines as $line) {
             $arrResult[] = explode(';', $line);
         }
         foreach ($arrResult as $res) {
             $resource = new Resource();
-            $resource->setShelf($shelfRepository->find($res[3]));
+            $resource->setShelf($shelfRepository->findOneByName($res[3]));
             $resource->setCode($res[0]);
             $resource->setDescription($res[1]);
             $resource->setLongDescription($res[4]);

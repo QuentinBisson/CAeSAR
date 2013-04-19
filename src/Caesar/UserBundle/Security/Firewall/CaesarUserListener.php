@@ -14,25 +14,25 @@ use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterfa
 
 class CaesarUserListener extends AbstractAuthenticationListener {
 
-  public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $httpKernel, $options = array()) {
-    parent::__construct(
-      $securityContext, $authenticationManager, $sessionStrategy, $httpUtils, "caesar", new DefaultAuthenticationSuccessHandler($httpUtils, $options), new DefaultAuthenticationFailureHandler($httpKernel, $httpUtils, $options), array_merge(
-        array(
-          'username_parameter' => 'username',
-          'intention' => 'authenticate',
-          'post_only' => true
-        ), $options));
-  }
-
-  protected function attemptAuthentication(Request $request) {
-    $matches = explode("=", $request->getContent());
-    if (count($matches) != 2 || $matches[0] !== "_username") {
-      return null;
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $httpKernel, $options = array()) {
+        parent::__construct(
+                $securityContext, $authenticationManager, $sessionStrategy, $httpUtils, "caesar", new DefaultAuthenticationSuccessHandler($httpUtils, $options), new DefaultAuthenticationFailureHandler($httpKernel, $httpUtils, $options), array_merge(
+                        array(
+            'username_parameter' => 'username',
+            'intention' => 'authenticate',
+            'post_only' => true
+                        ), $options));
     }
 
-    $token = new CaesarUserToken();
-    $token->setUser($matches[1]);
-    return $this->authenticationManager->authenticate($token);
-  }
+    protected function attemptAuthentication(Request $request) {
+        $matches = explode("=", $request->getContent());
+        if (count($matches) != 2 || $matches[0] !== "_username") {
+            return null;
+        }
+
+        $token = new CaesarUserToken();
+        $token->setUser($matches[1]);
+        return $this->authenticationManager->authenticate($token);
+    }
 
 }

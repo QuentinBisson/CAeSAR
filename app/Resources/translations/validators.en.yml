@@ -1,23 +1,63 @@
-validation:
-    assert:
-        error:
-            type:
-                page:
-                    height: The page height must be a float.
-                    width: The page width must be a float.
-                margin:
-                    left: The left margin must be a float.
-                    top: The top margin must be a float.
-                gap:
-                    horizontal: The horizontal gap must be a float.
-                    vertical: The vertical gap must be a float.
-                height: The labels height must be a float.
-                width: The labels width must be a float.
-                columns:
-                    below:
-                        one: The number of column has to be over 1.
-                rows:
-                    below:
-                        one: The number of row has to be over 1.
-                password: Your password must be at least 8 caracters. | Your password must be at least 8 caracters.
-                username: Your username must be at least 5 caracters. | Your username must be at least 5 caracters.
+--- 
+validation.assert.error.type: 
+  format: 
+    columns.below_one: "The number of column must be over 1"
+    height: "The labels height must be a float"
+    hgap: "The horizontal gap must be a float"
+    hgap_over_width: "Horizontal gap must be over the label's width"
+    margin_left: "The left margin must be a float"
+    margin_top: "The top margin must be a float"
+    page_height: "The page height must be a float"
+    page_width: "The page width must be a float"
+    rows.below_one: "The number of row must be over 1"
+    total_under_page_height: "The page height must be bigger than the total of all labels height added to the top margin as well as the vertical gaps"
+    total_under_page_width: "The page width must be bigger than the total of all labels width added to the left margin as well as the horizontal gaps"
+    vgap: "The vertical gap must be a float"
+    vgap_over_height: "Vertical gap must be over the label's height"
+    width: "The labels width must be a float"
+  not_empty: 
+    format: 
+      code: "The code can't be empty"
+      columns: "The number of column can't be empty"
+      height: "The height can't be empty"
+      hgap: "The horizontal gap can't be empty"
+      margin_left: "The left margin can't be empty"
+      margin_top: "The top margin can't be empty"
+      page_height: "The page height can't be empty"
+      page_width: "The page width can't be empty"
+      rows: "The number of row can't be empty"
+      vgap: "The vertical gap can't be empty"
+      width: "The width can't be empty"
+    resource: 
+      code: "The resource code can't be empty"
+      description: "The resource description can't be empty"
+      long_description: "The long description can't be empty"
+      path: "The image can't be empty"
+      quantity: "The quantity can't be empty"
+      shelf: "The resource location can't be empty"
+    shelf: 
+      description: "The location's description can't be empty"
+      name: "The location's name can't be empty"
+    user: 
+      codeBu: "The U. L. code can't be empty"
+      email: "The email can't be empty"
+      firstname: "The first name can't be empty"
+      name: "The last name can't be empty"
+      password: "The password can't be empty"
+      username: "The username can't be empty"
+  regex: 
+    user: 
+      codeBu: "The U.L. code can only contain numbers"
+      firstname: "The first name of the user can't contain numbers"
+      name: "The last name of the user can't contain numbers"
+  resource: 
+    local.bad_mime_type: "The local file must be JPEG or a PNG"
+    quantity: 
+      bad_type: "The quantity must be an integer"
+      below_one: "The quantity must not be below one"
+    url.bad_type: "The value is not a valid URL"
+  user: 
+    email.invalid: "The email value need to be a valid email"
+    password.below_eight: "Your password must be at least 8 characters. | Your password must be at least 8 characters"
+    password.dont_match: "The password and the confirmation passoword don't match"
+    username.below_five: "Your username must be at least 5 characters. | Your username must be at least 5 characters"

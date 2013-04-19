@@ -15,61 +15,61 @@
         <header class="header">
             <div class="header-content">
                 {% if is_granted('ROLE_ADMIN') %}
-                <section class="left">
-                    <ul id="breadcrumb" class="breadcrumb">
+                    <section class="left">
+                        <ul id="breadcrumb" class="breadcrumb">
                 {% block breadCrumb%}
-                            <li><a href="{{path('caesar_admin_homepage')}}">
-                                    <i class="icon-home"></i>
-                                </a>
-                                <span class="divider">></span>
-                            </li>
+                                <li><a href="{{path('caesar_admin_homepage')}}">
+                                        <i class="icon-home"></i>
+                                    </a>
+                                    <span class="divider">></span>
+                                </li>
                 {% endblock %}
-                        </ul>
-                    </section>
+                            </ul>
+                        </section>
                 {% endif %}
-                    <section class="right">
-                        <div class="inline">
-                            <select id="lang" class="lang-select">
-                                <option value="fr" data-imagesrc="{{asset('images/fr.png')}}"
+                        <section class="right">
+                            <div class="inline">
+                                <select id="lang" class="lang-select">
+                                    <option value="fr" data-imagesrc="{{asset('images/fr.png')}}"
                                     {% if app.request.locale == 'fr' %} selected="selected" {% endif %}>{{'admin.lang.french'|trans({})}}</option>
-                                        <option value="en" data-imagesrc="{{asset('images/en.png')}}"
+                                            <option value="en" data-imagesrc="{{asset('images/en.png')}}"
                                     {% if app.request.locale == 'en'%} selected="selected" {% endif %}>{{'admin.lang.english'|trans({})}}</option>
-                                        </select>
+                                            </select>
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">{{'admin.button.logout'|trans({})}}</a>
+                                            <a class="link-button-deconnexion" href="{{path('caesar_admin_logout')}}">{{'admin.button.logout'|trans({})}}</a>
                                     {% endif %}
-                                </div>
-                            </section>
-                        </div>
-                    </header>
+                                    </div>
+                                </section>
+                            </div>
+                        </header>
 
 
-                    <section class="main-content">
+                        <section class="main-content">
                 {% block menu %}{% endblock %}
                             {% block content %}{% endblock %}
-                        </section>
+                            </section>
         {% block javascripts %}
-                        <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
-                        <script type="text/javascript" src="{{ asset('js/jquery-ui-1.10.0.custom.min.js') }}" ></script>
-                        <script type="text/javascript" src="{{ asset('js/jquery.ddslick.min.js') }}" ></script>
-                        <script type="text/javascript">
-                            {% set route = app.request.get('_route') %}
-                            {% set route_params = app.request.get('_route_params') %}
-                            $(document).ready(function() {
-                                $('.lang-select').ddslick({
-                                    onSelected: function(data){
-                                        var ddData = $('#lang').data('ddslick');
-                                        if ('{{app.request.locale}}' != ddData.selectedData.value) {
-                                            if ('en' === ddData.selectedData.value) {
-                                                window.location = '{{ path(route, route_params | merge({ '_locale': 'en' })) }}';
-                                            } else {
-                                                window.location = '{{ path(route, route_params | merge({ '_locale': 'fr' })) }}';
+                            <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
+                            <script type="text/javascript" src="{{ asset('js/jquery-ui-1.10.0.custom.min.js') }}" ></script>
+                            <script type="text/javascript" src="{{ asset('js/jquery.ddslick.min.js') }}" ></script>
+                            <script type="text/javascript">
+                                {% set route = app.request.get('_route') %}
+                                {% set route_params = app.request.get('_route_params') %}
+                                $(document).ready(function() {
+                                    $('.lang-select').ddslick({
+                                        onSelected: function(data) {
+                                            var ddData = $('#lang').data('ddslick');
+                                            if ('{{app.request.locale}}' != ddData.selectedData.value) {
+                                                if ('en' === ddData.selectedData.value) {
+                                                    window.location = '{{ path(route, route_params | merge({ '_locale': 'en' })) }}';
+                                                } else {
+                                                    window.location = '{{ path(route, route_params | merge({ '_locale': 'fr' })) }}';
+                                                }
                                             }
                                         }
-                                    }
+                                    });
                                 });
-                            });
-                            </script>
+                                </script>
         {% endblock %}
-                        </body>
-                    </html>
+                            </body>
+                        </html>

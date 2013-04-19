@@ -18,56 +18,56 @@
 
             <div class="right nav-group">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a class="nav-el nav-btn" href="{{ path('caesar_client_profile')}}"><i class="icon-user icon-white"></i> {{ app.user.firstName }}</a>
-                            <a class="nav-el" id="toggle_user_panel" href="#"><i class="icon-chevron-down icon-white"></i></a>
+                    <a class="nav-el nav-btn" href="{{ path('caesar_client_profile')}}"><i class="icon-user icon-white"></i> {{ app.user.firstName }}</a>
+                    <a class="nav-el" id="toggle_user_panel" href="#"><i class="icon-chevron-down icon-white"></i></a>
                 {% else %}
-                            <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'client.navbar.inscription'|trans }}</a>
-                            <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'client.navbar.connexion'|trans }}</a>
+                        <a class="nav-el" href="{{ path('caesar_client_register')}}">{{ 'client.navbar.inscription'|trans }}</a>
+                        <a class="nav-el" href="{{ path('caesar_client_login') }}">{{ 'client.navbar.connexion'|trans }}</a>
                 {% endif %}
-                        </div>
                     </div>
-                    <div id="user_panel">
-                        <a class="btn" href="{{ path('caesar_client_profile')}}">Mon profil</a>
-                        <a class="btn" href="{{ path('caesar_client_search') }}">Mes emprunts</a>
-                        <a class="btn" href="{{ path('caesar_logout') }}">Déconnexion</a>
-                    </div>
-                    <section>
-                        <header>
+                </div>
+                <div id="user_panel">
+                    <a class="btn" href="{{ path('caesar_client_profile')}}">Mon profil</a>
+                    <a class="btn" href="{{ path('caesar_client_search') }}">Mes emprunts</a>
+                    <a class="btn" href="{{ path('caesar_logout') }}">Déconnexion</a>
+                </div>
+                <section>
+                    <header>
                 {% block bodyTitle %}{% endblock %}
-                            </header>
+                        </header>
 
-                            <section>
+                        <section>
 				{% block body %}
-    <h1>Erreur {{ status_code }}</h1>
-    <p>Le serveur a rencontré une erreur. Merci de contacter le support si le problème persiste.</p>
-    <pre>{{ status_text }}</pre>
+                                <h1>Erreur {{ status_code }}</h1>
+                                <p>Le serveur a rencontré une erreur. Merci de contacter le support si le problème persiste.</p>
+                                <pre>{{ status_text }}</pre>
 {% endblock body %}
-                                </section>
                             </section>
+                        </section>
 		{% block javascripts %}
-                            <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
-                            <script type="text/javascript">
-                                    $(document).ready(function(e) {
-                                            setInterval(function() {
-                                                    $('#giveMeFocus').focus();
-                                            }, 100);
-                                            var isDisplayed = false;
-                                            $('#user_panel').css('display', 'none');
-                                            $('#toggle_user_panel').click(function(e) {
-                                                    if (isDisplayed) {
-                                                            $(this).html('<i class="icon-chevron-down icon-white"></i>');
-                                                            isDisplayed = false;
-                                                    } else {
-                                                            $(this).html('<i class="icon-chevron-up icon-white"></i>');
-                                                            isDisplayed = true;
-                                                    }
-                                                    $('#user_panel').slideToggle("fast");
-                                                    return false;
-                                            })
-                                    })
-                                </script>
+                        <script type="text/javascript" src="{{ asset('js/jquery-1.9.0.min.js') }}"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function(e) {
+                                setInterval(function() {
+                                    $('#giveMeFocus').focus();
+                                }, 100);
+                                var isDisplayed = false;
+                                $('#user_panel').css('display', 'none');
+                                $('#toggle_user_panel').click(function(e) {
+                                    if (isDisplayed) {
+                                        $(this).html('<i class="icon-chevron-down icon-white"></i>');
+                                        isDisplayed = false;
+                                    } else {
+                                        $(this).html('<i class="icon-chevron-up icon-white"></i>');
+                                        isDisplayed = true;
+                                    }
+                                    $('#user_panel').slideToggle("fast");
+                                    return false;
+                                })
+                            })
+                            </script>
 		{% endblock %}
-                            </body>
-                        </html>
+                        </body>
+                    </html>
 
 

@@ -121,14 +121,14 @@
 {% endblock %}
 
 {% block contentBody %}
-        <div class="colonnes">
+                <div class="colonnes">
     {% for tag in tags %}
-                <div class="barcode">
-                    <span>
-                        <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
-                        <p>{{tag.code}}</p>
-                    </span>
-                </div>
+                        <div class="barcode">
+                            <span>
+                                <img src="{{asset(path('caesar_admin_tag_barcode', {'text' : tag.code}))}}" alt="{{tag.code}}"/>
+                                <p>{{tag.code}}</p>
+                            </span>
+                        </div>
     {% endfor %}
-            </div>
+                    </div>
 {% endblock %}

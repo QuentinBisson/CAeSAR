@@ -13,22 +13,22 @@
 {% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_user_update', {'id': user}) }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('caesar_admin_user_update', {'id': user}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
-        <fieldset>
-            <legend>{{'admin.fieldset.user.legend.personnal'|trans({})}}</legend>
+                <fieldset>
+                    <legend>{{'admin.fieldset.user.legend.personnal'|trans({})}}</legend>
             {{ form_row(form.codeBU) }}
             {{ form_row(form.name) }}
             {{ form_row(form.firstname) }}
             {{ form_row(form.email) }}
-        </fieldset>
-        <fieldset>
-            <legend>{{'admin.fieldset.user.legend.connexion'|trans({})}}</legend>
+                </fieldset>
+                <fieldset>
+                    <legend>{{'admin.fieldset.user.legend.connexion'|trans({})}}</legend>
             {{ form_row(form.username) }}
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.confirmPassword) }}
-        </fieldset>
+                </fieldset>
         {{ form_rest(form) }}
-        <input type="submit" value="{{'admin.button.user.update'|trans({})}}"/>
-    </form>
+                <input type="submit" value="{{'admin.button.user.update'|trans({})}}"/>
+            </form>
 {% endblock %}

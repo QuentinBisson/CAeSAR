@@ -7,11 +7,11 @@
 
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="1">
-        <a href="{{path('caesar_admin_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
-        <span class="divider">></span>
-    </li>
-    <li class="active"><span>{{'admin.breadcrumb.resources.skeleton'|trans({})}}</span></li>
+<li data-header="1">
+    <a href="{{path('caesar_admin_resource_homepage')}}">{{'admin.breadcrumb.resources.list'|trans({})}}</a>
+    <span class="divider">></span>
+</li>
+<li class="active"><span>{{'admin.breadcrumb.resources.skeleton'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}
@@ -19,11 +19,11 @@
 {% endblock %}
 
 {% block contentBody %}
-    <p class="flash-info">{{'admin.skeleton.change.info'|trans({})}}</p>
-    <form action="{{ path('caesar_admin_resource_skeleton') }}" method="post" {{ form_enctype(form) }}>
+        <p class="flash-info">{{'admin.skeleton.change.info'|trans({})}}</p>
+        <form action="{{ path('caesar_admin_resource_skeleton') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
         {{ form_row(form.skeleton, { 'attr' : { 'class': 'skeleton-textarea'} }) }}
-        <input type="submit" value="{{'admin.button.skeleton.change'|trans({})}}"/>
+                <input type="submit" value="{{'admin.button.skeleton.change'|trans({})}}"/>
         {{ form_rest(form) }}
-    </form>
+            </form>
 {% endblock %}

@@ -58,21 +58,28 @@
 /**
  * Trois boutons
  **/
-#main-form .main-form-actions {
+#main-form .main-form-actions, #modify-profile {
     margin: auto;
     margin-top: 10px;
     width: 640px;
     text-align: center;
 }
-#search-form .search-form-actions {
+#search-form .search-form-actions, #modify-profile {
     width: 210px;
     margin: auto;
     margin-top: 10px;
 }
 
+
+#modify-profile a {
+    display: inline-block;
+    text-decoration: none;
+    min-width: 230px;
+}
+
 .form-client input[type="submit"],
 #main-form .main-form-actions input[type="button"],
-#search-form .search-form-actions input[type="submit"]{
+#search-form .search-form-actions input[type="submit"], #modify-profile a{
     font-family: "Trebuchet MS", sans-serif;
     width: 210px;
     height: 60px;
@@ -112,9 +119,11 @@
     margin-top: 20px;
     margin-left: 200px;
 }
+
 .form-client input[type="submit"]:active,
 #main-form .main-form-actions input[type="button"]:active,
-#search-form .search-form-actions input[type="submit"]:active {
+#search-form .search-form-actions input[type="submit"]:active,
+#modify-profile a:active {
     color: #f3f3f6;
     background-color: rgb(83, 126, 192);
     background-image: -moz-linear-gradient(top,rgb(53, 86, 172),rgb(117, 163, 214));
@@ -140,7 +149,7 @@
 
 #caesar_userBundle_passwordType_plainPassword
 {
-       width: 640px;
+    width: 640px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

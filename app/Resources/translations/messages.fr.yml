@@ -1,137 +1,136 @@
-client:
-    navbar:
-        connexion: Connexion
-        inscription: Inscription
-        search_form:
-            placeholder: Rechercher ...
-            title: Rechercher une ressource
-        profile: Mon profil
-        borrowings: Mes emprunts
-        reservations: Mes réservations
-        logout: Déconnexion
-
-form:
-    user:
-        type:
-            label:
-                codeBu: Code B.U.
-                login: Login
-                password:
-                    normal: Mot de passe
-                    confirm: Confirmer le mot de passe
-                    new: Nouveau mot de passe
-                    current: Mot de passe actuel
-                email: Courriel
-                name: Nom
-                firstname: Prénom
-    shelf:
-        type:
-            label:
-                name: Nom de l'emplacement
-                description: Description
-                search: Rechercher
-    resource:
-        type:
-            label:
-                code: Code (ISBN ou Étiquette)
-                description: Titre
-                quantity: Quantité
-                shelf: Emplacement
-                local: Fichier local
-                url: Fichier distant
-                long:
-                    description: Description détaillée
-                search: Rechercher
-                skeleton: Squelette d'une ressource
-    tag:
-        choose: Choisissez un format
-        type:
-            label:
-                margin:
-                    left: Marge gauche (en cm)
-                    top: Marge supérieure (en cm)
-                gap:
-                    horizontal: Écart horizontal (en cm)
-                    vertical: Écart vertical (en cm)
-                page:
-                    width: Largeur de page (en cm)
-                    height: Hauteur de page (en cm)
-                height: Hauteur  (en cm)
-                width: Largeur (en cm)
-                columns: Colonnes
-                rows: Lignes
-                code: Code
-                format: Formats existants
-            text:
-                margin:
-                    left: Marge entre le bord gauche et la première colonne d'étiquette (en cm)
-                    top:  Marge entre le bord supérieur et la ligne colonne d'étiquette (en cm)
-                gap:
-                    horizontal: Écart horizontal entre le début d'une étiquette et le début de la suivante (en cm)
-                    vertical: Écart vertical entre le début d'une étiquette et le début de la suivante (en cm)
-    reservation:
-        type:
-            label:
-                date: Avant le
-    webmining.type.label:
-       active: Activer (ou non) le module 
-       google_books_url: URL de l'API Google books
-       authors: Autheur
-       publisher: Editeur
-       published_date: Date de publication
-       categories: Catégories
-       language: Langue
-       description: Description
-       page_count: Nombre de pages
-       variables: Nom des variables utilisées par le module de webmining
-       general: Aspect général
-    password.type.label.password: Input your password
-table:
-    foot:
-        count:
-            text: %value% lignes ont été trouvées
-    title:
-        users:
-          codeBu: Code B.U.
-          login: Login
-          nom: Nom
-          prenom: Prénom
-          email: Courriel
-        shelves:
-           name: Nom
-           description: Description
-        resources:
-            code: Code
-            description: Titre
-            shelf:
-                name: Nom de l'emplacement
-            quantity: Quantité
-        borrowings:
-            user: Utilisateur
-            resource: Ressource empruntée
-            date: Date d'emprunt
-            return:
-                date: Date de retour
-        reservations:
-            user: Utilisateur
-            resource: Ressource réservée
-            date: Date de réservation
-        tags:
-            code: Code ISBN-10, ISBN-13 ou CAeSAR-xxx
-            creationDate: Date de création
-    sort:
-        down: Trier vers le bas
-        up: Trier vers le haut
-
-ajax:
-    wait:
-        message: Veuillez patientez ...
-
-resource:
-    label:
-        identifier: Identifiant
-        location: Emplacement de la ressource
-        quantity: Quantité de ressources
-        details: Détails de la ressource
-        borrowings: Emprunts en cours
-        cover: Couverture de la ressource
+--- 
+Bad credentials: "Le login ou le mot de passe est invalide"
+ajax: 
+  wait: 
+    message: "Veuillez patientez ..."
+client: 
+  navbar: 
+    borrowings: "Mes emprunts"
+    connexion: Connexion
+    inscription: Inscription
+    logout: Déconnexion
+    profile: "Mon profil"
+    reservations: "Mes réservations"
+    search_form: 
+      placeholder: "Rechercher ..."
+      title: "Rechercher une ressource"
+form: 
+  password.type.label.password: "Input your password"
+  reservation: 
+    type: 
+      label: 
+        date: "Avant le"
+  resource: 
+    type: 
+      label: 
+        code: "Code (ISBN ou Étiquette)"
+        description: Titre
+        local: "Fichier local"
+        long: 
+          description: "Description détaillée"
+        quantity: Quantité
+        search: Rechercher
+        shelf: Emplacement
+        skeleton: "Squelette d'une ressource"
+        url: "Fichier distant"
+  shelf: 
+    type: 
+      label: 
+        description: Description
+        name: "Nom de l'emplacement"
+        search: Rechercher
+  tag: 
+    choose: "Choisissez un format"
+    type: 
+      label: 
+        code: Code
+        columns: Colonnes
+        format: "Formats existants"
+        gap: 
+          horizontal: "Écart horizontal (en cm)"
+          vertical: "Écart vertical (en cm)"
+        height: "Hauteur  (en cm)"
+        margin: 
+          left: "Marge gauche (en cm)"
+          top: "Marge supérieure (en cm)"
+        page: 
+          height: "Hauteur de page (en cm)"
+          width: "Largeur de page (en cm)"
+        rows: Lignes
+        width: "Largeur (en cm)"
+      text: 
+        gap: 
+          horizontal: "Écart horizontal entre le début d'une étiquette et le début de la suivante (en cm)"
+          vertical: "Écart vertical entre le début d'une étiquette et le début de la suivante (en cm)"
+        margin: 
+          left: "Marge entre le bord gauche et la première colonne d'étiquette (en cm)"
+          top: "Marge entre le bord supérieur et la ligne colonne d'étiquette (en cm)"
+  user: 
+    type: 
+      label: 
+        codeBu: "Code B.U."
+        email: Courriel
+        firstname: Prénom
+        login: Login
+        name: Nom
+        password: 
+          confirm: "Confirmer le mot de passe"
+          current: "Mot de passe actuel"
+          new: "Nouveau mot de passe"
+          normal: "Mot de passe"
+  webmining.type.label: 
+    active: "Activer (ou non) le module"
+    authors: Auteurs
+    categories: Catégories
+    description: Description
+    general: "Aspect général"
+    google_books_url: "URL de l'API Google books"
+    language: Langue
+    page_count: "Nombre de pages"
+    published_date: "Date de publication"
+    publisher: Editeur
+    variables: "Nom des variables utilisées par le module de webmining"
+resource: 
+  label: 
+    borrowings: "Emprunts en cours"
+    cover: "Couverture de la ressource"
+    details: "Détails de la ressource"
+    identifier: Identifiant
+    location: "Emplacement de la ressource"
+    quantity: "Quantité de ressources"
+table: 
+  foot: 
+    count: 
+      text: "%value% ligne a été trouvé | %value% lignes ont été trouvé"
+  sort: 
+    down: "Trier vers le bas"
+    up: "Trier vers le haut"
+  title: 
+    borrowings: 
+      date: "Date d'emprunt"
+      resource: "Ressource empruntée"
+      return: 
+        date: "Date de retour"
+      user: Utilisateur
+    reservations: 
+      date: "Date de réservation"
+      resource: "Ressource réservée"
+      user: Utilisateur
+    resources: 
+      code: Code
+      description: Titre
+      quantity: Quantité
+      shelf: 
+        name: "Nom de l'emplacement"
+    shelves: 
+      description: Description
+      name: Nom
+    tags: 
+      code: "Code ISBN-10, ISBN-13 ou CAeSAR-xxx"
+      creationDate: "Date de création"
+    users: 
+      codeBu: "Code B.U."
+      email: Courriel
+      login: Login
+      nom: Nom
+      prenom: Prénom

@@ -1,127 +1,127 @@
-client:
-    navbar:
-        connexion: Login
-        inscription: Register
-        search_form:
-            placeholder: Search ...
-            title: Search a resource
-        profile: My profile
-        borrowings: My borrowings
-        reservations: My reservations
-        logout: Log out
-form:
-    user.type.label:
-                codeBu: U.L. Code
-                login: Login
-                password:
-                    normal: Password
-                    confirm: Confirm your password
-                    new: New password
-                    current: Current password
-                email: Email address
-                name: Last name
-                firstname: First name
-    shelf.type.label:
-                name: Shelf name
-                description: Description
-                search: Search
-    resource.type.label:
-                code: Code (ISBN or Label)
-                description: Title
-                quantity: Quantity
-                shelf: Location
-                local: Local file
-                url: Distant file
-                long:
-                    description: Detailled description
-                search: Search
-                skeleton: Resource's skeleton
-    reservation.type.label.date: Before
-    tag:
-        choose: Choose a format
-        type:
-            label:
-                margin:
-                    left: Left margin (in cm)
-                    top: Top margin (in cm)
-                gap:
-                    horizontal: Horizontal gap (in cm)
-                    vertical: Vertical gap (in cm)
-                page:
-                    width: Page width (in cm)
-                    height: Page height (in cm)
-                height: Height  (in cm)
-                width: Width (in cm)
-                columns: Columns
-                rows: Rows
-                code: Code
-                format: Existing formats
-            text:
-                margin:
-                    left: Margin between the left border and the first column of labels (in cm)
-                    top:  Margin between the left border and the first row of labels (in cm)
-                gap:
-                    horizontal: Horizontal gap between the beginning of the first label and of the next (in cm)
-                    vertical: Vertical  gap between the beginning of the first label and of the next (in cm)
-    webmining.type.label:
-       active: Enable (or not) the module 
-       google_books_url: URL of Google books API
-       authors: Authors 
-       publisher: Publisher 
-       published_date: Published date 
-       categories: Categories 
-       language: Language 
-       description: Description 
-       page_count: Page count 
-       variables: Name of the variables used by the webmining module
-       general: General aspect
-    password.type.label.password: Saisser votre mot de passe
-table:
-    foot:
-        count:
-            text: %value% rows where found
-    title:
-        users:
-          codeBu: U.L. Code
-          login: Login
-          nom: Last name
-          prenom: First name
-          email: Email address
-        shelves:
-           name: Name
-           description: Description
-        resources:
-            code: Code
-            description: Title
-            shelf:
-                name: Location's name
-            quantity: Quantity
-        borrowings:
-            user: User
-            resource: Borrowed resource
-            date: Borrowing date
-            return:
-                date: Return date
-        reservations:
-            user: User
-            resource: Reserved resource
-            date: Reservation date
-        tags:
-            code: ISBN-10, ISBN-13 or C-xxx code
-            creationDate: Creation date
-    sort:
-        down: Sort down
-        up: Sort up
-ajax:
-    wait:
-        message: Please wait ...
-
-resource:
-    label:
-        identifier: Identifier
-        location: Resource's location
-        quantity: Resource's quantity
-        details: Resource's details
-        borrowings: Current borrowings
-        cover: Resource's cover
-Bad credentials: The login or the password is invalid
+--- 
+Bad credentials: "The login or the password is invalid"
+ajax: 
+  wait: 
+    message: "Please wait ..."
+client: 
+  navbar: 
+    borrowings: "My borrowings"
+    connexion: Login
+    inscription: Register
+    logout: "Log out"
+    profile: "My profile"
+    reservations: "My reservations"
+    search_form: 
+      placeholder: "Search ..."
+      title: "Search a resource"
+form: 
+  password.type.label.password: "Saisser votre mot de passe"
+  reservation.type.label.date: Before
+  resource.type.label: 
+    code: "Code (ISBN or Label)"
+    description: Title
+    local: "Local file"
+    long: 
+      description: "Detailled description"
+    quantity: Quantity
+    search: Search
+    shelf: Location
+    skeleton: "Resource's skeleton"
+    url: "Distant file"
+  shelf.type.label: 
+    description: Description
+    name: "Shelf name"
+    search: Search
+  tag: 
+    choose: "Choose a format"
+    type: 
+      label: 
+        code: Code
+        columns: Columns
+        format: "Existing formats"
+        gap: 
+          horizontal: "Horizontal gap (in cm)"
+          vertical: "Vertical gap (in cm)"
+        height: "Height  (in cm)"
+        margin: 
+          left: "Left margin (in cm)"
+          top: "Top margin (in cm)"
+        page: 
+          height: "Page height (in cm)"
+          width: "Page width (in cm)"
+        rows: Rows
+        width: "Width (in cm)"
+      text: 
+        gap: 
+          horizontal: "Horizontal gap between the beginning of the first label and of the next (in cm)"
+          vertical: "Vertical  gap between the beginning of the first label and of the next (in cm)"
+        margin: 
+          left: "Margin between the left border and the first column of labels (in cm)"
+          top: "Margin between the left border and the first row of labels (in cm)"
+  user.type.label: 
+    codeBu: "U.L. Code"
+    email: "Email address"
+    firstname: "First name"
+    login: Login
+    name: "Last name"
+    password: 
+      confirm: "Confirm your password"
+      current: "Current password"
+      new: "New password"
+      normal: Password
+  webmining.type.label: 
+    active: "Enable (or not) the module"
+    authors: Authors
+    categories: Categories
+    description: Description
+    general: "General aspect"
+    google_books_url: "URL of Google books API"
+    language: Language
+    page_count: "Page count"
+    published_date: "Published date"
+    publisher: Publisher
+    variables: "Name of the variables used by the webmining module"
+resource: 
+  label: 
+    borrowings: "Current borrowings"
+    cover: "Resource's cover"
+    details: "Resource's details"
+    identifier: Identifier
+    location: "Resource's location"
+    quantity: "Resource's quantity"
+table: 
+  foot: 
+    count: 
+      text: "%value% row was found | %value% rows were found"
+  sort: 
+    down: "Sort down"
+    up: "Sort up"
+  title: 
+    borrowings: 
+      date: "Borrowing date"
+      resource: "Borrowed resource"
+      return: 
+        date: "Return date"
+      user: User
+    reservations: 
+      date: "Reservation date"
+      resource: "Reserved resource"
+      user: User
+    resources: 
+      code: Code
+      description: Title
+      quantity: Quantity
+      shelf: 
+        name: "Location's name"
+    shelves: 
+      description: Description
+      name: Name
+    tags: 
+      code: "ISBN-10, ISBN-13 or C-xxx code"
+      creationDate: "Creation date"
+    users: 
+      codeBu: "U.L. Code"
+      email: "Email address"
+      login: Login
+      nom: "Last name"
+      prenom: "First name"

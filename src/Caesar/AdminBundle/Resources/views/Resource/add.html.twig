@@ -20,70 +20,70 @@
 {% endblock %}
 
 {% block contentBody %}
-<form action="{{ path('caesar_admin_resource_add') }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('caesar_admin_resource_add') }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
-    <div class="left max-width">
-        <div class="left limit-resource-mining">
-            <div class="left half-width">
+                <div class="left max-width">
+                    <div class="left limit-resource-mining">
+                        <div class="left half-width">
                 {{ form_label(form.code) }}
                 {{ form_errors(form.code) }}
                 {{ form_widget(form.code, { 'attr': {'class': 'resource-code', 'autocomplete' : 'off'} }) }}
-            </div>
+                            </div>
             {% if active_module %}
-                <div class="right half-width">
-                    <a class="web-mining-button">{{'admin.button.web.mining'|trans({})}}
-                        <span>
-                            <b>{{'admin.button.web.tooltip.title'|trans({})}}</b>
-                            <br />
+                            <div class="right half-width">
+                                <a class="web-mining-button">{{'admin.button.web.mining'|trans({})}}
+                                    <span>
+                                        <b>{{'admin.button.web.tooltip.title'|trans({})}}</b>
+                                        <br />
                             {{'admin.button.web.tooltip.content'|trans({})}}
-                        </span>
-                    </a>
-                </div>
+                                    </span>
+                                </a>
+                            </div>
             {% endif %}
-        </div>
-        <div class="clear"></div>
-        <div class="left half-width">
+                        </div>
+                        <div class="clear"></div>
+                        <div class="left half-width">
             {{ form_row(form.description, { 'attr': {'class': 'web-mining-to-color web-mining-description'} }) }}
             {{ form_row(form.quantity) }}
             {{ form_row(form.shelf, { 'attr': {'class': 'shelf-selection'} }) }}
-            <section class="shelf-description"></section>
+                                <section class="shelf-description"></section>
             {{ form_row(form.local, { 'attr': {'id': 'local-file'} })}}
-            <div>
+                                    <div>
                 {{ form_label(form.url) }}
                 {{ form_errors(form.url) }}
                 {{ form_widget(form.url, { 'attr': {'class': 'web-mining-to-color web-mining-image-url'} }) }}
-                <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
-            </div>
-        </div>
-        <div class="right half-width">
+                                            <input type="button" id="apply-image" value="{{'admin.button.resource.apply'|trans({})}}"/>
+                                        </div>
+                                    </div>
+                                    <div class="right half-width">
             {% if resource.path is defined and resource.path != "" %}
-                <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                                            <img id="resource-img" src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
             {% else %}
-                <img id="resource-img" src="" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
+                                            <img id="resource-img" src="" alt="{{'admin.button.resource.image.alt'|trans({})}}"/>
             {% endif %}
-        </div>
-        <div class="clear"></div>
-        <div>
-            <div class="long-description">
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div>
+                                            <div class="long-description">
                 {{ form_row(form.longDescription, { 'attr': {'class': 'web-mining-to-color web-mining-long-description'} }) }}
-            </div>
-            <input type="button" id="clearSkeleton" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
-            <input type="submit" value="{{'admin.button.resource.add'|trans({})}}"/>
-        </div>
-    </div>
+                                                </div>
+                                                <input type="button" id="clearSkeleton" value="{{'admin.button.resource.reinit.skeleton'|trans({})}}"/>
+                                                <input type="submit" value="{{'admin.button.resource.add'|trans({})}}"/>
+                                            </div>
+                                        </div>
     {{ form_row(form.path) }}
     {{ form_rest(form) }}
-    <input type = "hidden" class="empty-skeleton-url" value="{{path('caesar_admin_resource_clear_skeleton')}}" /> 
-    <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
-    <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
-    <input type = "hidden" id="loading-image-path" value="{{ asset('images/loading.gif') }}" />
-</form>
+                                        <input type = "hidden" class="empty-skeleton-url" value="{{path('caesar_admin_resource_clear_skeleton')}}" /> 
+                                        <input type = "hidden" class="shelf-description-url" value="{{path('caesar_admin_resource_description')}}" />
+                                        <input type = "hidden" class="webmining-url" value="{{path('caesar_admin_resource_webmining')}}" />
+                                        <input type = "hidden" id="loading-image-path" value="{{ asset('images/loading.gif') }}" />
+                                    </form>
 {% include 'CaesarAdminBundle:Resource:modal.html.twig' %}        
 {% endblock %}
 {% block javascripts %}
     {{parent()}}
-    <script type="text/javascript" src="{{asset("js/adminResources.js")}}"></script>   
+                                    <script type="text/javascript" src="{{asset("js/adminResources.js")}}"></script>   
     {% if active_module %}
-        <script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
+                                    <script type="text/javascript" src="{{asset("js/isbnChecker.js")}}"></script>
     {% endif %}
 {% endblock %}

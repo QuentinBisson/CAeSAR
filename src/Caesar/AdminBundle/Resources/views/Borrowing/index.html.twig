@@ -8,7 +8,7 @@
 
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="4" class="active"><span>{{'admin.breadcrumb.borrowings.list'|trans({})}}</span></li>
+<li data-header="4" class="active"><span>{{'admin.breadcrumb.borrowings.list'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}{{'admin.title.borrowings.list'|trans({})}}{% endblock %}
@@ -16,20 +16,20 @@
 {% block contentBody %}
 {% set route_params = app.request.get('_route_params') %}
 {% set route = app.request.get('_route') %}
-    <form action="{{ path(route, route_params) }}" method="post" {{ form_enctype(searchForm) }}>
+        <form action="{{ path(route, route_params) }}" method="post" {{ form_enctype(searchForm) }}>
         {{ form_errors(searchForm) }}
         {{ form_row(searchForm.archived) }}
-        <br/>
+                <br/>
         {{ form_rest(searchForm) }}
-        <br/>
-        <input type="submit" value="{{'admin.button.search'|trans({})}}" class="margin-left form-search-button"/>
-    </form>
-    <input type="hidden" id="serialize-request" value=""/>
-    <section class="contentBody">
+                <br/>
+                <input type="submit" value="{{'admin.button.search'|trans({})}}" class="margin-left form-search-button"/>
+            </form>
+            <input type="hidden" id="serialize-request" value=""/>
+            <section class="contentBody">
      {% include 'CaesarAdminBundle:Borrowing:list.html.twig' with {'borrowings' : borrowings, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
-    </section>
+                </section>
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
-        <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+                <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
 {% endblock %}

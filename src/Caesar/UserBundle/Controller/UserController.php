@@ -6,7 +6,6 @@ use Caesar\ResourceBundle\Form\ResourceSearchType;
 use Caesar\UserBundle\Entity\User;
 use Caesar\UserBundle\Form\PasswordType;
 use Caesar\UserBundle\Form\UserHandler;
-use Caesar\UserBundle\Form\UserProfileHandler;
 use Caesar\UserBundle\Form\UserType;
 use Caesar\UserBundle\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -102,7 +101,6 @@ class UserController extends Controller {
         return $this->render(
                         'CaesarUserBundle:User:login.html.twig', array(
                     'login_page_title' => $translator->trans('user.login.title', array(), 'CaesarUserBundle'),
-                    // last username entered by the user
                     'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                     'error' => $error,
                         )
@@ -111,19 +109,42 @@ class UserController extends Controller {
 
     public function modifyProfileAction() {
         $translator = $this->get('translator');
-        $user = $this->get('security.context')->getToken()->getUser();
         $security = $this->get('security.context');
+        $user = $security->getToken()->getUser();
         if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
-            $form = $this->createForm(new UserUpdateType(), $user);
-            $formHandler = new UserProfileHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
-            if ($formHandler->process()) {
-                $this->get('session')->setFlash('notice', $translator->trans('user.update_profile.successfull', array(), 'CaesarUserBundle'));
-                return $this->redirect($this->generateUrl('caesar_client_homepage'));
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('CaesarUserBundle:User');
+            $u = $repo->loadUserByUsername($user->getUsername());
+            $form = $this->createForm(new UserUpdateType(), $u);
+            $request = $this->get('request');
+            if ($request->isMethod('POST')) {
+                $form->bind($request);
+                if ($form->isValid()) {
+                    $u = $form->getData();
+                    $password = $u->getPassword();
+                    if (!empty($password)) {
+                        $plainPassword = $u->getPlainPassword();
+                        if (!empty($plainPassword)) {
+                            $encoder = $this->get('security.encoder_factory')->getEncoder($u);
+                            $u->setPassword($encoder->encodePassword($plainPassword, $u->getSalt()));
+                        }
+                    }
+                    $em->flush();
+
+                    $u->setAuthentified(true);
+                    $u->setIdentified(true);
+                    $token = new UsernamePasswordToken(
+                            $u->getUsername(), $u->getPassword(), "caesar", $u->getRoles());
+                    $token->setUser($u);
+                    $this->get('security.context')->setToken($token);
+                    $token->setAuthenticated(false);
+                    $this->get('session')->setFlash('notice', $translator->trans('user.update_profile.successfull', array(), 'CaesarUserBundle'));
+                    return $this->redirect($this->generateUrl('caesar_client_profile'));
+                }
             }
             return $this->render('CaesarUserBundle:User:modifyProfile.html.twig', array('form' => $form->createView()));
-        } else {
-            return $this->redirect($this->generateUrl('caesar_client_authenticate'));
         }
+        return $this->redirect($this->generateUrl('caesar_client_authenticate'));
     }
 
     public function authenticateAction() {
@@ -148,7 +169,6 @@ class UserController extends Controller {
                             $user->getUsername(), $encoded, "caesar", $user->getRoles());
                     $token->setUser($user);
                     $this->get('security.context')->setToken($token);
-                    //invalidate
                     $token->setAuthenticated(false);
 
                     return $this->redirect($this->generateUrl('caesar_client_modify_user'));
@@ -169,6 +189,15 @@ class UserController extends Controller {
         $form = $this->createForm(new UserType(), $user);
         $formHandler = new UserHandler($form, $this->get('request'), $this->get('doctrine')->getEntityManager(), $this->get('security.encoder_factory')->getEncoder($user));
         if ($formHandler->process()) {
+            $data = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $repository_user = $em->getRepository('CaesarUserBundle:User');
+            $u = $repository_user->loadUserByUsername($data->getUsername());
+            $u->setIdentified(true);
+            $token = new UsernamePasswordToken(
+                    $u->getUsername(), '', "caesar", $u->getRoles());
+            $this->get('security.context')->setToken($token);
+            $token->setAuthenticated(false);
             $this->get('session')->setFlash('notice', $translator->trans('user.register.successfull', array(), 'CaesarUserBundle'));
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         }

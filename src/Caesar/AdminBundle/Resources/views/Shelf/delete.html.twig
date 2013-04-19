@@ -6,11 +6,11 @@
 {% endblock %}
 {% block breadCrumb%}
     {{parent()}}
-    <li data-header="3">
-        <a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.breadcrumb.shelves.list'|trans({})}}</a>
-        <span class="divider">></span>
-    </li>
-    <li class="active"><span>{{'admin.breadcrumb.shelves.delete'|trans({})}}</span></li>
+<li data-header="3">
+    <a href="{{path('caesar_admin_shelf_homepage')}}">{{'admin.breadcrumb.shelves.list'|trans({})}}</a>
+    <span class="divider">></span>
+</li>
+<li class="active"><span>{{'admin.breadcrumb.shelves.delete'|trans({})}}</span></li>
 {% endblock %}
 
 {% block contentTitle %}
@@ -19,49 +19,49 @@
 
 {% block contentBody %}
     {% if books is defined %}
-    <div class="alert alert-warning">
+        <div class="alert alert-warning">
         {{'admin.label.location.delete.not.empty'|trans({})}}
-    </div>
-    <br />
-    <section class="contentBody">
-        <table class="table table-hover table-bordered table-striped overflow mid-height">
-            <thead>
-                <tr>
-                    <th class="resource-code">
-                        <p class="sort-label">
+            </div>
+            <br />
+            <section class="contentBody">
+                <table class="table table-hover table-bordered table-striped overflow mid-height">
+                    <thead>
+                        <tr>
+                            <th class="resource-code">
+                    <p class="sort-label">
                             {{'table.title.resources.code'|trans({})}}
                         </p>
-                    </th>
-                    <th class = "resource-description">
+                        </th>
+                        <th class = "resource-description">
                         <p class="sort-label">
                             {{'table.title.resources.description'|trans({})}}
-                        </p>
-                    </th>
-                    <th class = "resource-quantity" >
-                       <p class="sort-label">
+                            </p>
+                            </th>
+                            <th class = "resource-quantity" >
+                            <p class="sort-label">
                             {{'table.title.resources.shelf.name'|trans({})}}
-                        </p>
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td colspan="4">
+                                </p>
+                                </th>
+                                <th></th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
                         {{ 'table.foot.count.text'|trans({'%value%': count}) }}
-                    </td>
-                </tr>
-            </tfoot>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
         {% for book in books %}
-            <tr>
-                <td>{{ book.code }}</td>
-                <td>{{ book.description }}</td>
-                <td>{{ book.shelf.name }}</td>
-                <td><a href="{{ path('caesar_admin_resource_update', {'id':book.id}) }}">{{'admin.label.location.delete.move'|trans({})}}</a></td>
-            </tr>
+                                    <tr>
+                                        <td>{{ book.code }}</td>
+                                        <td>{{ book.description }}</td>
+                                        <td>{{ book.shelf.name }}</td>
+                                        <td><a href="{{ path('caesar_admin_resource_update', {'id':book.id}) }}">{{'admin.label.location.delete.move'|trans({})}}</a></td>
+                                    </tr>
         {% endfor %}
-        </table>
-    </section>
+                                </table>
+                            </section>
 
     {% endif %}
 {% endblock %}

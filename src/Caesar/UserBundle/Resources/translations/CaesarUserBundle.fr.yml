@@ -1,29 +1,34 @@
-user:
-    login:
-        title: "Connexion"
-        label:
-            login: "Connexion"
-            username: "Nom d'utilisateur"
-    authenticate:
-        title: "Authentification"
-    register:
-        title: "Inscription"
-        label:
-            register: "Enregistrer"
-        successfull: Inscription réussie
-search:
-    title: Recherche
-profile:
-    title: Mes informations
-form:
-    search:
-        placeholder: Entrez des mots-clés ...
-        search: Rechercher
-    main_form:
-        borrow: Emprunter
-        return: Rendre
-        consult: Consulter
-        placeholder: Entrez un code BU, ISBN, identifiant ...
-profile.change.informations: Changer mes informations
-borrowings.title: Mes emprunts
-fail.password: Mot de passe invalide
+--- 
+borrowings.title: "Mes emprunts"
+fail.password: "Mot de passe invalide"
+form: 
+  main_form: 
+    borrow: Emprunter
+    consult: Consulter
+    placeholder: "Entrez un code BU, ISBN, identifiant ..."
+    return: Rendre
+  search: 
+    placeholder: "Entrez des mots-clés ..."
+    search: Rechercher
+profile: 
+  title: "Mes informations"
+profile.change.informations: "Changer mes informations"
+search: 
+  title: Recherche
+user: 
+  authenticate: 
+    title: Authentification
+  login: 
+    label: 
+      login: Connexion
+      username: "Nom d'utilisateur"
+    title: Connexion
+  profile: 
+    label.modify: "Modifier mon profil"
+    modify.title: "Modification de mes informations"
+  register: 
+    label: 
+      register: Enregistrer
+    successfull: "Inscription réussie"
+    title: Inscription
+  update_profile.successfull: "Modification de votre profil réussi"

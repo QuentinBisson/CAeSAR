@@ -111,8 +111,8 @@ class BorrowingRepository extends EntityRepository {
     public function findAllInArray() {
         $array_return = array();
         $all = $this->findAll();
-        foreach($all as $one){
-            $tab = array($one->getId(), $one->getResource()->getId(),$one->getUser()->getId(), $one->getBorrowingDate());
+        foreach ($all as $one) {
+            $tab = array($one->getId(), $one->getResource()->getId(), $one->getUser()->getId(), $one->getBorrowingDate());
             array_push($array_return, $tab);
         }
         return $array_return;

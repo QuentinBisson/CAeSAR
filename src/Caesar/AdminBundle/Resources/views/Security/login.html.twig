@@ -8,24 +8,24 @@
 {% block content %}
 {{ parent() }}
 <div class="page">
-    
+
     <div class="top"></div>
     <div class="bot"></div>
     <h1>Administration</h1>
     <div class="errors">
     {% if error %}
-        <div class="flash-error">{{ error.message|trans }}</div>
+            <div class="flash-error">{{ error.message|trans }}</div>
     {% endif %}
     {% for type, flashMessages in app.session.flashbag.all() %}
         {% for flashMessage in flashMessages %}
             <div class="flash-{{ type }}">
                 {{ flashMessage|raw }}
-            </div>
+                </div>
         {% endfor %}
     {% endfor %}
-    </div>
-    <div class="log">
+            </div>
+            <div class="log">
     {% include 'CaesarAdminBundle:Security:login_form.html.twig' %}
-    </div>
-</div>
+                </div>
+            </div>
 {% endblock %}

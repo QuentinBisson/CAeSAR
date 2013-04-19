@@ -13,28 +13,28 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class CaesarUserAuthentificationProvider extends DaoAuthenticationProvider {
 
-  public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker = null, EncoderFactoryInterface $encoderFactory = null, $hideUserNotFoundExceptions = true) {
-    parent::__construct($userProvider, $userChecker, "caesar", $encoderFactory, $hideUserNotFoundExceptions);
-    $this->userProvider = $userProvider;
-    $this->encoderFactory = $encoderFactory;
-  }
-
-  protected function checkAuthentication(UserInterface $userInterface, UsernamePasswordToken $token) {
-    $user = $this->userProvider->loadUserByUsername($token->getUsername());
-    if ($user) {
-      if (!in_array('ROLE_ADMIN', $user->getRoles())) {
-        $authenticatedToken = new CaesarUserToken($user->getRoles());
-        $authenticatedToken->setUser($user);
-        $user->setIdentified(true);
-        if ($token->getCredentials() != null && $token->getCredentials() != "" && $user->getPassword() === $token->getCredentials()) {
-			$user->setAuthentified(true);
-		}
-        return $authenticatedToken;
-      } else {
-        throw new AuthenticationException('Un administrateur ne peut accéder ....');
-      }
+    public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker = null, EncoderFactoryInterface $encoderFactory = null, $hideUserNotFoundExceptions = true) {
+        parent::__construct($userProvider, $userChecker, "caesar", $encoderFactory, $hideUserNotFoundExceptions);
+        $this->userProvider = $userProvider;
+        $this->encoderFactory = $encoderFactory;
     }
-    throw new AuthenticationException('The authentication failed.');
-  }
+
+    protected function checkAuthentication(UserInterface $userInterface, UsernamePasswordToken $token) {
+        $user = $this->userProvider->loadUserByUsername($token->getUsername());
+        if ($user) {
+            if (!in_array('ROLE_ADMIN', $user->getRoles())) {
+                $authenticatedToken = new CaesarUserToken($user->getRoles());
+                $authenticatedToken->setUser($user);
+                $user->setIdentified(true);
+                if ($token->getCredentials() != null && $token->getCredentials() != "" && $user->getPassword() === $token->getCredentials()) {
+                    $user->setAuthentified(true);
+                }
+                return $authenticatedToken;
+            } else {
+                throw new AuthenticationException('Un administrateur ne peut accéder ....');
+            }
+        }
+        throw new AuthenticationException('The authentication failed.');
+    }
 
 }

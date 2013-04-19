@@ -15,13 +15,12 @@ class Config {
     private static $ACTIVATED_WEBMINING = 'active_webmining';
     private static $GOOGLE_BOOKS_URL = 'google_books_url';
     private static $RESOURCE_SKELETON = 'resource_skeleton';
-    
 
     private static function getParameter($container, $parameter) {
         $value = "";
         try {
             return $container->getParameter($parameter);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             var_dump(e);
         }
         return $value;
@@ -42,7 +41,7 @@ class Config {
     public static function getCategoriesKey($container) {
         return self::getParameter($container, self::$CATEGORIES);
     }
-    
+
     public static function getResourceSkeleton($container) {
         return self::getParameter($container, self::$RESOURCE_SKELETON);
     }
@@ -62,10 +61,10 @@ class Config {
     public static function getLanguageKey($container) {
         return self::getParameter($container, self::$LANGUAGE);
     }
+
     public static function getDescriptionKey($container) {
         return self::getParameter($container, self::$DESCRIPTION);
     }
-
 
     public static function getPageCountKey($container) {
         return self::getParameter($container, self::$PAGE_COUNT);

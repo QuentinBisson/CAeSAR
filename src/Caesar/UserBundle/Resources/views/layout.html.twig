@@ -8,9 +8,9 @@
 {% block body %}
     {% for type, flashMessages in app.session.flashbag.all() %}
         {% for flashMessage in flashMessages %}
-        <div class="flash-{{ type }}">
+<div class="flash-{{ type }}">
             {{ flashMessage|raw }}
-        </div>
+    </div>
     {% endfor %}
     {% endfor %}
     {% block caesar_user_content %}{% endblock caesar_user_content %}

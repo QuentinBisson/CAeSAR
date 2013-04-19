@@ -1,23 +1,63 @@
-validation:
-    assert:
-        error:
-            type:
-                page:
-                    height: La hauteur de page doit être un nombre flottant.
-                    width: La largeur de page doit être un nombre flottant.
-                margin:
-                    left: La marge gauche doit être un nombre flottant.
-                    top: La marge supérieure doit être un nombre flottant.
-                gap:
-                    horizontal: L'écart horizontal doit être un nombre flottant.
-                    vertical: L'écart vertical doit être un nombre flottant.
-                height: La hauteur d'une étiquette doit être un nombre flottant.
-                width: La largeur d'une étiquette doit être un nombre flottant.
-                columns:
-                    below:
-                        one: Le nombre de colonnes doit être supérieur à 1.
-                rows:
-                    below:
-                        one: Le nombre de lignes doit être supérieur à 1.
-                password: Votre mot de passe doit faire au moins 8 caractères|Votre mot de passe doit faire au moins 8 caractères
-                username: Votre nom d'utilisateur doit faire au moins 5 caractères|Votre nom d'utilisateur doit faire au moins 5 caractères
+--- 
+validation.assert.error.type: 
+  format: 
+    columns.below_one: "Le nombre de colonnes doit être supérieur à 1"
+    height: "La hauteur d'une étiquette doit être un nombre flottant"
+    hgap: "L'écart horizontal doit être un nombre flottant"
+    hgap_over_width: "L'écart horizontal doit être supérieur à la largeur des étiquettes"
+    margin_left: "La marge gauche doit être un nombre flottant"
+    margin_top: "La marge supérieure doit être un nombre flottant"
+    page_height: "La hauteur de page doit être un nombre flottant"
+    page_width: "La largeur de page doit être un nombre flottant"
+    rows.below_one: "Le nombre de ligne doit être supérieur à 1"
+    total_under_page_height: "La hauteur de la page doit être plus grande que la hauteur totale des étiquettes ajouté à la marge supérieure ainsi qu'aux écarts verticaux"
+    total_under_page_width: "La largeur de la page doit être plus grande que la largeur totale des étiquettes ajouté à la marge gauche ainsi qu'aux écarts horizontaux"
+    vgap: "L'écart vertical doit être un nombre flottant"
+    vgap_over_height: "L'écart vertical doit être supérieur à la hauteur des étiquettes"
+    width: "La largeur d'une étiquette doit être un nombre flottant"
+  not_empty: 
+    format: 
+      code: "Le code ne peut être vide"
+      columns: "Le nombre de colonne ne peut être vide"
+      height: "La hauteur des étiquettes ne peut être vide"
+      hgap: "L'écart horizontal ne peut être vide"
+      margin_left: "La marge gauche ne peut être vide"
+      margin_top: "La marge supérieure ne peut être vide"
+      page_height: "La hauteur de page ne peut être vide"
+      page_width: "La largeur de page ne peut être vide"
+      rows: "Le nombre de ligne ne peut être vide"
+      vgap: "L'écart vertical ne peut être vide"
+      width: "La largeur des étiquettes ne peut être vide"
+    resource: 
+      code: "Le code de la ressource ne peut être vide"
+      description: "La description de la ressource ne peut être vide"
+      long_description: "La description longue ne peut être vide"
+      path: "L'image de la ressource ne peut être vide"
+      quantity: "La quantité ne peut être vide"
+      shelf: "L'emplacement ne peut être vide"
+    shelf: 
+      description: "La description de l'emplacement ne peut être vide"
+      name: "Le nom de l'emplacement ne peut être vide"
+    user: 
+      codeBu: "Le code B.U. ne peut être vide"
+      email: "Le courriel ne peut être vide"
+      firstname: "Le prénom de l'utilisateur ne peut être vide"
+      name: "Le nom de l'utilisateur ne peut être vide"
+      password: "Le mot de passe ne peut être vide"
+      username: "Le login ne peut être vide"
+  regex: 
+    user: 
+      codeBu: "Le code B.U. ne doit contenir que des chiffres"
+      firstname: "Le prénom de l'utilisateur ne peut contenir de chiffres"
+      name: "Le nom de l'utilisateur ne peut contenir de chiffres"
+  resource: 
+    local.bad_mime_type: "Le fichier local doit être un JPEG ou un PNG"
+    quantity: 
+      bad_type: "La quantité doit être un entier"
+      below_one: "La quantité ne peut être inférieure à 1"
+    url.bad_type: "La valeur saisie n'est pas une URL valide"
+  user: 
+    email.invalid: "Le courriel saisi n'est pas une addresse mail valide"
+    password.below_eight: "Votre mot de passe doit faire au moins 8 caractères | Votre mot de passe doit faire au moins 8 caractères"
+    password.dont_match: "Le mot de passe et le mot de passe de confirmation ne correspondent pas"
+    username.below_five: "Votre nom d'utilisateur doit faire au moins 5 caractères | Votre nom d'utilisateur doit faire au moins 5 caractères"

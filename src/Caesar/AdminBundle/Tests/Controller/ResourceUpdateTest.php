@@ -6,10 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\ShelfBundle\Entity\Shelf;
 
-class ResourceUpdateTest extends WebTestCase{
- 
-    
-     /**
+class ResourceUpdateTest extends WebTestCase {
+
+    /**
      * @var \Doctrine\ORM\EntityManager
      */
     private $em;
@@ -51,7 +50,7 @@ class ResourceUpdateTest extends WebTestCase{
         $form['caesar_resourceBundle_resourceType[quantity]'] = 4;
         $form['caesar_resourceBundle_resourceType[longDescription]'] = 'Auteur: moi, page:259';
 
-        $client->submit($form);        
+        $client->submit($form);
     }
 
     /**
@@ -60,17 +59,16 @@ class ResourceUpdateTest extends WebTestCase{
     public function testUpdateDataValide() {
 
         $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000062');
-        
+
         $this->assertEquals('Pratique des tests logiciels 2', $resource_bis->getDescription());
         $this->assertEquals(4, $resource_bis->getQuantity());
         $this->assertEquals('Auteur: moi, page:259', $resource_bis->getLongDescription());
-        
+
         $this->em->remove($resource_bis);
         $this->em->remove($resource_bis->getShelf());
         $this->em->flush();
-        
     }
-    
+
     public function testDataInValide() {
         $client = static::createClient();
         $resource = new Resource();
@@ -96,7 +94,7 @@ class ResourceUpdateTest extends WebTestCase{
         $form['caesar_resourceBundle_resourceType[quantity]'] = 'a';
         $form['caesar_resourceBundle_resourceType[longDescription]'] = 'Auteur: moi, page:259';
 
-        $client->submit($form);        
+        $client->submit($form);
     }
 
     /**
@@ -105,16 +103,16 @@ class ResourceUpdateTest extends WebTestCase{
     public function testUpdateDataInValide() {
 
         $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000061');
-        
+
         $this->assertEquals('Pratique des tests logiciels', $resource_bis->getDescription());
         $this->assertEquals(3, $resource_bis->getQuantity());
         $this->assertEquals('Autre: moi, page:259', $resource_bis->getLongDescription());
-        
+
         $this->em->remove($resource_bis);
         $this->em->remove($resource_bis->getShelf());
         $this->em->flush();
-        
     }
+
 }
 
 ?>

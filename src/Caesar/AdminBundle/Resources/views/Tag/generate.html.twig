@@ -19,111 +19,111 @@
 {% endblock %}
 
 {% block contentBody %}
-<section class="contentBody">
-    <form class="left tag-generate-form" action="" method="post" {{ form_enctype(listForm) }}>
+        <section class="contentBody">
+            <form class="left tag-generate-form" action="" method="post" {{ form_enctype(listForm) }}>
         {{ form_errors(listForm) }}
-            <fieldset>
-                <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
+                    <fieldset>
+                        <legend>{{'admin.fieldset.tag.legend.choice'|trans({})}}</legend>
             {{ form_row(listForm.format , { 'attr': {'class': 'format-selection'} }) }}
             {{ form_rest(listForm) }}
-                <input type="button" value="{{'admin.button.tag.add'|trans({})}}" onclick="window.location.replace('{{path('caesar_admin_format_add')}}')" id="generator"/>
-                <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
-            </fieldset>
+                        <input type="button" value="{{'admin.button.tag.add'|trans({})}}" onclick="window.location.replace('{{path('caesar_admin_format_add')}}')" id="generator"/>
+                        <input type="hidden" value="{{path('caesar_admin_format_json')}}" class="format-url"/>
+                    </fieldset>
 
-            <fieldset>
-                <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
-                <div><p class="left"><label>{{'form.tag.type.label.gap.horizontal'|trans({})}}:</label><label class="format-data" id="horizontalGap"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.gap.vertical'|trans({})}}:</label><label class="format-data" id="verticalGap"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.margin.left'|trans({})}}:</label><label class="format-data" id="marginLeft"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.margin.top'|trans({})}}:</label><label class="format-data" id="marginTop"></label></p></div>
-            </fieldset>
-            <fieldset>
-                <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
-                <div><p class="left"><label>{{'form.tag.type.label.page.width'|trans({})}}:</label><label class="format-data" id="pageWidth"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.page.height'|trans({})}}:</label><label class="format-data" id="pageHeight"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.width'|trans({})}}:</label><label class="format-data" id="width"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.height'|trans({})}}:</label><label class="format-data" id="height"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.columns'|trans({})}}:</label><label class="format-data" id="columns"></label></p></div>
-                <div><p class="left"><label>{{'form.tag.type.label.rows'|trans({})}}:</label><label class="format-data" id="rows"></label></p></div>
-            </fieldset>
-            <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate"/>
-        </form>
+                    <fieldset>
+                        <legend>{{'admin.fieldset.tag.legend.positioning'|trans({})}}</legend>
+                        <div><p class="left"><label>{{'form.tag.type.label.gap.horizontal'|trans({})}}:</label><label class="format-data" id="horizontalGap"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.gap.vertical'|trans({})}}:</label><label class="format-data" id="verticalGap"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.margin.left'|trans({})}}:</label><label class="format-data" id="marginLeft"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.margin.top'|trans({})}}:</label><label class="format-data" id="marginTop"></label></p></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>{{'admin.fieldset.tag.legend.format'|trans({})}}</legend>
+                        <div><p class="left"><label>{{'form.tag.type.label.page.width'|trans({})}}:</label><label class="format-data" id="pageWidth"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.page.height'|trans({})}}:</label><label class="format-data" id="pageHeight"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.width'|trans({})}}:</label><label class="format-data" id="width"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.height'|trans({})}}:</label><label class="format-data" id="height"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.columns'|trans({})}}:</label><label class="format-data" id="columns"></label></p></div>
+                        <div><p class="left"><label>{{'form.tag.type.label.rows'|trans({})}}:</label><label class="format-data" id="rows"></label></p></div>
+                    </fieldset>
+                    <input type="submit" value="{{'admin.button.tag.generate'|trans({})}}" name="generate"/>
+                </form>
 
 
-        <section class="left tag-positioning-description">
-            <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
-            <div class="help">
-                <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
-                <dl>
-                    <dt>Margin left : </dt>
-                    <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
-                    <dt>Margin top : </dt>
-                    <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
-                    <dt>Vgap : </dt>
-                    <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
-                    <dt>Hgap : </dt>
-                    <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
-                </dl>
-            </div>
-        </section>
-    </section>
+                <section class="left tag-positioning-description">
+                    <img src="{{asset('bundles/caesaradmin/images/format.png')}}"/>
+                    <div class="help">
+                        <span class="help-title">{{'admin.summary.tag.help'|trans({})}}</span>
+                        <dl>
+                            <dt>Margin left : </dt>
+                            <dd>{{'form.tag.type.text.margin.left'|trans({})}}</dd>
+                            <dt>Margin top : </dt>
+                            <dd>{{'form.tag.type.text.margin.top'|trans({})}}</dd>
+                            <dt>Vgap : </dt>
+                            <dd>{{'form.tag.type.text.gap.vertical'|trans({})}}</dd>
+                            <dt>Hgap : </dt>
+                            <dd>{{'form.tag.type.text.gap.horizontal'|trans({})}}</dd>
+                        </dl>
+                    </div>
+                </section>
+            </section>
 {% endblock %}
 {% block javascripts %}
     {{parent()}}
-    <script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
-    <script type="text/javascript">
-        /* Pagination */
-        $(document).ready(function() {
-            var onChange = false;
-            $("select.format-selection").change(function(e){
-                if (!onChange) {
-                    onChange = true;
-                    $(this).parent('div').append('<img id="loading-format" src="{{ asset('images/loading.gif') }}" alt="loading" />');
-                    var url = $('input.format-url').attr('value');
+            <script type="text/javascript" src="{{asset("js/loadFormat.js")}}"></script>
+            <script type="text/javascript">
+                            /* Pagination */
+                            $(document).ready(function() {
+                                var onChange = false;
+                                $("select.format-selection").change(function(e) {
+                                    if (!onChange) {
+                                        onChange = true;
+                                        $(this).parent('div').append('<img id="loading-format" src="{{ asset('images/loading.gif') }}" alt="loading" />');
+                                        var url = $('input.format-url').attr('value');
 
-                    e.preventDefault();
-                    if ("" === $(this).find(":selected").attr('value')) {
-                        var form = document.getElementsByTagName("form")[0];
-                        var elements = form.elements;
-                        for (i = 0; i < elements.length; i++) {
-                            var field_type = elements[i].type.toLowerCase();
-                            switch (field_type) {
-                                case "number":
-                                case "text":
-                                    elements[i].value = "";
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        $('label.format-data').each(function() {
-                            $(this).text('');
-                        });
-                        $('#loading-format').remove();
-                        onChange = false;
-                        return false;
-                    }
+                                        e.preventDefault();
+                                        if ("" === $(this).find(":selected").attr('value')) {
+                                            var form = document.getElementsByTagName("form")[0];
+                                            var elements = form.elements;
+                                            for (i = 0; i < elements.length; i++) {
+                                                var field_type = elements[i].type.toLowerCase();
+                                                switch (field_type) {
+                                                    case "number":
+                                                    case "text":
+                                                        elements[i].value = "";
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            }
+                                            $('label.format-data').each(function() {
+                                                $(this).text('');
+                                            });
+                                            $('#loading-format').remove();
+                                            onChange = false;
+                                            return false;
+                                        }
 
-                    url += '/' + $(this).find(":selected").attr('value');
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        cache: false,
-                        success: function(data){
-                            var format = JSON.parse(data);
-                            fillForm(format);
-                            $('#loading-format').remove();
-                            onChange = false;
-                        },
-                        error: function(xhr, ajaxOptions, thrownError) {
-                            $('#loading-format').remove();
-                            onChange = false;
-                        }
-                    });
-                }
-                e.preventDefault();
-                return false; // Empêche la redirection normale
-            });
-        });
-    </script>
+                                        url += '/' + $(this).find(":selected").attr('value');
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url,
+                                            cache: false,
+                                            success: function(data) {
+                                                var format = JSON.parse(data);
+                                                fillForm(format);
+                                                $('#loading-format').remove();
+                                                onChange = false;
+                                            },
+                                            error: function(xhr, ajaxOptions, thrownError) {
+                                                $('#loading-format').remove();
+                                                onChange = false;
+                                            }
+                                        });
+                                    }
+                                    e.preventDefault();
+                                    return false; // Empêche la redirection normale
+                                });
+                            });
+                </script>
 {% endblock %}

@@ -15,14 +15,14 @@
         {{ form_errors(searchForm) }}
         {{ form_widget(searchForm.keywords, { 'attr': {'placeholder': 'form.search.placeholder'|trans({}, 'CaesarUserBundle'), 'class': 'form-text'} }) }}
         {{ form_rest(searchForm) }}
-        <div class="search-form-actions">
-            <input type="submit" name="rechercher" value="{{ 'form.search.search'|trans({}, 'CaesarUserBundle') }}">
-        </div>
-    </form>
-</section>
-<section class="contentBody">
+            <div class="search-form-actions">
+                <input type="submit" name="rechercher" value="{{ 'form.search.search'|trans({}, 'CaesarUserBundle') }}">
+            </div>
+        </form>
+    </section>
+    <section class="contentBody">
     {% include 'CaesarUserBundle:User:resourcesSearchList.html.twig' with {'resources' : resources, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
-</section>
+        </section>
 {% endblock %}
 {% block javascripts %}
 {{parent()}}
