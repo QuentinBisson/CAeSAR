@@ -3,17 +3,15 @@
 namespace Caesar\AdminBundle\Controller;
 
 use Caesar\AdminBundle\Entity\Config;
+use Caesar\AdminBundle\Form\LoadBackupType;
 use Caesar\AdminBundle\Form\ReservationDeleteType;
 use Caesar\AdminBundle\Form\WebminingModuleType;
 use Caesar\UserBundle\Form\ChangePasswordType;
-use Caesar\AdminBundle\Form\LoadBackupType;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use \ZipArchive;
-use \Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\File;
+use ZipArchive;
 
 class AdminController extends Controller {
 
@@ -228,7 +226,7 @@ class AdminController extends Controller {
                 foreach ($alldata as $datum) {
                     $insert = "INSERT INTO " . $key . " VALUES(";
                     foreach ($datum as $colum) {
-                        if (!$colum instanceof \DateTime) {
+                        if (!$colum instanceof DateTime) {
                             $insert .= "'" . $colum . "',";
                         } else {
                             $insert .= "'" . date_format($colum, 'Y-m-d H:i:s') . "',";

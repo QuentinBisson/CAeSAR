@@ -5,9 +5,12 @@ ajax:
   wait: 
     message: "Please wait ..."
 client: 
+  reservations:
+      exception: The reservation id %reservation% is not a valid reservation
+      notice.cancel: The reservation %reservation% was cancelled
   navbar: 
     borrowings: "My borrowings"
-    connexion: Login
+    connexion: Loginre
     inscription: Register
     logout: "Log out"
     profile: "My profile"

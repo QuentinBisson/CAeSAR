@@ -5,6 +5,9 @@ ajax:
   wait: 
     message: "Veuillez patientez ..."
 client: 
+  reservations:
+      exception: La réservation %reservation% n'est pas une réservation valide
+      notice.cancel: La réservation %reservation% a été annulée
   navbar: 
     borrowings: "Mes emprunts"
     connexion: Connexion

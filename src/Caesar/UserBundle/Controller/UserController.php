@@ -198,7 +198,7 @@ class UserController extends Controller {
                     $u->getUsername(), '', "caesar", $u->getRoles());
             $this->get('security.context')->setToken($token);
             $token->setAuthenticated(false);
-            $this->get('session')->setFlash('notice', $translator->trans('user.register.successfull', array(), 'CaesarUserBundle'));
+            $this->get('session')->setFlash('notice', $translatotranr->trans('user.register.successfull', array(), 'CaesarUserBundle'));
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         }
         return $this->render('CaesarUserBundle:User:register.html.twig', array('form' => $form->createView()));
@@ -276,6 +276,33 @@ class UserController extends Controller {
         }
 
         return $this->render("CaesarUserBundle:User:reservation.html.twig", $array);
+    }
+
+    public function cancelReservationAction($id) {
+        $translator = $this->get('translator');
+        if (filter_input(INPUT_GET, $id, FILTER_VALIDATE_INT) !== false) {
+            $clean = $id;
+        } else {
+            throw $this->createNotFoundException($translator->trans('client.reservations.exception', array('%reservation%' => $id)));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        if (isset($clean)) {
+            $reservation = $em->getRepository('CaesarUserBundle:Reservation')
+                    ->find($clean);
+        }
+
+        if (!$reservation) {
+            throw $this->createNotFoundException($translator->trans('client.reservations.exception', array('%reservation%' => $id)));
+        }
+        $em->remove($reservation);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+                'notice', $translator->trans('client.reservations.notice.cancel', array('%reservation%' => $reservation->getId()))
+        );
+
+        return $this->redirect($this->generateUrl('caesar_client_reservation'));
     }
 
 }

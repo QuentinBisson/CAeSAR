@@ -52,3 +52,9 @@ caesar_client_reservation:
     requirements:
         page:  \d+
         direction: asc|desc
+
+caesar_client_reservation_cancel:
+    pattern:  /cancel/reservation/{id}
+    defaults: { _controller: "CaesarUserBundle:User:cancelReservation", id:1}
+    requirements:
+        id:  \d+
