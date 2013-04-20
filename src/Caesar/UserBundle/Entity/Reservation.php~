@@ -3,7 +3,6 @@
 namespace Caesar\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\ReservationRepository")
@@ -33,8 +32,8 @@ class Reservation {
 
     /**
      * @var date $reservationDate
-     * 
-     * @ORM\Column(name="reservationDate", type="date")
+     *
+     * @ORM\Column(name="reservationDate", type="datetime")
      */
     private $reservationDate;
 
@@ -48,20 +47,18 @@ class Reservation {
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Resource $resource = null)
-    {
+    public function setResource(Resource2 $resource = null) {
         $this->resource = $resource;
-    
+
         return $this;
     }
 
     /**
      * Get resource
      *
-     * @return \Caesar\ResourceBundle\Resource 
+     * @return \Caesar\ResourceBundle\Resource
      */
-    public function getResource()
-    {
+    public function getResource() {
         return $this->resource;
     }
 
@@ -71,43 +68,40 @@ class Reservation {
      * @param \Caesar\UserBundle\Entity\User $user
      * @return Borrowing
      */
-    public function setUser(\Caesar\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Caesar\UserBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Caesar\UserBundle\Entity\User 
+     * @return \Caesar\UserBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
     /**
      * Set reservationDate
      *
-     * @param \DateTime $reservationDate
+     * @param DateTime $reservationDate
      * @return Reservation
      */
-    public function setReservationDate($reservationDate)
-    {
+    public function setReservationDate($reservationDate) {
         $this->reservationDate = $reservationDate;
-    
+
         return $this;
     }
 
     /**
      * Get reservationDate
      *
-     * @return \DateTime 
+     * @return DateTime
      */
-    public function getReservationDate()
-    {
+    public function getReservationDate() {
         return $this->reservationDate;
     }
+
 }

@@ -3,10 +3,9 @@
 namespace Caesar\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\BorrowingRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="borrowing"),
  */
 class Borrowing {
@@ -33,10 +32,15 @@ class Borrowing {
 
     /**
      * @var date $borrowingDate
-     * 
-     * @ORM\Column(name="borrowingDate", type="date")
+     *
+     * @ORM\Column(name="borrowingDate", type="datetime")
      */
     private $borrowingDate;
+
+    /** @ORM\PrePersist */
+    public function onPrePersist() {
+        $this->borrowingDate = new \DateTime("now");
+    }
 
     public function getId() {
         return $this->id;
@@ -57,12 +61,11 @@ class Borrowing {
     /**
      * Get borrowingDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBorrowingDate() {
         return $this->borrowingDate;
     }
-
 
     /**
      * Set resource
@@ -70,20 +73,18 @@ class Borrowing {
      * @param \Caesar\ResourceBundle\Resource $resource
      * @return Borrowing
      */
-    public function setResource(\Caesar\ResourceBundle\Resource $resource = null)
-    {
+    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null) {
         $this->resource = $resource;
-    
+
         return $this;
     }
 
     /**
      * Get resource
      *
-     * @return \Caesar\ResourceBundle\Resource 
+     * @return \Caesar\ResourceBundle\Resource
      */
-    public function getResource()
-    {
+    public function getResource() {
         return $this->resource;
     }
 
@@ -93,20 +94,19 @@ class Borrowing {
      * @param \Caesar\UserBundle\Entity\User $user
      * @return Borrowing
      */
-    public function setUser(\Caesar\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Caesar\UserBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Caesar\UserBundle\Entity\User 
+     * @return \Caesar\UserBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
+
 }

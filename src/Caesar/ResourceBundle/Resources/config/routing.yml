@@ -13,6 +13,10 @@ caesar_resource_borrow:
 caesar_resource_return:
     pattern:  /return/{code}
     defaults: { _controller: "CaesarResourceBundle:Resource:return" , code: ''}
+    
+caesar_resource_subscribe:
+    pattern:  /subscribe/{code}
+    defaults: { _controller: "CaesarResourceBundle:Resource:subscribe" , code: ''}
 
 caesar_blocking_reservations:
     pattern:  /blocking/reservations/{page}/{resource}/{user}

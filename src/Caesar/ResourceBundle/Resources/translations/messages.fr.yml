@@ -20,6 +20,9 @@ return:
 client:
     borrow:
         exception: La ressource avec le code ou l'identifiant %code% est introuvable
+    subscription:
+        resource:
+            subscribed: Vous êtes abonné à la ressource %resource%.
     borrowing:
         resource:
             borrowed: La ressource %resource% a été empruntée.

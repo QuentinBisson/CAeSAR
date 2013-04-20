@@ -1,5 +1,9 @@
 {
-    "hash": "2bd755cb6828aca84ae0681cf293b20f",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "9ed90c385a484a3a0de6afa083a4b17d",
     "packages": [
         {
             "name": "doctrine/common",
@@ -55,7 +59,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -289,7 +293,7 @@
                     "Doctrine\\Bundle\\FixturesBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -507,7 +511,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -566,7 +570,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -609,7 +613,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -672,7 +676,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -768,7 +772,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.2.1",
+                "url": "https://github.com/Seldaek/monolog/zipball/1.2.1",
                 "reference": "1.2.1",
                 "shasum": ""
             },
@@ -812,7 +816,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2012-08-29 11:53:20"
+            "time": "2012-08-29 04:53:20"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -1047,7 +1051,7 @@
                     "Symfony\\Bundle\\AsseticBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1297,7 +1301,7 @@
                     "Twig_Extensions_": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1367,8 +1371,10 @@
         }
     ],
     "packages-dev": [
+
     ],
     "aliases": [
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
@@ -1381,5 +1387,6 @@
         "php": ">=5.3.4"
     },
     "platform-dev": [
+
     ]
 }
