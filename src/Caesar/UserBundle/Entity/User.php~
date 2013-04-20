@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Entity(repositoryClass="Caesar\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNCodeBU", columns={"codeBu"}),
  * @ORM\UniqueConstraint(name="UNUsername", columns={"username"})})
- * 
+ *
  * @UniqueEntity("codeBu")
  * @UniqueEntity("username")
  */
@@ -28,61 +28,96 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var int $codeBu
-     * 
+     *
      * @ORM\Column(name="codeBu", type="integer",length=10, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^[0-9]*$/")
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.codeBu"
+     * )
+     * @Assert\Regex(
+     *  pattern="/^[0-9]*$/", 
+     *  match=true, 
+     *  message="validation.assert.error.type.regex.user.codeBu")
      */
     private $codeBu;
 
     /**
-     * @var string $login
-     * 
+     * @var string $username
+     *
      * @ORM\Column(name="username", type="string", length=100, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.username"
+     * )
+     * @Assert\MinLength(
+     *     limit=5,
+     *     message="validation.assert.error.type.user.username.below_five"
+     * )
      */
     private $username;
 
     /**
      * @var string $password
-     * 
-     * @ORM\Column(name="password", type="string", length=100)
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.password"
+     * )
+     * @Assert\MinLength(
+     *     limit=8,
+     *     message="validation.assert.error.type.user.password.below_eight"
+     * )
      */
     private $password;
 
     /**
+     *
+     * @var type Boolean used to know if a user is identified
+     */
+    private $identified;
+
+    /**
+     *
+     * @var type Boolean used to know if a user is authentified
+     */
+    private $authentified;
+
+    /**
      * @var string $plainPassword
-     * 
+     *
      * Il ne sera pas ajouté en base de données
      */
     private $plainPassword;
 
     /**
      * @var string $confirmPassword
-     * 
+     *
      * Il ne sera pas ajouté en base de données
      */
     protected $confirmPassword;
 
     /**
      * @var string $email
-     * 
+     *
      * @ORM\Column(name="email", type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.email"
+     * )
+     * @Assert\Email(
+     *   message="validation.assert.error.type.user.email.invalid"
+     * )
      */
     private $email;
 
     /**
      * @var string $name
-     * 
+     *
      * @ORM\Column(name="name", type="string", length=60)
-     * @Assert\NotBlank()
-     * 
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.name"
+     * )     
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your name cannot contain a number"
+     *     message="validation.assert.error.type.regex.user.name"
      * )
      *
      */
@@ -90,21 +125,22 @@ class User implements UserInterface, EquatableInterface, \Serializable {
 
     /**
      * @var string $firstname
-     * 
+     *
      * @ORM\Column(name="firstname", type="string", length=50)
-     * @Assert\NotBlank()
-     * 
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.user.firstname"
+     * )
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your name cannot contain a number"
+     *     message="validation.assert.error.type.regex.user.firstname"
      * )
      */
     private $firstname;
 
     /**
      * @var string $role
-     * 
+     *
      * @ORM\Column(name="role", type="string", length=50)
      */
     private $role;
@@ -118,16 +154,18 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\BorrowingArchive", mappedBy="user")
      */
     private $borrowingArchives;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="user")
      */
     private $reservations;
-    
+
     function __construct() {
         $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->borrowingArchives = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->identified = false;
+        $this->authentified = false;
     }
 
     public function getId() {
@@ -216,7 +254,7 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     }
 
     /**
-     * @Assert\True(message = "The password and confirmation password do not match")
+     * @Assert\True(message = "validation.assert.error.type.user.password.dont_match")
      */
     public function isPasswordEqualToConfirmationPassword() {
         return ($this->plainPassword === $this->confirmPassword);
@@ -227,7 +265,30 @@ class User implements UserInterface, EquatableInterface, \Serializable {
     }
 
     public function getRoles() {
-        return array($this->role);
+        $roles = array($this->role);
+        if ($this->isIdentified()) {
+            array_push($roles, $this->role . "_IDENTIFIED");
+        }
+        if ($this->isAuthentified()) {
+            array_push($roles, $this->role . "_AUTHENTIFIED");
+        }
+        return $roles;
+    }
+
+    public function isIdentified() {
+        return $this->identified;
+    }
+
+    public function setIdentified($identified) {
+        $this->identified = $identified;
+    }
+
+    public function isAuthentified() {
+        return $this->authentified;
+    }
+
+    public function setAuthentified($authentified) {
+        $this->authentified = $authentified;
     }
 
     public function getSalt() {
@@ -242,20 +303,35 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @see \Serializable::serialize()
      */
     public function serialize() {
-        return serialize(array(
-                    $this->id,
-                ));
+        $array = array();
+        if (isset($this->id)) {
+            array_push($array, $this->id);
+        }
+        if (isset($this->username)) {
+            array_push($array, $this->username);
+        }
+        if (isset($this->password)) {
+            array_push($array, $this->password);
+        }
+        return serialize($array);
     }
 
     /**
      * @see \Serializable::unserialize()
      */
-    public function unserialize($serialized) {
-        list (
-                $this->id,
-                ) = unserialize($serialized);
+    public function unserialize($data) {
+        $array = unserialize($data);
+        $size = count($array);
+        if ($size >= 1) {
+            $this->id = $array[0];
+            if ($size >= 2) {
+                $this->username = $array[1];
+                if ($size >= 3) {
+                    $this->password = $array[2];
+                }
+            }
+        }
     }
-
 
     /**
      * Add borrowings
@@ -263,10 +339,9 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @param \Caesar\UserBundle\Entity\Borrowing $borrowings
      * @return User
      */
-    public function addBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings)
-    {
+    public function addBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings) {
         $this->borrowings[] = $borrowings;
-    
+
         return $this;
     }
 
@@ -275,18 +350,16 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      *
      * @param \Caesar\UserBundle\Entity\Borrowing $borrowings
      */
-    public function removeBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings)
-    {
+    public function removeBorrowing(\Caesar\UserBundle\Entity\Borrowing $borrowings) {
         $this->borrowings->removeElement($borrowings);
     }
 
     /**
      * Get borrowings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBorrowings()
-    {
+    public function getBorrowings() {
         return $this->borrowings;
     }
 
@@ -296,10 +369,9 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
      * @return User
      */
-    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
-    {
+    public function addBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives) {
         $this->borrowingArchives[] = $borrowingArchives;
-    
+
         return $this;
     }
 
@@ -308,18 +380,16 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      *
      * @param \Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives
      */
-    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives)
-    {
+    public function removeBorrowingArchive(\Caesar\UserBundle\Entity\BorrowingArchive $borrowingArchives) {
         $this->borrowingArchives->removeElement($borrowingArchives);
     }
 
     /**
      * Get borrowingArchives
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBorrowingArchives()
-    {
+    public function getBorrowingArchives() {
         return $this->borrowingArchives;
     }
 
@@ -329,10 +399,9 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @param \Caesar\UserBundle\Entity\Reservation $reservations
      * @return User
      */
-    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
-    {
+    public function addReservation(\Caesar\UserBundle\Entity\Reservation $reservations) {
         $this->reservations[] = $reservations;
-    
+
         return $this;
     }
 
@@ -341,18 +410,21 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      *
      * @param \Caesar\UserBundle\Entity\Reservation $reservations
      */
-    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations)
-    {
+    public function removeReservation(\Caesar\UserBundle\Entity\Reservation $reservations) {
         $this->reservations->removeElement($reservations);
     }
 
     /**
      * Get reservations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReservations()
-    {
+    public function getReservations() {
         return $this->reservations;
     }
+
+    public function getUserDescription() {
+        return $this->name . ' ' . $this->firstname . '(' . $this->email . ')';
+    }
+
 }

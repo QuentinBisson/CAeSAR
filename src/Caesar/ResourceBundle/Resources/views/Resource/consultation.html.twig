@@ -25,6 +25,11 @@
             <span class="consultation-quantity">{{'resource.label.quantity'|trans({})}}:</span><br />
             <span class="consultation-text">{{resource.quantity}}</span>
         </p>
+        
+       	<div class="general-buttons">
+        	<input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
+        </div>
+   		
     </div>
 
     <div class="consultation-div clear">
@@ -60,4 +65,35 @@
         {% endif %}
         </div>
     </section>
+{% endblock %}
+
+
+{% block javascripts %}    
+	{{parent()}}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    	var code = {{resource.code}};    	
+        /*$('#giveMeFocus').keyup(function() {
+            var code = $(this).val();
+            if (code.length < 8) {
+                $('input[type="button"]').attr("disabled", 'disabled');
+                return true;
+            }*/
+
+            //if (new RegExp("^C-[0-9]*$", "g").test(code) || isValidIsbn(code)) {
+                //checkResource(code);
+                var button = $('[name="subscribe"]');
+                button.prop('disabled', false);
+                button.click(function() {
+                    window.location.replace('{{path('caesar_resource_subscribe')}}/' + code);
+                });
+            /*} else {
+                $('input[type="button"]').attr("disabled", 'disabled');
+                //display connexion message
+            }*/
+        //});
+    });
+
+    </script>
 {% endblock %}

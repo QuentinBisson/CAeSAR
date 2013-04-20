@@ -10,6 +10,8 @@ form:
   search: 
     placeholder: "Entrez des mots-clés ..."
     search: Rechercher
+  subscribe_form:
+    subscribe: S'abonner
 profile: 
   title: "Mes informations"
 profile.change.informations: "Changer mes informations"
