@@ -209,7 +209,9 @@ class ResourceController extends Controller {
                     'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
                         '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
             );
+
             $this->notify($resource, $q - $borrowedQuantity);
+
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $user = $this->get('security.context')->getToken()->getUser();
@@ -236,7 +238,7 @@ class ResourceController extends Controller {
                 $em->persist($archivedBorrowing);
                 $em->flush();
 
-                $this->notify($resource, $q - $borrowedQuantity);
+                $this->notify($resource, $q - $borrowedQuantity + 1);
 
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
@@ -318,31 +320,28 @@ class ResourceController extends Controller {
 
     private function notify($resource, $availableReservations) {
         $userToNotify = array();
-        //var_dump($resource);
-        $reservations = $resource->getReservations();
-        var_dump($reservations->first());
         $i = 0;
-        array_push($userToNotify, $reservations->first());
-        while ($i < $availableReservations - 1) {
-            array_push($userToNotify, $reservations->next());
+        $array = $resource->getReservations()->toArray();
+        $sizeOfArray = count($array);
+        while ($i < $availableReservations && $i < $sizeOfArray) {
+            array_push($userToNotify, $array[$i]->getUser());
             $i++;
         }
 
         $to = array();
-        var_dump($userToNotify);
-        echo var_dump($userToNotify);
-        foreach ($userToNotify as $r) {
-            array_push($to, $r->getUser()->getEmail());
+
+        foreach ($userToNotify as $u) {
+            array_push($to, $u->getEmail());
         }
         $transport = Swift_SmtpTransport::newInstance();
-        $message = Swift_Message::newInstance($transport)
+        /*$message = Swift_Message::newInstance($transport)
                 ->setSubject('Notification: Livre réservé')
                 ->setFrom('noreply@caesar.com')
                 ->setTo($to)
                 ->setBody($this->renderView(
                         'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource)), 'text/html'
         );
-        $this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);*/
     }
     
     public function subscribeAction($code = '') {
