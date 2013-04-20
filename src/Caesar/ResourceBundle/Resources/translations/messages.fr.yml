@@ -16,16 +16,20 @@ borrow:
     title: Emprunter une ressource
 return:
     title: Rendre une ressource
+subscription:
+    title: S'abonner à une ressource
 
 client:
     borrow:
         exception: La ressource avec le code ou l'identifiant %code% est introuvable
     subscription:
+        exception: La ressource avec le code ou l'identifiant %code% est introuvable
         resource:
             subscribed: Vous êtes abonné à la ressource %resource%.
+            connect: Il est nécessaire que vous vous connectiez pour vous abonner %resource%
     borrowing:
         resource:
-            borrowed: La ressource %resource% a été empruntée.
+            borrowed: La ressource %resource% a été empruntée
             reservation:
                 borrowed: La ressource %resource% que vous avez réservée est maintenant empruntée
                 error: Vous ne pouvez pas emprunter %resource% car vous n'êtes pas en haut de la liste de réservation

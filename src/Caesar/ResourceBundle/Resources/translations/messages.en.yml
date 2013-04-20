@@ -16,6 +16,8 @@ borrow:
     title: Borrow a resource
 return:
     title: Return a resource
+subscription:
+    title: Subscribe to a resource
 return:
     instead_of:
         title: Return a resource
@@ -23,6 +25,11 @@ return:
 client:
     borrow:
         exception: The resource with the code or the identifier %code% is unobtainable
+        subscription:
+            exception: The resource with the code or the identifier %code% is unobtainable
+            resource:
+                subscribed: You subscribe to the resource %resource%
+                connect: You need to log in to subscribe %resource%
     borrowing:
         resource:
             borrowed: The resource %resource% has been borrowed.
@@ -37,7 +44,7 @@ client:
         impossible:
             exception: You can't return %resource% because the resource is not currently borrowed
         accepted: The resource entitled %resource% is considered returned
-        refused: You can't return %resource% because you didn't borrow it.
+        refused: You can't return %resource% because you didn't borrow it
         #If someone asked you to returned the resource for him, you can do it. Else, you can't return the resource
         connect: You need to log in to return %resource%
         shelf: The resource %resource% must be stow at the location %shelf_name%. <br /><b>More informations</b><br />%shelf_description%
