@@ -5,6 +5,7 @@ namespace Caesar\ResourceBundle\Controller;
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
 use Caesar\UserBundle\Entity\BorrowingArchive;
+use Swift_Encoding;
 use Swift_Message;
 use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -329,15 +330,17 @@ class ResourceController extends Controller {
         foreach ($userToNotify as $u) {
             array_push($to, $u->getEmail());
         }
+        $translator = $this->get('translator');
         $transport = Swift_SmtpTransport::newInstance();
-        /*$message = Swift_Message::newInstance($transport)
-                ->setSubject('Notification: Livre réservé')
+        $message = Swift_Message::newInstance($transport)
+                ->setSubject($translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s'))))
                 ->setFrom('noreply@caesar.com')
                 ->setTo($to)
                 ->setBody($this->renderView(
                         'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource)), 'text/html'
         );
-        $this->get('mailer')->send($message);*/
+        $message->setEncoder(Swift_Encoding::get8BitEncoding());
+        $this->get('mailer')->send($message);
     }
 
 }

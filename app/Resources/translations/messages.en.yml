@@ -1,5 +1,6 @@
 --- 
 Bad credentials: "The login or the password is invalid"
+resource.reservation.available: "[%date%] Notice: A resource you reserved is available" 
 ajax: 
   wait: 
     message: "Please wait ..."

@@ -1,5 +1,6 @@
 --- 
 Bad credentials: "Le login ou le mot de passe est invalide"
+resource.reservation.available: "[%date%] Informations: Une ressource que vous avez réservé est disponible"
 ajax: 
   wait: 
     message: "Veuillez patientez ..."
