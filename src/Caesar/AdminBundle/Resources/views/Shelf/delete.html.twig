@@ -48,7 +48,13 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="4">
-                        {{ 'table.foot.count.text'|trans({'%value%': count}) }}
+                        {% if count == 0 %} 
+                            {{ 'table.foot.count.zero'|trans() }}
+                        {% elseif count == 1 %} 
+                            {{ 'table.foot.count.one'|trans({'%value%': count}) }}
+                        {% else %} 
+                            {{ 'table.foot.count.more_than_one'|trans({'%value%': count}) }}
+                        {% endif %}
                                             </td>
                                         </tr>
                                     </tfoot>

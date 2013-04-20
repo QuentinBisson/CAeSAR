@@ -58,9 +58,6 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\NotBlank(
-     *  message="validation.assert.error.type.not_empty.user.password"
-     * )
      * @Assert\MinLength(
      *     limit=8,
      *     message="validation.assert.error.type.user.password.below_eight"
