@@ -31,4 +31,60 @@ class Subscription {
     private $user;
 
     
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set resource
+     *
+     * @param \Caesar\ResourceBundle\Entity\Resource $resource
+     * @return Subscription
+     */
+    public function setResource(\Caesar\ResourceBundle\Entity\Resource $resource = null)
+    {
+        $this->resource = $resource;
+    
+        return $this;
+    }
+
+    /**
+     * Get resource
+     *
+     * @return \Caesar\ResourceBundle\Entity\Resource 
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Caesar\UserBundle\Entity\User $user
+     * @return Subscription
+     */
+    public function setUser(\Caesar\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Caesar\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

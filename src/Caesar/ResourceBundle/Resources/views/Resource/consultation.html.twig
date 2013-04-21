@@ -27,7 +27,11 @@
         </p>
 
        	<div class="general-buttons">
-            <input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
+       		{% if alreadySubscribed == false %}
+       			<input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
+			{% else %}
+			    <input type="button" name="unsubscribe" value="{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}" >
+			{% endif %}            
         </div>
 
     </div>
@@ -79,6 +83,12 @@
             button.prop('disabled', false);
             button.click(function() {
                 window.location.replace('{{path('caesar_resource_subscribe')}}/' + code);
+            });
+
+            var button = $('[name="unsubscribe"]');
+            button.prop('disabled', false);
+            button.click(function() {
+                window.location.replace('{{path('caesar_resource_unsubscribe')}}/' + code);
             });
 
         });

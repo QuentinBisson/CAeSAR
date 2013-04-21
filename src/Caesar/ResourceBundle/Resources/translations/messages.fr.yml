@@ -26,6 +26,7 @@ client:
         exception: La ressource avec le code ou l'identifiant %code% est introuvable
         resource:
             subscribed: Vous êtes abonné à la ressource %resource%.
+            unsubscribed: Vous êtes désabonné à la ressource %resource%.
             connect: Il est nécessaire que vous vous connectiez pour vous abonner %resource%
     borrowing:
         resource:

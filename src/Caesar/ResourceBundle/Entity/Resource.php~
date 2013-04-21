@@ -24,64 +24,76 @@ class Resource {
     /**
      * @ORM\ManyToOne(targetEntity="Caesar\ShelfBundle\Entity\Shelf", inversedBy="resources")
      * @ORM\JoinColumn(name="shelf_id", referencedColumnName="id")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.shelf"
+     * )
      * */
     private $shelf;
 
     /**
      * @var int $code
-     * 
+     *
      * @ORM\Column(name="code", type="string",length=20, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.code"
+     * )
      */
     private $code;
 
     /**
      * @var int $description
-     * 
+     *
      * @ORM\Column(name="description", type="string",length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.description"
+     * )
      */
     private $description;
 
     /**
      * @var int $longDescription
-     * 
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.long_description"
+     * )
      * @ORM\Column(name="longDescription", type="text")
-     * @Assert\NotBlank()
      */
     private $longDescription;
 
     /**
      * @var int $quantity
-     * 
+     *
      * @ORM\Column(name="quantity", type="integer")
-     * @Assert\NotBlank()
-     * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide."))
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.quantity"
+     * )
+     * @Assert\Min(limit = "1", message = "validation.assert.error.type.resource.quantity.below_one")
+     * @Assert\Type(type="integer", message="validation.assert.error.type.resource.quantity.bad_type"))
      */
     private $quantity;
 
     /**
      * @var string $path
-     * 
+     *
      * @ORM\Column(name="path", type="string",length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *  message="validation.assert.error.type.not_empty.resource.path"
+     * )
      */
     private $path;
 
     /**
      * @var string $local
      * @Assert\Image(
-     *  mimeTypes = {"image/jpeg","image/png"}
+     *  mimeTypes = {"image/jpeg","image/png"},
+     *  mimeTypesMessage="validation.assert.error.type.resource.local.bad_mime_type"
      * )
-     * 
+     *
      */
     private $local;
 
     /**
      * @var string $url
-     * @Assert\Url()
-     * @Assert\Regex("/^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|png)$/")
+     * @Assert\Url(message="validation.assert.error.type.resource.url.bad_type")
      */
     private $url;
 
@@ -97,8 +109,14 @@ class Resource {
 
     /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="resource")
+     * @ORM\OrderBy({"reservationDate" = "ASC"})
      */
     private $reservations;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Subscription", mappedBy="resource")
+     */
+    private $subscriptions;
 
     function __construct() {
         $this->borrowings = new ArrayCollection();
@@ -109,7 +127,7 @@ class Resource {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId() {
         return $this->id;
@@ -130,7 +148,7 @@ class Resource {
     /**
      * Get shelf
      *
-     * @return \Caesar\ShelfBundle\Entity\Shelf 
+     * @return \Caesar\ShelfBundle\Entity\Shelf
      */
     public function getShelf() {
         return $this->shelf;
@@ -151,7 +169,7 @@ class Resource {
     /**
      * Get code
      *
-     * @return integer 
+     * @return integer
      */
     public function getCode() {
         return $this->code;
@@ -172,7 +190,7 @@ class Resource {
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription() {
         return $this->description;
@@ -193,7 +211,7 @@ class Resource {
     /**
      * Get longDescription
      *
-     * @return string 
+     * @return string
      */
     public function getLongDescription() {
         return $this->longDescription;
@@ -214,7 +232,7 @@ class Resource {
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity() {
         return $this->quantity;
@@ -235,7 +253,7 @@ class Resource {
     /**
      * Get tag
      *
-     * @return \Caesar\TagBundle\Entity\Tag 
+     * @return \Caesar\TagBundle\Entity\Tag
      */
     public function getTag() {
         return $this->tag;
@@ -256,7 +274,7 @@ class Resource {
     /**
      * Get image
      *
-     * @return string 
+     * @return string
      */
     public function getPath() {
         return $this->path;
@@ -302,7 +320,7 @@ class Resource {
     /**
      * Get borrowings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBorrowings() {
         return $this->borrowings;
@@ -332,7 +350,7 @@ class Resource {
     /**
      * Get borrowingArchives
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBorrowingArchives() {
         return $this->borrowingArchives;
@@ -362,10 +380,48 @@ class Resource {
     /**
      * Get reservations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReservations() {
         return $this->reservations;
+    }
+
+    public function getJsonData() {
+        return get_object_vars($this);
+    }
+
+    /**
+     * ISBN
+     */
+    public static function isCAeSARCode($code) {
+        return preg_match("/^C-[0-9]*$/", $code);
+    }
+
+    public static function checkISBN($isbn) {
+        $j = 0;
+        $code = str_replace(array(' ', '-', '.'), '', $isbn);
+        $length = strlen($code);
+        switch ($length) {
+            case 10:
+                $k = $length;
+                for ($i = 0; $i < 9; $i++) {
+                    $j += intval($code[$i]) * $k;
+                    $k--;
+                }
+                $t = strtoupper($code[9]);
+                $j += $t == "X" ? 10 : intval($t);
+                return $j % 11 == 0;
+                break;
+            case 13:
+                $k = - 1;
+                for ($i = 0; $i < $length; $i++) {
+                    $j += intval($code[$i]) * (2 + $k);
+                    $k *= -1;
+                }
+                return $j % 10 == 0;
+                break;
+        }
+        return false;
     }
 
 }

@@ -156,6 +156,11 @@ class User implements UserInterface, EquatableInterface, \Serializable {
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Reservation", mappedBy="user")
      */
     private $reservations;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Subscription", mappedBy="user")
+     */
+    private $subscriptions;
 
     function __construct() {
         $this->borrowings = new \Doctrine\Common\Collections\ArrayCollection();
@@ -424,4 +429,37 @@ class User implements UserInterface, EquatableInterface, \Serializable {
         return $this->name . ' ' . $this->firstname . '(' . $this->email . ')';
     }
 
+
+    /**
+     * Add subscriptions
+     *
+     * @param \Caesar\UserBundle\Entity\Subscription $subscriptions
+     * @return User
+     */
+    public function addSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions[] = $subscriptions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove subscriptions
+     *
+     * @param \Caesar\UserBundle\Entity\Subscription $subscriptions
+     */
+    public function removeSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions->removeElement($subscriptions);
+    }
+
+    /**
+     * Get subscriptions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
 }

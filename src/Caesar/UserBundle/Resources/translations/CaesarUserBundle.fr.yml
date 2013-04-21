@@ -12,6 +12,7 @@ form:
     search: Rechercher
   subscribe_form:
     subscribe: S'abonner
+    unsubscribe: Se désabonner
 profile: 
   title: "Mes informations"
 profile.change.informations: "Changer mes informations"
