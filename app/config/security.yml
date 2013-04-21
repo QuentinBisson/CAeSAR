@@ -54,12 +54,13 @@ security:
                 failure_handler: caesar_user_security.component.authentication.handler.login_handler
                 failure_path:   null
     access_control:
-        - { path: login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /profile, roles: ROLE_USER_IDENTIFIED}
         - { path: /reservation, roles: ROLE_USER_IDENTIFIED}
+        - { path: /cancel/reservation/*, roles: ROLE_USER_IDENTIFIED}
         - { path: /borrowing, roles: ROLE_USER_IDENTIFIED}
-        - { path: authenticate, roles: ROLE_USER_IDENTIFIED}
+        - { path: /authenticate, roles: ROLE_USER_IDENTIFIED}
         - { path: /profile/modify, roles: ROLE_USER_AUTHENTIFIED}
         - { path: admin, roles: ROLE_ADMIN }

@@ -82,6 +82,14 @@ class ResourceController extends Controller {
                     $borrow->setResource($resource);
                     $borrow->setUser($user);
                     $em->persist($borrow);
+                   
+                    $array = $resource->getReservations()->toArray();
+                    foreach ($array as $r) {
+                        if ($r->getUser()->isEqualTo($user)) {
+                            $em->remove($r);
+                        }
+                    }
+                    
                     $em->flush();
                     $this->get('session')->getFlashBag()->add(
                             'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
@@ -90,13 +98,15 @@ class ResourceController extends Controller {
                 } else {
                     $reservedAvailable = $q - $borrowedQuantity;
                     $acceptedReservations = array();
-                    $reservations = $resource->getReservations();
                     $i = 0;
-                    array_push($acceptedReservations, $reservations->first());
-                    while ($i < $reservedAvailable - 1) {
-                        array_push($acceptedReservations, $reservations->next());
+                    $array = $resource->getReservations()->toArray();
+                    $sizeOfArray = count($array);
+                   
+                    while ($i < $reservedAvailable && $i < $sizeOfArray) {
+                        array_push($acceptedReservations, $array[$i]);
                         $i++;
                     }
+                    
                     $reservation = null;
                     foreach ($acceptedReservations as $r) {
                         if ($r->getUser()->isEqualTo($user)) {
