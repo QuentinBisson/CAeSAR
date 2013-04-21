@@ -160,7 +160,7 @@ class ResourceController extends Controller {
                             $params['resource'] = $resource->getId();
                         }
 
-                        $this->get('session')->getFlashBag()->add(e
+                        $this->get('session')->getFlashBag()->add(
                                 'error', $text
                         );
                         return $this->redirect($this->generateUrl('caesar_blocking_reservations', $params));
