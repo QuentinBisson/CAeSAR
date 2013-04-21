@@ -2,7 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}{{'mail.title'|trans({})}}{% endblock %}</title>
+        <title>{% block title %}
+        	{% if context == 'reservation' %}
+			   {{'mail.reservation.title'|trans({})}}  
+			{% elseif context == 'subscription_borrowed' %}
+			    {{'mail.subscription.borrowed.title'|trans({})}}  
+			{% else %}
+			    {{'mail.subscription.returned.title'|trans({})}}  
+			{% endif %}
+        	      
+        {% endblock %}</title>
         {% block stylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -11,19 +20,31 @@
         <section>
             <header>
                 <b>{{resource.description}}</b>
-            </header>
-
-            <section>
-                <p>{{'mail.hello'|trans({})}},<br />
-                    {{'mail.objective'|trans({})}}
+            </header><section>
+                <p>{{'mail.reservation.hello'|trans({})}},<br />
+                {% if context == 'reservation' %}
+					{{'mail.reservation.objective'|trans({})}}
                         <br />
                         <br />
-                    {{'mail.returned'|trans({'%resource%': resource.description})}}. {{'mail.borrow'|trans({})}}.<br />
+                    {{'mail.reservation.returned'|trans({'%resource%': resource.description})}}.<br />
+				{% elseif context == 'subscription_borrowed' %}
+				    {{'mail.subscription.borrowed.objective'|trans({})}}
                         <br />
-                    {{'mail.regards'|trans({})}},<br />
+                        <br />
+                    {{'mail.subscription.borrowed.borrow'|trans({'%resource%': resource.description})}}.<br />
+				{% else %}
+				    {{'mail.subscription.returned.objective'|trans({})}}
+                        <br />
+                        <br />
+                    {{'mail.subscription.returned.return'|trans({'%resource%': resource.description})}}.<br />
+				{% endif %}
+                     <br />
+                    {{'mail.reservation.regards'|trans({})}},<br />
                         CAeSAR Application
                     </p>
                 </section>
             </section>
+
+            
         </body>
     </html>

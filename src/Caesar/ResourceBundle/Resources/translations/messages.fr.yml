@@ -26,6 +26,7 @@ client:
         exception: La ressource avec le code ou l'identifiant %code% est introuvable
         resource:
             subscribed: Vous êtes abonné à la ressource %resource%.
+            alreadysubscribed: Vous êtes <b>déjà</b> abonné à la ressource %resource%.
             unsubscribed: Vous êtes désabonné à la ressource %resource%.
             connect: Il est nécessaire que vous vous connectiez pour vous abonner %resource%
     borrowing:
@@ -47,9 +48,19 @@ client:
         connect: Il est nécessaire que vous vous connectiez pour rendre %resource%
         shelf: La ressource %resource% doit être placé sur l'étagère %shelf_name%. <br /><b>Plus d'informations:</b><br /> %shelf_description%
 mail:
-    hello: Bonjour
-    objective: Vous recevez ce courriel d'information pour vous signaler qu'une ressource que vous avez réservé est disponible.
-    returned: Un exemplaire de la ressource %resource% a été rendue
-    borrow: Il vous est possible de l'emprunter
-    regards: Cordialement
-    title: Réservation
+    reservation:
+      hello: Bonjour
+      objective: Vous recevez ce courriel d'information pour vous signaler qu'une ressource que vous avez réservé est disponible.
+      returned: Un exemplaire de la ressource %resource% a été rendue
+      borrow: Il vous est possible de l'emprunter
+      regards: Cordialement
+      title: Réservation
+    subscription:
+      borrowed:        
+        objective: Vous recevez ce courriel d'information pour vous informer d'une action sur une ressource à laquelle vous vous êtes abonné.
+        borrow: Un exemplaire de la ressource %resource% a été emprunté 
+        title: Abonnement
+      returned:        
+        objective: Vous recevez ce courriel d'information pour vous informer d'une action sur une ressource à laquelle vous vous êtes abonné.
+        return: Un exemplaire de la ressource %resource% a été rendu
+        title: Abonnement
