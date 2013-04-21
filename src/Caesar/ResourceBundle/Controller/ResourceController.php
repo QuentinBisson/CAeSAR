@@ -156,7 +156,7 @@ class ResourceController extends Controller {
                             $params['resource'] = $resource->getId();
                         }
 
-                        $this->get('session')->getFlashBag()->add(
+                        $this->get('session')->getFlashBag()->add(e
                                 'error', $text
                         );
                         return $this->redirect($this->generateUrl('caesar_blocking_reservations', $params));
@@ -375,7 +375,7 @@ class ResourceController extends Controller {
                 ->setFrom($from)
                 ->setTo($to)
                 ->setBody($response, 'text/html');
-        $message->setEncoder(Swift_Encoding::get64BitEncoding());
+        $message->setEncoder(Swift_Encoding::getBase64Encoding());
         $this->get('mailer')->send($message);
     }
 
