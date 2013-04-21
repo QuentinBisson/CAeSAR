@@ -92,6 +92,14 @@ class ResourceController extends Controller {
                     $borrow->setResource($resource);
                     $borrow->setUser($user);
                     $em->persist($borrow);
+                   
+                    $array = $resource->getReservations()->toArray();
+                    foreach ($array as $r) {
+                        if ($r->getUser()->isEqualTo($user)) {
+                            $em->remove($r);
+                        }
+                    }
+                    
                     $em->flush();
                     foreach ($resource->getSubscriptions()->toArray() as $sub) {
                     	
@@ -104,13 +112,15 @@ class ResourceController extends Controller {
                 } else {
                     $reservedAvailable = $q - $borrowedQuantity;
                     $acceptedReservations = array();
-                    $reservations = $resource->getReservations();
                     $i = 0;
-                    array_push($acceptedReservations, $reservations->first());
-                    while ($i < $reservedAvailable - 1) {
-                        array_push($acceptedReservations, $reservations->next());
+                    $array = $resource->getReservations()->toArray();
+                    $sizeOfArray = count($array);
+                   
+                    while ($i < $reservedAvailable && $i < $sizeOfArray) {
+                        array_push($acceptedReservations, $array[$i]);
                         $i++;
                     }
+                    
                     $reservation = null;
                     foreach ($acceptedReservations as $r) {
                         if ($r->getUser()->isEqualTo($user)) {
@@ -150,7 +160,7 @@ class ResourceController extends Controller {
                             $params['resource'] = $resource->getId();
                         }
 
-                        $this->get('session')->getFlashBag()->add(
+                        $this->get('session')->getFlashBag()->add(e
                                 'error', $text
                         );
                         return $this->redirect($this->generateUrl('caesar_blocking_reservations', $params));
