@@ -318,58 +318,66 @@ header h1 {
 }
 
 .resource-details {
-    margin-left: 15px;
-    margin-right: 50px;
+    font-family: "Helvetica", "Arial", "sans-serif";
+     margin-left: 15px;
+    line-height: 30px;
 }
 
-.resource-image {
-    width: 180px;
-    padding: 20px 50px;
-}
-
-.resource-image img {
-    width: 140px;
-}
-
-.consultation-div {
-    margin-left: 20px;
-    padding-top: 10px;
-}
-
-.consult-title {
-    padding: 5px 10px;
-    outline: none;
-    background-color: #053A6C;
+.resource-details h1 {
+    border-left: 4px solid #053a6c;
+    background-color: #333;
     color: white;
-    font-weight: bold;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    font-weight: normal;
+    font-size : 24px;
+    padding: 5px 20px;
+    width: 295px;
+    float: left;
+    margin-top: 0px;
 }
 
-a.consult-title {
-    text-decoration: none;
+.resource-details h2 {
+    clear: both;
+    border-left: 4px solid #053a6c;
+    background-color: #ccc;
+    color: #505050;
+    font-weight: normal;
+    font-size : 18px;
+    padding: 5px;
+    margin-top: 0px;
 }
 
-.consultation-title {
-    font-size: 1.5em;
+.resource-details p {
+    font-size: 16px;
+ }
+
+.resource-details img {
+    float: left;
+    width: 140px;
+    margin-bottom: 10px;
 }
 
-.consultation-title, .consultation-id, .consultation-location, .consultation-quantity {
-    font-weight: bold;
+.resource-details .head {
+    min-width: 480px;
+    max-width: 480px;
+    width: 100%;
+    float: left;
+    margin-left: 20px;
 }
 
-.consultation-text {
-    margin-left: 100px;
+.resource-details .details {
+    min-width: 480px;
+    max-width: 480px;
+    float: left;
+    margin-left: 20px;
+    width: 100%;
 }
 
-.consultation-content-block, .consultation-text-details {
-    margin-top: 15px;
-    margin-left: 15px;
-}
-.consultation-text-details {
-    display: inline-block;
-    margin-bottom: 30px;
+.resource-details .borrowings {
+    min-width: 480px;
+    max-width: 800px;
+    float: left;
+    margin-left: 20px;
+    width: 100%;
 }
 
 .resource-code {

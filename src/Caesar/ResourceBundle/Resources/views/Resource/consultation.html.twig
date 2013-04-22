@@ -6,71 +6,62 @@
 
 {% block caesar_user_content %}
 <section>
-    <div class="left resource-image">
-        <img src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'resource.label.cover'|trans({})}}" />
-    </div>
+    
     <div class="resource-details">
-        <p>
-            <span class="consultation-title">{{resource.description}}</span>
-        </p>
-        <p>
-            <span class="consultation-id">{{'resource.label.identifier'|trans({})}}:</span><br />
-            <span class="consultation-text">{{resource.code}}</span>
-        </p>
-        <p>
-            <span class="consultation-location">{{'resource.label.location'|trans({})}}:</span><br />
-            <span class="consultation-text">{{resource.shelf.name}}</span>
-        </p>
-        <p>
-            <span class="consultation-quantity">{{'resource.label.quantity'|trans({})}}:</span><br />
-            <span class="consultation-text">{{resource.quantity}}</span>
-        </p>
-
-       	<div class="general-buttons">
-       		{% if alreadySubscribed == false %}
-       			<input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
-			{% else %}
-			    <input type="button" name="unsubscribe" value="{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}" >
-			{% endif %}            
-        </div>
-
-    </div>
-
-    <div class="consultation-div clear">
-        <p>
-            <span class="consult-title">{{'resource.label.details'|trans({})}}:</span><br />
-            <span class="consultation-text-details">{{resource.longDescription|nl2br}}</span>
-
-        </p>
-    </div>
-    <div class="consultation-div clear">
-        <span class="consult-title">{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</span>
-        {% if resource.borrowings.count > 0 %}
-        <div class="consultation-content-block">
-            <table>
-                <thead>
-                    <tr>
-                        <th>{{'consultation.text.name'|trans({})}}</th>
-                        <th>{{'consultation.text.firstname'|trans({})}}</th>
-                        <th>{{'consultation.text.borrowing.date'|trans({})}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        {% for borrowing in resource.borrowings %}
-                        <tr>
-                            <td>{{borrowing.user.name}}</td>
-                            <td>{{borrowing.user.firstname}}</td>
-                            <td>{{borrowing.borrowingDate|date('d/m/Y')}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        <div class="head">
+            <img src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'resource.label.cover'|trans({})}}" />
+            <h1>{{resource.description}}</h1>
+            <h2>{{'resource.label.identifier'|trans({})}}</h2>
+            <p>{{resource.code}}</p>
+            <div class="general-buttons">
+                {% if alreadySubscribed == false %}
+                    <input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
+                {% else %}
+                    <input type="button" name="unsubscribe" value="{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}" >
+                {% endif %}            
             </div>
-        {% endif %}
         </div>
-    </section>
-{% endblock %}
+        
+        <div class="details">
+            <h2>{{'resource.label.location'|trans({})}}</h2>
+            <p>{{resource.shelf.name}}</p>
 
+            <h2>{{'resource.label.quantity'|trans({})}}</h2>
+            <p>{{resource.quantity}}</p>
+
+            <h2>{{'resource.label.details'|trans({})}}</h2>
+            <p>{{resource.longDescription|nl2br}}</p>
+        </div>
+        
+        <div class="borrowings">
+            <h2>{{'resource.label.borrowings'|trans({})}} ({{resource.borrowings.count}})</h2>
+
+            {% if resource.borrowings.count > 0 %}
+                <div class="consultation-content-block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{'consultation.text.name'|trans({})}}</th>
+                                <th>{{'consultation.text.firstname'|trans({})}}</th>
+                                <th>{{'consultation.text.borrowing.date'|trans({})}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for borrowing in resource.borrowings %}
+                            <tr>
+                                <td>{{borrowing.user.name}}</td>
+                                <td>{{borrowing.user.firstname}}</td>
+                                <td>{{borrowing.borrowingDate|date('d/m/Y')}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
 
 {% block javascripts %}    
 	{{parent()}}
