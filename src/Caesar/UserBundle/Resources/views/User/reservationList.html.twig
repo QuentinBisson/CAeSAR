@@ -30,7 +30,7 @@
                 <td>{{ reservation.reservationDate|date('d/m/Y') }}</td>
                 <td>
                     <a href="{{path('caesar_client_reservation_cancel') ~ '/'~ reservation.id}}">
-                        <img src="{{asset('img/cancel.png')}}" alt='{{ 'reservation.cancel.link'|trans({}, 'CaesarUserBundle') }}' />
+                        <i class="icon-remove"></i><img src="{{asset('img/cancel.png')}}" alt='{{ 'reservation.cancel.link'|trans({}, 'CaesarUserBundle') }}' />
                     </a>
                 </td>
             </tr>

@@ -42,9 +42,9 @@ admin:
         synopsis:
             shelves: Cette section de l'application vous permet d'ajouter, modifier ou supprimer un emplacement.
             users: Cette section de l'application vous permet d'ajouter, modifier ou supprimer un utilisateur. Il est également possible de visualiser les emprunts d'un utilisateur.
-            resources: Cette section de l'application vous permet d'ajouter, modifier ou supprimer une ressource. De plus, il vous est possible de visualiser les réservations concernant une ressource. Enfin, il vous est possible de modifier le squelette d'une ressource.
-            borrowings: La section emprunts permet de visualiser les emprunts en cours ainsi que les emprunts archivés.
-            tags: Dans cette partie, il est possible de visualiser les étiquettes disponibles, de générer de nouvelles étiqettes et de créer des formats d'impression.
+            resources: Cette section de l'application vous permet d'ajouter, modifier ou supprimer une ressource. De plus, il vous est possible de visualiser les emprunts concernant une ressource. Enfin, il vous est possible de modifier le squelette d'une ressource.
+            borrowings: La section Emprunts permet de visualiser les emprunts en cours ainsi que les emprunts archivés.
+            tags: Dans cette partie, il est possible de visualiser les étiquettes disponibles, de générer de nouvelles planches d'étiquettes et de créer des formats d'impression.
             general: L'administration de l'application permet de changer votre mot de passe, de purger et lister les réservations, de gérer le module de webmining et de créer ou charger une sauvegarde des données de l'application.
     label:
         infobuble:
