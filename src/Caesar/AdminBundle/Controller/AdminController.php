@@ -203,12 +203,14 @@ class AdminController extends Controller {
                 'reservation' => 'CaesarUserBundle:Reservation',
                 'tag' => 'CaesarTagBundle:Tag',
                 'format' => 'CaesarTagBundle:Format',
+                'subscription' => 'CaesarUserBundle:Subscription'
             );
             $date = date("d-m-Y");
             $heure = date("H-i-s");
             $repertoire = $date . "-" . $heure;
             $save_file = "";
             $save_file.= "/*====== Drop des données  */\n";
+            $save_file.="DELETE FROM subscription;\n";
             $save_file.="DELETE FROM borrowing;\n";
             $save_file.="DELETE FROM borrowingArchive;\n";
             $save_file.="DELETE FROM reservation;\n";
