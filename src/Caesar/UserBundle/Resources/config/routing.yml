@@ -40,14 +40,14 @@ caesar_client_resetting:
     defaults: { _controller: "CaesarUserBundle:User:resetting" }
 
 caesar_client_borrowing:
-    pattern:  /borrowing
+    pattern:  /borrowing/{page}/{sort}/{direction}
     defaults: { _controller: "CaesarUserBundle:User:borrowing", page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+
         direction: asc|desc
 
 caesar_client_reservation:
-    pattern:  /reservation
+    pattern:  /reservation/{page}/{sort}/{direction}
     defaults: { _controller: "CaesarUserBundle:User:reservation", page:1, sort:'id', direction:'asc'}
     requirements:
         page:  \d+

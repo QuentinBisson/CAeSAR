@@ -47,7 +47,7 @@ class UserController extends Controller {
         }
 
         $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction, $keywords);
-        $count = $repository_resource->count();
+        $count = $repository_resource->count($keywords);
 
         /* Pagination */
         $total = $count;

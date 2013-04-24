@@ -1,5 +1,6 @@
 --- 
 borrowings.title: "Mes emprunts"
+reservations.title: "Mes réservations"
 fail.password: "Mot de passe invalide"
 form: 
   main_form: 

@@ -15,3 +15,7 @@
         {% include 'CaesarUserBundle:User:reservationList.html.twig' with {'reservations' : reservations, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
     </section>
 {% endblock %}
+{% block javascripts %}
+{{parent()}}
+        <script type="text/javascript" src="{{ asset('js/sort.js') }}" ></script>
+{% endblock %}

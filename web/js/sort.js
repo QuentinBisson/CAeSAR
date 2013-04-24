@@ -2,7 +2,7 @@ function click_sort(e) {
     var url = this.href;
     var form = $('form');
     var data = '';
-    if (form != null) {
+    if (form !== null) {
         form.attr('action', url);
         data = $("#serialize-request").val();
     }
@@ -33,7 +33,7 @@ function click_paginate(e) {
     var form = $('form');
     var url = elem.attr('href');
     var data = '';
-    if (form != null) {
+    if (form !== null) {
         form.attr('action', url);
         data = $("#serialize-request").val();
     }
@@ -58,7 +58,7 @@ function click_paginate(e) {
 
 function onSuccessAjaxRequest(data, url) {
     $('.contentBody').html(data);
-    $(".table > thead > tr > th a").each(function() {
+    $(".sort-link").each(function() {
         $(this).bind('click', click_sort);
         if (url.match($(this).attr('href') + '$')) {
             var src = $(this).children("img").attr("src");
@@ -97,7 +97,7 @@ function form_submit(e) {
 /* Pagination */
 $(document).ready(function() {
     var bool = false;
-    $(".table > thead > tr > th a").each(function() {
+    $(".sort-link").each(function() {
         $(this).bind('click', click_sort);
         var url = document.location.href;
         if (url.match($(this).attr('href') + '$')) {
@@ -113,7 +113,7 @@ $(document).ready(function() {
         }
     });
     if (bool === false) {
-        var elem = $('.table > thead th:first-child a.sort-up');
+        var elem = $('table > thead th:first-child a.sort-up');
         var src = elem.children("img").attr("src");
         var idx = src.indexOf('.png');
         src = src.slice(0, idx) + "-active" + src.slice(idx);
