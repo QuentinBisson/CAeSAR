@@ -2,10 +2,10 @@
     <thead>
         <tr>
             <th{% if 'resource' == sort %} class="sorted reservation-resource"{% else %} class = "reservation-resource" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.reservations.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
+                {% include ':Pagination:sortable_client.html.twig' with {'title' : 'table.title.reservations.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
             </th>
             <th{% if 'reservationDate' == sort %} class="sorted reservation-date"{% else %} class = "reservation-date" {% endif %} >
-                {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.reservations.date'|trans({}), 'page': page, 'sort': 'reservationDate'}  %}
+                {% include ':Pagination:sortable_client.html.twig' with {'title' : 'table.title.reservations.date'|trans({}), 'page': page, 'sort': 'reservationDate'}  %}
             </th>
             <th></th>
         </tr>

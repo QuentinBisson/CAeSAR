@@ -2,14 +2,14 @@
     <thead>
         <tr>
             <th{% if 'resource' == sort %} class="sorted borrowing-resource"{% else %} class = "borrowing-resource" {% endif %} >
-            {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
+            {% include ':Pagination:sortable_client.html.twig' with {'title' : 'table.title.borrowings.resource'|trans({}), 'page': page, 'sort': 'resource'}  %}
                 </th>
                 <th{% if 'borrowingDate' == sort %} class="sorted borrowing-date"{% else %} class = "borrowing-date" {% endif %} >
-            {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.borrowings.date'|trans({}), 'page': page, 'sort': 'borrowingDate'}  %}
-                    </th>
-                    <th class = "borrowing-return">
-            <p class="sort-label">
-                {{ 'table.title.borrowings.return.date'|trans({}) }}
+            {% include ':Pagination:sortable_client.html.twig' with {'title' : 'table.title.borrowings.date'|trans({}), 'page': page, 'sort': 'borrowingDate'}  %}
+                </th>
+                <th class="borrowing-return">
+                <p>
+                    {{ 'table.title.borrowings.return.date'|trans({}) }}
                 </p>
             </th>
         </tr>
