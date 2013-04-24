@@ -2,16 +2,16 @@
 
 {% block stylesheets %}
     {{parent()}}
-<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/table_client.css') }}" />
 {% endblock %}
 
 
 {% block bodyTitle %}
-<h1>{{'reservations.title'|trans({}, 'CaesarUserBundle')}}</h1>
+    <h1>{{'reservations.title'|trans({}, 'CaesarUserBundle')}}</h1>
 {% endblock %}
 
 {% block caesar_user_content %}
-<section class="contentBody">
-    {% include 'CaesarUserBundle:User:reservationList.html.twig' with {'reservations' : reservations, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
-</section>
+    <section class="contentBody">
+        {% include 'CaesarUserBundle:User:reservationList.html.twig' with {'reservations' : reservations, 'page' : page, 'direction' : direction, 'pagination' : pagination, 'count': count}  %}
+    </section>
 {% endblock %}

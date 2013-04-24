@@ -15,7 +15,7 @@
 
 .table th {
     padding: 15px 10px;
-    line-height: 8px;
+    line-height: 18px;
     font-size: 18px;
     text-transform: uppercase;
 }
@@ -168,4 +168,18 @@ p.sort-label {
 }
 .sort-link img {
     width: 10px;
+}
+
+.button-table-width {
+    width: 15%;
+}
+
+#table_list td.center {
+    text-align: center;
+}
+
+@media screen and (max-width:960px) {
+    .button-table-width {
+        width: 22%;
+    }
 }

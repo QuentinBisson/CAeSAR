@@ -36,4 +36,4 @@ user:
     title: Inscription
   update_profile.successfull: "Modification de votre profil réussi"
 reservation.cancel:
-    link: Annuler cette réservation
+    link: Annuler

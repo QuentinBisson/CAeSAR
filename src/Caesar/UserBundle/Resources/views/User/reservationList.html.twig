@@ -7,7 +7,7 @@
             <th{% if 'reservationDate' == sort %} class="sorted reservation-date"{% else %} class = "reservation-date" {% endif %} >
                 {% include ':Pagination:sortable.html.twig' with {'title' : 'table.title.reservations.date'|trans({}), 'page': page, 'sort': 'reservationDate'}  %}
             </th>
-            <th></th>
+            <th class="button-table-width"></th>
         </tr>
     </thead>
     <tfoot>
@@ -28,9 +28,10 @@
             <tr>
                 <td>{{ reservation.resource.description }}</td>
                 <td>{{ reservation.reservationDate|date('d/m/Y') }}</td>
-                <td>
-                    <a href="{{path('caesar_client_reservation_cancel') ~ '/'~ reservation.id}}">
-                        <i class="icon-remove"></i><img src="{{asset('img/cancel.png')}}" alt='{{ 'reservation.cancel.link'|trans({}, 'CaesarUserBundle') }}' />
+                <td class="center">
+                    <a class="cancelBtn" href="{{path('caesar_client_reservation_cancel') ~ '/'~ reservation.id}}">
+                        <i class="icon-white icon-remove"></i>
+                        <span>{{ 'reservation.cancel.link'|trans({}, 'CaesarUserBundle') }}</span>
                     </a>
                 </td>
             </tr>
