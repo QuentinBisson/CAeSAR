@@ -68,22 +68,35 @@ class TagController extends Controller {
                 $em = $this->getDoctrine()->getEntityManager();
                 $number = $format->getColumns() * $format->getRows();
                 $tags = array();
+                $nextTagCode = $this->container->getParameter('tag_code_value');
                 for ($i = 0; $i < $number; $i++) {
                     $tag = new Tag();
+
+                    $zerosToAdd = 12 - strlen($nextTagCode);
+                    $code = 'C-';
+                    for ($j = 0; $j < $zerosToAdd; $j++) {
+                        $code .= "0";
+                    }
+                    $tag->setCode($code . $nextTagCode);
+                    $nextTagCode = $nextTagCode + 1;
                     $em->persist($tag);
                     array_push($tags, $tag);
                 }
+                $this->get('caesar.params')->save(
+                        array(
+                            'tag_code_value' => $nextTagCode
+                ));
                 $em->flush();
 
-                foreach ($tags as $tag) {
-                    $idToString = "" . $tag->getId();
-                    $zerosToAdd = 10 - strlen($idToString);
-                    $code = 'C-';
-                    for ($i = 0; $i < $zerosToAdd; $i++) {
-                        $code .= "0";
-                    }
-                    $tag->setCode($code . $tag->getId());
-                }
+                /* foreach ($tags as $tag) {
+                  $idToString = "" . $tag->getId();
+                  $zerosToAdd = 10 - strlen($idToString);
+                  $code = 'C-';
+                  for ($i = 0; $i < $zerosToAdd; $i++) {
+                  $code .= "0";
+                  }
+                  $tag->setCode($code . $tag->getId());
+                  } */
                 $em->flush();
                 $hgap = $format->getHorizontalGap() - $format->getWidth();
                 $vgap = $format->getVerticalGap() - $format->getHeight();

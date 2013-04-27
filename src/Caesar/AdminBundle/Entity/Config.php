@@ -17,13 +17,11 @@ class Config {
     private static $RESOURCE_SKELETON = 'resource_skeleton';
 
     private static function getParameter($container, $parameter) {
-        $value = "";
         try {
             return $container->getParameter($parameter);
         } catch (Exception $e) {
-            var_dump(e);
+            return "";
         }
-        return $value;
     }
 
     public static function isGoogleBooksWebmining($container) {
