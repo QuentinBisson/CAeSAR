@@ -250,6 +250,7 @@ class AdminController extends Controller {
                     }
                 }
                 $zip->addFromString("backup.sql", $save_file);
+                $zip->addFile("../src/Caesar/AdminBundle/Resources/config/params.yml", "params.yml");
             }
             $zip->close();
             $response = new Response();
@@ -317,6 +318,9 @@ class AdminController extends Controller {
                         rename("resources/backup/load/img/" . $file, "resources/img/" . $file);
                     }
                 }
+                unlink("../src/Caesar/AdminBundle/Resources/config/params.yml");
+                rename("resources/backup/load/params.yml", "../src/Caesar/AdminBundle/Resources/config/params.yml");
+                chmod ("../src/Caesar/AdminBundle/Resources/config/params.yml",0777);
                 $this->deleteDirectory("resources/backup/load");
             } else {
                 $this->get('session')->getFlashBag()->add(
