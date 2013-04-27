@@ -229,7 +229,7 @@ class AdminController extends Controller {
                     $insert = "INSERT INTO " . $key . " VALUES(";
                     foreach ($datum as $colum) {
                         if (!$colum instanceof DateTime) {
-                            $insert .= "'" . $colum . "',";
+                            $insert .= "'" . addslashes($colum) . "',";
                         } else {
                             $insert .= "'" . date_format($colum, 'Y-m-d H:i:s') . "',";
                         }
