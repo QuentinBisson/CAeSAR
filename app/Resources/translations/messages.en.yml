@@ -10,7 +10,7 @@ client:
       notice.cancel: The reservation %reservation% was cancelled
   navbar: 
     borrowings: "My borrowings"
-    connexion: Loginre
+    connexion: Login
     inscription: Register
     logout: "Log out"
     profile: "My profile"

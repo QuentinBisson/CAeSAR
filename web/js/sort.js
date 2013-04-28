@@ -13,7 +13,9 @@ function click_sort(e) {
         data: data,
         cache: false,
         success: function(data) {
-            window.history.pushState('state', 'page', url);
+			if (window.history && window.history.pushState) {
+				window.history.pushState('state', 'page', url);
+			}
             onSuccessAjaxRequest(data, url);
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -25,7 +27,9 @@ function click_sort(e) {
 }
 
 function click_paginate(e) {
-    window.history.pushState('state', 'page', $(this).attr('href'));
+	if (window.history && window.history.pushState) {
+    	window.history.pushState('state', 'page', $(this).attr('href'));
+	}
     $(".navigation a").each(function() {
         $(this).removeClass('active');
     });
@@ -45,7 +49,9 @@ function click_paginate(e) {
         cache: false,
         success: function(data) {
             elem.addClass('active');
-            window.history.pushState('state', 'page', url);
+			if (window.history && window.history.pushState) {
+    			window.history.pushState('state', 'page', url);
+			}
             onSuccessAjaxRequest(data, url);
         },
         error: function(xhr, ajaxOptions, thrownError) {
