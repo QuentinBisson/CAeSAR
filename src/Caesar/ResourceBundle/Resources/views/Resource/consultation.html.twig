@@ -18,7 +18,11 @@
                     <input type="button" name="subscribe" value="{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}" >
                 {% else %}
                     <input type="button" name="unsubscribe" value="{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}" >
-                {% endif %}            
+                {% endif %}  
+                <a class="button {% if hasReserved %}disabled{% endif %}"
+                    href="{{ path('caesar_resource_reserve', {'code':resource.code})}}">
+                    {{ 'form.reservation_form.reserve'|trans }}
+                </a>
             </div>
         </div>
         
@@ -81,7 +85,6 @@
             button.click(function() {
                 window.location.replace('{{path('caesar_resource_unsubscribe')}}/' + code);
             });
-
         });
 
         </script>
