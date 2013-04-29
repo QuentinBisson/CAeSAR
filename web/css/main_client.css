@@ -46,11 +46,15 @@ header h1 {
 .flash-notice, .flash-error, .flash-info {
     -webkit-border-radius: 8px;
     border-radius: 5px;
-    margin: 10px;
+    
     padding: 10px 20px;
     color: #555;
     max-width: 598px;
     margin: auto;
+    margin-bottom: 10px;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    font-size: 16px;
+    text-align: center;
 }
 
 .flash-notice {
@@ -348,7 +352,12 @@ header h1 {
 
 .resource-details p {
     font-size: 16px;
- }
+    text-align: justify;
+}
+
+.resource-details p.flash-info {
+    display: block;
+}
 
 .resource-details img {
     float: left;
@@ -362,8 +371,12 @@ header h1 {
     width: 100%;
     float: left;
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
+.resource-details .head . actions {
+    margin: 0px 10px;
+}
 .resource-details .details {
     min-width: 480px;
     max-width: 480px;

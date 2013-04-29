@@ -516,14 +516,7 @@ class ResourceController extends Controller {
         if (!$resource) {
             throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
         }
-        // $resource est un ressource valide
-        
-        //TODO Afficher bouton que si loggué et ajouter dans security l'url + abonnement: Même principe
-
-        //TODO reservé par le même utilisateur
-        
-        //TODO justify text (text-align: justify)
-        
+        // $resource est un ressource valide        
         if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
             // L'utilisateur est bien authentifié
             $user = $this->get('security.context')->getToken()->getUser();
