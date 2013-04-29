@@ -34,7 +34,7 @@
             <p>{{resource.quantity}}</p>
 
             <h2>{{'resource.label.details'|trans({})}}</h2>
-            <p>{{resource.longDescription|nl2br}}</p>
+            <p>{{resource.longDescription|replace({"\\n": "\n"})|nl2br}}</p>
         </div>
         
         <div class="borrowings">

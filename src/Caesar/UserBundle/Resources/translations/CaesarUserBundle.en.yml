@@ -33,4 +33,4 @@ user:
     successfull: "Successfull registration"
     title: Registration
   update_profile.successfull: "Successfull profile update"
-link: Cancel
+reservation.cancel.link: Cancel

@@ -374,11 +374,6 @@ class ResourceController extends Controller {
         $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
     }
 
-    /* public function sendSubscriberBorrowNotification($to) {
-
-      $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
-      } */
-
     public function sendMail($to, $from, $response, $subject) {
         $transport = Swift_SmtpTransport::newInstance();
         $message = Swift_Message::newInstance($transport)
@@ -523,25 +518,31 @@ class ResourceController extends Controller {
         }
         // $resource est un ressource valide
         
-        if (count($resource->getReservations()) > 0) {
+        //TODO Afficher bouton que si loggué et ajouter dans security l'url + abonnement: Même principe
+
+        //TODO reservé par le même utilisateur
+        
+        //TODO justify text (text-align: justify)
+        
+        /*if (count($resource->getReservations()) > 0) {
             // La ressource est déjà réservée
             $this->get('session')->setFlash('error', $translator->trans('client.reservation.alreadyReserved'));
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
-        }
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        }*/
+        
+        if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
             // L'utilisateur est bien authentifié
             $user = $this->get('security.context')->getToken()->getUser();
             $reservation = new Reservation();
             $reservation->setResource($resource);
             $reservation->setUser($user);
             $reservation->setReservationDate(new \DateTime());
-            $user->addReservation($reservation);
             $em->persist($reservation);
-            $em->persist($user);
             $em->flush();
             $this->get('session')->setFlash('notice', $translator->trans('client.reservation.success'));
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {
+			//TODO flash-info message
             // On le redirige pour qu'il se connecte
             return $this->redirect($this->generateUrl('caesar_client_authenticate'));
         }
