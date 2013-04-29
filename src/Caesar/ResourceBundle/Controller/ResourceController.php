@@ -524,15 +524,16 @@ class ResourceController extends Controller {
         
         //TODO justify text (text-align: justify)
         
-        /*if (count($resource->getReservations()) > 0) {
-            // La ressource est déjà réservée
-            $this->get('session')->setFlash('error', $translator->trans('client.reservation.alreadyReserved'));
-            return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
-        }*/
-        
         if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
             // L'utilisateur est bien authentifié
             $user = $this->get('security.context')->getToken()->getUser();
+            // On vérifie qu'il n'a pas déjà réservé cette ressource
+            foreach ($user->getReservations() as $r) {
+                if ($r->getResource()->getId() == $resource->getId()) {
+                    $this->get('session')->setFlash('error', $translator->trans('client.reservation.alreadyReserved'));
+                    return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
+                }
+            }
             $reservation = new Reservation();
             $reservation->setResource($resource);
             $reservation->setUser($user);
@@ -542,8 +543,8 @@ class ResourceController extends Controller {
             $this->get('session')->setFlash('notice', $translator->trans('client.reservation.success'));
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {
-			//TODO flash-info message
             // On le redirige pour qu'il se connecte
+            $this->get('session')->setFlash('info', $translator->trans('client.reservation.must_connect'));
             return $this->redirect($this->generateUrl('caesar_client_authenticate'));
         }
     }
