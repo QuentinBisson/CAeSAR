@@ -115,7 +115,11 @@ class ResourceController extends Controller {
                     
                     foreach ($resource->getSubscriptions()->toArray() as $sub) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     	array_push($to, $sub->getUser()->getEmail());
+=======
+                        
+>>>>>>> 98c38e5709a965aa7dd53c389c8850218dfc13d4
 =======
                         
 >>>>>>> 98c38e5709a965aa7dd53c389c8850218dfc13d4
