@@ -49,7 +49,7 @@
                 {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
                             <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
                 {% else %}
-                            <td></td>
+                            <td>&nbsp;</td>
                 {% endif %}
                         </tr>
             {% endfor %}

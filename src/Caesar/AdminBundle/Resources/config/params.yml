@@ -10,4 +10,4 @@ parameters:
     pageCount_webmining_key: pageCount
     categories_webmining_key: categories
     resource_skeleton: "Authors (Autheurs): $authors\r\nPublisher (Editeur): $publisher\r\nPublished date (Date de publication): $publishedDate\r\nCategories (Catégories): $categories\r\nLanguage (Langue): $language\r\nDescription (Description): $description\r\nPage count (Nombre de pages): $pageCount"
-    tag_code_value: 20
+    tag_code_value: 29

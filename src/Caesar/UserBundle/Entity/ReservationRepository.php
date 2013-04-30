@@ -77,6 +77,7 @@ class ReservationRepository extends EntityRepository {
 
     public function countPreviousReservations($resource, $user = null) {
         $qb = $this->createQueryBuilder('r');
+        $qb->select('count(r.id)');
         $qb->where('r.resource = :resource');
         $qb->setParameter("resource", $resource);
         if ($user != null) {

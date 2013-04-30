@@ -4,10 +4,10 @@ namespace Caesar\ResourceBundle\Controller;
 
 use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
-use Caesar\UserBundle\Entity\Subscription;
 use Caesar\UserBundle\Entity\BorrowingArchive;
 use Caesar\UserBundle\Entity\Reservation;
-
+use Caesar\UserBundle\Entity\Subscription;
+use DateTime;
 use Swift_Encoding;
 use Swift_Message;
 use Swift_SmtpTransport;
@@ -321,7 +321,7 @@ class ResourceController extends Controller {
         }
     }
 
-    public function blockingReservationsAction($page, $resource = -1, $user = null) {
+    public function blockingReservationsAction($page, $resource = 1, $user = null) {
         $nb_per_page = 10;
         $em = $this->getDoctrine()->getManager();
 
@@ -367,6 +367,7 @@ class ResourceController extends Controller {
         foreach ($userToNotify as $u) {
             array_push($to, $u->getEmail());
         }
+        
         $translator = $this->get('translator');
         $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
         $body = $this->renderView(
@@ -422,6 +423,7 @@ class ResourceController extends Controller {
             }
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {//Je dois me connecter
+            $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
             $this->get('session')->getFlashBag()->add(
                     'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
             );
@@ -474,6 +476,7 @@ class ResourceController extends Controller {
             );
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {//Je dois me connecter
+            $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
             $this->get('session')->getFlashBag()->add(
                     'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
             );
@@ -530,15 +533,17 @@ class ResourceController extends Controller {
             $reservation = new Reservation();
             $reservation->setResource($resource);
             $reservation->setUser($user);
-            $reservation->setReservationDate(new \DateTime());
+            $reservation->setReservationDate(new DateTime());
             $em->persist($reservation);
             $em->flush();
             $this->get('session')->setFlash('notice', $translator->trans('client.reservation.success'));
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {
-            // On le redirige pour qu'il se connecte
+            // On le redirige pour qu'il s'authentifie
+            $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
             $this->get('session')->setFlash('info', $translator->trans('client.reservation.must_connect'));
-            return $this->redirect($this->generateUrl('caesar_client_authenticate'));
+            $response = $this->redirect($this->generateUrl('caesar_client_authenticate'));
+            return $response;
         }
     }
 

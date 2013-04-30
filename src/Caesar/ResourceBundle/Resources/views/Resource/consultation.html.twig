@@ -1,5 +1,10 @@
 {% extends "CaesarUserBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/table_client.css') }}" />
+{% endblock %}
+
 {% block bodyTitle %}
 <h1>Consultation</h1>
 {% endblock %}
@@ -45,7 +50,7 @@
 
             {% if resource.borrowings.count > 0 %}
                 <div class="consultation-content-block">
-                    <table>
+                    <table class="table table-hover table-bordered table-striped table-padding">
                         <thead>
                             <tr>
                                 <th>{{'consultation.text.name'|trans({})}}</th>

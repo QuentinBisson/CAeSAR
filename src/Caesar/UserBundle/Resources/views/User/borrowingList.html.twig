@@ -19,35 +19,35 @@
         <tr>
             <td colspan="3">
                 {% if count == 0 %} 
-                            {{ 'table.foot.count.zero'|trans() }}
-                        {% elseif count == 1 %} 
-                            {{ 'table.foot.count.one'|trans({'%value%': count}) }}
-                        {% else %} 
-                            {{ 'table.foot.count.more_than_one'|trans({'%value%': count}) }}
-                        {% endif %}
-                </td>
-            </tr>
-        </tfoot>
-        <tbody id="table_list">
-         {% for borrowing in borrowings %}
-                <tr>
-                    <td>
-                    {% if borrowing.resource.description is defined %}
-                            {{ borrowing.resource.description }}
-                    {% else %}
-                            {{ borrowing.resource }}
-                    {% endif %}
-                        </td>
-                        <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
-                {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
-                        <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
-                {% else %}
-                        <td></td>
+                    {{ 'table.foot.count.zero'|trans() }}
+                {% elseif count == 1 %} 
+                    {{ 'table.foot.count.one'|trans({'%value%': count}) }}
+                {% else %} 
+                    {{ 'table.foot.count.more_than_one'|trans({'%value%': count}) }}
                 {% endif %}
-                    </tr>
-            {% endfor %}
-                </tbody>
-            </table>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody id="table_list">
+        {% for borrowing in borrowings %}
+            <tr>
+                <td>
+                {% if borrowing.resource.description is defined %}
+                        {{ borrowing.resource.description }}
+                {% else %}
+                        {{ borrowing.resource }}
+                {% endif %}
+                    </td>
+                    <td>{{ borrowing.borrowingDate|date('d/m/Y') }}</td>
+            {% if borrowing.returnDate is defined and borrowing.returnDate is not null %}
+                    <td>{{ borrowing.returnDate|date('d/m/Y') }}</td>
+            {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+        </table>
 
 {# display navigation #}
 

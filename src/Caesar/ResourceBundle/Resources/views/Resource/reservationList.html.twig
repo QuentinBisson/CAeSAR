@@ -17,24 +17,24 @@
     <tr>
         <td colspan="3">
             {% if count == 0 %} 
-                            {{ 'table.foot.count.zero'|trans() }}
-                        {% elseif count == 1 %} 
-                            {{ 'table.foot.count.one'|trans({'%value%': count}) }}
-                        {% else %} 
-                            {{ 'table.foot.count.more_than_one'|trans({'%value%': count}) }}
-                        {% endif %}
-            </td>
+                {{ 'table.foot.count.zero'|trans() }}
+            {% elseif count == 1 %} 
+                {{ 'table.foot.count.one'|trans({'%value%': count}) }}
+            {% else %} 
+                {{ 'table.foot.count.more_than_one'|trans({'%value%': count}) }}
+            {% endif %}
+        </td>
+    </tr>
+</tfoot>
+<tbody id="table_list">
+    {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.user.firstname ~ ' ' ~ reservation.user.name}}</td>
+            <td>{{ reservation.resource.description }}</td>
+            <td>{{ reservation.reservationDate|date('d/m/Y') }}</td>
         </tr>
-    </tfoot>
-    <tbody id="table_list">
-        {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.user.firstname ~ ' ' ~ reservation.user.name}}</td>
-                <td>{{ reservation.resource.description }}</td>
-                <td>{{ reservation.reservationDate|date('d/m/Y') }}</td>
-            </tr>
     {% endfor %}
-        </tbody>
+</tbody>
     </table>
 
 {# display navigation #}

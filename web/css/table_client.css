@@ -192,3 +192,7 @@ p.sort-label {
 #table_list td.center {
     text-align: center;
 }
+
+.table-padding thead th {
+    padding: 15px 20px 20px;
+}

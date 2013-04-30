@@ -28,7 +28,7 @@ caesar_resource_reserve:
 
 caesar_blocking_reservations:
     pattern:  /blocking/reservations/{page}/{resource}/{user}
-    defaults: { _controller: "CaesarResourceBundle:Resource:blockingReservations" , page: 1, resource: -1, user: null}
+    defaults: { _controller: "CaesarResourceBundle:Resource:blockingReservations" , page: 1, resource: 1, user: null}
     requirements:
         page: \d+
         resource: \d+

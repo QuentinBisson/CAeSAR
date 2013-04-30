@@ -9,6 +9,7 @@ use Caesar\UserBundle\Form\UserHandler;
 use Caesar\UserBundle\Form\UserType;
 use Caesar\UserBundle\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -144,7 +145,17 @@ class UserController extends Controller {
             }
             return $this->render('CaesarUserBundle:User:modifyProfile.html.twig', array('form' => $form->createView()));
         }
+        $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
         return $this->redirect($this->generateUrl('caesar_client_authenticate'));
+    }
+
+    private function endsWith($haystack, $needle) {
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
     }
 
     public function authenticateAction() {
@@ -153,8 +164,10 @@ class UserController extends Controller {
         $form = $this->createForm(new PasswordType());
         $request = $this->get('request');
         $security = $this->get('security.context');
+        $session = $request->getSession();
+        $url = $session->get('authenticate_referer_url');
         if ($security->isGranted('ROLE_USER_AUTHENTIFIED')) {
-            return $this->redirect($this->generateUrl('caesar_client_modify_user'));
+            return new RedirectResponse($url);
         }
         if ($request->isMethod('POST')) {
             $form->bindRequest($request);
@@ -170,8 +183,7 @@ class UserController extends Controller {
                     $token->setUser($user);
                     $this->get('security.context')->setToken($token);
                     $token->setAuthenticated(false);
-
-                    return $this->redirect($this->generateUrl('caesar_client_modify_user'));
+                    return new RedirectResponse($url);
                 } else {
                     $this->get('session')->getFlashBag()->add(
                             'error', $translator->trans('fail.password', array(), 'CaesarUserBundle')

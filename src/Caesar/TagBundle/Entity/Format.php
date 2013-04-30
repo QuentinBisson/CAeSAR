@@ -244,21 +244,21 @@ class Format {
     }
 
     /**
-     * @Assert\True(message = "validation.assert.error.format.hgap_over_width")
+     * @Assert\True(message = "validation.assert.error.type.format.hgap_over_width")
      */
     public function isHgapOverWidth() {
         return ($this->horizontalGap >= $this->width);
     }
 
     /**
-     * @Assert\True(message = "validation.assert.error.format.vgap_over_height")
+     * @Assert\True(message = "validation.assert.error.type.format.vgap_over_height")
      */
     public function isVgapOverHeight() {
         return ($this->verticalGap >= $this->height);
     }
 
     /**
-     * @Assert\True(message = "validation.assert.error.format.total_under_page_width")
+     * @Assert\True(message = "validation.assert.error.type.format.total_under_page_width")
      */
     public function isTotalUnderPageWidth() {
         $hgap = $this->horizontalGap - $this->width;
@@ -266,7 +266,7 @@ class Format {
     }
 
     /**
-     * @Assert\True(message = "validation.assert.error.format.total_under_page_height")
+     * @Assert\True(message = "validation.assert.error.type.format.total_under_page_height")
      */
     public function isTotalUnderPageHeight() {
         $vgap = $this->verticalGap - $this->height;
