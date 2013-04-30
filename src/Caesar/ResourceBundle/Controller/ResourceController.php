@@ -111,9 +111,18 @@ class ResourceController extends Controller {
                     }
 
                     $em->flush();
+                    $to = array();
+                    
                     foreach ($resource->getSubscriptions()->toArray() as $sub) {
-                        
+                    	array_push($to, $sub->getUser()->getEmail());
                     }
+                    
+                    $translator = $this->get('translator');
+                    $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
+                    $body = $this->renderView(
+                    		'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_borrowed'));
+                    $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
+                    
                     $this->get('session')->getFlashBag()->add(
                             'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
                     );
@@ -236,6 +245,23 @@ class ResourceController extends Controller {
             $em->remove($borrowing);
             $em->persist($archivedBorrowing);
             $em->flush();
+            
+            $to = array();
+            
+            foreach ($resource->getSubscriptions()->toArray() as $sub) {
+            	array_push($to, $sub->getUser()->getEmail());
+            }
+            
+            $translator = $this->get('translator');
+            $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
+            $body = $this->renderView(
+            		'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_returned'));
+            var_dump($to);
+            $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
+            
+            $this->get('session')->getFlashBag()->add(
+            		'notice', $to[0]
+            );
             $this->get('session')->getFlashBag()->add(
                     'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
             );
@@ -243,9 +269,9 @@ class ResourceController extends Controller {
                     'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
                         '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
             );
-
+            var_dump($to);
             $this->notify($resource, $q - $borrowedQuantity);
-
+            var_dump($to);
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $user = $this->get('security.context')->getToken()->getUser();
