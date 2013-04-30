@@ -6,6 +6,8 @@ use Caesar\ResourceBundle\Entity\Resource;
 use Caesar\UserBundle\Entity\Borrowing;
 use Caesar\UserBundle\Entity\Subscription;
 use Caesar\UserBundle\Entity\BorrowingArchive;
+use Caesar\UserBundle\Entity\Reservation;
+
 use Swift_Encoding;
 use Swift_Message;
 use Swift_SmtpTransport;
@@ -32,16 +34,24 @@ class ResourceController extends Controller {
             throw $this->createNotFoundException($translator->trans('client.borrow.exception', array('%code%' => $code)));
         }
         $alreadySubscribed = false;
+        $hasReserved = false;
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-	        $user = $this->get('security.context')->getToken()->getUser();
-	        foreach ($user->getSubscriptions()->toArray() as $sub) {
-	        	if ($sub->getResource()->getId() == $resource->getId()) {
-	        		$alreadySubscribed = true;
-	        	}
-	        }
-        }              
-        return $this->render('CaesarResourceBundle:Resource:consultation.html.twig',
-        		 array('resource' => $resource, 'alreadySubscribed' => $alreadySubscribed));
+            $user = $this->get('security.context')->getToken()->getUser();
+            foreach ($user->getSubscriptions()->toArray() as $sub) {
+                if ($sub->getResource()->getId() == $resource->getId()) {
+                    $alreadySubscribed = true;
+                }
+            }
+            foreach ($user->getReservations() as $r) {
+                if ($r->getResource()->getId() == $resource->getId()) {
+                    $hasReserved = true;
+                }
+            }
+        }
+        return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array(
+            'resource' => $resource, 
+            'alreadySubscribed' => $alreadySubscribed,
+            'hasReserved' => $hasReserved));
     }
 
     public function ajaxGetAction($code) {
@@ -92,19 +102,23 @@ class ResourceController extends Controller {
                     $borrow->setResource($resource);
                     $borrow->setUser($user);
                     $em->persist($borrow);
-                   
+
                     $array = $resource->getReservations()->toArray();
                     foreach ($array as $r) {
                         if ($r->getUser()->isEqualTo($user)) {
                             $em->remove($r);
                         }
                     }
-                    
+
                     $em->flush();
                     $to = array();
                     
                     foreach ($resource->getSubscriptions()->toArray() as $sub) {
+<<<<<<< HEAD
                     	array_push($to, $sub->getUser()->getEmail());
+=======
+                        
+>>>>>>> 98c38e5709a965aa7dd53c389c8850218dfc13d4
                     }
                     
                     $translator = $this->get('translator');
@@ -114,8 +128,7 @@ class ResourceController extends Controller {
                     $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
                     
                     $this->get('session')->getFlashBag()->add(
-                            'notice', $translator->trans('client.borrowing.resource.borrowed',
-                            		 array('%resource%' => $resource->getDescription()))
+                            'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
                     );
                     return $this->redirect($this->generateUrl('caesar_client_homepage'));
                 } else {
@@ -124,12 +137,12 @@ class ResourceController extends Controller {
                     $i = 0;
                     $array = $resource->getReservations()->toArray();
                     $sizeOfArray = count($array);
-                   
+
                     while ($i < $reservedAvailable && $i < $sizeOfArray) {
                         array_push($acceptedReservations, $array[$i]);
                         $i++;
                     }
-                    
+
                     $reservation = null;
                     foreach ($acceptedReservations as $r) {
                         if ($r->getUser()->isEqualTo($user)) {
@@ -145,8 +158,7 @@ class ResourceController extends Controller {
                         $em->persist($borrow);
                         $em->flush();
                         $this->get('session')->getFlashBag()->add(
-                                'notice', $translator->trans('client.borrowing.resource.reservation.borrowed',
-                                		 array('%resource%' => $resource->getDescription()))
+                                'notice', $translator->trans('client.borrowing.resource.reservation.borrowed', array('%resource%' => $resource->getDescription()))
                         );
                         return $this->redirect($this->generateUrl('caesar_client_homepage'));
                     } else {
@@ -159,13 +171,11 @@ class ResourceController extends Controller {
                         //Pas le premier sur la liste de réservation
                         $params = array();
                         if ($isInList) {
-                            $text = $translator->trans('client.borrowing.resource.reservation.error',
-                            		 array('%resource%' => $resource->getDescription()));
+                            $text = $translator->trans('client.borrowing.resource.reservation.error', array('%resource%' => $resource->getDescription()));
                             $params['user'] = $user->getId();
                             $params['resource'] = $resource->getId();
                         } else { //Ressource non réservée.
-                            $text = $translator->trans('client.borrowing.resource.reservation.none',
-                            		 array('%resource%' => $resource->getDescription()));
+                            $text = $translator->trans('client.borrowing.resource.reservation.none', array('%resource%' => $resource->getDescription()));
                             $params['resource'] = $resource->getId();
                         }
 
@@ -177,8 +187,7 @@ class ResourceController extends Controller {
                 }
             } else {//Je dois me connecter
                 $this->get('session')->getFlashBag()->add(
-                        'info', $translator->trans('client.borrowing.resource.connect',
-                        		 array('%resource%' => $resource->getDescription()))
+                        'info', $translator->trans('client.borrowing.resource.connect', array('%resource%' => $resource->getDescription()))
                 );
 
                 $request = $this->getRequest();
@@ -204,8 +213,7 @@ class ResourceController extends Controller {
         } else {
             //Plus de ressources disponibles
             $this->get('session')->getFlashBag()->add(
-                    'error', $translator->trans('client.borrowing.resource.unavailable',
-                    		 array('%resource%' => $resource->getDescription()))
+                    'error', $translator->trans('client.borrowing.resource.unavailable', array('%resource%' => $resource->getDescription()))
             );
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         }
@@ -228,8 +236,7 @@ class ResourceController extends Controller {
         $borrowedQuantity = count($resource->getBorrowings());
 
         if ($borrowedQuantity <= 0) {
-            throw $this->createNotFoundException($translator->trans('client.return.impossible.exception',
-            		 array('%resource%' => $resource->getDescription())));
+            throw $this->createNotFoundException($translator->trans('client.return.impossible.exception', array('%resource%' => $resource->getDescription())));
         }
 
         $shelf = $resource->getShelf();
@@ -393,15 +400,10 @@ class ResourceController extends Controller {
         $translator = $this->get('translator');
         $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
         $body = $this->renderView(
-                        'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'reservation'));
+                'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'reservation'));
         $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
-       
     }
-	
-    /*public function sendSubscriberBorrowNotification($to) {
-    	
-    	$this->sendMail($to, 'noreply@caesar.com', $body, $subject);
-    }*/
+
     public function sendMail($to, $from, $response, $subject) {
         $transport = Swift_SmtpTransport::newInstance();
         $message = Swift_Message::newInstance($transport)
@@ -427,34 +429,83 @@ class ResourceController extends Controller {
         }
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-        	$user = $this->get('security.context')->getToken()->getUser();
-        	$alreadySubscribed = false;
-        	foreach ($resource->getSubscriptions()->toArray() as $sub) {
-        		if ($sub->getUser()->getId() == $user->getId()) {//L'utilisateur est déjà abonné
-        			$alreadySubscribed = true;
-        		}
-        	}          
+            $user = $this->get('security.context')->getToken()->getUser();
+            $alreadySubscribed = false;
+            foreach ($resource->getSubscriptions()->toArray() as $sub) {
+                if ($sub->getUser()->getId() == $user->getId()) {//L'utilisateur est déjà abonné
+                    $alreadySubscribed = true;
+                }
+            }
             if ($alreadySubscribed == false) {
-	            $subscription = new Subscription();
-	            $subscription->setResource($resource);
-	            $subscription->setUser($user);
-	            $em->persist($subscription);
-	            $em->flush();
-	            $this->get('session')->getFlashBag()->add(
-	                    'notice', $translator->trans('client.subscription.resource.subscribed',
-	                    		 array('%resource%' => $resource->getDescription()))
-	            );
+                $subscription = new Subscription();
+                $subscription->setResource($resource);
+                $subscription->setUser($user);
+                $em->persist($subscription);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add(
+                        'notice', $translator->trans('client.subscription.resource.subscribed', array('%resource%' => $resource->getDescription()))
+                );
             } else {
-            	$this->get('session')->getFlashBag()->add(
-            			'info', $translator->trans('client.subscription.resource.alreadysubscribed',
-            					array('%resource%' => $resource->getDescription()))
-            	);
+                $this->get('session')->getFlashBag()->add(
+                        'info', $translator->trans('client.subscription.resource.alreadysubscribed', array('%resource%' => $resource->getDescription()))
+                );
             }
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
         } else {//Je dois me connecter
             $this->get('session')->getFlashBag()->add(
-                    'info', $translator->trans('client.subscription.resource.connect',
-                    		 array('%resource%' => $resource->getDescription()))
+                    'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
+            );
+
+            $request = $this->getRequest();
+            $session = $request->getSession();
+
+            if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+                $error = $request->attributes->get(
+                        SecurityContext::AUTHENTICATION_ERROR
+                );
+            } else {
+                $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+                $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+            }
+
+            return $this->render(
+                            'CaesarUserBundle:User:login.html.twig', array(
+                        'login_page_title' => $translator->trans('subscription.title'),
+                        'resource' => $resource,
+                        'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+                        'error' => $error)
+            );
+        }
+    }
+
+    public function unsubscribeAction($code = '') {
+        $translator = $this->get('translator');
+        $em = $this->getDoctrine()->getManager();
+        if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
+            $resource = $em->getRepository('CaesarResourceBundle:Resource')
+                    ->findOneByCode($code);
+        } else {
+            throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
+        }
+        if (!$resource) {
+            throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
+        }
+
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->get('security.context')->getToken()->getUser();
+            foreach ($resource->getSubscriptions()->toArray() as $sub) {
+                if ($sub->getUser()->getId() == $user->getId()) {
+                    $em->remove($sub);
+                }
+            }
+            $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                    'notice', $translator->trans('client.subscription.resource.unsubscribed', array('%resource%' => $resource->getDescription()))
+            );
+            return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
+        } else {//Je dois me connecter
+            $this->get('session')->getFlashBag()->add(
+                    'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
             );
 
             $request = $this->getRequest();
@@ -479,58 +530,46 @@ class ResourceController extends Controller {
         }
     }
     
-    public function unsubscribeAction($code = '') {
-    	$translator = $this->get('translator');
-    	$em = $this->getDoctrine()->getManager();    	
-    	if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
-    		$resource = $em->getRepository('CaesarResourceBundle:Resource')
-    		->findOneByCode($code);
-    	} else {
-    		throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
-    	}
-    	if (!$resource) {
-    		throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
-    	}
-    
-    	if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {    		
-    		$user = $this->get('security.context')->getToken()->getUser();
-	    	foreach ($resource->getSubscriptions()->toArray() as $sub) {
-	        	if ($sub->getUser()->getId() == $user->getId()) {
-	        		$em->remove($sub);
-	        	}
-	        }	            		
-    		$em->flush();
-    		$this->get('session')->getFlashBag()->add(
-    				'notice', $translator->trans('client.subscription.resource.unsubscribed',
-    						 array('%resource%' => $resource->getDescription()))
-    		);
-    		return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
-    	} else {//Je dois me connecter
-    		$this->get('session')->getFlashBag()->add(
-    				'info', $translator->trans('client.subscription.resource.connect',
-    						 array('%resource%' => $resource->getDescription()))
-    		);
-    
-    		$request = $this->getRequest();
-    		$session = $request->getSession();
-    
-    		if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-    			$error = $request->attributes->get(
-    					SecurityContext::AUTHENTICATION_ERROR
-    			);
-    		} else {
-    			$error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-    			$session->remove(SecurityContext::AUTHENTICATION_ERROR);
-    		}
-    
-    		return $this->render(
-    				'CaesarUserBundle:User:login.html.twig', array(
-    						'login_page_title' => $translator->trans('subscription.title'),
-    						'resource' => $resource,
-    						'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-    						'error' => $error)
-    		);
-    	}
+    /**
+     * Réservation d'une ressource par un utilisateur authentifié
+     * @param type $code : le code de la ressource à réserver
+     */
+    public function reserveAction($code) {
+        $translator = $this->get('translator');
+        $em = $this->get('doctrine')->getEntityManager();
+        if (Resource::isCAeSARCode($code) || Resource::checkISBN($code)) {
+            $resource = $em->getRepository('CaesarResourceBundle:Resource')
+                    ->findOneByCode($code);
+        } else {
+            throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
+        }
+        if (!$resource) {
+            throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
+        }
+        // $resource est un ressource valide        
+        if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
+            // L'utilisateur est bien authentifié
+            $user = $this->get('security.context')->getToken()->getUser();
+            // On vérifie qu'il n'a pas déjà réservé cette ressource
+            foreach ($user->getReservations() as $r) {
+                if ($r->getResource()->getId() == $resource->getId()) {
+                    $this->get('session')->setFlash('error', $translator->trans('client.reservation.alreadyReserved'));
+                    return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
+                }
+            }
+            $reservation = new Reservation();
+            $reservation->setResource($resource);
+            $reservation->setUser($user);
+            $reservation->setReservationDate(new \DateTime());
+            $em->persist($reservation);
+            $em->flush();
+            $this->get('session')->setFlash('notice', $translator->trans('client.reservation.success'));
+            return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
+        } else {
+            // On le redirige pour qu'il se connecte
+            $this->get('session')->setFlash('info', $translator->trans('client.reservation.must_connect'));
+            return $this->redirect($this->generateUrl('caesar_client_authenticate'));
+        }
     }
 
 }

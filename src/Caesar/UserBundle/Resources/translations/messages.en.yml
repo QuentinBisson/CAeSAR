@@ -1,0 +1,9 @@
+client:
+    reservation:
+        alreadyReserved: "You have already reserved this resource"
+        success: "You have reserved this resource"
+        must_connect: "You must be authenticated to reserve this resource"
+form:
+    reservation_form:
+        reserve: "Reserve"
+        

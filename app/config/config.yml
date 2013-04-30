@@ -18,7 +18,8 @@ framework:
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     trust_proxy_headers: false # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
     trusted_proxies: ~
-    session:         ~
+    session:         
+        lifetime:       1800
 
 # Twig Configuration
 twig:

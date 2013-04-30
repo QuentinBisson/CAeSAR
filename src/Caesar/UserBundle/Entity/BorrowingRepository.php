@@ -78,20 +78,16 @@ class BorrowingRepository extends EntityRepository {
             $query2 .= $separator . "resource_id = :resource";
         }
 
-        if ($direction != 'asc' || $direction != 'desc') {
+        if ($direction != 'asc' && $direction != 'desc') {
             $direction = 'asc';
         }
-
-        $orderBy = " order by case :sort
-           when 'borrowingDate' then borrowingDate
-           when 'resource' then resource
-           when 'user' then user
-           else id
-       end $direction";
-
-        $query1 .= $orderBy;
-        $query2 .= $orderBy;
-        $stmt = $this->_em->getConnection()->prepare("SELECT id, resource, user, borrowingDate, returnDate FROM (( $query1 ) union all ( $query2 )) t $orderBy LIMIT :min , :number");
+        $acceptedSort = array("resource", "borrowingDate", "user", "id");
+        
+        if (!in_array($sort, $acceptedSort)) {
+            $sort = "id";
+        } 
+        
+        $stmt = $this->_em->getConnection()->prepare("SELECT t.id, t.resource as \"resource\", user, t.borrowingDate, t.returnDate FROM (( $query1 ) union all ( $query2 )) t order by $sort $direction LIMIT :min , :number");
 
         if ($user != null) {
             $stmt->bindValue('user', $user->getId());
@@ -99,8 +95,6 @@ class BorrowingRepository extends EntityRepository {
         if ($resource != null) {
             $stmt->bindValue('resource', $resource->getId());
         }
-
-        $stmt->bindValue('sort', $sort);
         $stmt->bindValue('min', $min, PDO::PARAM_INT);
         $stmt->bindValue('number', $min + $nb_per_page, PDO::PARAM_INT);
 

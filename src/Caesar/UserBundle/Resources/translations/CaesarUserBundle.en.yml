@@ -1,5 +1,6 @@
 --- 
 borrowings.title: "My borrowings"
+reservations.title: "My reservations"
 fail.password: "Invalid password"
 form: 
   main_form: 
@@ -32,4 +33,4 @@ user:
     successfull: "Successfull registration"
     title: Registration
   update_profile.successfull: "Successfull profile update"
-link: Cancel this reservation
+reservation.cancel.link: Cancel

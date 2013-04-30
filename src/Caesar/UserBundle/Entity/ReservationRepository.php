@@ -17,7 +17,7 @@ class ReservationRepository extends EntityRepository {
         $nb_per_page = 10;
         $min = ($page - 1) * $nb_per_page;
         $qb = $this->createQueryBuilder('r');
-        if ($user != null) {
+        if ($user != null && is_object($user) && !is_string($user)) {
             $qb->where('r.user = :user');
             $qb->setParameter("user", $user->getId());
         }
@@ -40,7 +40,7 @@ class ReservationRepository extends EntityRepository {
         $qb = $this->createQueryBuilder('r');
         $qb->select('count(r.id)');
 
-        if ($user != null) {
+        if ($user != null && is_object($user) && !is_string($user)) {
             $qb->where('r.user = :user');
             $qb->setParameter("user", $user->getId());
         }

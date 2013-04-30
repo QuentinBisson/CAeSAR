@@ -47,7 +47,7 @@ class UserController extends Controller {
         }
 
         $resources = $repository_resource->getResourceFromToSortBy($page, $sort, $direction, $keywords);
-        $count = $repository_resource->count();
+        $count = $repository_resource->count($keywords);
 
         /* Pagination */
         $total = $count;
@@ -198,7 +198,7 @@ class UserController extends Controller {
                     $u->getUsername(), '', "caesar", $u->getRoles());
             $this->get('security.context')->setToken($token);
             $token->setAuthenticated(false);
-            $this->get('session')->setFlash('notice', $translatotranr->trans('user.register.successfull', array(), 'CaesarUserBundle'));
+            $this->get('session')->setFlash('notice', $translator->trans('user.register.successfull', array(), 'CaesarUserBundle'));
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         }
         return $this->render('CaesarUserBundle:User:register.html.twig', array('form' => $form->createView()));

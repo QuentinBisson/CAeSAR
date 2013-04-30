@@ -203,12 +203,14 @@ class AdminController extends Controller {
                 'reservation' => 'CaesarUserBundle:Reservation',
                 'tag' => 'CaesarTagBundle:Tag',
                 'format' => 'CaesarTagBundle:Format',
+                'subscription' => 'CaesarUserBundle:Subscription'
             );
             $date = date("d-m-Y");
             $heure = date("H-i-s");
             $repertoire = $date . "-" . $heure;
             $save_file = "";
             $save_file.= "/*====== Drop des données  */\n";
+            $save_file.="DELETE FROM subscription;\n";
             $save_file.="DELETE FROM borrowing;\n";
             $save_file.="DELETE FROM borrowingArchive;\n";
             $save_file.="DELETE FROM reservation;\n";
@@ -227,7 +229,7 @@ class AdminController extends Controller {
                     $insert = "INSERT INTO " . $key . " VALUES(";
                     foreach ($datum as $colum) {
                         if (!$colum instanceof DateTime) {
-                            $insert .= "'" . $colum . "',";
+                            $insert .= "'" . addslashes($colum) . "',";
                         } else {
                             $insert .= "'" . date_format($colum, 'Y-m-d H:i:s') . "',";
                         }
@@ -248,6 +250,7 @@ class AdminController extends Controller {
                     }
                 }
                 $zip->addFromString("backup.sql", $save_file);
+                $zip->addFile("../src/Caesar/AdminBundle/Resources/config/params.yml", "params.yml");
             }
             $zip->close();
             $response = new Response();
@@ -315,6 +318,9 @@ class AdminController extends Controller {
                         rename("resources/backup/load/img/" . $file, "resources/img/" . $file);
                     }
                 }
+                unlink("../src/Caesar/AdminBundle/Resources/config/params.yml");
+                rename("resources/backup/load/params.yml", "../src/Caesar/AdminBundle/Resources/config/params.yml");
+                chmod ("../src/Caesar/AdminBundle/Resources/config/params.yml",0777);
                 $this->deleteDirectory("resources/backup/load");
             } else {
                 $this->get('session')->getFlashBag()->add(

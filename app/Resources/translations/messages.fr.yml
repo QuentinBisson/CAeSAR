@@ -132,7 +132,7 @@ table:
       description: Description
       name: Nom
     tags: 
-      code: "Code ISBN-10, ISBN-13 ou CAeSAR-xxx"
+      code: "Code propriétaire de l'application C-xxx"
       creationDate: "Date de création"
     users: 
       codeBu: "Code B.U."

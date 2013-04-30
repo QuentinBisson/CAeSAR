@@ -1,5 +1,6 @@
 --- 
 borrowings.title: "Mes emprunts"
+reservations.title: "Mes réservations"
 fail.password: "Mot de passe invalide"
 form: 
   main_form: 
@@ -36,4 +37,4 @@ user:
     title: Inscription
   update_profile.successfull: "Modification de votre profil réussi"
 reservation.cancel:
-    link: Annuler cette réservation
+    link: Annuler

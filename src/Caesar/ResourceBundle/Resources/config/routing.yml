@@ -21,6 +21,10 @@ caesar_resource_subscribe:
 caesar_resource_unsubscribe:
     pattern:  /unsubscribe/{code}
     defaults: { _controller: "CaesarResourceBundle:Resource:unsubscribe" , code: ''}
+    
+caesar_resource_reserve:
+    pattern: /reserve/{code}
+    defaults: {_controller: "CaesarResourceBundle:Resource:reserve", code: ''}
 
 caesar_blocking_reservations:
     pattern:  /blocking/reservations/{page}/{resource}/{user}

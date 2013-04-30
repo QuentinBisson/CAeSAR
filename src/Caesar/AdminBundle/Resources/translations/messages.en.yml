@@ -40,12 +40,12 @@ admin:
         english: English
     home:
         synopsis:
-            shelves: Location's management
-            users: Users management
-            resources: Resources management
-            borrowings: Borrowings management
-            tags: Labels management
-            general: Application managment
+            shelves: The location section allows you to add, update or delete a location.
+            users: This section allows you to add, update or delete a user. You can also visualize a user's borrowings.
+            resources: In this section, you can  add, update or delete a resource. Moreover, you are able to visualize the borrowings concerning a resource. Finally, you can update the resource's skeleton.
+            borrowings: The Borrowings section allows you to visualize the current borrowings as well as the archived ones.
+            tags: In this section, you can visualize the available labels, generate new labels and create print formats.
+            general: The administration section can help you change your password, purge and list reservations, manage the webmining module and create and load a backup of the application.
     label:
         infobuble:
             resource_borrowing: Show borrowings from this resource

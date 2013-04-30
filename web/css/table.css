@@ -35,7 +35,8 @@
 
 .table-bordered {
     border: 1px solid #dddddd;
-    border-collapse: collapse;
+	border-spacing: 0px;
+	border-collapse: separate;
     border-left: 0;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -49,6 +50,10 @@
 .table-bordered th,
 .table-bordered td {
     border: 1px solid #dddddd;
+}
+
+.table-bordered tr td:first-child, .table-bordered tr th:first-child  {
+	border-left: 2px solid darkgray;
 }
 
 .table-striped tbody > tr:nth-child(odd) > td,
