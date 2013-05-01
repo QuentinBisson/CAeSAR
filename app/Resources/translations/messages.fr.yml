@@ -94,6 +94,8 @@ form:
     published_date: "Date de publication"
     publisher: Editeur
     variables: "Nom des variables utilisées par le module de webmining"
+  subscription:
+    active: "Activer (ou non) l'abonnement"
 resource: 
   label: 
     borrowings: "Emprunts en cours"

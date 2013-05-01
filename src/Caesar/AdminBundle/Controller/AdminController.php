@@ -6,6 +6,7 @@ use Caesar\AdminBundle\Entity\Config;
 use Caesar\AdminBundle\Form\LoadBackupType;
 use Caesar\AdminBundle\Form\ReservationDeleteType;
 use Caesar\AdminBundle\Form\WebminingModuleType;
+use Caesar\AdminBundle\Form\SubscriptionType;
 use Caesar\UserBundle\Form\ChangePasswordType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -188,6 +189,35 @@ class AdminController extends Controller {
         }
 
         return $this->render('CaesarAdminBundle:Admin:webmining.html.twig', array('form' => $form->createView()));
+    }
+    
+    public function subscriptionsAction() {
+    	$translator = $this->get('translator');
+    
+    	$array = array();
+    	$array['active_sub'] = Config::isSubscriptionActivated($this->container);    	
+    	$form = $this->createForm(new SubscriptionType(), $array);    	
+    	$request = $this->get('request');
+    	if ($request->isMethod('POST')) {
+    		$form->bind($request);
+    		if ($form->isValid()) {
+    			$data = $form->getData();
+    			$this->get('caesar.params')->save(
+    					array(
+    							'active_subscription' => $data['active_sub'],    							
+    					));
+    			$this->get('session')->getFlashBag()->add(
+    					'notice', $translator->trans('admin.form.webmining.notice')
+    			);
+    			return $this->redirect($this->generateUrl('caesar_admin_general_subscriptions'));
+    		} else {
+    			$this->get('session')->getFlashBag()->add(
+    					'error', $translator->trans('admin.form.webmining.error')
+    			);
+    		}
+    	}
+    
+    	return $this->render('CaesarAdminBundle:Admin:subscription.html.twig', array('form' => $form->createView()));
     }
 
     public function createBackupAction() {

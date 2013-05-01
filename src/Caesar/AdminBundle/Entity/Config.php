@@ -13,6 +13,7 @@ class Config {
     private static $CATEGORIES = 'categories_webmining_key';
     private static $GOOGLE_BOOKS_WEBMINING = 'google_books_webmining';
     private static $ACTIVATED_WEBMINING = 'active_webmining';
+    private static $ACTIVATED_SUBSCRIPTION = 'active_subscription';
     private static $GOOGLE_BOOKS_URL = 'google_books_url';
     private static $RESOURCE_SKELETON = 'resource_skeleton';
 
@@ -30,6 +31,10 @@ class Config {
 
     public static function isWebminingModuleActivated($container) {
         return self::getParameter($container, self::$ACTIVATED_WEBMINING) == true;
+    }
+    
+    public static function isSubscriptionActivated($container) {
+    	return self::getParameter($container, self::$ACTIVATED_SUBSCRIPTION) == true;
     }
 
     public static function getGoogleBooksURL($container) {

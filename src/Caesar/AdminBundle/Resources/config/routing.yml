@@ -39,6 +39,10 @@ caesar_admin_general_reservation_delete:
 caesar_admin_general_webmining:
     pattern:  /webmining
     defaults: { _controller: CaesarAdminBundle:Admin:webmining}
+    
+caesar_admin_general_subscriptions:
+    pattern:  /subscriptions
+    defaults: { _controller: CaesarAdminBundle:Admin:subscriptions}
 
 caesar_admin_general_create_backup:
     pattern:  /backup/create

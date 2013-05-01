@@ -138,6 +138,7 @@ admin:
                 header: Administration générale
                 password: Changer de mot de passe
                 webmining: Module de webmining
+                subscriptions: Gérer l'abonnement
                 clean_reservations: Purger les reservations
                 list_reservations: Lister les reservations
     fieldset:
@@ -207,6 +208,7 @@ admin:
             list: Réservations
         general:
             password: Changer le mot de passe
+            subscriptions: Options de l'abonnement
             webmining: Options du webmining
             backup:
                   load: Charger un backup

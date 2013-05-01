@@ -1,5 +1,6 @@
 parameters:
     active_webmining: true
+    active_subscription: true
     google_books_url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
     google_books_webmining: true
     authors_webmining_key: authors
