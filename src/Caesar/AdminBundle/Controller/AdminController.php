@@ -198,10 +198,13 @@ class AdminController extends Controller {
     	$array['active_sub'] = Config::isSubscriptionActivated($this->container);    	
     	$form = $this->createForm(new SubscriptionType(), $array);    	
     	$request = $this->get('request');
+    	var_dump("toto");
     	if ($request->isMethod('POST')) {
     		$form->bind($request);
+    		var_dump("tutu");
     		if ($form->isValid()) {
     			$data = $form->getData();
+    			var_dump($data['active_sub']);
     			$this->get('caesar.params')->save(
     					array(
     							'active_subscription' => $data['active_sub'],    							
@@ -216,7 +219,7 @@ class AdminController extends Controller {
     			);
     		}
     	}
-    
+    	
     	return $this->render('CaesarAdminBundle:Admin:subscription.html.twig', array('form' => $form->createView()));
     }
 
