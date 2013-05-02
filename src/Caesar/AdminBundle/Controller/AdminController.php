@@ -190,34 +190,34 @@ class AdminController extends Controller {
 
         return $this->render('CaesarAdminBundle:Admin:webmining.html.twig', array('form' => $form->createView()));
     }
-    
+
     public function subscriptionsAction() {
-    	$translator = $this->get('translator');
-    
-    	$array = array();
-    	$array['active_sub'] = Config::isSubscriptionActivated($this->container);    	
-    	$form = $this->createForm(new SubscriptionType(), $array);    	
-    	$request = $this->get('request');
-    	if ($request->isMethod('POST')) {
-    		$form->bind($request);
-    		if ($form->isValid()) {
-    			$data = $form->getData();
-    			$this->get('caesar.params')->save(
-    					array(
-    							'active_subscription' => $data['active_sub'],    							
-    					));
-    			$this->get('session')->getFlashBag()->add(
-    					'notice', $translator->trans('admin.form.webmining.notice')
-    			);
-    			return $this->redirect($this->generateUrl('caesar_admin_general_subscriptions'));
-    		} else {
-    			$this->get('session')->getFlashBag()->add(
-    					'error', $translator->trans('admin.form.webmining.error')
-    			);
-    		}
-    	}
-    
-    	return $this->render('CaesarAdminBundle:Admin:subscription.html.twig', array('form' => $form->createView()));
+        $translator = $this->get('translator');
+
+        $array = array();
+        $array['active_subscription'] = Config::isSubscriptionActivated($this->container);
+        $form = $this->createForm(new SubscriptionType(), $array);
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $this->get('caesar.params')->save(
+                        array(
+                            'active_subscription' => $data['active_subscription'],
+                ));
+                $this->get('session')->getFlashBag()->add(
+                        'notice', $translator->trans('admin.form.webmining.notice')
+                );
+                return $this->redirect($this->generateUrl('caesar_admin_general_subscriptions'));
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                        'error', $translator->trans('admin.form.webmining.error')
+                );
+            }
+        }
+
+        return $this->render('CaesarAdminBundle:Admin:subscription.html.twig', array('form' => $form->createView()));
     }
 
     public function createBackupAction() {
@@ -350,7 +350,7 @@ class AdminController extends Controller {
                 }
                 unlink("../src/Caesar/AdminBundle/Resources/config/params.yml");
                 rename("resources/backup/load/params.yml", "../src/Caesar/AdminBundle/Resources/config/params.yml");
-                chmod ("../src/Caesar/AdminBundle/Resources/config/params.yml",0777);
+                chmod("../src/Caesar/AdminBundle/Resources/config/params.yml", 0777);
                 $this->deleteDirectory("resources/backup/load");
             } else {
                 $this->get('session')->getFlashBag()->add(

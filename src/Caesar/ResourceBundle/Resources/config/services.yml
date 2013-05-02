@@ -2,6 +2,9 @@ parameters:
 #    caesar_resource.example.class: Caesar\ResourceBundle\Example
 
 services:
+      caesar.params:
+        class: Caesar\AdminBundle\Services\Params
+        arguments: ['params.yml']
 #    caesar_resource.example:
 #        class: %caesar_resource.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]

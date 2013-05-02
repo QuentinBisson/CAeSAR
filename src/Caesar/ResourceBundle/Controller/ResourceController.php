@@ -49,9 +49,9 @@ class ResourceController extends Controller {
             }
         }
         return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array(
-            'resource' => $resource, 
-            'alreadySubscribed' => $alreadySubscribed,
-            'hasReserved' => $hasReserved));
+                    'resource' => $resource,
+                    'alreadySubscribed' => $alreadySubscribed,
+                    'hasReserved' => $hasReserved));
     }
 
     public function ajaxGetAction($code) {
@@ -111,18 +111,20 @@ class ResourceController extends Controller {
                     }
 
                     $em->flush();
-                    $to = array();
-                    
-                    foreach ($resource->getSubscriptions()->toArray() as $sub) {
-                    	array_push($to, $sub->getUser()->getEmail());
+
+                    if ($this->container->getParameter("active_subscription")) {
+                        $to = array();
+
+                        foreach ($resource->getSubscriptions()->toArray() as $sub) {
+                            array_push($to, $sub->getUser()->getEmail());
+                        }
+
+                        $translator = $this->get('translator');
+                        $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
+                        $body = $this->renderView(
+                                'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_borrowed'));
+                        $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
                     }
-                    
-                    $translator = $this->get('translator');
-                    $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
-                    $body = $this->renderView(
-                    		'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_borrowed'));
-                    $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
-                    
                     $this->get('session')->getFlashBag()->add(
                             'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
                     );
@@ -245,23 +247,21 @@ class ResourceController extends Controller {
             $em->remove($borrowing);
             $em->persist($archivedBorrowing);
             $em->flush();
-            
-            $to = array();
-            
-            foreach ($resource->getSubscriptions()->toArray() as $sub) {
-            	array_push($to, $sub->getUser()->getEmail());
+
+            if ($this->container->getParameter("active_subscription")) {
+                $to = array();
+
+                foreach ($resource->getSubscriptions()->toArray() as $sub) {
+                    array_push($to, $sub->getUser()->getEmail());
+                }
+
+                $translator = $this->get('translator');
+                $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
+                $body = $this->renderView(
+                        'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_returned'));
+
+                $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
             }
-            
-            $translator = $this->get('translator');
-            $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
-            $body = $this->renderView(
-            		'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_returned'));
-            var_dump($to);
-            $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
-            
-            $this->get('session')->getFlashBag()->add(
-            		'notice', $to[0]
-            );
             $this->get('session')->getFlashBag()->add(
                     'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
             );
@@ -269,9 +269,8 @@ class ResourceController extends Controller {
                     'info', $translator->trans('client.return.shelf', array('%resource%' => $resource->getDescription(),
                         '%shelf_name%' => $shelf->getName(), '%shelf_description%' => $shelf->getDescription()))
             );
-            var_dump($to);
             $this->notify($resource, $q - $borrowedQuantity);
-            var_dump($to);
+
             return $this->redirect($this->generateUrl('caesar_client_homepage'));
         } else if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $user = $this->get('security.context')->getToken()->getUser();
@@ -393,7 +392,7 @@ class ResourceController extends Controller {
         foreach ($userToNotify as $u) {
             array_push($to, $u->getEmail());
         }
-        
+
         $translator = $this->get('translator');
         $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
         $body = $this->renderView(
@@ -528,7 +527,7 @@ class ResourceController extends Controller {
             );
         }
     }
-    
+
     /**
      * Réservation d'une ressource par un utilisateur authentifié
      * @param type $code : le code de la ressource à réserver
