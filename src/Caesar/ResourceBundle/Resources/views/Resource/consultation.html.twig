@@ -10,8 +10,6 @@
 {% endblock %}
 
 {% block caesar_user_content %}
-<section>
-    
     <div class="resource-details">
         <div class="head">
             <img src="{{asset('resources/img/' ~ resource.path)}}" alt="{{'resource.label.cover'|trans({})}}" />
@@ -72,5 +70,4 @@
             {% endif %}
         </div>
     </div>
-</section>
 {% endblock %}

@@ -323,7 +323,7 @@ header h1 {
 
 .resource-details {
     font-family: "Helvetica", "Arial", "sans-serif";
-     margin-left: 15px;
+    margin-left: 15px;
     line-height: 30px;
 }
 
@@ -334,8 +334,8 @@ header h1 {
     font-weight: normal;
     font-size : 24px;
     padding: 5px 20px;
-    width: 295px;
     float: left;
+    width: 61%;
     margin-top: 0px;
 }
 
@@ -367,31 +367,51 @@ header h1 {
 
 .resource-details .head {
     min-width: 480px;
-    max-width: 480px;
+    max-width: 100%;
     width: 100%;
     float: left;
     margin-left: 20px;
     margin-bottom: 20px;
 }
 
-.resource-details .head . actions {
-    margin: 0px 10px;
-}
 .resource-details .details {
     min-width: 480px;
-    max-width: 480px;
+    width: 100%;
+    max-width: 100%;
+    float: left;
+    margin-left: 20px;
+}
+
+.resource-details .borrowings {
+    min-width: 480px;
     float: left;
     margin-left: 20px;
     width: 100%;
 }
 
-.resource-details .borrowings {
-    min-width: 480px;
-    max-width: 800px;
-    float: left;
-    margin-left: 20px;
-    width: 100%;
+@media screen and (max-width:480px) {
+    .resource-details {
+        width: 100%;
+    }
+    .resource-details .head, 
+    .resource-details .details,
+    .resource-details .borrowings {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
 }
+@media screen and (max-width:960px) {
+    .resource-details .head, 
+    .resource-details .details {
+        max-width: 480px;
+    }
+    .resource-details .borrowings {
+        max-width: 100%;
+    }
+}
+
+
 
 .resource-code {
     width: 20%;
