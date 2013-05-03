@@ -45,7 +45,7 @@ class ResourceUpdateTest extends WebTestCase {
         $crawler = $client->request('GET', '/fr/admin/resource/update/' . $resource->getId());
 
         $form = $crawler->selectButton("Modifier la ressource")->form();
-        $form['caesar_resourceBundle_resourceType[code]'] = 'C-0000000062';
+        $form['caesar_resourceBundle_resourceType[code]'] = 'C-0000000061';
         $form['caesar_resourceBundle_resourceType[description]'] = 'Pratique des tests logiciels 2';
         $form['caesar_resourceBundle_resourceType[quantity]'] = 4;
         $form['caesar_resourceBundle_resourceType[longDescription]'] = 'Auteur: moi, page:259';
@@ -58,7 +58,7 @@ class ResourceUpdateTest extends WebTestCase {
      */
     public function testUpdateDataValide() {
 
-        $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000062');
+        $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000061');
 
         $this->assertEquals('Pratique des tests logiciels 2', $resource_bis->getDescription());
         $this->assertEquals(4, $resource_bis->getQuantity());

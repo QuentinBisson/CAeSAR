@@ -413,6 +413,9 @@ class ResourceController extends Controller {
             if (isset($book->volumeInfo->title)) {
                 $resource['title'] = $book->volumeInfo->title;
             }
+            if (isset($book->volumeInfo->subtitle) && $book->volumeInfo->subtitle != "") {
+                $resource['title'] .= ': ' . $book->volumeInfo->subtitle;
+            }
             if (isset($book->volumeInfo->authors)) {
                 $resource['authors'] = $book->volumeInfo->authors;
             }

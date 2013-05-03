@@ -2,13 +2,14 @@
 
 namespace Caesar\AdminBundle\Tests\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Caesar\AdminBundle\Tests\Controller;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class ResourceAddControllerTest extends WebTestCase {
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityManager
      */
     private $em;
 
@@ -20,23 +21,28 @@ class ResourceAddControllerTest extends WebTestCase {
         static::$kernel->boot();
         $this->em = static::$kernel->getContainer()
                 ->get('doctrine')
-                ->getEntityManager()
-        ;
+                ->getEntityManager();
     }
 
     public function testIndex() {
         $client = static::createClient();
 
+        $crawler = $client->request('GET', '/fr/admin/login');
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'Admin';
+        $form['_password'] = 'administrator';
+
+        // soumet le formulaire
+        $client->submit($form);
+        
         $crawler = $client->request('GET', '/fr/admin/resource/add');
-
-
+        
         $this->assertGreaterThan(
                 0, $crawler->filter('html:contains("Ajouter une nouvelle ressource")')->count()
         );
     }
 
     public function testAddDeleteSeveralResources() {
-
         $arrResult = array();
         $arrLines = file('..\src\Caesar\AdminBundle\Tests\Controller\resource.csv');
         foreach ($arrLines as $line) {
@@ -48,10 +54,18 @@ class ResourceAddControllerTest extends WebTestCase {
     }
 
     public function testAdd($code = '9782360570409', $description = 'Manuel de Russe vol 1', $quantity = '1', $shelf = '107', $url = 'http://connectnigeria.com/articles/wp-content/uploads/2012/12/Google.jpg', $longDescription = 'Oui.') {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/fr/admin/resource/add');
 
-        echo "Test sur :" . $code . " ," . $description . " \n";
+        $client = static::createClient();
+        
+        $crawler = $client->request('GET', '/fr/admin/login');
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'Admin';
+        $form['_password'] = 'administrator';
+
+        // soumet le formulaire
+        $client->submit($form);
+        
+        $crawler = $client->request('GET', '/fr/admin/resource/add');
 
         $form = $crawler->selectButton("Ajouter la ressource")->form();
 

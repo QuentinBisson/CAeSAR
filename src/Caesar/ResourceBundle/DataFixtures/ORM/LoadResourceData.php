@@ -26,7 +26,7 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
             $resource->setShelf($shelfRepository->findOneByName($res[3]));
             $resource->setCode($res[0]);
             $resource->setDescription($res[1]);
-            $resource->setLongDescription($res[4]);
+            $resource->setLongDescription(str_replace('\n', "\n", $res[4]));
             $resource->setQuantity($res[2]);
             $filename = $this->handleImage($res[5], $resource->getCode());
             $resource->setPath($filename);
