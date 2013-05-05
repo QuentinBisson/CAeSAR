@@ -20,7 +20,7 @@
                 {% if alreadySubscribed == false %}
                     <a class="btn-primary" href="{{ path('caesar_resource_subscribe', {'code':resource.code}) }}">{{ 'form.subscribe_form.subscribe'|trans({}, 'CaesarUserBundle') }}</a>
                 {% else %}
-                    <a class="btn-primary" href="{{ path('caesar_resource_unsubscribe', {'code':resource.code}) }}">{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}"</a>
+                    <a class="btn-primary" href="{{ path('caesar_resource_unsubscribe', {'code':resource.code}) }}">{{ 'form.subscribe_form.unsubscribe'|trans({}, 'CaesarUserBundle') }}</a>
                 {% endif %} 
                 {% if hasReserved == false %} 
                     <a class="btn-primary" href="{{ path('caesar_resource_reserve', {'code':resource.code})}}">

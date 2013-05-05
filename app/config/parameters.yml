@@ -6,10 +6,10 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:    sendmail
-    mailer_host:         localhost
-    mailer_user:         ~
-    mailer_password:     ~
+    mailer_transport:    gmail
+    mailer_host:         ~
+    mailer_user:         strategesim@gmail.com
+    mailer_password:     cemen123
     mailer_auth_mode:    ~
     mailer_encryption:   ~
     mailer_port:         ~
