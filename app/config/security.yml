@@ -60,6 +60,8 @@ security:
         - { path: /profile, roles: ROLE_USER_IDENTIFIED}
         - { path: admin/reservation, roles: ROLE_ADMIN }
         - { path: /reservation, roles: ROLE_USER_IDENTIFIED}
+        - { path: /subscribe, roles: ROLE_USER_IDENTIFIED}
+        - { path: /unsubscribe, roles: ROLE_USER_IDENTIFIED}
         - { path: /reserve, roles: ROLE_USER_IDENTIFIED}
         - { path: /cancel/reservation/*, roles: ROLE_USER_IDENTIFIED}
         - { path: admin/borrowing, roles: ROLE_ADMIN }

@@ -63,4 +63,4 @@ swiftmailer:
     username:   "%mailer_user%"
     password:   "%mailer_password%"
     auth_mode:  "%mailer_auth_mode%"
-    spool:      { type: memory }
+    

@@ -112,7 +112,7 @@ class Resource {
      * @ORM\OrderBy({"reservationDate" = "ASC"})
      */
     private $reservations;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Caesar\UserBundle\Entity\Subscription", mappedBy="resource")
      */
@@ -424,17 +424,15 @@ class Resource {
         return false;
     }
 
-
     /**
      * Add subscriptions
      *
      * @param \Caesar\UserBundle\Entity\Subscription $subscriptions
      * @return Resource
      */
-    public function addSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions)
-    {
+    public function addSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions) {
         $this->subscriptions[] = $subscriptions;
-    
+
         return $this;
     }
 
@@ -443,8 +441,7 @@ class Resource {
      *
      * @param \Caesar\UserBundle\Entity\Subscription $subscriptions
      */
-    public function removeSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions)
-    {
+    public function removeSubscription(\Caesar\UserBundle\Entity\Subscription $subscriptions) {
         $this->subscriptions->removeElement($subscriptions);
     }
 
@@ -453,8 +450,8 @@ class Resource {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSubscriptions()
-    {
+    public function getSubscriptions() {
         return $this->subscriptions;
     }
+
 }

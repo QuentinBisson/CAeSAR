@@ -114,11 +114,10 @@ class ResourceController extends Controller {
 
                     if ($this->container->getParameter("active_subscription")) {
                         $to = array();
-
+						
                         foreach ($resource->getSubscriptions()->toArray() as $sub) {
                             array_push($to, $sub->getUser()->getEmail());
                         }
-
                         $translator = $this->get('translator');
                         $subject = $translator->trans('resource.reservation.available', array('%date%' => date('d/m/T H:i:s')));
                         $body = $this->renderView(
@@ -424,7 +423,7 @@ class ResourceController extends Controller {
             throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
         }
 
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
             $user = $this->get('security.context')->getToken()->getUser();
             $alreadySubscribed = false;
             foreach ($resource->getSubscriptions()->toArray() as $sub) {
@@ -447,31 +446,12 @@ class ResourceController extends Controller {
                 );
             }
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
-        } else {//Je dois me connecter
+        } else {
+            // On le redirige pour qu'il s'authentifie
             $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
-            $this->get('session')->getFlashBag()->add(
-                    'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
-            );
-
-            $request = $this->getRequest();
-            $session = $request->getSession();
-
-            if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-                $error = $request->attributes->get(
-                        SecurityContext::AUTHENTICATION_ERROR
-                );
-            } else {
-                $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-                $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-            }
-
-            return $this->render(
-                            'CaesarUserBundle:User:login.html.twig', array(
-                        'login_page_title' => $translator->trans('subscription.title'),
-                        'resource' => $resource,
-                        'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                        'error' => $error)
-            );
+            $this->get('session')->setFlash('info', $translator->trans('client.reservation.must_connect'));
+            $response = $this->redirect($this->generateUrl('caesar_client_authenticate'));
+            return $response;
         }
     }
 
@@ -488,7 +468,7 @@ class ResourceController extends Controller {
             throw $this->createNotFoundException($translator->trans('client.subscription.exception', array('%code%' => $code)));
         }
 
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->get('security.context')->isGranted('ROLE_USER_AUTHENTIFIED')) {
             $user = $this->get('security.context')->getToken()->getUser();
             foreach ($resource->getSubscriptions()->toArray() as $sub) {
                 if ($sub->getUser()->getId() == $user->getId()) {
@@ -500,31 +480,11 @@ class ResourceController extends Controller {
                     'notice', $translator->trans('client.subscription.resource.unsubscribed', array('%resource%' => $resource->getDescription()))
             );
             return $this->redirect($this->generateUrl('caesar_resource_homepage', array('code' => $code)));
-        } else {//Je dois me connecter
+        } else {// On le redirige pour qu'il s'authentifie
             $this->get('session')->set('authenticate_referer_url', $this->get('request')->getUri());
-            $this->get('session')->getFlashBag()->add(
-                    'info', $translator->trans('client.subscription.resource.connect', array('%resource%' => $resource->getDescription()))
-            );
-
-            $request = $this->getRequest();
-            $session = $request->getSession();
-
-            if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-                $error = $request->attributes->get(
-                        SecurityContext::AUTHENTICATION_ERROR
-                );
-            } else {
-                $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-                $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-            }
-
-            return $this->render(
-                            'CaesarUserBundle:User:login.html.twig', array(
-                        'login_page_title' => $translator->trans('subscription.title'),
-                        'resource' => $resource,
-                        'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                        'error' => $error)
-            );
+            $this->get('session')->setFlash('info', $translator->trans('client.reservation.must_connect'));
+            $response = $this->redirect($this->generateUrl('caesar_client_authenticate'));
+            return $response;
         }
     }
 
