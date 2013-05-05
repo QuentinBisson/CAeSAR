@@ -1,6 +1,7 @@
 --- 
 Bad credentials: "Le login ou le mot de passe est invalide"
 resource.reservation.available: "[%date%] Informations: Une ressource que vous avez réservé est disponible"
+reservations.blocking.title: "Réservations bloquantes"
 ajax: 
   wait: 
     message: "Veuillez patientez ..."
@@ -19,7 +20,7 @@ client:
       placeholder: "Rechercher ..."
       title: "Rechercher une ressource"
 form: 
-  password.type.label.password: "Input your password"
+  password.type.label.password: "Saisissez votre mot de passe"
   reservation: 
     type: 
       label: 
@@ -121,7 +122,7 @@ table:
         date: "Date de retour"
       user: Utilisateur
     reservations: 
-      date: "Date de réservation"
+      date: "Date"
       resource: "Ressource réservée"
       user: Utilisateur
     resources: 
