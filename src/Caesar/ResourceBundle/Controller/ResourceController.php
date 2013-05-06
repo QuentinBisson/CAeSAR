@@ -50,6 +50,7 @@ class ResourceController extends Controller {
         }
         return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array(
                     'resource' => $resource,
+        		    'subActive' => $this->container->getParameter("active_subscription"),
                     'alreadySubscribed' => $alreadySubscribed,
                     'hasReserved' => $hasReserved));
     }
