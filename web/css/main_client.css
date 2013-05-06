@@ -323,7 +323,7 @@ header h1 {
 
 .resource-details {
     font-family: "Helvetica", "Arial", "sans-serif";
-    margin-left: 15px;
+    margin: 0px;
     line-height: 30px;
 }
 
@@ -335,7 +335,8 @@ header h1 {
     font-size : 24px;
     padding: 5px 20px;
     float: left;
-    width: 61%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
     margin-top: 0px;
 }
 
@@ -347,6 +348,8 @@ header h1 {
     font-weight: normal;
     font-size : 18px;
     padding: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
     margin-top: 0px;
 }
 
@@ -365,49 +368,38 @@ header h1 {
     margin-bottom: 10px;
 }
 
-.resource-details .head {
-    min-width: 480px;
-    max-width: 100%;
-    width: 100%;
-    float: left;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
+.resource-details .head,
 .resource-details .details {
-    min-width: 480px;
-    width: 100%;
-    max-width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 50%;
     float: left;
-    margin-left: 20px;
 }
-
 .resource-details .borrowings {
-    min-width: 480px;
-    float: left;
-    margin-left: 20px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
     width: 100%;
+    clear: none;
 }
 
-@media screen and (max-width:480px) {
-    .resource-details {
-        width: 100%;
-    }
+@media screen and (min-width:1024px) {
     .resource-details .head, 
     .resource-details .details,
     .resource-details .borrowings {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
+        width: 33%;
+        float: left;
     }
 }
-@media screen and (max-width:960px) {
+/* Petites résolutions */
+@media screen and (max-width:640px) {
     .resource-details .head, 
-    .resource-details .details {
-        max-width: 480px;
-    }
+    .resource-details .details,
     .resource-details .borrowings {
-        max-width: 100%;
+        width: 100%;
+        clear: both;
+        float: none;
     }
 }
 
@@ -422,7 +414,7 @@ header h1 {
 }
 
 table.table {
-    width: 90%;
+    width: 100%;
 }
 
 p.sort-label {
