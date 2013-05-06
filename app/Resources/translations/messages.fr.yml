@@ -108,9 +108,9 @@ resource:
 table: 
   foot: 
     count:
-      zero: "Aucune ligne n'a été trouvé"
-      one: "%value% ligne a été trouvé"
-      more_than_one: "%value% lignes ont été trouvé"
+      zero: "Aucune ligne n'a été trouvée"
+      one: "%value% ligne a été trouvée"
+      more_than_one: "%value% lignes ont été trouvées"
   sort: 
     down: "Trier vers le bas"
     up: "Trier vers le haut"
