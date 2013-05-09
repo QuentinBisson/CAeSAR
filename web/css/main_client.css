@@ -46,7 +46,7 @@ header h1 {
 .flash-notice, .flash-error, .flash-info {
     -webkit-border-radius: 8px;
     border-radius: 5px;
-    
+
     padding: 10px 20px;
     color: #555;
     max-width: 598px;
@@ -384,7 +384,7 @@ header h1 {
     clear: none;
 }
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1024px), (-webkit-min-logical-width: 1024px) {
     .resource-details .head, 
     .resource-details .details,
     .resource-details .borrowings {
@@ -402,9 +402,6 @@ header h1 {
         float: none;
     }
 }
-
-
-
 .resource-code {
     width: 20%;
 }

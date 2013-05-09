@@ -371,11 +371,3 @@ input.unnotify-web-mining, textarea.unnotify-web-mining {
 fieldset p.left {    
     clear: both;
 }
-
-@media screen and (max-width:980px) and (min-width:480px) {
-
-}
-
-@media screen and (max-width:480px) {
-
-}
