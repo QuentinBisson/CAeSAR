@@ -18,8 +18,8 @@
   header('HTTP/1.0 403 Forbidden');
   exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
   } */
-echo "Installation de l'application Caesar....\n";
-echo "Verifiction des pre-requis...\n";
+echo "Installation de l'application Caesar ...\n";
+echo "Vérification des pré-requis ...\n";
 if (!extension_loaded("fileinfo")) {
     exit("ERREUR: Veuillez activer le module fileinfo");
 }
@@ -45,11 +45,11 @@ if (!extension_loaded("pdo_mysql")) {
     exit("ERREUR: Veuillez activer le module pdo_mysql");
 }
 
-echo "Initialisation...\n";
+echo "Initialisation ...\n";
 exec("php composer.phar install");
 echo "Vendors ok\n";
 
-echo "Mise a jours des droits d'acces...\n";
+echo "Mise à jour des droits d'accès ...\n";
 //chmod 777
 
 if (file_exists("app\cache")) {
@@ -61,23 +61,23 @@ if (file_exists("app\logs")) {
 if (file_exists("Adminbundle\Resouces\config\params.yml")) {
     chmod("Adminbundle\Resouces\config\params.yml", 0777);
 }
-echo "Droits d'acces ok \n";
+echo "Droits d'accès ok \n";
 
 /* db */
-echo "Initialisation de la base de donnees...\n";
+echo "Initialisation de la base de données ...\n";
 exec("php app\console doctrine:database:create");
 exec("php app\console doctrine:schema:update --force");
 exec("php app\console doctrine:fixtures:load --fixtures=src\Caesar\AdminBundle\DataFixtures\ORM --append");
-echo "Base de donnees ok\n";
+echo "Base de données ok\n";
 
 /* assets */
-echo "Creation des liens...\n";
+echo "Création des liens ...\n";
 exec("php app\console assets:install web --symlink");
 
 /* cache */
-echo "Nettoyage du cache...\n";
+echo "Nettoyage du cache ...\n";
 exec("php app\console cache:clear");
 exec("php app\console cache:clear --env=prod");
 
-echo "L'installation c'est deroule avec succes."
+echo "L'installation s'est deroulée avec succès."
 ?>
