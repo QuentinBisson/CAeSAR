@@ -40,7 +40,7 @@ class UserTest extends WebTestCase {
         $form_profile['caesar_userBundle_userUpdateType[confirmPassword]'] = $this->password;
         $client->submit($form_profile);
         
-        $this->assertTrue($crawler->filter('html:contains("Albert")')->count() > 0);      
+        $this->assertTrue($profile->filter('html:contains("Albert")')->count() > 0);      
     }   
 
 }
