@@ -28,7 +28,7 @@ class UserTest extends WebTestCase {
         $client->submit($form_log);
         
         $profile = $client->request('GET', '/fr/profile');
-        $link = $profile->filterXpath("//a[@name='modifyProfile']")->eq(1)->link();
+        $link = $profile->filterXpath('//a[@id="modifyProfile"]')->eq(1)->link();
         $client->click($link);
         $form_auth = $login->selectButton("Connexion")->form();
         $form_auth['caesar_userBundle_passwordType[plainPassword]'] = $this->password;
