@@ -27,6 +27,14 @@ class ResourceUpdateTest extends WebTestCase {
 
     public function testDataValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
+
         $resource = new Resource();
         $shelf = new Shelf();
         $shelf->setName("étagére 5")
@@ -45,7 +53,7 @@ class ResourceUpdateTest extends WebTestCase {
         $crawler = $client->request('GET', '/fr/admin/resource/update/' . $resource->getId());
 
         $form = $crawler->selectButton("Modifier la ressource")->form();
-        $form['caesar_resourceBundle_resourceType[code]'] = 'C-0000000061';
+        $form['caesar_resourceBundle_resourceType[code]'] = 'C-0000000062';
         $form['caesar_resourceBundle_resourceType[description]'] = 'Pratique des tests logiciels 2';
         $form['caesar_resourceBundle_resourceType[quantity]'] = 4;
         $form['caesar_resourceBundle_resourceType[longDescription]'] = 'Auteur: moi, page:259';
@@ -58,7 +66,7 @@ class ResourceUpdateTest extends WebTestCase {
      */
     public function testUpdateDataValide() {
 
-        $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000061');
+        $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000062');
 
         $this->assertEquals('Pratique des tests logiciels 2', $resource_bis->getDescription());
         $this->assertEquals(4, $resource_bis->getQuantity());
@@ -71,6 +79,13 @@ class ResourceUpdateTest extends WebTestCase {
 
     public function testDataInValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $resource = new Resource();
         $shelf = new Shelf();
         $shelf->setName("étagére 6")
@@ -101,7 +116,6 @@ class ResourceUpdateTest extends WebTestCase {
      * @depends testDataInValide
      */
     public function testUpdateDataInValide() {
-
         $resource_bis = $this->em->getRepository('CaesarResourceBundle:Resource')->findOneByCode('C-0000000061');
 
         $this->assertEquals('Pratique des tests logiciels', $resource_bis->getDescription());

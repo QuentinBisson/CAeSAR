@@ -26,6 +26,13 @@ class UserUpdateTest extends WebTestCase {
 
     public function testDataValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $user = new User();
         $encoder = static::$kernel->getContainer()->get('security.encoder_factory')->getEncoder($user);
         $user->setCodeBu(123)
@@ -56,6 +63,13 @@ class UserUpdateTest extends WebTestCase {
      */
     public function testUpdateDataValide() {
         $client = static::createClient();
+         $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
 
         $user_bis = $this->em->getRepository('CaesarUserBundle:User')->findOneByCodeBu(123);
 
@@ -72,6 +86,13 @@ class UserUpdateTest extends WebTestCase {
 
     public function testDataInValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $user = new User();
         $encoder = static::$kernel->getContainer()->get('security.encoder_factory')->getEncoder($user);
         $user->setCodeBu(124)
@@ -102,7 +123,13 @@ class UserUpdateTest extends WebTestCase {
      */
     public function testUpdateDataInValide() {
         $client = static::createClient();
+         $crawler = $client->request('GET', '/fr/admin/login');
 
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $user_bis = $this->em->getRepository('CaesarUserBundle:User')->findOneByCodeBu(124);
 
         $this->assertEquals('totooo', $user_bis->getName());

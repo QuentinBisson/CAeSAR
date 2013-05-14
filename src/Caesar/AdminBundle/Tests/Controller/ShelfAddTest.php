@@ -26,7 +26,13 @@ class ShelfAddControllerTest extends WebTestCase {
 
     public function testIndex() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
 
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $crawler = $client->request('GET', '/fr/admin/shelf/add');
 
 
@@ -48,6 +54,13 @@ class ShelfAddControllerTest extends WebTestCase {
 
     public function testAddShelf($name = 'Etagere', $description = 'Une étagère') {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $crawler = $client->request('GET', '/fr/admin/shelf/add');
 
         echo "Test sur :" . $name . " ," . $description . "\n";

@@ -27,6 +27,13 @@ class ShelfUpdateTest extends WebTestCase {
 
     public function testDataValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $shelf = new Shelf();
         $shelf->setName("étagére 1")
                 ->setDescription("A gauche dans la salle");
@@ -47,7 +54,13 @@ class ShelfUpdateTest extends WebTestCase {
      */
     public function testUpdateDataValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
 
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $shelf_bis = $this->em->getRepository('CaesarShelfBundle:Shelf')->findOneByName('étagére 2');
 
         $this->assertEquals('étagére 2', $shelf_bis->getName());
@@ -58,6 +71,13 @@ class ShelfUpdateTest extends WebTestCase {
 
     public function testDatainValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
+
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
         $shelf = new Shelf();
         $shelf->setName("étagére 1")
                 ->setDescription("A gauche dans la salle");
@@ -74,11 +94,18 @@ class ShelfUpdateTest extends WebTestCase {
     }
 
     /**
-     * @depends testDataValide
+     * @depends testDatainValide
      */
     public function testUpdateDatainValide() {
         $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/admin/login');
 
+        $form = $crawler->selectButton("Connexion")->form();
+        $form['_username'] = 'admin';
+        $form['_password'] = 'adminadmin';
+
+        $client->submit($form);
+        
         $shelf_bis = $this->em->getRepository('CaesarShelfBundle:Shelf')->findOneByName('étagére 1');
 
         $this->assertEquals('étagére 1', $shelf_bis->getName());
