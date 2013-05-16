@@ -19,7 +19,7 @@
   exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
   } */
 echo "Installation de l'application Caesar....\n";
-echo "Verifiction des pre-requis...\n";
+echo "Verification des pre-requis...\n";
 if (!extension_loaded("fileinfo")) {
     exit("ERREUR: Veuillez activer le module fileinfo");
 }
@@ -49,7 +49,7 @@ echo "Initialisation...\n";
 exec("php composer.phar install");
 echo "Vendors ok\n";
 
-echo "Mise a jours des droits d'acces...\n";
+echo "Mise a jour des droits d'acces...\n";
 //chmod 777
 
 if (file_exists("app/cache")) {
@@ -79,5 +79,5 @@ echo "Nettoyage du cache...\n";
 exec("php app/console cache:clear");
 exec("php app/console cache:clear --env=prod");
 
-echo "L'installation c'est deroule avec succes."
+echo "L'installation s'est deroulee avec succes."
 ?>

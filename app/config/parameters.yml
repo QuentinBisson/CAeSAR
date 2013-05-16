@@ -1,18 +1,18 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     caesar
-    database_user:     root
-    database_password: ~
+    database_driver:   pdo_mysql # Nom du driver du SGDB utilisé (par défaut : pdo_mysql)
+    database_host:     127.0.0.1 # Adresse du serveur de la base de données
+    database_port:     ~ # Port du serveur de la base de données
+    database_name:     caesar # Nom du schéma de la base de données (par défaut : caesar)
+    database_user:     root # Nom d’utilisateur du serveur de base de données
+    database_password: ~ # Mot de passe du serveur de base de données
 
-    mailer_transport:    gmail
-    mailer_host:         smtp.gmail.com
-    mailer_user:         strategesim@gmail.com
-    mailer_password:     cemen123
+    mailer_transport:    gmail #Protocole utilisé pour le serveur de messagerie (smtp, gmail …)
+    mailer_host:         smtp.gmail.com # Adresse du serveur de messagerie (ex : smtp.mondomaine.com)
+    mailer_user:         strategesim@gmail.com # Nom d’utilisateur du serveur de messagerie
+    mailer_password:     cemen123 # Mot de passe du serveur de messagerie
     mailer_auth_mode:    ~
-    mailer_encryption:   ssl
-    mailer_port:         465
+    mailer_encryption:   ssl # Méthode d’encryptage (par défaut : ssl) 
+    mailer_port:         465 # Port utilisé pour le serveur de messagerie (par défaut : 465)
 
-    locale:            fr
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    locale:            fr # Langue par défaut de l’application (fr, en, …)
+    secret:            ThisTokenIsNotSoSecretChangeIt # Clé unique permettant de sécuriser l’application
