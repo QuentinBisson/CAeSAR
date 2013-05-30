@@ -121,11 +121,11 @@ class ResourceController extends Controller {
                 }
             }
         }
-
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
         return $this->render('CaesarAdminBundle:Resource:add.html.twig', array(
                     'form' => $form->createView(),
                     'resource' => $resource,
-                    'active_module' => Config::isWebminingModuleActivated($this->container)
+                    'active_module' => ($xml->active_webmining == '1')
         ));
     }
 
@@ -174,9 +174,10 @@ class ResourceController extends Controller {
             }
         }
 
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
         return $this->render('CaesarAdminBundle:Resource:update.html.twig', array(
                     'form' => $form->createView(), 'resource' => $resource, 'shelf' => $resource->getShelf(),
-                    'active_module' => Config::isWebminingModuleActivated($this->container)
+                    'active_module' => ($xml->active_webmining == '1')
         ));
     }
 
@@ -220,7 +221,8 @@ class ResourceController extends Controller {
      */
     public function webminingAction($code) {
         $translator = $this->get('translator');
-        if (!Config::isWebminingModuleActivated($this->container)) {
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        if (($xml->active_webmining != '1')) {
             throw $this->createNotFoundException($translator->trans('admin.form.webmining.activated.exception'));
         }
         if (filter_input(INPUT_GET, $code, FILTER_VALIDATE_INT) !== false) {
@@ -292,7 +294,8 @@ class ResourceController extends Controller {
         $translator = $this->get('translator');
 
         $array = array();
-        $array['skeleton'] = str_replace("\\r\\n", "\r\n", Config::getResourceSkeleton($this->container));
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        $array['skeleton'] = str_replace("\\r\\n", "\r\n", (string) $xml->resource_skeleton);
 
         $form = $this->createForm(new ResourceSkeletonType(), $array);
         $request = $this->get('request');
@@ -300,10 +303,13 @@ class ResourceController extends Controller {
             $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
-                $this->get('caesar.params')->save(
+                /*$this->get('caesar.params')->save(
                         array(
                             'resource_skeleton' => $data['skeleton']
-                ));
+                ));*/
+                $xml->resource_skeleton = $data['skeleton'];
+                $xml->asXML($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+                unset($xml);
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.skeleton.notice')
                 );
@@ -313,8 +319,9 @@ class ResourceController extends Controller {
                         'error', $translator->trans('admin.form.skeleton.error')
                 );
             }
-        }
 
+        }
+            unset($xml);
         return $this->render('CaesarAdminBundle:Resource:skeleton.html.twig', array('form' => $form->createView()));
     }
 
@@ -389,15 +396,18 @@ class ResourceController extends Controller {
     private function webmining($isbn) {
         $resource = null;
         if (Resource::checkISBN($isbn)) {
-            if (Config::isGoogleBooksWebmining($this->container)) {
+            $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+            if (($xml->google_books_webmining == '1')) {
                 $resource = $this->searchDataFromGoogleBooks($isbn);
             }
+            unset($xml);
         }
         return $this->transformResourceToJSON($resource);
     }
 
     private function searchDataFromGoogleBooks($isbn) {
-        if (($request = Config::getGoogleBooksURL($this->container)) == null) {
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        if (($request = (string) $xml->google_books_url) == null) {
             return null;
         }
         $request .= $isbn;
@@ -447,10 +457,11 @@ class ResourceController extends Controller {
     }
 
     private function transformResourceToJSON($resource) {
-        $skeleton = Config::getResourceSkeleton($this->container);
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        $skeleton = (string) $xml->resource_skeleton;
         $result = array();
 
-        $key = Config::getAuthorsKey($this->container);
+        $key = (string) $xml->authors_webmining_key;
         if (isset($resource['authors'])) {
             $authors = "";
             $separator = "";
@@ -469,28 +480,28 @@ class ResourceController extends Controller {
             $result['description'] = "";
         }
 
-        $key = Config::getPublisherKey($this->container);
+        $key = (string) $xml->publisher_webmining_key;
         if (isset($resource['publisher'])) {
             $longDescription = str_replace('$' . $key, $resource['publisher'], $longDescription);
         } else {
             $longDescription = str_replace('$' . $key, "", $longDescription);
         }
 
-        $key = Config::getDescriptionKey($this->container);
+        $key = (string) $xml->description_webmining_key;
         if (isset($resource['description'])) {
             $longDescription = str_replace('$' . $key, $resource['description'], $longDescription);
         } else {
             $longDescription = str_replace('$' . $key, "", $longDescription);
         }
 
-        $key = Config::getPublishedDateKey($this->container);
+        $key = (string) $xml->publishedDate_webmining_key;
         if (isset($resource['publishedDate'])) {
             $longDescription = str_replace('$' . $key, $resource['publishedDate'], $longDescription);
         } else {
             $longDescription = str_replace('$' . $key, "", $longDescription);
         }
 
-        $key = Config::getCategoriesKey($this->container);
+        $key = (string) $xml->categories_webmining_key;
         if (isset($resource['categories'])) {
             $categories = "";
             $separator = "";
@@ -503,14 +514,14 @@ class ResourceController extends Controller {
             $longDescription = str_replace('$' . $key, "", $longDescription);
         }
 
-        $key = Config::getLanguageKey($this->container);
+        $key = (string) $xml->language_webmining_key;
         if (isset($resource['language'])) {
             $longDescription = str_replace('$' . $key, $resource['language'], $longDescription);
         } else {
             $longDescription = str_replace('$' . $key, "", $longDescription);
         }
 
-        $key = Config::getPageCountKey($this->container);
+        $key = (string) $xml->pageCount_webmining_key;
         if (isset($resource['pageCount'])) {
             $longDescription = str_replace('$' . $key, $resource['pageCount'], $longDescription);
         } else {
@@ -524,31 +535,33 @@ class ResourceController extends Controller {
         }
 
         $result['longDescription'] = $longDescription;
+        unset($xml);
         return json_encode($result);
     }
 
     private function clearSkeleton() {
-        $skeleton = str_replace("\\r\\n", "\r\n", Config::getResourceSkeleton($this->container));
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');       
+        $skeleton = str_replace("\\r\\n", "\r\n", (string) $xml->resource_skeleton);
 
-        $key = Config::getAuthorsKey($this->container);
+        $key = (string) $xml->authors_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getPublisherKey($this->container);
+        $key = (string) $xml->publisher_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getDescriptionKey($this->container);
+        $key = (string) $xml->description_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getPublishedDateKey($this->container);
+        $key = (string) $xml->publishedDate_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getCategoriesKey($this->container);
+        $key = (string) $xml->categories_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getLanguageKey($this->container);
+        $key = (string) $xml->language_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
-        $key = Config::getPageCountKey($this->container);
+        $key = (string) $xml->pageCount_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
 
         return $skeleton;

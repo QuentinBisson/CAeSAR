@@ -58,8 +58,8 @@ if (file_exists("app/cache")) {
 if (file_exists("app/logs")) {
     chmod("app/logs", 0777);
 }
-if (file_exists("Adminbundle/Resouces/config/params.yml")) {
-    chmod("Adminbundle/Resouces/config/params.yml", 0777);
+if (file_exists("Adminbundle/Resouces/config/params.xml")) {
+    chmod("Adminbundle/Resouces/config/params.xml", 0777);
 }
 echo "Droits d'acces ok \n";
 
@@ -78,6 +78,46 @@ exec("php app/console assets:install web --symlink");
 echo "Nettoyage du cache...\n";
 exec("php app/console cache:clear");
 exec("php app/console cache:clear --env=prod");
+	
+function recursiveChmod ($path, $filePerm=0644, $dirPerm=0755) {
+	// Check if the path exists
+	if (!file_exists($path)) {
+		return(false);
+	}
+
+	// See whether this is a file
+	if (is_file($path)) {
+		// Chmod the file with our given filepermissions
+		chmod($path, $filePerm);
+
+	// If this is a directory...
+	} elseif (is_dir($path)) {
+		// Then get an array of the contents
+		$foldersAndFiles = scandir($path);
+
+		// Remove "." and ".." from the list
+		$entries = array_slice($foldersAndFiles, 2);
+
+		// Parse every result...
+		foreach ($entries as $entry) {
+			// And call this function again recursively, with the same permissions
+			recursiveChmod($path."/".$entry, $filePerm, $dirPerm);
+		}
+
+		// When we are done with the contents of the directory, we chmod the directory itself
+		chmod($path, $dirPerm);
+	}
+
+	// Everything seemed to work out well, return true
+	return(true);
+}
+
+if (file_exists("app/cache")) {
+    recursiveChmod("app/cache", 0777, 0777);
+}
+if (file_exists("app/logs")) {
+    recursiveChmod("app/logs", 0777, 0777);
+}
 
 echo "L'installation s'est deroulee avec succes."
 ?>

@@ -5,14 +5,17 @@ namespace Caesar\AdminBundle\Controller;
 use Caesar\AdminBundle\Entity\Config;
 use Caesar\AdminBundle\Form\LoadBackupType;
 use Caesar\AdminBundle\Form\ReservationDeleteType;
-use Caesar\AdminBundle\Form\WebminingModuleType;
 use Caesar\AdminBundle\Form\SubscriptionType;
+use Caesar\AdminBundle\Form\WebminingModuleType;
 use Caesar\UserBundle\Form\ChangePasswordType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\File;
 use ZipArchive;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand;
 
 class AdminController extends Controller {
 
@@ -150,44 +153,58 @@ class AdminController extends Controller {
         $translator = $this->get('translator');
 
         $array = array();
-        $array['active_module'] = Config::isWebminingModuleActivated($this->container);
-        $array['authors_key'] = Config::getAuthorsKey($this->container);
-        $array['publisher_key'] = Config::getPublisherKey($this->container);
-        $array['published_date_key'] = Config::getPublishedDateKey($this->container);
-        $array['language_key'] = Config::getLanguageKey($this->container);
-        $array['description_key'] = Config::getDescriptionKey($this->container);
-        $array['page_count_key'] = Config::getPageCountKey($this->container);
-        $array['google_books_url'] = Config::getGoogleBooksURL($this->container);
-        $array['categories_key'] = Config::getCategoriesKey($this->container);
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        $array['active_module'] = ($xml->active_webmining == '1');
+        $array['authors_key'] = (string) $xml->authors_webmining_key;
+        $array['publisher_key'] = (string) $xml->publisher_webmining_key;
+        $array['published_date_key'] = (string) $xml->publishedDate_webmining_key;
+        $array['language_key'] = (string) $xml->language_webmining_key;
+        $array['description_key'] = (string) $xml->description_webmining_key;
+        $array['page_count_key'] = (string) $xml->pageCount_webmining_key;
+        $array['google_books_url'] = (string) $xml->google_books_url;
+        $array['categories_key'] = (string) $xml->categories_webmining_key;
         $form = $this->createForm(new WebminingModuleType(), $array);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
-                $this->get('caesar.params')->save(
-                        array(
-                            'active_webmining' => $data['active_module'],
-                            'authors_webmining_key' => $data['authors_key'],
-                            'publisher_webmining_key' => $data['publisher_key'],
-                            'publishedDate_webmining_key' => $data['published_date_key'],
-                            'language_webmining_key' => $data['language_key'],
-                            'description_webmining_key' => $data['description_key'],
-                            'pageCount_webmining_key' => $data['page_count_key'],
-                            'google_books_url' => $data['google_books_url'],
-                            'categories_webmining_key' => $data['categories_key'],
-                ));
+
+                $xml->active_webmining = $data['active_module'];
+                $xml->authors_webmining_key = $data['authors_key'];
+                $xml->publisher_webmining_key = $data['publisher_key'];
+                $xml->publishedDate_webmining_key = $data['published_date_key'];
+                $xml->language_webmining_key = $data['language_key'];
+                $xml->description_webmining_key = $data['description_key'];
+                $xml->pageCount_webmining_key = $data['page_count_key'];
+                $xml->google_books_url = $data['google_books_url'];
+                $xml->categories_webmining_key = $data['categories_key'];
+                /* $this->get('caesar.params')->save(
+                  array(
+                  'active_webmining' => $data['active_module'],
+                  'authors_webmining_key' => $data['authors_key'],
+                  'publisher_webmining_key' => $data['publisher_key'],
+                  'publishedDate_webmining_key' => $data['published_date_key'],
+                  'language_webmining_key' => $data['language_key'],
+                  'description_webmining_key' => $data['description_key'],
+                  'pageCount_webmining_key' => $data['page_count_key'],
+                  'google_books_url' => $data['google_books_url'],
+                  'categories_webmining_key' => $data['categories_key'],
+                  )); */
+                $xml->categories_webmining_key = $data['categories_key'];
+                $xml->asXML($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.webmining.notice')
                 );
-                return $this->redirect($this->generateUrl('caesar_admin_general_webmining'));
+                unset($xml);
+                return $this->redirect($this->generateUrl('caesar_admin_login'));
             } else {
                 $this->get('session')->getFlashBag()->add(
                         'error', $translator->trans('admin.form.webmining.error')
                 );
             }
         }
-
+        unset($xml);
         return $this->render('CaesarAdminBundle:Admin:webmining.html.twig', array('form' => $form->createView()));
     }
 
@@ -195,20 +212,27 @@ class AdminController extends Controller {
         $translator = $this->get('translator');
 
         $array = array();
-        $array['active_subscription'] = Config::isSubscriptionActivated($this->container);
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+        $array['active_subscription'] = ($xml->active_subscription == '1');
         $form = $this->createForm(new SubscriptionType(), $array);
         $request = $this->get('request');
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
-                $this->get('caesar.params')->save(
-                        array(
-                            'active_subscription' => $data['active_subscription'],
-                ));
+                $xml->active_subscription = $data['active_subscription'];
+
+                /* $this->get('caesar.params')->save(
+                  array(
+                  'active_subscription' => $data['active_subscription'],
+                  )); */
+                $xml->asXML($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+
+                unset($xml);
                 $this->get('session')->getFlashBag()->add(
                         'notice', $translator->trans('admin.form.webmining.notice')
                 );
+
                 return $this->redirect($this->generateUrl('caesar_admin_general_subscriptions'));
             } else {
                 $this->get('session')->getFlashBag()->add(
@@ -216,7 +240,7 @@ class AdminController extends Controller {
                 );
             }
         }
-
+        unset($xml);
         return $this->render('CaesarAdminBundle:Admin:subscription.html.twig', array('form' => $form->createView()));
     }
 
@@ -280,7 +304,7 @@ class AdminController extends Controller {
                     }
                 }
                 $zip->addFromString("backup.sql", $save_file);
-                $zip->addFile("../src/Caesar/AdminBundle/Resources/config/params.yml", "params.yml");
+                $zip->addFile("../src/Caesar/AdminBundle/Resources/config/params.xml", "params.xml");
             }
             $zip->close();
             $response = new Response();
@@ -348,9 +372,9 @@ class AdminController extends Controller {
                         rename("resources/backup/load/img/" . $file, "resources/img/" . $file);
                     }
                 }
-                unlink("../src/Caesar/AdminBundle/Resources/config/params.yml");
-                rename("resources/backup/load/params.yml", "../src/Caesar/AdminBundle/Resources/config/params.yml");
-                chmod("../src/Caesar/AdminBundle/Resources/config/params.yml", 0777);
+                unlink("../src/Caesar/AdminBundle/Resources/config/params.xml");
+                rename("resources/backup/load/params.xml", "../src/Caesar/AdminBundle/Resources/config/params.xml");
+                chmod("../src/Caesar/AdminBundle/Resources/config/params.xml", 0777);
                 $this->deleteDirectory("resources/backup/load");
             } else {
                 $this->get('session')->getFlashBag()->add(

@@ -1,5 +1,5 @@
 parameters:
-    active_webmining: true
+    active_webmining: false
     active_subscription: false
     google_books_url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
     google_books_webmining: true
@@ -11,4 +11,4 @@ parameters:
     pageCount_webmining_key: pageCount
     categories_webmining_key: categories
     resource_skeleton: "Authors (Auteurs): $authors\r\nPublisher (Editeur): $publisher\r\nPublished date (Date de publication): $publishedDate\r\nCategories (Catégories): $categories\r\nLanguage (Langue): $language\r\nDescription (Description): $description\r\nPage count (Nombre de pages): $pageCount"
-    tag_code_value: 57
+    tag_code_value: 1

@@ -17,4 +17,4 @@ services:
     caesar.params:
         class: Caesar\AdminBundle\Services\Params
         arguments: ['params.yml']
-        # On injecte le nom de notre fichier au service
+        # On injecte le nom de notre fichier au service    

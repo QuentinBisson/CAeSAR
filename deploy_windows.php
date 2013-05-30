@@ -58,8 +58,8 @@ if (file_exists("app\cache")) {
 if (file_exists("app\logs")) {
     chmod("app\logs", 0777);
 }
-if (file_exists("Adminbundle\Resouces\config\params.yml")) {
-    chmod("Adminbundle\Resouces\config\params.yml", 0777);
+if (file_exists("Adminbundle\Resouces\config\params.xml")) {
+    chmod("Adminbundle\Resouces\config\params.xml", 0777);
 }
 echo "Droits d'acces ok \n";
 
