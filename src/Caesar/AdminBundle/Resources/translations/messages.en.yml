@@ -138,6 +138,7 @@ admin:
                 header: General administration
                 password: Change password
                 webmining: Webmining module
+                subscriptions: Subscriptions management
                 clean_reservations: Purge reservations
                 list_reservations: List reservations
     fieldset:
@@ -207,6 +208,7 @@ admin:
             list: Reservations
         general:
             password: Change password
+            subscriptions: Subscriptions options
             webmining: Webmining options
             backup:
                   load: Load a backup
