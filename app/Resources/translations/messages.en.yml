@@ -86,6 +86,8 @@ form:
     published_date: "Published date"
     publisher: Publisher
     variables: "Name of the variables used by the webmining module"
+  subscription:
+    active: "Enable (or disable) subscription"
 resource: 
   label: 
     borrowings: "Current borrowings"

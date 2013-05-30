@@ -25,11 +25,13 @@ return:
 client:
     borrow:
         exception: The resource with the code or the identifier %code% is unobtainable
-        subscription:
-            exception: The resource with the code or the identifier %code% is unobtainable
-            resource:
-                subscribed: You subscribe to the resource %resource%
-                connect: You need to log in to subscribe %resource%
+    subscription:
+        exception: The resource with the code or the identifier %code% is unobtainable
+        resource:
+            subscribed: You have subscribed to the resource %resource%.
+            alreadysubscribed: You have <b>already</b> subscribed to resource ressource %resource%.
+            unsubscribed: You have unsubscribed to %resource%.
+            connect: You have to be connected to subscribe to %resource%
     borrowing:
         resource:
             borrowed: The resource %resource% has been borrowed.
