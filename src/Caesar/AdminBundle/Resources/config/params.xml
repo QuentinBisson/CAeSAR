@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <webmining>
     <active_webmining>1</active_webmining>
-    <active_subscription/>
+    <active_subscription></active_subscription>
     <google_books_url>https://www.googleapis.com/books/v1/volumes?q=isbn:</google_books_url>
     <google_books_webmining>1</google_books_webmining>
     <authors_webmining_key>auteur</authors_webmining_key>
@@ -12,5 +12,5 @@
     <pageCount_webmining_key>pageCount</pageCount_webmining_key>
     <categories_webmining_key>categories</categories_webmining_key>
     <resource_skeleton>Authors (Auteurs): $authors\r\nPublisher (Editeur): $publisher\r\nPublished date (Date de publication): $publishedDate\r\nCategories (Catégories): $categories\r\nLanguage (Langue): $language\r\nDescription (Description): $description\r\nPage count (Nombre de pages): $pageCount</resource_skeleton>
-    <tag_code_value>49</tag_code_value>
+    <tag_code_value>1</tag_code_value>
 </webmining>
