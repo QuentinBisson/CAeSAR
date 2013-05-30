@@ -563,7 +563,7 @@ class ResourceController extends Controller {
 
         $key = (string) $xml->pageCount_webmining_key;
         $skeleton = str_replace('$' . $key, "", $skeleton);
-
+        
         return $skeleton;
     }
 

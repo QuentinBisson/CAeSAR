@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Caesar\ResourceBundle\Entity\ResourceRepository")
+ * @UniqueEntity(fields={"code"})
+ * @UniqueEntity(fields={"description"})
  * @ORM\Table(name="resource")
  */
 class Resource {

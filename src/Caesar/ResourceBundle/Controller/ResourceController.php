@@ -404,14 +404,14 @@ class ResourceController extends Controller {
     }
 
     public function sendMail($to, $from, $response, $subject) {
-        $transport = Swift_SmtpTransport::newInstance();
+        /*$transport = Swift_SmtpTransport::newInstance();
         $message = Swift_Message::newInstance($transport)
                 ->setSubject($subject)
                 ->setFrom($from)
                 ->setTo($to)
                 ->setBody($response, 'text/html');
         $message->setEncoder(Swift_Encoding::getBase64Encoding());
-        $this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);*/
     }
 
     public function subscribeAction($code = '') {
