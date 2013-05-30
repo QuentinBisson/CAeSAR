@@ -20,7 +20,7 @@
   } */
 echo "Installation de l'application Caesar....\n";
 echo "Verification des pre-requis...\n";
-if (!extension_loaded("fileinfo")) {
+/*if (!extension_loaded("fileinfo")) {
     exit("ERREUR: Veuillez activer le module fileinfo");
 }
 if (!extension_loaded("gd")) {
@@ -43,7 +43,7 @@ if (!extension_loaded("mysql")) {
 }
 if (!extension_loaded("pdo_mysql")) {
     exit("ERREUR: Veuillez activer le module pdo_mysql");
-}
+}*/
 
 echo "Initialisation...\n";
 exec("php composer.phar install");
