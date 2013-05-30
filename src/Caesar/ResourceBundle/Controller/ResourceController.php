@@ -48,9 +48,10 @@ class ResourceController extends Controller {
                 }
             }
         }
+        $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
         return $this->render('CaesarResourceBundle:Resource:consultation.html.twig', array(
                     'resource' => $resource,
-        		    'subActive' => $this->container->getParameter("active_subscription"),
+        		    'subActive' => $xml->active_subscription == '1',
                     'alreadySubscribed' => $alreadySubscribed,
                     'hasReserved' => $hasReserved));
     }
@@ -112,8 +113,8 @@ class ResourceController extends Controller {
                     }
 
                     $em->flush();
-
-                    if ($this->container->getParameter("active_subscription")) {
+                    $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+                    if ($xml->active_subscription == '1') {
                         $to = array();
 						
                         foreach ($resource->getSubscriptions()->toArray() as $sub) {
@@ -125,6 +126,7 @@ class ResourceController extends Controller {
                                 'CaesarResourceBundle:Resource:mail.html.twig', array('resource' => $resource, 'context' => 'subscription_borrowed'));
                         $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
                     }
+                    unset($xml);
                     $this->get('session')->getFlashBag()->add(
                             'notice', $translator->trans('client.borrowing.resource.borrowed', array('%resource%' => $resource->getDescription()))
                     );
@@ -247,8 +249,8 @@ class ResourceController extends Controller {
             $em->remove($borrowing);
             $em->persist($archivedBorrowing);
             $em->flush();
-
-            if ($this->container->getParameter("active_subscription")) {
+            $xml = simplexml_load_file($this->get('kernel')->getRootDir() . '/../src/Caesar/AdminBundle/Resources/config/params.xml');
+            if ($xml->active_subscription == '1') {
                 $to = array();
 
                 foreach ($resource->getSubscriptions()->toArray() as $sub) {
@@ -262,6 +264,7 @@ class ResourceController extends Controller {
 
                 $this->sendMail($to, 'noreply@caesar.com', $body, $subject);
             }
+            unset($xml);
             $this->get('session')->getFlashBag()->add(
                     'notice', $translator->trans('client.return.accepted', array('%resource%' => $resource->getDescription()))
             );
